@@ -48,5 +48,53 @@
         "type": "herb_preparation",
         "vertex_1": "aesculus-hippocastanum",
         "vertex_2": "capsule"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "allium-sativum",
+        "vertex_2": "syrup"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "allium-sativum",
+        "vertex_2": "capsule"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "allium-sativum",
+        "vertex_2": "tablet"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "aloe-vera",
+        "vertex_2": "gel"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "aloe-vera",
+        "vertex_2": "juice"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "aloe-vera",
+        "vertex_2": "tincture"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "alpinia-officinarum",
+        "vertex_2": "decoction"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "alpinia-officinarum",
+        "vertex_2": "tincture"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "alpinia-officinarum",
+        "vertex_2": "powder"
+    },
+    {
+        "type": "none"
     }
 ]

@@ -15,6 +15,21 @@
         "herb_name": "aesculus hippocastanum"
     },
     {
+        "type": "herb",
+        "herb_slug": "allium-sativum",
+        "herb_name": "allium sativum"
+    },
+    {
+        "type": "herb",
+        "herb_slug": "aloe-vera",
+        "herb_name": "aloe vera"
+    },
+    {
+        "type": "herb",
+        "herb_slug": "alpinia-officinarum",
+        "herb_name": "alpinia officinarum"
+    },
+    {
         "type": "preparation",
         "preparation_slug": "infusion",
         "preparation_name": "infusion"
@@ -58,6 +73,29 @@
         "type": "preparation",
         "preparation_slug": "capsule",
         "preparation_name": "capsule"
+    },
+    {
+        "type": "preparation",
+        "preparation_slug": "pearl",
+        "preparation_name": "pearl"
+    },
+    {
+        "type": "preparation",
+        "preparation_slug": "syrup",
+        "preparation_name": "syrup"
+    },
+    {
+        "type": "preparation",
+        "preparation_slug": "gel",
+        "preparation_name": "gel"
+    },
+    {
+        "type": "preparation",
+        "preparation_slug": "juice",
+        "preparation_name": "juice"
+    },
+    {
+        "type": "none"
     }
 ]
 
