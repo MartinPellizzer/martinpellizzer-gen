@@ -16,3 +16,6 @@ allium-sativum\tablet
 aloe-vera\gel
 aloe-vera\juice
 aloe-vera\tincture
+alpinia-officinarum\decoction
+alpinia-officinarum\tincture
+alpinia-officinarum\powder

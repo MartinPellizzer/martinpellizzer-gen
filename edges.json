@@ -1,0 +1,52 @@
+[
+    {
+        "type": "herb_preparation",
+        "vertex_1": "achillea-millefolium",
+        "vertex_2": "infusion"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "achillea-millefolium",
+        "vertex_2": "tincture"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "achillea-millefolium",
+        "vertex_2": "essential-oil"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "achillea-millefolium",
+        "vertex_2": "poultice"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "acorus-calamus",
+        "vertex_2": "decoction"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "acorus-calamus",
+        "vertex_2": "tincture"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "acorus-calamus",
+        "vertex_2": "powder"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "aesculus-hippocastanum",
+        "vertex_2": "tablet"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "aesculus-hippocastanum",
+        "vertex_2": "lotion"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "aesculus-hippocastanum",
+        "vertex_2": "capsule"
+    }
+]

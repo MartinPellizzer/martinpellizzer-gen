@@ -15,6 +15,9 @@ model_8b = f'/home/ubuntu/vault-tmp/llms/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf'
 model_validator_filepath = f'llms/Llama-3-Partonus-Lynx-8B-Instruct-Q4_K_M.gguf'
 model = model_8b
 
+vertices = json_read('vertices.json')
+edges = json_read('edges.json')
+
 
 
 ###############################################
@@ -30,6 +33,16 @@ html_header = f'''
             <a class="no-underline" href="/ailments.html">Ailments</a>
         </nav>
     </header>
+'''
+
+html_footer = f'''
+    <footer class="container-xl flex justify-between">
+        <span>martinpellizzer.com | all rights reserved</span>
+        <nav class="flex gap-16">
+            <a class="no-underline" href="/">About</a>
+            <a class="no-underline" href="/">Contact</a>
+        </nav>
+    </footer>
 '''
 
 def html_head_gen(title):
@@ -118,7 +131,6 @@ def p_home():
     html_article = ''
     title = f'herbalism'
     html_head = html_head_gen(title)
-    html_breadcrumbs = breadcrumbs_gen(f'home.html')
     html_article_layout = html_article_layout_gen(html_article)
     html = f'''
         <!DOCTYPE html>
@@ -126,8 +138,8 @@ def p_home():
         {html_head}
         <body>
             {html_header}
-            {html_breadcrumbs}
             {html_article_layout}
+            {html_footer}
         </body>
         </html>
     '''
@@ -196,6 +208,7 @@ def p_herbs(herbs_slugs):
             {html_header}
             {html_breadcrumbs}
             {html_article_layout}
+            {html_footer}
         </body>
         </html>
     '''
@@ -274,6 +287,7 @@ def a_herb(herb):
             {html_header}
             {html_breadcrumbs}
             {html_article_layout}
+            {html_footer}
         </body>
         </html>
     '''
@@ -306,6 +320,7 @@ def a_herb_benefits(herb):
             {html_header}
             {html_breadcrumbs}
             {html_article_layout}
+            {html_footer}
         </body>
         </html>
     '''
@@ -377,6 +392,7 @@ def a_herb_preparations(herb):
             {html_header}
             {html_breadcrumbs}
             {html_article_layout}
+            {html_footer}
         </body>
         </html>
     '''
@@ -445,6 +461,7 @@ def p_preparations(preparations):
             {html_header}
             {html_breadcrumbs}
             {html_article_layout}
+            {html_footer}
         </body>
         </html>
     '''
@@ -518,6 +535,7 @@ def a_preparation(preparation):
             {html_header}
             {html_breadcrumbs}
             {html_article_layout}
+            {html_footer}
         </body>
         </html>
     '''
@@ -565,7 +583,8 @@ def a_preparation_herbs(preparation):
             <body>
                 {html_header}
                 {html_breadcrumbs}
-            {html_article_layout}
+                {html_article_layout}
+                {html_footer}
             </body>
             </html>
         '''
@@ -597,6 +616,7 @@ def p_equipments(lst):
             {html_header}
             {html_breadcrumbs}
             {html_article_layout}
+            {html_footer}
         </body>
         </html>
     '''
@@ -628,6 +648,7 @@ def a_equipment(equipment):
             {html_header}
             {html_breadcrumbs}
             {html_article_layout}
+            {html_footer}
         </body>
         </html>
     '''
@@ -883,6 +904,7 @@ def a_equipment_best(equipment):
             {html_header}
             {html_breadcrumbs}
             {html_article_layout}
+            {html_footer}
         </body>
         </html>
     '''
@@ -913,6 +935,7 @@ def p_ailments(slugs):
             {html_header}
             {html_breadcrumbs}
             {html_article_layout}
+            {html_footer}
         </body>
         </html>
     '''
@@ -944,6 +967,7 @@ def a_ailment(slug):
             {html_header}
             {html_breadcrumbs}
             {html_article_layout}
+            {html_footer}
         </body>
         </html>
     '''
@@ -979,6 +1003,19 @@ p_home()
 
 # herbs
 if 1:
+    vertices_herbs = [vertex for vertex in vertices if vertex['type'] == 'herb']
+    herbs = []
+    for vertex_herb in vertices_herbs:
+        herb_slug = vertex_herb['herb_slug']
+        herb = {'herb_slug': herb_slug, 'preparations_slugs': []}
+        preparations_slugs = []
+        for edge in edges: 
+            if edge['type'] == 'herb_preparation' and edge['vertex_1'] == herb_slug:
+                herb['preparations_slugs'].append(edge['vertex_2'])
+        herbs.append(herb)
+    
+
+    '''
     with open('database/csvs/herbs-preparations.txt') as f: content = f.read()
     llst = []
     lines = content.split('\n')
@@ -996,6 +1033,8 @@ if 1:
                 break
         if not found:
             herbs.append({'herb_slug': lst[0], 'preparations_slugs': [lst[1]]})
+    '''
+
     herb_slugs = [x['herb_slug'] for x in herbs]
     p_herbs(herb_slugs)
     for herb in herbs:
@@ -1005,6 +1044,19 @@ if 1:
 
 # preparations
 if 1:
+    vertices_preparations = [vertex for vertex in vertices if vertex['type'] == 'preparation']
+    preparations = []
+    for vertex_preparation in vertices_preparations:
+        preparation_slug = vertex_preparation['preparation_slug']
+        preparation = {'preparation_slug': preparation_slug, 'herbs_slugs': []}
+        herbs_slugs = []
+        for edge in edges: 
+            print(edge)
+            if edge['type'] == 'herb_preparation' and edge['vertex_2'] == preparation_slug:
+                preparation['herbs_slugs'].append(edge['vertex_1'])
+        preparations.append(preparation)
+    
+    '''
     with open('database/csvs/herbs-preparations.txt') as f: content = f.read()
     llst = []
     lines = content.split('\n')
@@ -1025,6 +1077,8 @@ if 1:
                 'preparation_slug': lst[1], 
                 'herbs_slugs': [lst[0]]
             })
+    '''
+
     p_preparations(preparations)
     for preparation in preparations:
         a_preparation(preparation)
@@ -1060,3 +1114,23 @@ if 1:
 
 shutil.copy('style.css', f'{website_folderpath}/style.css')
 
+quit()
+vertices = json_read('vertices.json')
+edges = json_read('edges.json')
+
+# find preparations of achillea millefolium
+herb_slug = 'achillea-millefolium'
+preparations_slugs = []
+for edge in edges: 
+    if edge['type'] == 'herb_preparation' and edge['vertex_1'] == herb_slug:
+        preparations_slugs.append(edge['vertex_2'])
+
+print(preparations_slugs)
+
+herb_slug = 'acorus-calamus'
+preparations_slugs = []
+for edge in edges: 
+    if edge['type'] == 'herb_preparation' and edge['vertex_1'] == herb_slug:
+        preparations_slugs.append(edge['vertex_2'])
+
+print(preparations_slugs)

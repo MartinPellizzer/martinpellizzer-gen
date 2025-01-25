@@ -1,0 +1,63 @@
+[
+    {
+        "type": "herb",
+        "herb_slug": "achillea-millefolium",
+        "herb_name": "achillea millefolium"
+    },
+    {
+        "type": "herb",
+        "herb_slug": "acorus-calamus",
+        "herb_name": "acorus calamus"
+    },
+    {
+        "type": "herb",
+        "herb_slug": "aesculus-hippocastanum",
+        "herb_name": "aesculus hippocastanum"
+    },
+    {
+        "type": "preparation",
+        "preparation_slug": "infusion",
+        "preparation_name": "infusion"
+    },
+    {
+        "type": "preparation",
+        "preparation_slug": "decoction",
+        "preparation_name": "decoction"
+    },
+    {
+        "type": "preparation",
+        "preparation_slug": "tincture",
+        "preparation_name": "tincture"
+    },
+    {
+        "type": "preparation",
+        "preparation_slug": "essential-oil",
+        "preparation_name": "essential oil"
+    },
+    {
+        "type": "preparation",
+        "preparation_slug": "poultice",
+        "preparation_name": "poultice"
+    },
+    {
+        "type": "preparation",
+        "preparation_slug": "powder",
+        "preparation_name": "powder"
+    },
+    {
+        "type": "preparation",
+        "preparation_slug": "tablet",
+        "preparation_name": "tablet"
+    },
+    {
+        "type": "preparation",
+        "preparation_slug": "lotion",
+        "preparation_name": "lotion"
+    },
+    {
+        "type": "preparation",
+        "preparation_slug": "capsule",
+        "preparation_name": "capsule"
+    }
+]
+
