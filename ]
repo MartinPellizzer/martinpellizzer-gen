@@ -1,7 +1,6 @@
 import os
 import json
 import random
-import shutil
 
 from nltk import tokenize
 
@@ -15,43 +14,6 @@ model_8b = f'/home/ubuntu/vault-tmp/llms/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf'
 model_validator_filepath = f'llms/Llama-3-Partonus-Lynx-8B-Instruct-Q4_K_M.gguf'
 model = model_8b
 
-
-
-###############################################
-# ;COMPONENTS
-###############################################
-html_header = f'''
-    <header class="container-xl flex justify-between">
-        <a class="no-underline" href="/">Martin Pellizzer</a>
-        <nav class="flex gap-16">
-            <a class="no-underline" href="/herbs.html">Herbs</a>
-            <a class="no-underline" href="/preparations.html">Preparations</a>
-            <a class="no-underline" href="/equipments.html">Equipments</a>
-            <a class="no-underline" href="/ailments.html">Ailments</a>
-        </nav>
-    </header>
-'''
-
-def html_head_gen(title):
-    html = f'''
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link rel="stylesheet" href="/style.css">
-            <title>{title}</title>
-        </head>
-    '''
-    return html
-
-def html_article_layout_gen(html_article):
-    html = f'''
-        <section class="container-md">
-            <main class>
-                {html_article}
-            </main>
-        </section>
-    '''
-    return html
 
 ###############################################
 # ;UTIL FORMAT
@@ -88,18 +50,18 @@ def text_format_1N1_html(text):
 # ;UTIL COMPONENT
 ###############################################
 def breadcrumbs_gen(filepath):
-    breadcrumbs = ['<a class="no-underline" href="/">Home</a>']
+    breadcrumbs = ['<a href="/">Home</a>']
     breadcrumbs_path = filepath.replace('website/', '')
     chunks = breadcrumbs_path.split('/')
     filepath_curr = ''
     for chunk in chunks[:-1]:
         filepath_curr += f'/{chunk}'
         chunk = chunk.strip().replace('-', ' ').title()
-        breadcrumbs.append(f'<a class="no-underline" href="{filepath_curr}.html">{chunk}</a>')
+        breadcrumbs.append(f'<a href="{filepath_curr}.html">{chunk}</a>')
     breadcrumbs = ' | '.join(breadcrumbs)
     breadcrumbs += f' | {chunks[-1].strip().replace(".html", "").replace("-", " ").title()}'
     breadcrumbs_section = f'''
-        <section class="container-xl py-24">
+        <section style="margin-top: 48px;">
             {breadcrumbs}
         </section>
     '''
@@ -116,18 +78,23 @@ html_menu = html_menu_gen()
 
 def p_home():
     html_article = ''
-    title = f'herbalism'
-    html_head = html_head_gen(title)
-    html_breadcrumbs = breadcrumbs_gen(f'home.html')
-    html_article_layout = html_article_layout_gen(html_article)
+    html_article += f'<h1>Martin Pellizzer</h1>'
+    html_article += f'<p><a href="/equipments.html">equipments</a></p>'
+    html_article += f'<p><a href="/preparations.html">preparations</a></p>'
+    html_article += f'<p><a href="/ailments.html">ailments</a></p>'
+    html_article += f'<p><a href="/herbs.html">herbs</a></p>'
     html = f'''
         <!DOCTYPE html>
         <html lang="en">
-        {html_head}
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title></title>
+        </head>
         <body>
-            {html_header}
-            {html_breadcrumbs}
-            {html_article_layout}
+            <main>
+                {html_article}
+            </main>
         </body>
         </html>
     '''
@@ -184,18 +151,21 @@ def p_herbs(herbs_slugs):
         html_article += f'<h2>{i+1}. {herb_name}</h2>\n'
         html_article += f'<p>{herb_desc}</p>\n'
         html_article += f'<p><a href="/herbs/{herb_slug}.html">{herb_name}</a></p>\n'
-    title = 'herbs'
-    html_head = html_head_gen(title)
     html_breadcrumbs = breadcrumbs_gen(f'herbs.html')
-    html_article_layout = html_article_layout_gen(html_article)
     html = f'''
         <!DOCTYPE html>
         <html lang="en">
-        {html_head}
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Herbs</title>
+        </head>
         <body>
-            {html_header}
+            {html_menu}
             {html_breadcrumbs}
-            {html_article_layout}
+            <main>
+                {html_article}
+            </main>
         </body>
         </html>
     '''
@@ -203,8 +173,7 @@ def p_herbs(herbs_slugs):
         f.write(html)
 
 
-def a_herb(herb):
-    herb_slug = herb['herb_slug']
+def a_herb(herb_slug):
     herb_name = herb_slug.replace('-', ' ')
     json_article_filepath = f'database/pages/herbs/{herb_slug}.json'
     json_article = json_read(json_article_filepath, create=True)
@@ -213,67 +182,47 @@ def a_herb(herb):
     json_article['herb_url'] = f'herbs/{herb_slug}.html'
     json_write(json_article_filepath, json_article)
     # update
-    sections = [
-        ['1', 'identification', f'write a short 3-sentence paragraph about the identification of {herb_name}.', f''],
-        ['1', 'taxonomy', f'write a short 3-sentence paragraph about the taxonomy of {herb_name}.', f''],
-        ['0', 'botany', f'write a short 3-sentence paragraph about the botanical characteristics of {herb_name}.', f''],
-
-        ['1', 'uses', f'write a short 3-sentence paragraph about the medicinal uses of {herb_name}.', f''],
-        ['1', 'benefits', f'write a short 3-sentence paragraph about the benefits of {herb_name}.', f'benefit'],
-        ['1', 'properties', f'write a short 3-sentence paragraph about the therapeutic properties of {herb_name}.', f''],
-        ['1', 'constituents', f'write a short 3-sentence paragraph about the active constituents of {herb_name}.', f''],
-        ['1', 'parts', f'write a short 3-sentence paragraph about the parts of {herb_name}.', f''],
-        ['1', 'preparations', f'write a short 3-sentence paragraph about the preparations of {herb_name}.', f'preparation'],
-        ['1', 'side-effects', f'write a short 3-sentence paragraph about the side effects of {herb_name}.', f''],
-
-
-        ['0', 'distribution', f'write a short 3-sentence paragraph about the distribution of {herb_name}.', f''],
-        ['0', 'native', f'write a short 3-sentence paragraph about the native range of {herb_name}.', f''],
-        ['0', 'habitat', f'write a short 3-sentence paragraph about the habitat of {herb_name}.', f''],
-
-        ['1', 'cultivation', f'write a short 3-sentence paragraph about the cultivation of {herb_name}.', f''],
-        ['0', 'growing-conditions', f'write a short 3-sentence paragraph about the growing conditions of {herb_name}.', f''],
-        ['0', 'germination', f'write a short 3-sentence paragraph about the germination of {herb_name}.', f''],
-        ['0', 'cultivars', f'write a short 3-sentence paragraph about the cultivars of {herb_name}.', f''],
-    ]
-    for section in sections:
-        exe = section[0]
-        if exe != '1': continue
-        key = section[1]
-        prompt = section[2]
-        ai_paragraph_gen(
-            key = key, 
-            filepath = json_article_filepath, 
-            data = json_article, 
-            obj = json_article, 
-            prompt = prompt,
-        )
-    # amazon
-    # html
+    ai_paragraph_gen(
+        key = 'benefits', 
+        filepath = json_article_filepath, 
+        data = json_article, 
+        obj = json_article, 
+        prompt = f'''
+            Write a short 3-sentence paragraph about the benefits of {herb_name}.
+        ''',
+    )
+    ai_paragraph_gen(
+        key = 'preparations', 
+        filepath = json_article_filepath, 
+        data = json_article, 
+        obj = json_article, 
+        prompt = f'''
+            Write a short 3-sentence paragraph about the medicinal preparations of {herb_name}.
+        ''',
+    )
     html_article = ''
     html_article += f'<h1>{herb_name}</h1>'
-    for section in sections:
-        exe = section[0]
-        if exe != '1': continue
-        section_name = section[1]
-        section_desc = json_article[section_name]
-        section_link = section[3]
-        html_article += f'<h2>{section_name}</h2>'
-        html_article += f'<p>{section_desc}</p>\n'
-        if section_link.strip() != '':
-            html_article += f'<p><a href="/herbs/{herb_slug}/{section_link}.html">{section_name}</a></p>'
-    title = f'{herb_name}'
-    html_head = html_head_gen(title)
+    html_article += f'<h2>benefits</h2>'
+    html_article += f'<p>{json_article["benefits"]}</p>\n'
+    html_article += f'<p><a href="/herbs/{herb_slug}/benefits.html">benefits</a></p>'
+    html_article += f'<h2>preparations</h2>'
+    html_article += f'<p>{json_article["preparations"]}</p>\n'
+    html_article += f'<p><a href="/herbs/{herb_slug}/preparations.html">preparations</a></p>'
     html_breadcrumbs = breadcrumbs_gen(f'herbs/{herb_slug}.html')
-    html_article_layout = html_article_layout_gen(html_article)
     html = f'''
         <!DOCTYPE html>
         <html lang="en">
-        {html_head}
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>{herb_name}</title>
+        </head>
         <body>
-            {html_header}
+            {html_menu}
             {html_breadcrumbs}
-            {html_article_layout}
+            <main>
+                {html_article}
+            </main>
         </body>
         </html>
     '''
@@ -283,50 +232,54 @@ def a_herb(herb):
         f.write(html)
 
 
-def a_herb_benefits(herb):
-    slug = herb['herb_slug']
+def a_herb_benefits(slug):
     name = slug.replace('-', ' ')
-    json_article_filepath = f'database/pages/herbs/{slug}/benefit.json'
+    json_article_filepath = f'database/pages/herbs/{slug}/benefits.json'
     json_article = json_read(json_article_filepath, create=True)
     json_article['slug'] = slug
     json_article['name'] = name
-    json_article['url'] = f'herbs/{slug}/benefit.html'
+    json_article['url'] = f'herbs/{slug}/benefits.html'
     json_write(json_article_filepath, json_article)
     html_article = ''
     html_article += f'<h1>{name} benefits</h1>'
-    title = f'{name} benefits'
-    html_head = html_head_gen(title)
-    html_breadcrumbs = breadcrumbs_gen(f'herbs/{slug}/benefit.html')
-    html_article_layout = html_article_layout_gen(html_article)
+    html_breadcrumbs = breadcrumbs_gen(f'herbs/{slug}/benefits.html')
     html = f'''
         <!DOCTYPE html>
         <html lang="en">
-        {html_head}
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>{name}</title>
+        </head>
         <body>
-            {html_header}
+            {html_menu}
             {html_breadcrumbs}
-            {html_article_layout}
+            <main>
+                {html_article}
+            </main>
         </body>
         </html>
     '''
     if not os.path.exists(f'{website_folderpath}/herbs/{slug}'): 
         os.mkdir(f'{website_folderpath}/herbs/{slug}')
-    with open(f'{website_folderpath}/herbs/{slug}/benefit.html', 'w') as f:
+    with open(f'{website_folderpath}/herbs/{slug}/benefits.html', 'w') as f:
         f.write(html)
 
 
-def a_herb_preparations(herb):
-    herb_slug = herb['herb_slug']
+def a_herb_preparations(herb_slug, llst):
     herb_name = herb_slug.replace('-', ' ')
-    json_article_filepath = f'database/pages/herbs/{herb_slug}/preparation.json'
+    json_article_filepath = f'database/pages/herbs/{slug}/preparations.json'
     json_article = json_read(json_article_filepath, create=True)
     json_article['herb_slug'] = herb_slug
     json_article['herb_name'] = herb_name
-    json_article['herb_url'] = f'herbs/{herb_slug}/preparation.html'
+    json_article['herb_url'] = f'herbs/{herb_slug}/preparations.html'
     if 'preparations' not in json_article: json_article['preparations'] = []
     json_write(json_article_filepath, json_article)
     # json
-    preparations_slugs = herb['preparations_slugs']
+    preparations_slugs = []
+    for lst in llst:
+        if lst[0] == herb_slug:
+            preparations_slugs.append(lst[1])
     for preparation_slug in preparations_slugs:
         preparation_name = preparation_slug.replace('-', ' ')
         # add if doesn't exist
@@ -360,91 +313,64 @@ def a_herb_preparations(herb):
     html_article += f'<h1>{herb_name} preparations</h1>'
     for preparation in json_article['preparations']:
         preparation_slug = preparation['preparation_slug']
+        preparation_slug_plural = f'{preparation_slug}s'
         preparation_name = preparation_slug.replace('-', ' ')
         preparation_desc = preparation['preparation_desc']
         html_article += f'<h2>{preparation_name}</h2>\n'
         html_article += f'<p>{preparation_desc}</p>\n'
-        html_article += f'<p><a href="/preparations/{preparation_slug}/{herb_slug}.html">{preparation_name}</a></p>'
-    title = f'{herb_name} preparations'
-    html_head = html_head_gen(title)
-    html_breadcrumbs = breadcrumbs_gen(f'herbs/{herb_slug}/preparation.html')
-    html_article_layout = html_article_layout_gen(html_article)
+        html_article += f'<p><a href="/preparations/{preparation_slug_plural}/{slug}.html">{preparation_name}</a></p>'
+    html_breadcrumbs = breadcrumbs_gen(f'herbs/{herb_slug}/preparations.html')
     html = f'''
         <!DOCTYPE html>
         <html lang="en">
-        {html_head}
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>{herb_name}</title>
+        </head>
         <body>
-            {html_header}
+            {html_menu}
             {html_breadcrumbs}
-            {html_article_layout}
+            <main>
+                {html_article}
+            </main>
         </body>
         </html>
     '''
     if not os.path.exists(f'{website_folderpath}/herbs/{herb_slug}'): 
         os.mkdir(f'{website_folderpath}/herbs/{herb_slug}')
-    with open(f'{website_folderpath}/herbs/{herb_slug}/preparation.html', 'w') as f:
+    with open(f'{website_folderpath}/herbs/{herb_slug}/preparations.html', 'w') as f:
         f.write(html)
 
 
 def p_preparations(preparations):
-    preparation_slugs = []
+    slugs = []
     for preparation in preparations:
-        if preparation['preparation_slug'] not in preparation_slugs: 
-            preparation_slugs.append(preparation['preparation_slug'])
+        if preparation['preparation_slug'] not in slugs: 
+            slugs.append(preparation['preparation_slug'])
     json_article_filepath = f'database/pages/preparations.json'
     json_article = json_read(json_article_filepath, create=True)
     json_write(json_article_filepath, json_article)
-    # json
-    if 'preparations' not in json_article: json_article['preparations'] = []
-    for preparation_slug in preparation_slugs:
-        preparation_name = preparation_slug.replace('-', ' ')
-        # add if doesn't exist
-        found = False
-        for _obj in json_article['preparations']:
-            if preparation_slug == _obj['preparation_slug']:
-                found = True
-                break
-        if not found:
-            json_article['preparations'].append({'preparation_slug': preparation_slug})
-            json_write(json_article_filepath, json_article)
-        # update
-        preparation_obj = {}
-        for _preparation_obj in json_article['preparations']:
-            if preparation_slug == _preparation_obj['preparation_slug']:
-                preparation_obj = _preparation_obj
-                break
-        ai_paragraph_gen(
-            key = 'preparation_desc', 
-            filepath = json_article_filepath, 
-            data = json_article, 
-            obj = preparation_obj, 
-            prompt = f'''
-                Write a short 3-sentence paragraph about {preparation_name}.
-            ''',
-        )
-    # html
     html_article = ''
     html_article += f'<h1>preparations</h1>'
-    for preparation in json_article['preparations']:
-        slug_plural = preparation['preparation_slug']
-        name_plural = slug_plural.replace('-', ' ')
-        preparation_desc = preparation['preparation_desc']
-        html_article += f'<h2>{name_plural}</h2>'
-        html_article += f'<p>{preparation_desc}</p>'
-        html_article += f'<p><a href="/preparations/{slug_plural}.html">{name_plural}</a></p>'
-        html_article += f'<div style="margin-bottom: 48px;"></div>'
-    title = f'preparations'
-    html_head = html_head_gen(title)
+    for slug in slugs:
+        name = slug.replace('-', ' ')
+        html_article += f'<p><a href="/preparations/{slug}.html">{name}</a></p>'
     html_breadcrumbs = breadcrumbs_gen(f'preparations.html')
-    html_article_layout = html_article_layout_gen(html_article)
     html = f'''
         <!DOCTYPE html>
         <html lang="en">
-        {html_head}
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Herbs</title>
+        </head>
         <body>
-            {html_header}
+            {html_menu}
             {html_breadcrumbs}
-            {html_article_layout}
+            <main>
+                {html_article}
+            </main>
         </body>
         </html>
     '''
@@ -455,117 +381,75 @@ def p_preparations(preparations):
 
 
 def a_preparation(preparation):
-    preparation_slug = preparation['preparation_slug']
-    preparation_name_singular = preparation_slug.replace('-', ' ')
-    preparation_name_plural = preparation_slug.replace('-', ' ')
+    preparation_slug_singular = preparation['preparation_slug']
+    preparation_slug_plural = f'{preparation_slug_singular}s'
+    preparation_name_singular = preparation_slug_singular.replace('-', ' ')
+    preparation_name_plural = preparation_slug_plural.replace('-', ' ')
     herbs_slugs = preparation['herbs_slugs']
-    json_article_filepath = f'database/pages/preparations/{preparation_slug}.json'
+    json_article_filepath = f'database/pages/preparations/{preparation_slug_plural}.json'
     json_article = json_read(json_article_filepath, create=True)
-    json_article['preparation_slug'] = preparation_slug
+    json_article['preparation_slug_singular'] = preparation_slug_singular
+    json_article['preparation_slug_plural'] = preparation_slug_plural
     json_article['preparation_name_singular'] = preparation_name_singular
     json_article['preparation_name_plural'] = preparation_name_plural
-    json_article['preparation_url'] = f'preparations/{preparation_slug}.html'
+    json_article['preparation_url'] = f'preparations/{preparation_slug_plural}.html'
     json_write(json_article_filepath, json_article)
-    # json
-    if 'herbs' not in json_article: json_article['herbs'] = []
-    for herb_slug in herbs_slugs:
-        herb_name = herb_slug.replace('-', ' ')
-        # add if doesn't exist
-        found = False
-        for _obj in json_article['herbs']:
-            if herb_slug == _obj['herb_slug']:
-                found = True
-                break
-        if not found:
-            json_article['herbs'].append({'herb_slug': herb_slug})
-            json_write(json_article_filepath, json_article)
-        # update
-        herb_obj = {}
-        for _herb_obj in json_article['herbs']:
-            if herb_slug == _herb_obj['herb_slug']:
-                herb_obj = _herb_obj
-                break
-        ai_paragraph_gen(
-            key = 'herb_desc', 
-            filepath = json_article_filepath, 
-            data = json_article, 
-            obj = herb_obj, 
-            prompt = f'''
-                Write a short 3-sentence paragraph about {herb_name} {preparation_name_singular}.
-            ''',
-        )
-    # html
     html_article = ''
     html_article += f'<h1>{preparation_name_plural}</h1>'
-    for herb in json_article['herbs']:
-        slug_plural = herb['herb_slug']
-        name_plural = slug_plural.replace('-', ' ')
-        herb_desc = herb['herb_desc']
-        html_article += f'<h2>{name_plural}</h2>'
-        html_article += f'<p>{herb_desc}</p>'
-        html_article += f'<p><a href="/preparations/{preparation_slug}/{herb_slug}.html">{herb_name} {preparation_name_singular}</a></p>'
-        html_article += f'<div style="margin-bottom: 48px;"></div>'
-    title = f'{preparation_slug}'
-    html_head = html_head_gen(title)
-    html_breadcrumbs = breadcrumbs_gen(f'preparations/{preparation_slug}.html')
-    html_article_layout = html_article_layout_gen(html_article)
+    for herb_slug in herbs_slugs:
+        herb_name = herb_slug.replace('-', ' ')
+        html_article += f'<p><a href="/preparations/{preparation_slug_plural}/{herb_slug}.html">{herb_name} {preparation_name_singular}</a></p>'
+    html_breadcrumbs = breadcrumbs_gen(f'preparations/{preparation_slug_plural}.html')
     html = f'''
         <!DOCTYPE html>
         <html lang="en">
-        {html_head}
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>{preparation_name_plural}</title>
         </head>
         <body>
-            {html_header}
+            {html_menu}
             {html_breadcrumbs}
-            {html_article_layout}
+            <main>
+                {html_article}
+            </main>
         </body>
         </html>
     '''
-    with open(f'{website_folderpath}/preparations/{preparation_slug}.html', 'w') as f:
+    with open(f'{website_folderpath}/preparations/{preparation_slug_plural}.html', 'w') as f:
         f.write(html)
 
 
 def a_preparation_herbs(preparation):
     for herb_slug in preparation['herbs_slugs']:
         preparation_slug = preparation['preparation_slug']
-        preparation_name_singular = preparation_slug.replace('-', ' ')
-        preparation_name_plural = preparation_slug.replace('-', ' ')
+        preparation_name = preparation_slug.replace('-', ' ')
         herb_name = herb_slug.replace('-', ' ')
         json_article_filepath = f'database/pages/preparations/{preparation_slug}/{herb_slug}.json'
         json_article = json_read(json_article_filepath, create=True)
         json_article['preparation_slug'] = preparation_slug
-        json_article['preparation_name_plural'] = preparation_name_plural
-        json_article['preparation_name_singular'] = preparation_name_singular
+        json_article['preparation_name'] = preparation_name
         json_article['preparation_url'] = f'preparations/{preparation_slug}/{herb_slug}.html'
         json_write(json_article_filepath, json_article)
-        # update
-        ai_paragraph_gen(
-            key = 'intro', 
-            filepath = json_article_filepath, 
-            data = json_article, 
-            obj = json_article, 
-            prompt = f'''
-                Write a short 3-sentence paragraph about {herb_name} {preparation_name_singular}.
-            ''',
-        )
-        # html
         html_article = ''
-        html_article += f'<h1>{herb_name} {preparation_name_singular}</h1>'
-        html_article += f'<h2>intro</h2>'
-        html_article += f'<p>{json_article["intro"]}</p>'
+        html_article += f'<h1>{herb_name} {preparation_name}</h1>'
         html_article += f'<p><a href="/herbs/{herb_slug}.html">{herb_name}</a></p>'
-        title = f'{herb_slug} {preparation_slug}'
-        html_head = html_head_gen(title)
         html_breadcrumbs = breadcrumbs_gen(f'preparations/{preparation_slug}/{herb_slug}.html')
-        html_article_layout = html_article_layout_gen(html_article)
         html = f'''
             <!DOCTYPE html>
             <html lang="en">
-            {html_head}
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>{herb_name} {preparation_name}</title>
+            </head>
             <body>
-                {html_header}
+                {html_menu}
                 {html_breadcrumbs}
-            {html_article_layout}
+                <main>
+                    {html_article}
+                </main>
             </body>
             </html>
         '''
@@ -575,8 +459,7 @@ def a_preparation_herbs(preparation):
             f.write(html)
 
 
-def p_equipments(lst):
-    equipments_slugs = [x['slug'] for x in lst]
+def p_equipments(equipments_slugs):
     json_article_filepath = f'database/pages/equipments.json'
     json_article = json_read(json_article_filepath, create=True)
     json_write(json_article_filepath, json_article)
@@ -585,18 +468,19 @@ def p_equipments(lst):
     for equipment_slug in equipments_slugs:
         equipment_name = equipment_slug.replace('-', ' ')
         html_article += f'<p><a href="/equipments/{equipment_slug}.html">{equipment_name}</a></p>'
-    title = f'equipments'
-    html_head = html_head_gen(title)
-    html_breadcrumbs = breadcrumbs_gen(f'equipments.html')
-    html_article_layout = html_article_layout_gen(html_article)
     html = f'''
         <!DOCTYPE html>
         <html lang="en">
-        {html_head}
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title></title>
+        </head>
         <body>
-            {html_header}
-            {html_breadcrumbs}
-            {html_article_layout}
+            {html_menu}
+            <main>
+                {html_article}
+            </main>
         </body>
         </html>
     '''
@@ -604,53 +488,21 @@ def p_equipments(lst):
         os.mkdir(f'{website_folderpath}/equipments')
     with open(f'{website_folderpath}/equipments.html', 'w') as f:
         f.write(html)
-
-
-def a_equipment(equipment):
-    equipment_slug = equipment['slug']
+    
+def a_equipment(equipment_slug):
     equipment_name = equipment_slug.replace('-', ' ')
-    equipments_slugs = [x['slug'] for x in lst]
+
+    json_products_folderpath = f'{vault}/amazon/json/{equipment_slug}'
+
     json_article_filepath = f'database/pages/equipments/{equipment_slug}.json'
-    json_article = json_read(json_article_filepath, create=True)
-    json_write(json_article_filepath, json_article)
-    html_article = ''
-    html_article += f'<h1>{equipment_name}</h1>'
-    html_article += f'<p><a href="/equipments/{equipment_slug}/best.html">best {equipment_name}</a></p>'
-    title = f'{equipment_slug}'
-    html_head = html_head_gen(title)
-    html_breadcrumbs = breadcrumbs_gen(f'equipments/{equipment_slug}.html')
-    html_article_layout = html_article_layout_gen(html_article)
-    html = f'''
-        <!DOCTYPE html>
-        <html lang="en">
-        {html_head}
-        <body>
-            {html_header}
-            {html_breadcrumbs}
-            {html_article_layout}
-        </body>
-        </html>
-    '''
-    if not os.path.exists(f'{website_folderpath}/equipments'): 
-        os.mkdir(f'{website_folderpath}/equipments')
-    with open(f'{website_folderpath}/equipments/{equipment_slug}.html', 'w') as f:
-        f.write(html)
-
-
-def a_equipment_best(equipment):
-    equipment_slug = equipment['slug']
-    equipment_amazon = equipment['amazon']
-    equipment_name = equipment_slug.replace('-', ' ')
-    equipment_name_plural = f'{equipment_name}s'
-    json_products_folderpath = f'{vault}/amazon/json/{equipment_amazon}'
-    json_article_filepath = f'database/pages/equipments/{equipment_slug}/best.json'
     json_article = json_read(json_article_filepath, create=True)
     json_article['slug'] = equipment_slug
     json_article['name'] = equipment_name
-    json_article['url'] = f'equipments/{equipment_slug}/best.html'
+    json_article['url'] = f'equipments/{equipment_slug}.html'
     if 'products_num' not in json_article: json_article['products_num'] = random.choice([7, 9, 11, 13])
     products_num = json_article['products_num']
     json_write(json_article_filepath, json_article)
+
     #################################################################
     # ;article_json
     #################################################################
@@ -668,6 +520,7 @@ def a_equipment_best(equipment):
         if reply.strip() != '':
             json_article[key] = reply
             json_write(json_article_filepath, json_article)
+
     # order filepaths by popularity
     products_jsons_filepaths = [f'{json_products_folderpath}/{x}' for x in os.listdir(json_products_folderpath)]
     products_jsons = []
@@ -683,6 +536,7 @@ def a_equipment_best(equipment):
         product_filepath = f'{json_products_folderpath}/{product_asin}.json'
         products_jsons_filepaths_ordered.append(product_filepath)
     products_jsons_filepaths_ordered = products_jsons_filepaths_ordered[:products_num]
+
     # ;product
     for i, product_json_filepath in enumerate(products_jsons_filepaths_ordered):
         product_data = json_read(product_json_filepath, create=True)
@@ -692,6 +546,7 @@ def a_equipment_best(equipment):
         print(product_aff_link)
         print(product_title)
         print(product_asin)
+
         # init product
         key = 'products'
         if key not in json_article: json_article[key] = []
@@ -704,6 +559,7 @@ def a_equipment_best(equipment):
             product = {'product_id': product_asin}
             json_article[key].append(product)
         json_write(json_article_filepath, json_article)
+
         # update product
         if 'products' not in json_article: json_article['products'] = []
         for obj in json_article['products']:
@@ -711,6 +567,7 @@ def a_equipment_best(equipment):
                 obj['product_title'] = product_title
                 obj['product_aff_link'] = product_aff_link
                 json_write(json_article_filepath, json_article)
+
                 # ;title
                 key = 'title_ai'
                 if key not in obj: obj[key] = ''
@@ -736,6 +593,7 @@ def a_equipment_best(equipment):
                         except: continue
                         obj[key] = line
                         json_write(json_article_filepath, json_article)
+
                 # ;pros
                 key = 'pros'
                 if key not in obj: obj[key] = []
@@ -805,6 +663,7 @@ def a_equipment_best(equipment):
                                 outputs.append(line)
                     obj[key] = outputs
                     json_write(json_article_filepath, json_article)
+
                 # ;description
                 key = 'desc'
                 if key not in obj: obj[key] = ''
@@ -827,6 +686,7 @@ def a_equipment_best(equipment):
                     reply = llm_reply(prompt)
                     obj[key] = reply
                     json_write(json_article_filepath, json_article)
+
                 # ;cons_description
                 key = 'warn'
                 if key not in obj: obj[key] = ''
@@ -849,13 +709,15 @@ def a_equipment_best(equipment):
                     reply = llm_reply(prompt)
                     obj[key] = reply
                     json_write(json_article_filepath, json_article)
+
+
     #################################################################
     # ;article_html
     #################################################################
-    title = f'{products_num} best {equipment_name_plural}'.title()
     html_article = ''
-    html_article += f'<h1>{title}</h1>'
+    html_article += f'<h1>{equipment_name}</h1>'
     html_article += f'{text_format_1N1_html(json_article["intro"])}\n'
+
     if 'products' not in json_article: json_article['products'] = []
     for i, obj in enumerate(json_article['products'][:products_num]):
         title_ai = obj['title_ai']
@@ -863,32 +725,34 @@ def a_equipment_best(equipment):
         pros = obj['pros']
         warn = obj['warn']
         # product_aff_link = obj['product_aff_link']
+
         html_article += f'<h2>{i+1}. {title_ai}</h2>\n'
         html_article += f'{text_format_1N1_html(desc)}\n'
-        html_article += f'<p class="font-bold text-black">Key Features:</p>\n'
+        html_article += f'<p class="helvetica-bold text-black">Key Features:</p>\n'
         html_article += f'<ul>\n'
         for item in pros[:5]:
             html_article += f'<li>{item}</li>\n'
         html_article += f'</ul>\n'
-        html_article += f'<p class="font-bold text-black">Warnings:</p>\n'
+        html_article += f'<p class="helvetica-bold text-black">Warnings:</p>\n'
         html_article += f'{text_format_1N1_html(warn)}\n'
-    html_head = html_head_gen(title)
-    html_breadcrumbs = breadcrumbs_gen(f'equipments/{equipment_slug}/best.html')
-    html_article_layout = html_article_layout_gen(html_article)
+
     html = f'''
         <!DOCTYPE html>
         <html lang="en">
-        {html_head}
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title></title>
+        </head>
         <body>
-            {html_header}
-            {html_breadcrumbs}
-            {html_article_layout}
+            {html_menu}
+            <main>
+                {html_article}
+            </main>
         </body>
         </html>
     '''
-    if not os.path.exists(f'{website_folderpath}/equipments/{equipment_slug}'): 
-        os.mkdir(f'{website_folderpath}/equipments/{equipment_slug}')
-    with open(f'{website_folderpath}/equipments/{equipment_slug}/best.html', 'w') as f:
+    with open(f'{website_folderpath}/equipments/{equipment_slug}.html', 'w') as f:
         f.write(html)
 
 
@@ -901,18 +765,19 @@ def p_ailments(slugs):
     for slug in slugs:
         name = slug.replace('-', ' ')
         html_article += f'<p><a href="/ailments/{slug}.html">{name}</a></p>'
-    title = f'ailment'
-    html_head = html_head_gen(title)
-    html_breadcrumbs = breadcrumbs_gen(f'ailments.html')
-    html_article_layout = html_article_layout_gen(html_article)
     html = f'''
         <!DOCTYPE html>
         <html lang="en">
-        {html_head}
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Herbs</title>
+        </head>
         <body>
-            {html_header}
-            {html_breadcrumbs}
-            {html_article_layout}
+            {html_menu}
+            <main>
+                {html_article}
+            </main>
         </body>
         </html>
     '''
@@ -932,25 +797,38 @@ def a_ailment(slug):
     json_write(json_article_filepath, json_article)
     html_article = ''
     html_article += f'<h1>{name}</h1>'
-    title = f'{slug}'
-    html_head = html_head_gen(title)
-    html_breadcrumbs = breadcrumbs_gen(f'ailments/{name}.html')
-    html_article_layout = html_article_layout_gen(html_article)
     html = f'''
         <!DOCTYPE html>
         <html lang="en">
-        {html_head}
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>{name}</title>
+        </head>
         <body>
-            {html_header}
-            {html_breadcrumbs}
-            {html_article_layout}
+            {html_menu}
+            <main>
+                {html_article}
+            </main>
         </body>
         </html>
     '''
     with open(f'{website_folderpath}/ailments/{slug}.html', 'w') as f:
         f.write(html)
 
-if 0:
+
+p_home()
+
+# herbs
+if 1:
+    with open('database/csvs/herbs-preparations.txt') as f: content = f.read()
+    llst = []
+    lines = content.split('\n')
+    for line in lines:
+        if line.strip() == '': continue
+        lst = line.split('\\')
+        llst.append(lst)
+
     vertex_1 = {
         'type': 'herb',
         'slug': 'achillea-millefolium',
@@ -975,33 +853,12 @@ if 0:
             herbs.append(vertex)
 
 
-p_home()
-
-# herbs
-if 1:
-    with open('database/csvs/herbs-preparations.txt') as f: content = f.read()
-    llst = []
-    lines = content.split('\n')
-    for line in lines:
-        if line.strip() == '': continue
-        lst = line.split('\\')
-        llst.append(lst)
-    herbs = []
-    for lst in llst:
-        found = False
-        for herb in herbs:
-            if lst[0] == herb['herb_slug']:
-                herb['preparations_slugs'].append(lst[1])
-                found = True
-                break
-        if not found:
-            herbs.append({'herb_slug': lst[0], 'preparations_slugs': [lst[1]]})
-    herb_slugs = [x['herb_slug'] for x in herbs]
-    p_herbs(herb_slugs)
-    for herb in herbs:
-        a_herb(herb)
-        a_herb_benefits(herb)
-        a_herb_preparations(herb)
+    slugs = [x['slug'] for x in herbs]
+    p_herbs(slugs)
+    for slug in slugs:
+        a_herb(slug)
+        a_herb_benefits(slug)
+        a_herb_preparations(slug, llst)
 
 # preparations
 if 1:
@@ -1012,6 +869,15 @@ if 1:
         if line.strip() == '': continue
         lst = line.split('\\')
         llst.append(lst)
+
+    preparations = [
+        {'preparation_slug': 'infusions', 'preparation_slug_singular': 'infusion', 'herbs_slugs': ['achillea-millefolium', 'acorus-calamus']},
+        {'preparation_slug': 'tinctures', 'preparation_slug_singular': 'infusion', 'herbs_slugs': ['aesculus-hippocastanum', 'allium-sativum']},
+    ]
+    p_preparations(preparations)
+    for preparation in preparations:
+        a_preparation_herbs(preparation)
+
     preparations = []
     for lst in llst:
         found = False
@@ -1021,31 +887,26 @@ if 1:
                 found = True
                 break
         if not found:
-            preparations.append({
-                'preparation_slug': lst[1], 
-                'herbs_slugs': [lst[0]]
-            })
-    p_preparations(preparations)
+            preparations.append({'preparation_slug': lst[1], 'herbs_slugs': [lst[0]]})
     for preparation in preparations:
         a_preparation(preparation)
-        a_preparation_herbs(preparation)
 
 # equipments
 if 1:
     lst = [
-        {'slug': 'jar', 'amazon': 'jars',},
-        {'slug': 'bottle', 'amazon': 'bottles',},
-        {'slug': 'spatula', 'amazon': 'spatulas',},
-        {'slug': 'coffee-grinder', 'amazon': 'coffee-grinders',},
-        {'slug': 'mortar', 'amazon': 'mortars',},
-        {'slug': 'pestle', 'amazon': 'pestles',},
-        {'slug': 'measuring-cup', 'amazon': 'measuring-cups',},
-        {'slug': 'lid-grip', 'amazon': 'lid-grips',},
+        {'slug': 'jars', 'img_tag': 'jar', },
+        {'slug': 'bottles', 'img_tag': 'bottle', },
+        {'slug': 'spatulas', 'img_tag': 'spatula', },
+        {'slug': 'coffee-grinders', 'img_tag': 'coffe grinder', },
+        {'slug': 'mortars', 'img_tag': 'mortar', },
+        {'slug': 'pestles', 'img_tag': 'pestle', },
+        {'slug': 'measuring-cups', 'img_tag': 'measuring cup', },
+        {'slug': 'lid-grips', 'img_tag': 'lid grip', },
     ]
-    p_equipments(lst)
-    for equipment in lst:
-        a_equipment(equipment)
-        a_equipment_best(equipment)
+    slugs = [x['slug'] for x in lst]
+    p_equipments(slugs)
+    for slug in slugs:
+        a_equipment(slug)
 
 # ailments
 if 1:
@@ -1058,5 +919,5 @@ if 1:
     for slug in slugs:
         a_ailment(slug)
 
-shutil.copy('style.css', f'{website_folderpath}/style.css')
-
+# TODO: csv with combinations? ex -> achillea-millefolium, infusion, [ailment]
+#       then, generate all the pages/combinations/categoris/connection/etc from the combination above in the csv
