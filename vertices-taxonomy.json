@@ -1,0 +1,106 @@
+[
+    {
+        "vertex_type": "herb_family",
+        "family_slug": "asteraceae"
+    },
+    {
+        "vertex_type": "herb_family",
+        "family_slug": "araceae"
+    },
+    {
+        "vertex_type": "herb_family",
+        "family_slug": "sapindaceae"
+    },
+    {
+        "vertex_type": "herb_family",
+        "family_slug": "liliaceae"
+    },
+    {
+        "vertex_type": "herb_family",
+        "family_slug": "xanthorrhoeaceae"
+    },
+    {
+        "vertex_type": "herb_family",
+        "family_slug": "zingiberaceae"
+    },
+    {
+        "vertex_type": "herb_family",
+        "family_slug": "apiaceae"
+    },
+    {
+        "vertex_type": "herb_family",
+        "family_slug": "fabaceae"
+    },
+    {
+        "vertex_type": "herb_family",
+        "family_slug": "solanaceae"
+    },
+    {
+        "vertex_type": "herb_family",
+        "family_slug": "meliaceae"
+    },
+    {
+        "vertex_type": "herb_order",
+        "order_slug": "asterales"
+    },
+    {
+        "vertex_type": "herb_order",
+        "order_slug": "acorales"
+    },
+    {
+        "vertex_type": "herb_order",
+        "order_slug": "sapindales"
+    },
+    {
+        "vertex_type": "herb_order",
+        "order_slug": "asparagales"
+    },
+    {
+        "vertex_type": "herb_order",
+        "order_slug": "zingiberales"
+    },
+    {
+        "vertex_type": "herb_order",
+        "order_slug": "apiales"
+    },
+    {
+        "vertex_type": "herb_order",
+        "order_slug": "fabales"
+    },
+    {
+        "vertex_type": "herb_order",
+        "order_slug": "solanales"
+    },
+    {
+        "vertex_type": "herb_subclass",
+        "subclass_slug": "asteridae"
+    },
+    {
+        "vertex_type": "herb_subclass",
+        "subclass_slug": "arecidae"
+    },
+    {
+        "vertex_type": "herb_subclass",
+        "subclass_slug": "rosidae"
+    },
+    {
+        "vertex_type": "herb_subclass",
+        "subclass_slug": "commelinidae"
+    },
+    {
+        "vertex_type": "herb_class",
+        "class_slug": "magnoliopsida"
+    },
+    {
+        "vertex_type": "herb_class",
+        "class_slug": "liliopsida"
+    },
+    {
+        "vertex_type": "herb_division",
+        "division_slug": "angiospermae"
+    },
+    {
+        "vertex_type": "herb_division",
+        "division_slug": "magnoliophyta"
+    }
+]

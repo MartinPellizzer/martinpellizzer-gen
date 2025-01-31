@@ -30,6 +30,31 @@
         "herb_name": "alpinia officinarum"
     },
     {
+        "type": "herb",
+        "herb_slug": "ammi-visnaga",
+        "herb_name": "ammi visnaga"
+    },
+    {
+        "type": "herb",
+        "herb_slug": "angelica-sinensis",
+        "herb_name": "angelica sinensis"
+    },
+    {
+        "type": "herb",
+        "herb_slug": "apium-graveolens",
+        "herb_name": "apium graveolens"
+    },
+    {
+        "type": "herb",
+        "herb_slug": "arctium-lappa",
+        "herb_name": "arctium lappa"
+    },
+    {
+        "type": "herb",
+        "herb_slug": "artemisia-absinthium",
+        "herb_name": "artemisia absinthium"
+    },
+    {
         "type": "preparation",
         "preparation_slug": "infusion",
         "preparation_name": "infusion"
@@ -93,6 +118,61 @@
         "type": "preparation",
         "preparation_slug": "juice",
         "preparation_name": "juice"
+    },
+    {
+        "type": "preparation",
+        "preparation_slug": "wine-infusion",
+        "preparation_name": "wine infusion"
+    },
+    {
+        "type": "preparation",
+        "preparation_slug": "vinegar-infusion",
+        "preparation_name": "vinegar infusion"
+    },
+    {
+        "type": "preparation",
+        "preparation_slug": "glycerin-infusion",
+        "preparation_name": "glycerin infusion"
+    },
+    {
+        "type": "preparation",
+        "preparation_slug": "oil-infusion",
+        "preparation_name": "oil infusion"
+    },
+    {
+        "type": "preparation",
+        "preparation_slug": "oinment",
+        "preparation_name": "oinment"
+    },
+    {
+        "type": "preparation",
+        "preparation_slug": "salve",
+        "preparation_name": "salve"
+    },
+    {
+        "type": "preparation",
+        "preparation_slug": "balm",
+        "preparation_name": "balm"
+    },
+    {
+        "type": "preparation",
+        "preparation_slug": "cream",
+        "preparation_name": "cream"
+    },
+    {
+        "type": "preparation",
+        "preparation_slug": "suppositories",
+        "preparation_name": "suppositories"
+    },
+    {
+        "type": "preparation",
+        "preparation_slug": "bolus",
+        "preparation_name": "bolus"
+    },
+    {
+        "type": "ailment",
+        "ailment_slug": "fever",
+        "ailment_name": "fever"
     },
     {
         "type": "none"

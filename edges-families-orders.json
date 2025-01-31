@@ -1,0 +1,52 @@
+[
+    {
+        "edge_type": "herb_family_order",
+        "vertex_1": "asteraceae",
+        "vertex_2": "asterales"
+    },
+    {
+        "edge_type": "herb_family_order",
+        "vertex_1": "araceae",
+        "vertex_2": "acorales"
+    },
+    {
+        "edge_type": "herb_family_order",
+        "vertex_1": "sapindaceae",
+        "vertex_2": "sapindales"
+    },
+    {
+        "edge_type": "herb_family_order",
+        "vertex_1": "liliaceae",
+        "vertex_2": "asparagales"
+    },
+    {
+        "edge_type": "herb_family_order",
+        "vertex_1": "xanthorrhoeaceae",
+        "vertex_2": "asparagales"
+    },
+    {
+        "edge_type": "herb_family_order",
+        "vertex_1": "zingiberaceae",
+        "vertex_2": "zingiberales"
+    },
+    {
+        "edge_type": "herb_family_order",
+        "vertex_1": "apiaceae",
+        "vertex_2": "apiales"
+    },
+    {
+        "edge_type": "herb_family_order",
+        "vertex_1": "fabaceae",
+        "vertex_2": "fabales"
+    },
+    {
+        "edge_type": "herb_family_order",
+        "vertex_1": "solanaceae",
+        "vertex_2": "solanales"
+    },
+    {
+        "edge_type": "herb_family_order",
+        "vertex_1": "meliaceae",
+        "vertex_2": "sapindales"
+    }
+]

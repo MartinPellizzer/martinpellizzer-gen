@@ -1,0 +1,22 @@
+[
+    {
+        "edge_type": "herb_subclass_class",
+        "vertex_1": "asteridae",
+        "vertex_2": "magnoliopsida"
+    },
+    {
+        "edge_type": "herb_subclass_class",
+        "vertex_1": "arecidae",
+        "vertex_2": "liliopsida"
+    },
+    {
+        "edge_type": "herb_subclass_class",
+        "vertex_1": "rosidae",
+        "vertex_2": "magnoliopsida"
+    },
+    {
+        "edge_type": "herb_subclass_class",
+        "vertex_1": "commelinidae",
+        "vertex_2": "liliopsida"
+    }
+]

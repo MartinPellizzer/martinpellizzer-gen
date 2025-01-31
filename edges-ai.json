@@ -1,0 +1,827 @@
+[
+    {
+        "type": "herb_preparation",
+        "vertex_1": "achillea-millefolium",
+        "vertex_2": "tincture"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "achillea-millefolium",
+        "vertex_2": "infusion"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "achillea-millefolium",
+        "vertex_2": "salve"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "achillea-millefolium",
+        "vertex_2": "extract"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "achillea-millefolium",
+        "vertex_2": "infused-oil"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "achillea-millefolium",
+        "vertex_2": "cream"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "achillea-millefolium",
+        "vertex_2": "oil"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "achillea-millefolium",
+        "vertex_2": "balm"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "achillea-millefolium",
+        "vertex_2": "glycerite"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "achillea-millefolium",
+        "vertex_2": "tea"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "achillea-millefolium",
+        "vertex_2": "gum"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "acorus-calamus",
+        "vertex_2": "tincture"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "acorus-calamus",
+        "vertex_2": "extract"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "acorus-calamus",
+        "vertex_2": "oil"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "acorus-calamus",
+        "vertex_2": "elixir"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "acorus-calamus",
+        "vertex_2": "infusion"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "acorus-calamus",
+        "vertex_2": "powder"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "acorus-calamus",
+        "vertex_2": "cream"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "acorus-calamus",
+        "vertex_2": "capsule"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "acorus-calamus",
+        "vertex_2": "glycerite"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "acorus-calamus",
+        "vertex_2": "gum"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "acorus-calamus",
+        "vertex_2": "salve"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "aesculus-hippocastanum",
+        "vertex_2": "extract"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "aesculus-hippocastanum",
+        "vertex_2": "tincture"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "aesculus-hippocastanum",
+        "vertex_2": "cream"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "aesculus-hippocastanum",
+        "vertex_2": "salve"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "aesculus-hippocastanum",
+        "vertex_2": "oil"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "aesculus-hippocastanum",
+        "vertex_2": "infused-oil"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "aesculus-hippocastanum",
+        "vertex_2": "liniment"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "aesculus-hippocastanum",
+        "vertex_2": "balm"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "aesculus-hippocastanum",
+        "vertex_2": "elixir"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "aesculus-hippocastanum",
+        "vertex_2": "gel"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "aesculus-hippocastanum",
+        "vertex_2": "powder"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "allium-sativum",
+        "vertex_2": "extract"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "allium-sativum",
+        "vertex_2": "tincture"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "allium-sativum",
+        "vertex_2": "cream"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "allium-sativum",
+        "vertex_2": "oil"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "allium-sativum",
+        "vertex_2": "capsule"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "allium-sativum",
+        "vertex_2": "elixir"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "allium-sativum",
+        "vertex_2": "infusion"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "allium-sativum",
+        "vertex_2": "tea"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "allium-sativum",
+        "vertex_2": "gum"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "allium-sativum",
+        "vertex_2": "infused-oil"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "allium-sativum",
+        "vertex_2": "salve"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "aloe-vera",
+        "vertex_2": "cream"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "aloe-vera",
+        "vertex_2": "gel"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "aloe-vera",
+        "vertex_2": "extract"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "aloe-vera",
+        "vertex_2": "salve"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "aloe-vera",
+        "vertex_2": "oil"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "aloe-vera",
+        "vertex_2": "balm"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "aloe-vera",
+        "vertex_2": "infused-oil"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "aloe-vera",
+        "vertex_2": "tincture"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "aloe-vera",
+        "vertex_2": "powder"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "aloe-vera",
+        "vertex_2": "lotion"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "aloe-vera",
+        "vertex_2": "elixir"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "alpinia-officinarum",
+        "vertex_2": "extract"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "alpinia-officinarum",
+        "vertex_2": "tincture"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "alpinia-officinarum",
+        "vertex_2": "infusion"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "alpinia-officinarum",
+        "vertex_2": "oil"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "alpinia-officinarum",
+        "vertex_2": "cream"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "alpinia-officinarum",
+        "vertex_2": "elixir"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "alpinia-officinarum",
+        "vertex_2": "capsule"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "alpinia-officinarum",
+        "vertex_2": "powder"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "alpinia-officinarum",
+        "vertex_2": "decoction"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "alpinia-officinarum",
+        "vertex_2": "gum"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "alpinia-officinarum",
+        "vertex_2": "glycerite"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "ammi-visnaga",
+        "vertex_2": "extract"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "ammi-visnaga",
+        "vertex_2": "tincture"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "ammi-visnaga",
+        "vertex_2": "oil"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "ammi-visnaga",
+        "vertex_2": "cream"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "ammi-visnaga",
+        "vertex_2": "elixir"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "ammi-visnaga",
+        "vertex_2": "infusion"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "ammi-visnaga",
+        "vertex_2": "capsule"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "ammi-visnaga",
+        "vertex_2": "gum"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "ammi-visnaga",
+        "vertex_2": "powder"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "ammi-visnaga",
+        "vertex_2": "salve"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "ammi-visnaga",
+        "vertex_2": "glycerite"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "angelica-sinensis",
+        "vertex_2": "extract"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "angelica-sinensis",
+        "vertex_2": "tincture"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "angelica-sinensis",
+        "vertex_2": "decoction"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "angelica-sinensis",
+        "vertex_2": "capsule"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "angelica-sinensis",
+        "vertex_2": "infusion"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "angelica-sinensis",
+        "vertex_2": "glycerite"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "angelica-sinensis",
+        "vertex_2": "powder"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "angelica-sinensis",
+        "vertex_2": "tea"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "angelica-sinensis",
+        "vertex_2": "elixir"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "angelica-sinensis",
+        "vertex_2": "oil"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "angelica-sinensis",
+        "vertex_2": "cream"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "apium-graveolens",
+        "vertex_2": "tincture"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "apium-graveolens",
+        "vertex_2": "extract"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "apium-graveolens",
+        "vertex_2": "cream"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "apium-graveolens",
+        "vertex_2": "oil"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "apium-graveolens",
+        "vertex_2": "infusion"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "apium-graveolens",
+        "vertex_2": "salve"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "apium-graveolens",
+        "vertex_2": "elixir"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "apium-graveolens",
+        "vertex_2": "glycerite"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "apium-graveolens",
+        "vertex_2": "infused-oil"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "apium-graveolens",
+        "vertex_2": "tea"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "apium-graveolens",
+        "vertex_2": "gum"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "arctium-lappa",
+        "vertex_2": "tincture"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "arctium-lappa",
+        "vertex_2": "extract"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "arctium-lappa",
+        "vertex_2": "infusion"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "arctium-lappa",
+        "vertex_2": "decoction"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "arctium-lappa",
+        "vertex_2": "salve"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "arctium-lappa",
+        "vertex_2": "powder"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "arctium-lappa",
+        "vertex_2": "capsule"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "arctium-lappa",
+        "vertex_2": "oil"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "arctium-lappa",
+        "vertex_2": "cream"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "arctium-lappa",
+        "vertex_2": "infused-oil"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "arctium-lappa",
+        "vertex_2": "gum"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "artemisia-absinthium",
+        "vertex_2": "tincture"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "artemisia-absinthium",
+        "vertex_2": "extract"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "artemisia-absinthium",
+        "vertex_2": "infusion"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "artemisia-absinthium",
+        "vertex_2": "salve"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "artemisia-absinthium",
+        "vertex_2": "oil"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "artemisia-absinthium",
+        "vertex_2": "cream"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "artemisia-absinthium",
+        "vertex_2": "glycerite"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "artemisia-absinthium",
+        "vertex_2": "elixir"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "artemisia-absinthium",
+        "vertex_2": "essential-oil"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "artemisia-absinthium",
+        "vertex_2": "gum"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "artemisia-absinthium",
+        "vertex_2": "balm"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "artemisia-annua",
+        "vertex_2": "extract"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "artemisia-annua",
+        "vertex_2": "capsule"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "artemisia-annua",
+        "vertex_2": "tincture"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "artemisia-annua",
+        "vertex_2": "oil"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "artemisia-annua",
+        "vertex_2": "elixir"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "artemisia-annua",
+        "vertex_2": "cream"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "artemisia-annua",
+        "vertex_2": "infused-oil"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "artemisia-annua",
+        "vertex_2": "glycerite"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "artemisia-annua",
+        "vertex_2": "powder"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "artemisia-annua",
+        "vertex_2": "tablet"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "artemisia-annua",
+        "vertex_2": "syrup"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "astragalus-membranaceus",
+        "vertex_2": "extract"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "astragalus-membranaceus",
+        "vertex_2": "capsule"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "astragalus-membranaceus",
+        "vertex_2": "tincture"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "astragalus-membranaceus",
+        "vertex_2": "powder"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "astragalus-membranaceus",
+        "vertex_2": "tea"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "astragalus-membranaceus",
+        "vertex_2": "glycerite"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "astragalus-membranaceus",
+        "vertex_2": "infusion"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "astragalus-membranaceus",
+        "vertex_2": "tablet"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "astragalus-membranaceus",
+        "vertex_2": "elixir"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "astragalus-membranaceus",
+        "vertex_2": "cream"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "astragalus-membranaceus",
+        "vertex_2": "decoction"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "atropa-belladonna",
+        "vertex_2": "extract"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "atropa-belladonna",
+        "vertex_2": "tincture"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "atropa-belladonna",
+        "vertex_2": "elixir"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "atropa-belladonna",
+        "vertex_2": "capsule"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "atropa-belladonna",
+        "vertex_2": "oil"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "atropa-belladonna",
+        "vertex_2": "cream"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "atropa-belladonna",
+        "vertex_2": "powder"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "atropa-belladonna",
+        "vertex_2": "gum"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "atropa-belladonna",
+        "vertex_2": "glycerite"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "atropa-belladonna",
+        "vertex_2": "infused-oil"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "atropa-belladonna",
+        "vertex_2": "salve"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "extract"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "oil"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "capsule"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "cream"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "tincture"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "powder"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "infused-oil"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "elixir"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "gum"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "balm"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "salve"
+    }
+]

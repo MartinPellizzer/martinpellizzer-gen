@@ -1,0 +1,42 @@
+[
+    {
+        "edge_type": "herb_order_subclass",
+        "vertex_1": "asterales",
+        "vertex_2": "asteridae"
+    },
+    {
+        "edge_type": "herb_order_subclass",
+        "vertex_1": "acorales",
+        "vertex_2": "arecidae"
+    },
+    {
+        "edge_type": "herb_order_subclass",
+        "vertex_1": "sapindales",
+        "vertex_2": "rosidae"
+    },
+    {
+        "edge_type": "herb_order_subclass",
+        "vertex_1": "asparagales",
+        "vertex_2": "commelinidae"
+    },
+    {
+        "edge_type": "herb_order_subclass",
+        "vertex_1": "zingiberales",
+        "vertex_2": "commelinidae"
+    },
+    {
+        "edge_type": "herb_order_subclass",
+        "vertex_1": "apiales",
+        "vertex_2": "rosidae"
+    },
+    {
+        "edge_type": "herb_order_subclass",
+        "vertex_1": "fabales",
+        "vertex_2": "rosidae"
+    },
+    {
+        "edge_type": "herb_order_subclass",
+        "vertex_1": "solanales",
+        "vertex_2": "asteridae"
+    }
+]

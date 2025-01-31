@@ -1,0 +1,498 @@
+[
+    {
+        "vertex_type": "herb",
+        "herb_slug": "achillea-millefolium",
+        "herb_name_scientific": "achillea millefolium",
+        "herb_names_common": [
+            {
+                "name": "Yarrow",
+                "confidence_score": 10
+            },
+            {
+                "name": "Milfoil",
+                "confidence_score": 9
+            },
+            {
+                "name": "Soldier's Thread",
+                "confidence_score": 7
+            },
+            {
+                "name": "Bloodwort",
+                "confidence_score": 6
+            },
+            {
+                "name": "Nonesuch",
+                "confidence_score": 5
+            }
+        ],
+        "herb_family": "asteraceae"
+    },
+    {
+        "vertex_type": "herb",
+        "herb_slug": "acorus-calamus",
+        "herb_name_scientific": "acorus calamus",
+        "herb_names_common": [
+            {
+                "name": "Sweet Flag",
+                "confidence_score": 10
+            },
+            {
+                "name": "Calamus",
+                "confidence_score": 8
+            },
+            {
+                "name": "Sweet Root",
+                "confidence_score": 7
+            },
+            {
+                "name": "Sweet Rush",
+                "confidence_score": 6
+            },
+            {
+                "name": "Acorus",
+                "confidence_score": 4
+            }
+        ],
+        "herb_family": "araceae"
+    },
+    {
+        "vertex_type": "herb",
+        "herb_slug": "aesculus-hippocastanum",
+        "herb_name_scientific": "aesculus hippocastanum",
+        "herb_names_common": [
+            {
+                "name": "Horse Chestnut",
+                "confidence_score": 10
+            },
+            {
+                "name": "Conker Tree",
+                "confidence_score": 8
+            },
+            {
+                "name": "Buckeye",
+                "confidence_score": 7
+            },
+            {
+                "name": "Spanish Chestnut",
+                "confidence_score": 6
+            },
+            {
+                "name": "Ox Chestnut",
+                "confidence_score": 5
+            }
+        ],
+        "herb_family": "sapindaceae"
+    },
+    {
+        "vertex_type": "herb",
+        "herb_slug": "allium-sativum",
+        "herb_name_scientific": "allium sativum",
+        "herb_names_common": [
+            {
+                "name": "Garlic",
+                "confidence_score": 10
+            },
+            {
+                "name": "Allium",
+                "confidence_score": 8
+            },
+            {
+                "name": "Rocambole",
+                "confidence_score": 7
+            },
+            {
+                "name": "Creole",
+                "confidence_score": 6
+            },
+            {
+                "name": "Silverskin",
+                "confidence_score": 4
+            },
+            {
+                "name": "Nagire",
+                "confidence_score": 3
+            },
+            {
+                "name": "Elephant",
+                "confidence_score": 1
+            }
+        ],
+        "herb_family": "liliaceae"
+    },
+    {
+        "vertex_type": "herb",
+        "herb_slug": "aloe-vera",
+        "herb_name_scientific": "aloe vera",
+        "herb_names_common": [
+            {
+                "name": "Aloe",
+                "confidence_score": 10
+            },
+            {
+                "name": "Burn Plant",
+                "confidence_score": 9
+            },
+            {
+                "name": "Lily of the Desert",
+                "confidence_score": 9
+            },
+            {
+                "name": "First Aid Plant",
+                "confidence_score": 8
+            },
+            {
+                "name": "Gel Plant",
+                "confidence_score": 7
+            },
+            {
+                "name": "Succulent Aloe",
+                "confidence_score": 6
+            },
+            {
+                "name": "True Aloe",
+                "confidence_score": 5
+            },
+            {
+                "name": "Wonder Plant",
+                "confidence_score": 4
+            }
+        ],
+        "herb_family": "xanthorrhoeaceae"
+    },
+    {
+        "vertex_type": "herb",
+        "herb_slug": "alpinia-officinarum",
+        "herb_name_scientific": "alpinia officinarum",
+        "herb_names_common": [
+            {
+                "name": "Galangal",
+                "confidence_score": 10
+            },
+            {
+                "name": "Thai Ginger",
+                "confidence_score": 9
+            },
+            {
+                "name": "Siamese Ginger",
+                "confidence_score": 8
+            },
+            {
+                "name": "Lesser Ginger",
+                "confidence_score": 7
+            },
+            {
+                "name": "Lesser Galangal",
+                "confidence_score": 6
+            },
+            {
+                "name": "Kati Patha",
+                "confidence_score": 5
+            },
+            {
+                "name": "Chinese Ginger",
+                "confidence_score": 4
+            },
+            {
+                "name": "Siwri",
+                "confidence_score": 3
+            },
+            {
+                "name": "Khanzingar",
+                "confidence_score": 2
+            }
+        ],
+        "herb_family": "zingiberaceae"
+    },
+    {
+        "vertex_type": "herb",
+        "herb_slug": "ammi-visnaga",
+        "herb_name_scientific": "ammi visnaga",
+        "herb_names_common": [
+            {
+                "name": "Khaya",
+                "confidence_score": 10
+            },
+            {
+                "name": "Visnaga",
+                "confidence_score": 10
+            },
+            {
+                "name": "Queen Anne's Lace",
+                "confidence_score": 9
+            },
+            {
+                "name": "Tordilium",
+                "confidence_score": 8
+            },
+            {
+                "name": "Carrot Queen",
+                "confidence_score": 6
+            },
+            {
+                "name": "False Queen Anne's Lace",
+                "confidence_score": 5
+            },
+            {
+                "name": "Tordil",
+                "confidence_score": 4
+            }
+        ],
+        "herb_family": "apiaceae"
+    },
+    {
+        "vertex_type": "herb",
+        "herb_slug": "angelica-sinensis",
+        "herb_name_scientific": "angelica sinensis",
+        "herb_names_common": [
+            {
+                "name": "Dong Quai",
+                "confidence_score": 10
+            },
+            {
+                "name": "Tang Kuei",
+                "confidence_score": 9
+            },
+            {
+                "name": "Chinese Angelica",
+                "confidence_score": 8
+            },
+            {
+                "name": "Female Ginseng",
+                "confidence_score": 6
+            },
+            {
+                "name": "Chinese Angelic",
+                "confidence_score": 5
+            },
+            {
+                "name": "Tangkwai",
+                "confidence_score": 4
+            }
+        ],
+        "herb_family": "apiaceae"
+    },
+    {
+        "vertex_type": "herb",
+        "herb_slug": "apium-graveolens",
+        "herb_name_scientific": "apium graveolens",
+        "herb_names_common": [
+            {
+                "name": "Parsley",
+                "confidence_score": 10
+            },
+            {
+                "name": "Garden Parsley",
+                "confidence_score": 9
+            },
+            {
+                "name": "Rock Parsley",
+                "confidence_score": 8
+            },
+            {
+                "name": "Sea Parsley",
+                "confidence_score": 7
+            },
+            {
+                "name": "Turnip Parsley",
+                "confidence_score": 5
+            },
+            {
+                "name": "American Parsley",
+                "confidence_score": 4
+            }
+        ],
+        "herb_family": "apiaceae"
+    },
+    {
+        "vertex_type": "herb",
+        "herb_slug": "arctium-lappa",
+        "herb_name_scientific": "arctium lappa",
+        "herb_names_common": [
+            {
+                "name": "Burdock",
+                "confidence_score": 10
+            },
+            {
+                "name": "Gobo",
+                "confidence_score": 9
+            },
+            {
+                "name": "Artichoke Thistle",
+                "confidence_score": 8
+            },
+            {
+                "name": "Great Burdock",
+                "confidence_score": 8
+            },
+            {
+                "name": "Niu Bang Zi",
+                "confidence_score": 7
+            },
+            {
+                "name": "Gokshura",
+                "confidence_score": 6
+            },
+            {
+                "name": "Cnicus Lappa",
+                "confidence_score": 5
+            },
+            {
+                "name": "Lappa",
+                "confidence_score": 3
+            }
+        ],
+        "herb_family": "asteraceae"
+    },
+    {
+        "vertex_type": "herb",
+        "herb_slug": "artemisia-absinthium",
+        "herb_name_scientific": "artemisia absinthium",
+        "herb_names_common": [
+            {
+                "name": "Wormwood",
+                "confidence_score": 10
+            },
+            {
+                "name": "Absinthe",
+                "confidence_score": 9
+            },
+            {
+                "name": "Green Ginger",
+                "confidence_score": 8
+            },
+            {
+                "name": "Mugwort",
+                "confidence_score": 6
+            },
+            {
+                "name": "Old Woman",
+                "confidence_score": 5
+            },
+            {
+                "name": "Sagebrush",
+                "confidence_score": 4
+            }
+        ],
+        "herb_family": "asteraceae"
+    },
+    {
+        "vertex_type": "herb",
+        "herb_slug": "artemisia-annua",
+        "herb_name_scientific": "artemisia annua",
+        "herb_names_common": [
+            {
+                "name": "Sweet Annie",
+                "confidence_score": 10
+            },
+            {
+                "name": "Qinghao",
+                "confidence_score": 10
+            },
+            {
+                "name": "Annual Wormwood",
+                "confidence_score": 9
+            },
+            {
+                "name": "Sweet Wormwood",
+                "confidence_score": 9
+            },
+            {
+                "name": "Sweet Sagewort",
+                "confidence_score": 8
+            },
+            {
+                "name": "Artemisia",
+                "confidence_score": 6
+            }
+        ],
+        "herb_family": "asteraceae"
+    },
+    {
+        "vertex_type": "herb",
+        "herb_slug": "astragalus-membranaceus",
+        "herb_name_scientific": "astragalus membranaceus",
+        "herb_names_common": [
+            {
+                "name": "Huang Qi",
+                "confidence_score": 10
+            },
+            {
+                "name": "Mengkui",
+                "confidence_score": 9
+            },
+            {
+                "name": "Mang Qi",
+                "confidence_score": 6
+            },
+            {
+                "name": "Dong Huang Qi",
+                "confidence_score": 4
+            },
+            {
+                "name": "Huang Qi Tong",
+                "confidence_score": 3
+            }
+        ],
+        "herb_family": "fabaceae"
+    },
+    {
+        "vertex_type": "herb",
+        "herb_slug": "atropa-belladonna",
+        "herb_name_scientific": "atropa belladonna",
+        "herb_names_common": [
+            {
+                "name": "Deadly Nightshade",
+                "confidence_score": 10
+            },
+            {
+                "name": "Belladonna",
+                "confidence_score": 10
+            },
+            {
+                "name": "Beautiful Woman's Herb",
+                "confidence_score": 6
+            },
+            {
+                "name": "Witch's Thimble",
+                "confidence_score": 5
+            },
+            {
+                "name": "Devil's Herb",
+                "confidence_score": 3
+            }
+        ],
+        "herb_family": "solanaceae"
+    },
+    {
+        "vertex_type": "herb",
+        "herb_slug": "azadirachta-indica",
+        "herb_name_scientific": "azadirachta indica",
+        "herb_names_common": [
+            {
+                "name": "Neem",
+                "confidence_score": 10
+            },
+            {
+                "name": "Margosa",
+                "confidence_score": 8
+            },
+            {
+                "name": "Indian Lilac",
+                "confidence_score": 6
+            },
+            {
+                "name": "Arishtha",
+                "confidence_score": 5
+            },
+            {
+                "name": "Vitrum",
+                "confidence_score": 4
+            },
+            {
+                "name": "Azadirach",
+                "confidence_score": 2
+            }
+        ],
+        "herb_family": "meliaceae"
+    }
+]

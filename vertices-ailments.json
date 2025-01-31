@@ -1,0 +1,53 @@
+[
+    {
+        "vertex_type": "ailment",
+        "ailment_slug": "common-cold",
+        "ailment_name": "common cold"
+    },
+    {
+        "vertex_type": "ailment",
+        "ailment_slug": "sinus-infection",
+        "ailment_name": "sinus infection"
+    },
+    {
+        "vertex_type": "ailment",
+        "ailment_slug": "sore-throat",
+        "ailment_name": "sore throat"
+    },
+    {
+        "vertex_type": "ailment",
+        "ailment_slug": "headache",
+        "ailment_name": "headache"
+    },
+    {
+        "vertex_type": "ailment",
+        "ailment_slug": "cough",
+        "ailment_name": "cough"
+    },
+    {
+        "vertex_type": "ailment",
+        "ailment_slug": "allergy",
+        "ailment_name": "allergy"
+    },
+    {
+        "vertex_type": "ailment",
+        "ailment_slug": "high-blood-pressure",
+        "ailment_name": "high blood pressure"
+    },
+    {
+        "vertex_type": "ailment",
+        "ailment_slug": "anxiety",
+        "ailment_name": "anxiety"
+    },
+    {
+        "vertex_type": "ailment",
+        "ailment_slug": "fibroid",
+        "ailment_name": "fibroid"
+    },
+    {
+        "vertex_type": "ailment",
+        "ailment_slug": "constipation",
+        "ailment_name": "constipation"
+    }
+]
+

@@ -15,9 +15,64 @@ model_8b = f'/home/ubuntu/vault-tmp/llms/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf'
 model_validator_filepath = f'llms/Llama-3-Partonus-Lynx-8B-Instruct-Q4_K_M.gguf'
 model = model_8b
 
-vertices = json_read('vertices.json')
-edges = json_read('edges.json')
+checkpoint_filepath = f'{vault}/stable-diffusion/checkpoints/juggernautXL_juggXIByRundiffusion.safetensors'
 
+vertices = json_read('vertices.json')
+vertices_herbs = json_read('vertices-herbs.json')
+vertices_preparations = json_read('vertices-preparations.json')
+vertices_ailments = json_read('vertices-ailments.json')
+
+edges = json_read('edges.json')
+edges_ai = json_read('edges.json')
+# edges_herbs_preparations = [edge for edge in edges_ai if edge['type'] == 'herb_preparation']
+edges_herbs_preparations = json_read('edges-herbs-preparations.json')
+edges_herbs_ailments = json_read('edges-herbs-ailments.json')
+
+edges_families_orders = json_read('edges-families-orders.json')
+edges_orders_subclasses = json_read('edges-orders-subclasses.json')
+edges_subclasses_classes = json_read('edges-subclasses-classes.json')
+edges_classes_divisions = json_read('edges-classes-divisions.json')
+
+def img_resize(img, w=768, h=768):
+    start_size = img.size
+    end_size = (w, h)
+    if start_size[0] / end_size [0] < start_size[1] / end_size [1]:
+        ratio = start_size[0] / end_size[0]
+        new_end_size = (end_size[0], int(start_size[1] / ratio))
+    else:
+        ratio = start_size[1] / end_size[1]
+        new_end_size = (int(start_size[0] / ratio), end_size[1])
+    img = img.resize(new_end_size)
+    w_crop = new_end_size[0] - end_size[0]
+    h_crop = new_end_size[1] - end_size[1]
+    area = (
+        w_crop // 2, 
+        h_crop // 2,
+        new_end_size[0] - w_crop // 2,
+        new_end_size[1] - h_crop // 2
+    )
+    img = img.crop(area)
+    return img
+
+###############################################
+# ;AMAZON
+###############################################
+def affiliate_disclaimer_gen():
+    html = ''
+    html += f'''
+        <p class="text-14 mb-0"><i>Disclaimer: We earn a commission if you click this link and make a purchase at no additional cost to you.</i></p>
+    '''
+    return html
+
+def amazon_buy_button(url):
+    affiliate_disclaimer_html = affiliate_disclaimer_gen()
+    html = f'''
+        <div class="bg-lightgray px-24 py-32">
+            <a class="button-amazon mb-16" href="{url}" target="_blank">Buy On Amazon</a>
+            {affiliate_disclaimer_html}
+        </div>
+    '''
+    return html
 
 
 ###############################################
@@ -146,22 +201,27 @@ def p_home():
     with open(f'{website_folderpath}/index.html', 'w') as f:
         f.write(html)
     
-def ai_paragraph_gen(filepath, data, obj, key, prompt, regen=False):
+def ai_paragraph_gen(filepath, data, obj, key, prompt, regen=False, print_prompt=False):
     if key not in obj: obj[key] = ''
     if regen: obj[key] = ''
     if obj[key] == '':
+        if print_prompt: print(prompt)
         reply = llm_reply(prompt)
         if reply.strip() != '':
+            if 'can\'t' in reply: return
             obj[key] = reply
             json_write(filepath, data)
 
-def p_herbs(herbs_slugs):
+def p_herbs():
     json_article_filepath = f'database/pages/herbs.json'
     json_article = json_read(json_article_filepath, create=True)
-    json_write(json_article_filepath, json_article)
     if 'herbs' not in json_article: json_article['herbs'] = []
-    for herb_slug in herbs_slugs:
-        herb_name = herb_slug.replace('-', ' ')
+    # json_article['herbs'] = []
+    for herb in vertices_herbs:
+        herb_slug = herb['herb_slug']
+        herb_name_scientific = herb['herb_name_scientific']
+        herb_names_common = [item['name'] for item in herb['herb_names_common']]
+        herb_name_common = herb_names_common[0]
         # add if doesn't exist
         found = False
         for _obj in json_article['herbs']:
@@ -169,7 +229,11 @@ def p_herbs(herbs_slugs):
                 found = True
                 break
         if not found:
-            json_article['herbs'].append({'herb_slug': herb_slug})
+            json_article['herbs'].append({
+                'herb_slug': herb_slug,
+                'herb_name_scientific': herb_name_scientific,
+                'herb_name_common': herb_name_common,
+            })
             json_write(json_article_filepath, json_article)
         # update
         herb_obj = {}
@@ -183,19 +247,24 @@ def p_herbs(herbs_slugs):
             data = json_article, 
             obj = herb_obj, 
             prompt = f'''
-                Write a short 3-sentence paragraph about {herb_name}.
+                Write a short 3-sentence paragraph about {herb_name_scientific}.
+                Start the reply with the following words: {herb_name_scientific}, also known as {herb_name_common}, .
             ''',
+            regen = False,
         )
 
     html_article = ''
-    html_article += f'<h1>herbs</h1>'
+    herbs_num = len(vertices_herbs)
+    html_article += f'''<h1>{herbs_num} Best Medicinal Herbs For Apothecaries</h1>'''
     for i, herb in enumerate(json_article['herbs']):
         herb_slug = herb['herb_slug']
-        herb_name = herb_slug.replace('-', ' ')
+        herb_name_scientific = herb['herb_name_scientific']
+        herb_name_common = herb['herb_name_common']
         herb_desc = herb['herb_desc']
-        html_article += f'<h2>{i+1}. {herb_name}</h2>\n'
-        html_article += f'<p>{herb_desc}</p>\n'
-        html_article += f'<p><a href="/herbs/{herb_slug}.html">{herb_name}</a></p>\n'
+        html_article += f'<h2>{i+1}. {herb_name_scientific.capitalize()} ({herb_name_common})</h2>\n'
+        html_article += f'''<img src="/images/herbs/{herb_slug}.jpg" alt="{herb_name_scientific}">\n'''
+        html_article += f'''{text_format_1N1_html(herb_desc)}\n'''
+        html_article += f'<p><a href="/herbs/{herb_slug}.html">{herb_name_scientific}</a></p>\n'
     title = 'herbs'
     html_head = html_head_gen(title)
     html_breadcrumbs = breadcrumbs_gen(f'herbs.html')
@@ -218,37 +287,73 @@ def p_herbs(herbs_slugs):
 
 def a_herb(herb):
     herb_slug = herb['herb_slug']
-    herb_name = herb_slug.replace('-', ' ')
+    herb_name_scientific = herb['herb_name_scientific']
+    herb_name_common = herb['herb_names_common'][0]['name']
     json_article_filepath = f'database/pages/herbs/{herb_slug}.json'
     json_article = json_read(json_article_filepath, create=True)
     json_article['herb_slug'] = herb_slug
-    json_article['herb_name'] = herb_name
+    json_article['herb_name_scientific'] = herb_name_scientific
     json_article['herb_url'] = f'herbs/{herb_slug}.html'
     json_write(json_article_filepath, json_article)
     # update
     sections = [
-        ['1', 'identification', f'write a short 3-sentence paragraph about the identification of {herb_name}.', f''],
-        ['1', 'taxonomy', f'write a short 3-sentence paragraph about the taxonomy of {herb_name}.', f''],
-        ['0', 'botany', f'write a short 3-sentence paragraph about the botanical characteristics of {herb_name}.', f''],
+        ['0', 'botany', f'write a short 3-sentence paragraph about the botanical characteristics of {herb_name_scientific}.', f''],
 
-        ['1', 'uses', f'write a short 3-sentence paragraph about the medicinal uses of {herb_name}.', f''],
-        ['1', 'benefits', f'write a short 3-sentence paragraph about the benefits of {herb_name}.', f'benefit'],
-        ['1', 'properties', f'write a short 3-sentence paragraph about the therapeutic properties of {herb_name}.', f''],
-        ['1', 'constituents', f'write a short 3-sentence paragraph about the active constituents of {herb_name}.', f''],
-        ['1', 'parts', f'write a short 3-sentence paragraph about the parts of {herb_name}.', f''],
-        ['1', 'preparations', f'write a short 3-sentence paragraph about the preparations of {herb_name}.', f'preparation'],
-        ['1', 'side-effects', f'write a short 3-sentence paragraph about the side effects of {herb_name}.', f''],
+        ['1', 'benefits', f'write a short 3-sentence paragraph about the benefits of {herb_name_scientific}.', f'benefit'],
+        ['1', 'properties', f'write a short 3-sentence paragraph about the therapeutic properties of {herb_name_scientific}.', f''],
+        ['1', 'constituents', f'write a short 3-sentence paragraph about the active constituents of {herb_name_scientific}.', f''],
+        ['1', 'parts', f'write a short 3-sentence paragraph about the parts of {herb_name_scientific}.', f''],
+        ['1', 'preparations', f'write a short 3-sentence paragraph about the preparations of {herb_name_scientific}.', f'preparation'],
+        ['1', 'side-effects', f'write a short 3-sentence paragraph about the side effects of {herb_name_scientific}.', f''],
 
 
-        ['0', 'distribution', f'write a short 3-sentence paragraph about the distribution of {herb_name}.', f''],
-        ['0', 'native', f'write a short 3-sentence paragraph about the native range of {herb_name}.', f''],
-        ['0', 'habitat', f'write a short 3-sentence paragraph about the habitat of {herb_name}.', f''],
+        ['0', 'distribution', f'write a short 3-sentence paragraph about the distribution of {herb_name_scientific}.', f''],
+        ['0', 'native', f'write a short 3-sentence paragraph about the native range of {herb_name_scientific}.', f''],
+        ['0', 'habitat', f'write a short 3-sentence paragraph about the habitat of {herb_name_scientific}.', f''],
 
-        ['1', 'cultivation', f'write a short 3-sentence paragraph about the cultivation of {herb_name}.', f''],
-        ['0', 'growing-conditions', f'write a short 3-sentence paragraph about the growing conditions of {herb_name}.', f''],
-        ['0', 'germination', f'write a short 3-sentence paragraph about the germination of {herb_name}.', f''],
-        ['0', 'cultivars', f'write a short 3-sentence paragraph about the cultivars of {herb_name}.', f''],
+        ['1', 'cultivation', f'write a short 3-sentence paragraph about the cultivation of {herb_name_scientific}.', f''],
+        ['0', 'growing-conditions', f'write a short 3-sentence paragraph about the growing conditions of {herb_name_scientific}.', f''],
+        ['0', 'germination', f'write a short 3-sentence paragraph about the germination of {herb_name_scientific}.', f''],
+        ['0', 'cultivars', f'write a short 3-sentence paragraph about the cultivars of {herb_name_scientific}.', f''],
     ]
+    ai_paragraph_gen(
+        key = 'taxonomy', 
+        filepath = json_article_filepath, 
+        data = json_article, 
+        obj = json_article, 
+        prompt = f'''
+            write a short 3-sentence paragraph about the taxonomy of {herb_name_scientific}.
+            include the data below.
+            - family: {herb['herb_family']}
+            start with the following words: {herb_name_scientific}, commonly known as {herb_name_common}, is .
+        ''',
+        regen = False,
+    )
+    ai_paragraph_gen(
+        key = 'identification', 
+        filepath = json_article_filepath, 
+        data = json_article, 
+        obj = json_article, 
+        prompt = f'''
+            write a short 3-sentence paragraph about the identification of {herb_name_scientific}.
+        ''',
+        regen = False,
+    )
+    ailments_slugs = [edge['vertex_2'] for edge in edges_herbs_ailments if edge['vertex_1'] == herb_slug]
+    ailments_slugs_prompt = ', '.join(ailments_slugs)[:5]
+    ai_paragraph_gen(
+        key = 'uses', 
+        filepath = json_article_filepath, 
+        data = json_article, 
+        obj = json_article, 
+        prompt = f'''
+            Write a short 5-sentence paragraph about the ailments that the plant {herb_name_scientific} heals.
+            In specific, tell that this plant heals the following ailments: {ailments_slugs_prompt}.
+            Write one sentence for ailment.
+            Start the reply with the following words: {herb_name_scientific.capitalize()} is used .
+        ''',
+        regen = False,
+    )
     for section in sections:
         exe = section[0]
         if exe != '1': continue
@@ -261,10 +366,83 @@ def a_herb(herb):
             obj = json_article, 
             prompt = prompt,
         )
+
     # amazon
     # html
     html_article = ''
-    html_article += f'<h1>{herb_name}</h1>'
+    html_article += f'<h1>{herb_name_scientific.capitalize()} ({herb_name_common})</h1>'
+    html_article += f'''<img src="/images/herbs/{herb_slug}.jpg" alt="{herb_name_scientific}">\n'''
+
+    ## what is
+    html_article += f'<h2>What is {herb_name_scientific.capitalize()}?</h2>\n'
+    html_article += f'''{text_format_1N1_html(json_article['taxonomy'])}\n'''
+    html_article += f'<h3>What is the taxonomy of this plant?</h3>\n'
+    herb_family = herb['herb_family']
+    herb_order = [edge['vertex_2'] for edge in edges_families_orders if (edge['edge_type'] == 'herb_family_order' and edge['vertex_1'] == herb_family)][0]
+    herb_subclass = [edge['vertex_2'] for edge in edges_orders_subclasses if (edge['edge_type'] == 'herb_order_subclass' and edge['vertex_1'] == herb_order)][0]
+    herb_class = [edge['vertex_2'] for edge in edges_subclasses_classes if (edge['edge_type'] == 'herb_subclass_class' and edge['vertex_1'] == herb_subclass)][0]
+    herb_division = [edge['vertex_2'] for edge in edges_classes_divisions if (edge['edge_type'] == 'herb_class_division' and edge['vertex_1'] == herb_class)][0]
+    html_article += f'<p>The taxonomy of {herb_name_scientific} is presented in the table below using the Linnaean system of classification.</p>\n'
+    html_article += f'''
+        <table>
+            <tr>
+                <th>Taxonomy</th>
+                <th>Category</th>
+            </tr>
+            <tr>
+                <td>Kingdom</td>
+                <td>Plantae</td>
+            </tr>
+            <tr>
+                <td>Division</td>
+                <td>{herb_division.capitalize()}</td>
+            </tr>
+            <tr>
+                <td>Class</td>
+                <td>{herb_class.capitalize()}</td>
+            </tr>
+            <tr>
+                <td>Subclass</td>
+                <td>{herb_subclass.capitalize()}</td>
+            </tr>
+            <tr>
+                <td>Order</td>
+                <td>{herb_order.capitalize()}</td>
+            </tr>
+            <tr>
+                <td>Family</td>
+                <td>{herb_family.capitalize()}</td>
+            </tr>
+            <tr>
+                <td>Genus</td>
+                <td>{herb_name_scientific.split()[0].capitalize()}</td>
+            </tr>
+            <tr>
+                <td>Species</td>
+                <td>{herb_name_scientific.capitalize()}</td>
+            </tr>
+        </table>
+    '''
+    
+    # edges_families_orders = json_read('edges-families-orders.json')
+    # edges_orders_subclasses = json_read('edges-orders-subclasses.json')
+    ### botanical illustration
+    html_article += f'<h3>Is there a botanical illustation of this plant?</h3>\n'
+    html_article += f'''<p>Yes, the following drawing shows a botanical illustration of {herb_name_scientific}.</p>\n'''
+    html_article += f'''<img src="/images/herbs/{herb_slug}-illustation.jpg" alt="{herb_name_scientific} botanical illustration">\n'''
+    ### identification
+    # html_article += f'<h3>How to identify this plant?</h3>\n'
+    # html_article += f'''{text_format_1N1_html(json_article['identification'])}\n'''
+    ## ;uses
+    html_article += f'<h2>What are the most common uses of {herb_name_scientific.capitalize()}?</h2>\n'
+    html_article += f'''{text_format_1N1_html(json_article['uses'])}\n'''
+    html_article += f'''<p>The following list summarizes the most common ailments treated with this plant.</p>\n'''
+    html_article += f'''<ul>\n'''
+    for ailment_slug in ailments_slugs[:10]:
+        ailment_name = [vertex['ailment_name'] for vertex in vertices_ailments if vertex['ailment_slug'] == ailment_slug][0]
+        html_article += f'''<li>{ailment_name.capitalize()}</li>\n'''
+    html_article += f'''</ul>\n'''
+    ## sections to re-organize
     for section in sections:
         exe = section[0]
         if exe != '1': continue
@@ -275,7 +453,7 @@ def a_herb(herb):
         html_article += f'<p>{section_desc}</p>\n'
         if section_link.strip() != '':
             html_article += f'<p><a href="/herbs/{herb_slug}/{section_link}.html">{section_name}</a></p>'
-    title = f'{herb_name}'
+    title = f'{herb_name_scientific}'
     html_head = html_head_gen(title)
     html_breadcrumbs = breadcrumbs_gen(f'herbs/{herb_slug}.html')
     html_article_layout = html_article_layout_gen(html_article)
@@ -297,20 +475,59 @@ def a_herb(herb):
         f.write(html)
 
 
-def a_herb_benefits(herb):
-    slug = herb['herb_slug']
-    name = slug.replace('-', ' ')
-    json_article_filepath = f'database/pages/herbs/{slug}/benefit.json'
+def a_herb_uses(herb):
+    herb_slug = herb['herb_slug']
+    herb_name = herb['herb_name_scientific']
+    json_article_filepath = f'database/pages/herbs/{herb_slug}/use.json'
     json_article = json_read(json_article_filepath, create=True)
-    json_article['slug'] = slug
-    json_article['name'] = name
-    json_article['url'] = f'herbs/{slug}/benefit.html'
+    json_article['herb_slug'] = herb_slug
+    json_article['herb_name'] = herb_name
+    json_article['herb_url'] = f'herbs/{herb_slug}/use.html'
+    if 'uses' not in json_article: json_article['uses'] = []
     json_write(json_article_filepath, json_article)
+    # json
+    uses_slugs = [edge['vertex_2'] for edge in edges_herbs_ailments if edge['vertex_1'] == herb_slug]
+    for use_slug in uses_slugs:
+        use_name = use_slug.replace('-', ' ')
+        # add if doesn't exist
+        found = False
+        for _obj in json_article['uses']:
+            if use_slug == _obj['use_slug']:
+                found = True
+                break
+        if not found:
+            json_article['uses'].append({'use_slug': use_slug})
+            json_write(json_article_filepath, json_article)
+        # update
+        use_obj = {}
+        for _use_obj in json_article['uses']:
+            if use_slug == _use_obj['use_slug']:
+                use_obj = _use_obj
+                break
+        ai_paragraph_gen(
+            key = 'use_desc', 
+            filepath = json_article_filepath, 
+            data = json_article, 
+            obj = use_obj, 
+            prompt = f'''
+                Write a short 3-sentence paragraph about the use of {herb_name} for {use_name}.
+                Start with the following words: {herb_name} is .
+            ''',
+            regen = False,
+        )
+    # html
     html_article = ''
-    html_article += f'<h1>{name} benefits</h1>'
-    title = f'{name} benefits'
+    html_article += f'<h1>{herb_name} uses</h1>'
+    for use in json_article['uses']:
+        use_slug = use['use_slug']
+        use_name = use_slug.replace('-', ' ')
+        use_desc = use['use_desc']
+        html_article += f'<h2>{use_name}</h2>\n'
+        html_article += f'<p>{use_desc}</p>\n'
+        html_article += f'<p><a href="/ailments/{use_slug}.html">{use_name}</a></p>'
+    title = f'{herb_name} uses'
     html_head = html_head_gen(title)
-    html_breadcrumbs = breadcrumbs_gen(f'herbs/{slug}/benefit.html')
+    html_breadcrumbs = breadcrumbs_gen(f'herbs/{herb_slug}/use.html')
     html_article_layout = html_article_layout_gen(html_article)
     html = f'''
         <!DOCTYPE html>
@@ -324,15 +541,110 @@ def a_herb_benefits(herb):
         </body>
         </html>
     '''
-    if not os.path.exists(f'{website_folderpath}/herbs/{slug}'): 
-        os.mkdir(f'{website_folderpath}/herbs/{slug}')
-    with open(f'{website_folderpath}/herbs/{slug}/benefit.html', 'w') as f:
+    if not os.path.exists(f'{website_folderpath}/herbs/{herb_slug}'): 
+        os.mkdir(f'{website_folderpath}/herbs/{herb_slug}')
+    with open(f'{website_folderpath}/herbs/{herb_slug}/use.html', 'w') as f:
+        f.write(html)
+
+
+
+def a_herb_benefits(herb):
+    herb_slug = herb['herb_slug']
+    herb_name_scientific = herb['herb_name_scientific']
+    json_article_filepath = f'database/pages/herbs/{herb_slug}/benefit.json'
+    json_article = json_read(json_article_filepath, create=True)
+    json_article['herb_slug'] = herb_slug
+    json_article['herb_name_scientific'] = herb_name_scientific
+    json_article['herb_url'] = f'herbs/{herb_slug}/benefit.html'
+    json_write(json_article_filepath, json_article)
+    # json
+    key = 'benefits'
+    if key not in json_article: json_article[key] = []
+    # json_article[key] = []
+    if json_article[key] == []:
+        outputs = []
+        for _ in range(1):
+            prompt = f'''
+                Write a list of the 20 most important health benefits of the plant {herb_name_scientific}.
+                Also, write a confidence score from 1 to 10 for each benefit, indicating how much sure you are about that answer.
+                Start each benefit with a third presron singular action verb.
+                Write as few words as possible.
+                Reply in JSON using the format below:
+                [
+                    {{"benefit": "write benefit 1 here", "confidence_score": 10}},
+                    {{"benefit": "write benefit 2 here", "confidence_score": 5}},
+                    {{"benefit": "write benefit 3 here", "confidence_score": 7}}
+                ]
+                Reply only with the JSON.
+            '''
+            reply = llm_reply(prompt)
+            try: json_reply = json.loads(reply)
+            except: json_reply = {}
+            if json_reply != {}:
+                for item in json_reply:
+                    try: benefit_name = item['benefit'].strip().lower()
+                    except: continue
+                    try: confidence_score = item['confidence_score']
+                    except: continue
+                    if benefit_name.endswith('.'): benefit_name = benefit_name[:-1]
+                    outputs.append({
+                        'benefit_name': benefit_name,
+                        'confidence_score': confidence_score,
+                    })
+        outputs = sorted(outputs, key=lambda x: x['confidence_score'], reverse=True)
+        for output in outputs:
+            print(output)
+        json_article['benefits'] = outputs
+        json_write(json_article_filepath, json_article)
+
+    for json_benefit in json_article['benefits'][:10]:
+        benefit_name = json_benefit['benefit_name']
+        ai_paragraph_gen(
+            key = 'benefit_desc', 
+            filepath = json_article_filepath, 
+            data = json_article, 
+            obj = json_benefit, 
+            prompt = f'''
+                Write a short 3-sentence paragraph about the following benefit of {herb_name_scientific}: for {benefit_name}.
+                If you can't answer, reply with only "I can't reply".
+                Start with the following words: {herb_name_scientific.capitalize()} {benefit_name} .
+            ''',
+            regen = False,
+            print_prompt = True,
+        )
+
+    # html
+    title = f'{herb_name_scientific} benefits'
+    html_article = ''
+    html_article += f'<h1>10 Best {herb_name_scientific.title()} Benefits</h1>\n'
+    html_article += f'''<img src="/images/herbs/{herb_slug}.jpg" alt="{herb_name_scientific}">\n'''
+    for i, benefit in enumerate(json_article['benefits'][:10]):
+        html_article += f'''<h2>{i+1}. {benefit['benefit_name'].title()}</h2>\n'''
+        html_article += f'''<p>{benefit['benefit_desc']}</p>\n'''
+    html_head = html_head_gen(title)
+    html_breadcrumbs = breadcrumbs_gen(f'herbs/{herb_slug}/benefit.html')
+    html_article_layout = html_article_layout_gen(html_article)
+    html = f'''
+        <!DOCTYPE html>
+        <html lang="en">
+        {html_head}
+        <body>
+            {html_header}
+            {html_breadcrumbs}
+            {html_article_layout}
+            {html_footer}
+        </body>
+        </html>
+    '''
+    if not os.path.exists(f'{website_folderpath}/herbs/{herb_slug}'): 
+        os.mkdir(f'{website_folderpath}/herbs/{herb_slug}')
+    with open(f'{website_folderpath}/herbs/{herb_slug}/benefit.html', 'w') as f:
         f.write(html)
 
 
 def a_herb_preparations(herb):
     herb_slug = herb['herb_slug']
-    herb_name = herb_slug.replace('-', ' ')
+    herb_name = herb['herb_name_scientific']
     json_article_filepath = f'database/pages/herbs/{herb_slug}/preparation.json'
     json_article = json_read(json_article_filepath, create=True)
     json_article['herb_slug'] = herb_slug
@@ -341,7 +653,7 @@ def a_herb_preparations(herb):
     if 'preparations' not in json_article: json_article['preparations'] = []
     json_write(json_article_filepath, json_article)
     # json
-    preparations_slugs = herb['preparations_slugs']
+    preparations_slugs = [edge['vertex_2'] for edge in edges_herbs_preparations if edge['vertex_1'] == herb_slug]
     for preparation_slug in preparations_slugs:
         preparation_name = preparation_slug.replace('-', ' ')
         # add if doesn't exist
@@ -366,7 +678,7 @@ def a_herb_preparations(herb):
             obj = preparation_obj, 
             prompt = f'''
                 Write a short 3-sentence paragraph about {herb_name} {preparation_name}.
-                Start with the following words: {herb_name} is .
+                Start with the following words: {herb_name} {preparation_name} is .
             ''',
             regen = False,
         )
@@ -402,17 +714,13 @@ def a_herb_preparations(herb):
         f.write(html)
 
 
-def p_preparations(preparations):
-    preparation_slugs = []
-    for preparation in preparations:
-        if preparation['preparation_slug'] not in preparation_slugs: 
-            preparation_slugs.append(preparation['preparation_slug'])
+def p_preparations():
     json_article_filepath = f'database/pages/preparations.json'
     json_article = json_read(json_article_filepath, create=True)
-    json_write(json_article_filepath, json_article)
     # json
     if 'preparations' not in json_article: json_article['preparations'] = []
-    for preparation_slug in preparation_slugs:
+    for preparation in vertices_preparations:
+        preparation_slug = preparation['preparation_slug']
         preparation_name = preparation_slug.replace('-', ' ')
         # add if doesn't exist
         found = False
@@ -441,11 +749,11 @@ def p_preparations(preparations):
     # html
     html_article = ''
     html_article += f'<h1>preparations</h1>'
-    for preparation in json_article['preparations']:
+    for i, preparation in enumerate(json_article['preparations']):
         slug_plural = preparation['preparation_slug']
         name_plural = slug_plural.replace('-', ' ')
         preparation_desc = preparation['preparation_desc']
-        html_article += f'<h2>{name_plural}</h2>'
+        html_article += f'<h2>{i+1}. {name_plural}</h2>'
         html_article += f'<p>{preparation_desc}</p>'
         html_article += f'<p><a href="/preparations/{slug_plural}.html">{name_plural}</a></p>'
         html_article += f'<div style="margin-bottom: 48px;"></div>'
@@ -473,9 +781,8 @@ def p_preparations(preparations):
 
 def a_preparation(preparation):
     preparation_slug = preparation['preparation_slug']
-    preparation_name_singular = preparation_slug.replace('-', ' ')
-    preparation_name_plural = preparation_slug.replace('-', ' ')
-    herbs_slugs = preparation['herbs_slugs']
+    preparation_name_singular = preparation['preparation_name']
+    preparation_name_plural = preparation['preparation_name_plural']
     json_article_filepath = f'database/pages/preparations/{preparation_slug}.json'
     json_article = json_read(json_article_filepath, create=True)
     json_article['preparation_slug'] = preparation_slug
@@ -483,10 +790,17 @@ def a_preparation(preparation):
     json_article['preparation_name_plural'] = preparation_name_plural
     json_article['preparation_url'] = f'preparations/{preparation_slug}.html'
     json_write(json_article_filepath, json_article)
+    # get herbs
+    herbs_slugs = [edge['vertex_1'] for edge in edges_herbs_preparations if edge['vertex_2'] == preparation_slug]
+    herbs = []
+    for herb_slug in herbs_slugs:
+        herb = [vertex for vertex in vertices_herbs if vertex['herb_slug'] == herb_slug][0]
+        herbs.append(herb)
     # json
     if 'herbs' not in json_article: json_article['herbs'] = []
-    for herb_slug in herbs_slugs:
-        herb_name = herb_slug.replace('-', ' ')
+    for herb in herbs:
+        herb_slug = herb['herb_slug']
+        herb_name_scientific = herb['herb_name_scientific']
         # add if doesn't exist
         found = False
         for _obj in json_article['herbs']:
@@ -494,7 +808,7 @@ def a_preparation(preparation):
                 found = True
                 break
         if not found:
-            json_article['herbs'].append({'herb_slug': herb_slug})
+            json_article['herbs'].append({'herb_slug': herb_slug, 'herb_name_scientific': herb_name_scientific})
             json_write(json_article_filepath, json_article)
         # update
         herb_obj = {}
@@ -508,19 +822,19 @@ def a_preparation(preparation):
             data = json_article, 
             obj = herb_obj, 
             prompt = f'''
-                Write a short 3-sentence paragraph about {herb_name} {preparation_name_singular}.
+                Write a short 3-sentence paragraph about {herb_name_scientific} {preparation_name_singular}.
             ''',
         )
     # html
     html_article = ''
     html_article += f'<h1>{preparation_name_plural}</h1>'
     for herb in json_article['herbs']:
-        slug_plural = herb['herb_slug']
-        name_plural = slug_plural.replace('-', ' ')
+        herb_slug = herb['herb_slug']
+        herb_name_scientific = herb['herb_name_scientific']
         herb_desc = herb['herb_desc']
-        html_article += f'<h2>{name_plural}</h2>'
+        html_article += f'<h2>{herb_name_scientific}</h2>'
         html_article += f'<p>{herb_desc}</p>'
-        html_article += f'<p><a href="/preparations/{preparation_slug}/{herb_slug}.html">{herb_name} {preparation_name_singular}</a></p>'
+        html_article += f'<p><a href="/preparations/{preparation_slug}/{herb_slug}.html">{herb_name_scientific} {preparation_name_singular}</a></p>'
         html_article += f'<div style="margin-bottom: 48px;"></div>'
     title = f'{preparation_slug}'
     html_head = html_head_gen(title)
@@ -544,7 +858,9 @@ def a_preparation(preparation):
 
 
 def a_preparation_herbs(preparation):
-    for herb_slug in preparation['herbs_slugs']:
+    preparation_slug = preparation['preparation_slug']
+    herbs_slugs = [edge['vertex_1'] for edge in edges_herbs_preparations if edge['vertex_2'] == preparation_slug]
+    for herb_slug in herbs_slugs:
         preparation_slug = preparation['preparation_slug']
         preparation_name_singular = preparation_slug.replace('-', ' ')
         preparation_name_plural = preparation_slug.replace('-', ' ')
@@ -666,9 +982,11 @@ def a_equipment_best(equipment):
     json_products_folderpath = f'{vault}/amazon/json/{equipment_amazon}'
     json_article_filepath = f'database/pages/equipments/{equipment_slug}/best.json'
     json_article = json_read(json_article_filepath, create=True)
-    json_article['slug'] = equipment_slug
-    json_article['name'] = equipment_name
-    json_article['url'] = f'equipments/{equipment_slug}/best.html'
+    json_article['title'] = f'best {equipment_name_plural} for herbalists'
+    json_article['equipment_slug'] = equipment_slug
+    json_article['equipment_name'] = equipment_name
+    json_article['equipment_name_plural'] = f'{equipment_name}s'
+    json_article['url'] = f'equipments/{equipment_slug}/best'
     if 'products_num' not in json_article: json_article['products_num'] = random.choice([7, 9, 11, 13])
     products_num = json_article['products_num']
     json_write(json_article_filepath, json_article)
@@ -706,13 +1024,10 @@ def a_equipment_best(equipment):
     products_jsons_filepaths_ordered = products_jsons_filepaths_ordered[:products_num]
     # ;product
     for i, product_json_filepath in enumerate(products_jsons_filepaths_ordered):
-        product_data = json_read(product_json_filepath, create=True)
+        product_data = json_read(product_json_filepath)
         product_aff_link = product_data['affiliate_link']
         product_title = product_data['title']
         product_asin = product_json_filepath.split('/')[-1].replace('.json', '')
-        print(product_aff_link)
-        print(product_title)
-        print(product_asin)
         # init product
         key = 'products'
         if key not in json_article: json_article[key] = []
@@ -879,12 +1194,13 @@ def a_equipment_best(equipment):
     html_article += f'{text_format_1N1_html(json_article["intro"])}\n'
     if 'products' not in json_article: json_article['products'] = []
     for i, obj in enumerate(json_article['products'][:products_num]):
-        title_ai = obj['title_ai']
+        title = obj['title_ai']
         desc = obj['desc']
         pros = obj['pros']
         warn = obj['warn']
+        product_aff_link = obj['product_aff_link']
         # product_aff_link = obj['product_aff_link']
-        html_article += f'<h2>{i+1}. {title_ai}</h2>\n'
+        html_article += f'<h2>{i+1}. {title}</h2>\n'
         html_article += f'{text_format_1N1_html(desc)}\n'
         html_article += f'<p class="font-bold text-black">Key Features:</p>\n'
         html_article += f'<ul>\n'
@@ -893,6 +1209,8 @@ def a_equipment_best(equipment):
         html_article += f'</ul>\n'
         html_article += f'<p class="font-bold text-black">Warnings:</p>\n'
         html_article += f'{text_format_1N1_html(warn)}\n'
+        amazon_button_html = amazon_buy_button(product_aff_link)
+        html_article += amazon_button_html
     html_head = html_head_gen(title)
     html_breadcrumbs = breadcrumbs_gen(f'equipments/{equipment_slug}/best.html')
     html_article_layout = html_article_layout_gen(html_article)
@@ -914,16 +1232,48 @@ def a_equipment_best(equipment):
         f.write(html)
 
 
-def p_ailments(slugs):
+def p_ailments():
     json_article_filepath = f'database/pages/ailments.json'
     json_article = json_read(json_article_filepath, create=True)
-    json_write(json_article_filepath, json_article)
+    if 'ailments' not in json_article: json_article['ailments'] = []
+    for ailment in vertices_ailments:
+        ailment_slug = ailment['ailment_slug']
+        ailment_name = ailment['ailment_name']
+        # add if doesn't exist
+        found = False
+        for _obj in json_article['ailments']:
+            if ailment_slug == _obj['ailment_slug']:
+                found = True
+                break
+        if not found:
+            json_article['ailments'].append({'ailment_slug': ailment_slug})
+            json_write(json_article_filepath, json_article)
+        # update
+        ailment_obj = {}
+        for _ailment_obj in json_article['ailments']:
+            if ailment_slug == _ailment_obj['ailment_slug']:
+                ailment_obj = _ailment_obj
+                break
+        ai_paragraph_gen(
+            key = 'ailment_desc', 
+            filepath = json_article_filepath, 
+            data = json_article, 
+            obj = ailment_obj, 
+            prompt = f'''
+                Write a short 3-sentence paragraph about {ailment_name}.
+            ''',
+        )
+
     html_article = ''
     html_article += f'<h1>ailments</h1>'
-    for slug in slugs:
-        name = slug.replace('-', ' ')
-        html_article += f'<p><a href="/ailments/{slug}.html">{name}</a></p>'
-    title = f'ailment'
+    for i, ailment in enumerate(json_article['ailments']):
+        ailment_slug = ailment['ailment_slug']
+        ailment_name = ailment_slug.replace('-', ' ')
+        ailment_desc = ailment['ailment_desc']
+        html_article += f'<h2>{i+1}. {ailment_name}</h2>\n'
+        html_article += f'<p>{ailment_desc}</p>\n'
+        html_article += f'<p><a href="/ailments/{ailment_slug}.html">{ailment_name}</a></p>\n'
+    title = 'ailments'
     html_head = html_head_gen(title)
     html_breadcrumbs = breadcrumbs_gen(f'ailments.html')
     html_article_layout = html_article_layout_gen(html_article)
@@ -939,25 +1289,48 @@ def p_ailments(slugs):
         </body>
         </html>
     '''
-    if not os.path.exists(f'{website_folderpath}/ailments'): 
-        os.mkdir(f'{website_folderpath}/ailments')
     with open(f'{website_folderpath}/ailments.html', 'w') as f:
         f.write(html)
 
-
-def a_ailment(slug):
-    name = slug.replace('-', ' ')
-    json_article_filepath = f'database/pages/ailments/{slug}.json'
+def a_ailment(ailment):
+    ailment_slug = ailment['ailment_slug']
+    ailment_name = ailment['ailment_name']
+    json_article_filepath = f'database/pages/ailments/{ailment_slug}.json'
     json_article = json_read(json_article_filepath, create=True)
-    json_article['slug'] = slug
-    json_article['name'] = name
-    json_article['url'] = f'ailments/{slug}.html'
+    json_article['ailment_slug'] = ailment_slug
+    json_article['ailment_name'] = ailment_name
+    json_article['ailment_url'] = f'ailments/{ailment_slug}.html'
     json_write(json_article_filepath, json_article)
+    # update
+    sections = [
+        ['1', 'intro', f'write a short 3-sentence paragraph about the ailment: {ailment_name}.', f''],
+    ]
+    for section in sections:
+        if section[0] != '1': continue
+        key = section[1]
+        prompt = section[2]
+        ai_paragraph_gen(
+            key = key, 
+            filepath = json_article_filepath, 
+            data = json_article, 
+            obj = json_article, 
+            prompt = prompt,
+        )
+    # html
     html_article = ''
-    html_article += f'<h1>{name}</h1>'
-    title = f'{slug}'
+    html_article += f'<h1>{ailment_name}</h1>'
+    for section in sections:
+        if section[0] != '1': continue
+        section_name = section[1]
+        section_desc = json_article[section_name]
+        section_link = section[3]
+        html_article += f'<h2>{section_name}</h2>'
+        html_article += f'<p>{section_desc}</p>\n'
+        if section_link.strip() != '':
+            html_article += f'<p><a href="/ailments/{ailment_slug}/{section_link}.html">{section_name}</a></p>'
+    title = f'{ailment_name}'
     html_head = html_head_gen(title)
-    html_breadcrumbs = breadcrumbs_gen(f'ailments/{name}.html')
+    html_breadcrumbs = breadcrumbs_gen(f'ailments/{ailment_slug}.html')
     html_article_layout = html_article_layout_gen(html_article)
     html = f'''
         <!DOCTYPE html>
@@ -971,121 +1344,31 @@ def a_ailment(slug):
         </body>
         </html>
     '''
-    with open(f'{website_folderpath}/ailments/{slug}.html', 'w') as f:
+    if not os.path.exists(f'{website_folderpath}/ailments'): 
+        os.mkdir(f'{website_folderpath}/ailments')
+    with open(f'{website_folderpath}/ailments/{ailment_slug}.html', 'w') as f:
         f.write(html)
-
-if 0:
-    vertex_1 = {
-        'type': 'herb',
-        'slug': 'achillea-millefolium',
-    }
-
-    vertex_2 = {
-        'type': 'preparation',
-        'slug': 'infusion',
-    }
-
-    edge_1 = {
-        'vertex_1': vertex_1,
-        'vertex_2': vertex_2,
-    }
-
-    vertices = [vertex_1, vertex_2]
-    edges = [edge_1]
-
-    herbs = []
-    for vertex in vertices:
-        if vertex['type'] == 'herb':
-            herbs.append(vertex)
-
 
 p_home()
 
 # herbs
 if 1:
-    vertices_herbs = [vertex for vertex in vertices if vertex['type'] == 'herb']
-    herbs = []
-    for vertex_herb in vertices_herbs:
-        herb_slug = vertex_herb['herb_slug']
-        herb = {'herb_slug': herb_slug, 'preparations_slugs': []}
-        preparations_slugs = []
-        for edge in edges: 
-            if edge['type'] == 'herb_preparation' and edge['vertex_1'] == herb_slug:
-                herb['preparations_slugs'].append(edge['vertex_2'])
-        herbs.append(herb)
-    
-
-    '''
-    with open('database/csvs/herbs-preparations.txt') as f: content = f.read()
-    llst = []
-    lines = content.split('\n')
-    for line in lines:
-        if line.strip() == '': continue
-        lst = line.split('\\')
-        llst.append(lst)
-    herbs = []
-    for lst in llst:
-        found = False
-        for herb in herbs:
-            if lst[0] == herb['herb_slug']:
-                herb['preparations_slugs'].append(lst[1])
-                found = True
-                break
-        if not found:
-            herbs.append({'herb_slug': lst[0], 'preparations_slugs': [lst[1]]})
-    '''
-
-    herb_slugs = [x['herb_slug'] for x in herbs]
-    p_herbs(herb_slugs)
-    for herb in herbs:
+    p_herbs()
+    for herb in vertices_herbs:
         a_herb(herb)
+        a_herb_uses(herb)
         a_herb_benefits(herb)
         a_herb_preparations(herb)
 
 # preparations
 if 1:
-    vertices_preparations = [vertex for vertex in vertices if vertex['type'] == 'preparation']
-    preparations = []
-    for vertex_preparation in vertices_preparations:
-        preparation_slug = vertex_preparation['preparation_slug']
-        preparation = {'preparation_slug': preparation_slug, 'herbs_slugs': []}
-        herbs_slugs = []
-        for edge in edges: 
-            print(edge)
-            if edge['type'] == 'herb_preparation' and edge['vertex_2'] == preparation_slug:
-                preparation['herbs_slugs'].append(edge['vertex_1'])
-        preparations.append(preparation)
-    
-    '''
-    with open('database/csvs/herbs-preparations.txt') as f: content = f.read()
-    llst = []
-    lines = content.split('\n')
-    for line in lines:
-        if line.strip() == '': continue
-        lst = line.split('\\')
-        llst.append(lst)
-    preparations = []
-    for lst in llst:
-        found = False
-        for preparation in preparations:
-            if lst[1] == preparation['preparation_slug']:
-                preparation['herbs_slugs'].append(lst[0])
-                found = True
-                break
-        if not found:
-            preparations.append({
-                'preparation_slug': lst[1], 
-                'herbs_slugs': [lst[0]]
-            })
-    '''
-
-    p_preparations(preparations)
-    for preparation in preparations:
+    p_preparations()
+    for preparation in vertices_preparations:
         a_preparation(preparation)
         a_preparation_herbs(preparation)
 
 # equipments
-if 1:
+if 0:
     lst = [
         {'slug': 'jar', 'amazon': 'jars',},
         {'slug': 'bottle', 'amazon': 'bottles',},
@@ -1102,35 +1385,10 @@ if 1:
         a_equipment_best(equipment)
 
 # ailments
-if 1:
-    lst = [
-        {'slug': 'bad-breath',},
-        {'slug': 'fever',},
-    ]
-    slugs = [x['slug'] for x in lst]
-    p_ailments(slugs)
-    for slug in slugs:
-        a_ailment(slug)
+if 0:
+    p_ailments()
+    for vertex_ailment in vertices_ailments:
+        a_ailment(vertex_ailment)
 
 shutil.copy('style.css', f'{website_folderpath}/style.css')
 
-quit()
-vertices = json_read('vertices.json')
-edges = json_read('edges.json')
-
-# find preparations of achillea millefolium
-herb_slug = 'achillea-millefolium'
-preparations_slugs = []
-for edge in edges: 
-    if edge['type'] == 'herb_preparation' and edge['vertex_1'] == herb_slug:
-        preparations_slugs.append(edge['vertex_2'])
-
-print(preparations_slugs)
-
-herb_slug = 'acorus-calamus'
-preparations_slugs = []
-for edge in edges: 
-    if edge['type'] == 'herb_preparation' and edge['vertex_1'] == herb_slug:
-        preparations_slugs.append(edge['vertex_2'])
-
-print(preparations_slugs)

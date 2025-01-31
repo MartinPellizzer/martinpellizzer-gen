@@ -95,6 +95,91 @@
         "vertex_2": "powder"
     },
     {
+        "type": "herb_preparation",
+        "vertex_1": "ammi-visnaga",
+        "vertex_2": "infusion"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "ammi-visnaga",
+        "vertex_2": "powder"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "angelica-sinensis",
+        "vertex_2": "wine-infusion"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "angelica-sinensis",
+        "vertex_2": "tincture"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "angelica-sinensis",
+        "vertex_2": "infusion"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "angelica-sinensis",
+        "vertex_2": "decoction"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "angelica-sinensis",
+        "vertex_2": "tablet"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "apium-graveolens",
+        "vertex_2": "juice"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "apium-graveolens",
+        "vertex_2": "infusion"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "apium-graveolens",
+        "vertex_2": "tincture"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "apium-graveolens",
+        "vertex_2": "powder"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "arctium-lappa",
+        "vertex_2": "decoction"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "arctium-lappa",
+        "vertex_2": "tincture"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "arctium-lappa",
+        "vertex_2": "infusion"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "arctium-lappa",
+        "vertex_2": "poultice"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "artemisia-absinthium",
+        "vertex_2": "infusion"
+    },
+    {
+        "type": "herb_preparation",
+        "vertex_1": "artemisia-absinthium",
+        "vertex_2": "tincture"
+    },
+    {
         "type": "none"
     }
 ]

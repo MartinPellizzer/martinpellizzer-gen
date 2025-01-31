@@ -46,6 +46,14 @@ h2 {
     margin-top: 4.8rem;
 }
 
+h3 {
+    color: #101010;
+    font-size: 2.4rem;
+    line-height: 3.2rem;
+    margin-bottom: 1.6rem;
+    margin-top: 4.8rem;
+}
+
 p {
     color: #303030;
     margin-bottom: 1.6rem;
@@ -63,9 +71,25 @@ li {
     padding-bottom: 0.8rem;
 }
 
+img {
+    width: 100%;
+    margin-bottom: 1.6rem;
+}
+
+.bg-lightgray {
+    background-color: #f6f6f6;
+}
+
+
 .font-bold {
     font-weight: bold;
 }
+
+.text-14 {
+    font-size: 1.4rem;
+    line-height: 2.0rem;
+}
+
 
 .flex {
     display: flex;
@@ -79,9 +103,27 @@ li {
     gap: 1.6rem;
 }
 
+.px-24 {
+    padding-left: 2.4rem;
+    padding-right: 2.4rem;
+}
+
 .py-24 {
     padding-top: 2.4rem;
     padding-bottom: 2.4rem;
+}
+
+.py-32 {
+    padding-top: 3.2rem;
+    padding-bottom: 3.2rem;
+}
+
+.mb-0 {
+    margin-bottom: 0;
+}
+
+.mb-16 {
+    margin-bottom: 1.6rem;
 }
 
 .no-underline {
@@ -99,4 +141,32 @@ footer {
     padding-bottom: 2.4rem;
     border-top: 1px solid #cdcdcd;
     margin-top: 4.8rem;
+}
+
+.button-amazon {
+    display: inline-block;
+    text-decoration: none;
+    color: #000000;
+    background-color: #ff9900;
+    border-radius: 9999px;
+    padding-top: 1.2rem;
+    padding-bottom: 0.8rem;
+    padding-left: 2.4rem;
+    padding-right: 2.4rem;
+}
+
+table { 
+    border-collapse: collapse;
+    border: 1px solid #101010;
+    margin-bottom: 1.6rem;
+}
+
+th { 
+    border: 1px solid #101010;
+    padding: 0.8rem 1.6rem;
+}
+
+td { 
+    border: 1px solid #101010;
+    padding: 0.8rem 1.6rem;
 }

@@ -1,0 +1,12 @@
+[
+    {
+        "edge_type": "herb_class_division",
+        "vertex_1": "magnoliopsida",
+        "vertex_2": "angiospermae"
+    },
+    {
+        "edge_type": "herb_class_division",
+        "vertex_1": "liliopsida",
+        "vertex_2": "magnoliophyta"
+    }
+]

@@ -1,0 +1,290 @@
+[
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "infusion",
+        "preparation_name": "infusion",
+        "preparation_name_plural": "infusions",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "tincture",
+        "preparation_name": "tincture",
+        "preparation_name_plural": "tinctures",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "decoction",
+        "preparation_name": "decoction",
+        "preparation_name_plural": "decoctions",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "salve",
+        "preparation_name": "salve",
+        "preparation_name_plural": "salves",
+        "preparation_synonyms": ["balms", "oinments"]
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "oinment",
+        "preparation_name": "oinment",
+        "preparation_name_plural": "oinments",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "poultice",
+        "preparation_name": "poultice",
+        "preparation_name_plural": "poultices",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "suppository",
+        "preparation_name": "suppository",
+        "preparation_name_plural": "suppositories",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "capsule",
+        "preparation_name": "capsule",
+        "preparation_name_plural": "capsules",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "glycerite",
+        "preparation_name": "glycerite",
+        "preparation_name_plural": "glycerites",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "extract",
+        "preparation_name": "extract",
+        "preparation_name_plural": "extracts",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "resin",
+        "preparation_name": "resin",
+        "preparation_name_plural": "resins",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "infused-oil",
+        "preparation_name": "infused oil",
+        "preparation_name_plural": "infused oils",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "tea",
+        "preparation_name": "tea",
+        "preparation_name_plural": "tea",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "tablet",
+        "preparation_name": "tablet",
+        "preparation_name_plural": "tablets",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "lozenge",
+        "preparation_name": "lozenge",
+        "preparation_name_plural": "lozenges",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "gum",
+        "preparation_name": "gum",
+        "preparation_name_plural": "gums",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "gel",
+        "preparation_name": "gel",
+        "preparation_name_plural": "gels",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "powder",
+        "preparation_name": "powder",
+        "preparation_name_plural": "powders",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "elixir",
+        "preparation_name": "elixir",
+        "preparation_name_plural": "elixirs",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "lotion",
+        "preparation_name": "lotion",
+        "preparation_name_plural": "lotions",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "oil",
+        "preparation_name": "oil",
+        "preparation_name_plural": "oils",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "cream",
+        "preparation_name": "cream",
+        "preparation_name_plural": "creams",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "balm",
+        "preparation_name": "balm",
+        "preparation_name_plural": "balms",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "essential-oil",
+        "preparation_name": "essential oil",
+        "preparation_name_plural": "essential oils",
+        "preparation_synonyms": ["volatile oils"]
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "liniment",
+        "preparation_name": "liniment",
+        "preparation_name_plural": "liniments",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "cordial",
+        "preparation_name": "cordial",
+        "preparation_name_plural": "cordials",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "paste",
+        "preparation_name": "paste",
+        "preparation_name_plural": "pastes",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "plaster",
+        "preparation_name": "plaster",
+        "preparation_name_plural": "plasters",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "pill",
+        "preparation_name": "pill",
+        "preparation_name_plural": "pills",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "emulsion",
+        "preparation_name": "emulsion",
+        "preparation_name_plural": "emulsions",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "concentrate",
+        "preparation_name": "concentrate",
+        "preparation_name_plural": "concentrates",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "mist",
+        "preparation_name": "mist",
+        "preparation_name_plural": "mists",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "spray",
+        "preparation_name": "spray",
+        "preparation_name_plural": "sprays",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "drop",
+        "preparation_name": "drop",
+        "preparation_name_plural": "drops",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "bath",
+        "preparation_name": "bath",
+        "preparation_name_plural": "baths",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "maceration",
+        "preparation_name": "maceration",
+        "preparation_name_plural": "macerations",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "ghee",
+        "preparation_name": "ghee",
+        "preparation_name_plural": "ghees",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "syrup",
+        "preparation_name": "syrup",
+        "preparation_name_plural": "syrups",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "fomentation",
+        "preparation_name": "fomentation",
+        "preparation_name_plural": "fomentations",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "percolation",
+        "preparation_name": "percolation",
+        "preparation_name_plural": "percolations",
+        "preparation_synonyms": []
+    },
+    {
+        "vertex_type": "preparation",
+        "preparation_slug": "pomade",
+        "preparation_name": "pomade",
+        "preparation_name_plural": "pomades",
+        "preparation_synonyms": []
+    }
+]
+
