@@ -1,43 +1,87 @@
 [
     {
         "vertex_type": "herb_family",
-        "family_slug": "asteraceae"
+        "family_slug": {
+            "name": "asteraceae",
+            "confidence_score": 10
+        }
     },
     {
         "vertex_type": "herb_family",
-        "family_slug": "araceae"
+        "family_slug": {
+            "name": "araceae",
+            "confidence_score": 10
+        }
     },
     {
         "vertex_type": "herb_family",
-        "family_slug": "sapindaceae"
+        "family_slug": {
+            "name": "sapindaceae",
+            "confidence_score": 10
+        }
     },
     {
         "vertex_type": "herb_family",
-        "family_slug": "liliaceae"
+        "family_slug": {
+            "name": "alliaceae",
+            "confidence_score": 8
+        }
     },
     {
         "vertex_type": "herb_family",
-        "family_slug": "xanthorrhoeaceae"
+        "family_slug": {
+            "name": "asphodelaceae",
+            "confidence_score": 10
+        }
     },
     {
         "vertex_type": "herb_family",
-        "family_slug": "zingiberaceae"
+        "family_slug": {
+            "name": "zingiberaceae",
+            "confidence_score": 10
+        }
     },
     {
         "vertex_type": "herb_family",
-        "family_slug": "apiaceae"
+        "family_slug": {
+            "name": "apiaceae",
+            "confidence_score": 10
+        }
     },
     {
         "vertex_type": "herb_family",
-        "family_slug": "fabaceae"
+        "family_slug": {
+            "name": "fabaceae",
+            "confidence_score": 10
+        }
     },
     {
         "vertex_type": "herb_family",
-        "family_slug": "solanaceae"
+        "family_slug": {
+            "name": "solanaceae",
+            "confidence_score": 10
+        }
     },
     {
         "vertex_type": "herb_family",
-        "family_slug": "meliaceae"
+        "family_slug": {
+            "name": "meliaceae",
+            "confidence_score": 10
+        }
+    },
+    {
+        "vertex_type": "herb_family",
+        "family_slug": {
+            "name": "rutaceae",
+            "confidence_score": 9
+        }
+    },
+    {
+        "vertex_type": "herb_family",
+        "family_slug": {
+            "name": "apiaceae",
+            "confidence_score": 9
+        }
     },
     {
         "vertex_type": "herb_order",
@@ -82,6 +126,10 @@
     {
         "vertex_type": "herb_subclass",
         "subclass_slug": "rosidae"
+    },
+    {
+        "vertex_type": "herb_subclass",
+        "subclass_slug": "liliidae"
     },
     {
         "vertex_type": "herb_subclass",

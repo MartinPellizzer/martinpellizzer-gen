@@ -12,16 +12,6 @@
     {
         "type": "herb_ailment",
         "vertex_1": "achillea-millefolium",
-        "vertex_2": "cough"
-    },
-    {
-        "type": "herb_ailment",
-        "vertex_1": "achillea-millefolium",
-        "vertex_2": "allergy"
-    },
-    {
-        "type": "herb_ailment",
-        "vertex_1": "achillea-millefolium",
         "vertex_2": "sore-throat"
     },
     {
@@ -32,7 +22,12 @@
     {
         "type": "herb_ailment",
         "vertex_1": "achillea-millefolium",
-        "vertex_2": "constipation"
+        "vertex_2": "cough"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "achillea-millefolium",
+        "vertex_2": "allergy"
     },
     {
         "type": "herb_ailment",
@@ -41,8 +36,18 @@
     },
     {
         "type": "herb_ailment",
-        "vertex_1": "acorus-calamus",
-        "vertex_2": "common-cold"
+        "vertex_1": "achillea-millefolium",
+        "vertex_2": "constipation"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "achillea-millefolium",
+        "vertex_2": "high-blood-pressure"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "achillea-millefolium",
+        "vertex_2": "fibroid"
     },
     {
         "type": "herb_ailment",
@@ -67,6 +72,11 @@
     {
         "type": "herb_ailment",
         "vertex_1": "acorus-calamus",
+        "vertex_2": "common-cold"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "acorus-calamus",
         "vertex_2": "headache"
     },
     {
@@ -82,17 +92,7 @@
     {
         "type": "herb_ailment",
         "vertex_1": "aesculus-hippocastanum",
-        "vertex_2": "sore-throat"
-    },
-    {
-        "type": "herb_ailment",
-        "vertex_1": "aesculus-hippocastanum",
-        "vertex_2": "headache"
-    },
-    {
-        "type": "herb_ailment",
-        "vertex_1": "aesculus-hippocastanum",
-        "vertex_2": "cough"
+        "vertex_2": "constipation"
     },
     {
         "type": "herb_ailment",
@@ -107,17 +107,27 @@
     {
         "type": "herb_ailment",
         "vertex_1": "aesculus-hippocastanum",
+        "vertex_2": "sore-throat"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "aesculus-hippocastanum",
+        "vertex_2": "cough"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "aesculus-hippocastanum",
+        "vertex_2": "headache"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "aesculus-hippocastanum",
         "vertex_2": "common-cold"
     },
     {
         "type": "herb_ailment",
         "vertex_1": "aesculus-hippocastanum",
         "vertex_2": "anxiety"
-    },
-    {
-        "type": "herb_ailment",
-        "vertex_1": "aesculus-hippocastanum",
-        "vertex_2": "constipation"
     },
     {
         "type": "herb_ailment",
@@ -137,12 +147,12 @@
     {
         "type": "herb_ailment",
         "vertex_1": "allium-sativum",
-        "vertex_2": "sore-throat"
+        "vertex_2": "sinus-infection"
     },
     {
         "type": "herb_ailment",
         "vertex_1": "allium-sativum",
-        "vertex_2": "cough"
+        "vertex_2": "sore-throat"
     },
     {
         "type": "herb_ailment",
@@ -152,7 +162,7 @@
     {
         "type": "herb_ailment",
         "vertex_1": "allium-sativum",
-        "vertex_2": "sinus-infection"
+        "vertex_2": "cough"
     },
     {
         "type": "herb_ailment",
@@ -168,11 +178,6 @@
         "type": "herb_ailment",
         "vertex_1": "allium-sativum",
         "vertex_2": "anxiety"
-    },
-    {
-        "type": "herb_ailment",
-        "vertex_1": "allium-sativum",
-        "vertex_2": "high-blood-pressure"
     },
     {
         "type": "herb_ailment",
@@ -192,22 +197,22 @@
     {
         "type": "herb_ailment",
         "vertex_1": "aloe-vera",
-        "vertex_2": "cough"
-    },
-    {
-        "type": "herb_ailment",
-        "vertex_1": "aloe-vera",
         "vertex_2": "allergy"
     },
     {
         "type": "herb_ailment",
         "vertex_1": "aloe-vera",
-        "vertex_2": "sinus-infection"
+        "vertex_2": "cough"
     },
     {
         "type": "herb_ailment",
         "vertex_1": "aloe-vera",
         "vertex_2": "anxiety"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "aloe-vera",
+        "vertex_2": "sinus-infection"
     },
     {
         "type": "herb_ailment",
@@ -232,11 +237,6 @@
     {
         "type": "herb_ailment",
         "vertex_1": "alpinia-officinarum",
-        "vertex_2": "sinus-infection"
-    },
-    {
-        "type": "herb_ailment",
-        "vertex_1": "alpinia-officinarum",
         "vertex_2": "sore-throat"
     },
     {
@@ -247,7 +247,12 @@
     {
         "type": "herb_ailment",
         "vertex_1": "alpinia-officinarum",
-        "vertex_2": "allergy"
+        "vertex_2": "sinus-infection"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "alpinia-officinarum",
+        "vertex_2": "constipation"
     },
     {
         "type": "herb_ailment",
@@ -257,7 +262,7 @@
     {
         "type": "herb_ailment",
         "vertex_1": "alpinia-officinarum",
-        "vertex_2": "constipation"
+        "vertex_2": "allergy"
     },
     {
         "type": "herb_ailment",
@@ -267,17 +272,12 @@
     {
         "type": "herb_ailment",
         "vertex_1": "ammi-visnaga",
-        "vertex_2": "headache"
-    },
-    {
-        "type": "herb_ailment",
-        "vertex_1": "ammi-visnaga",
-        "vertex_2": "sore-throat"
-    },
-    {
-        "type": "herb_ailment",
-        "vertex_1": "ammi-visnaga",
         "vertex_2": "sinus-infection"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "ammi-visnaga",
+        "vertex_2": "headache"
     },
     {
         "type": "herb_ailment",
@@ -287,17 +287,22 @@
     {
         "type": "herb_ailment",
         "vertex_1": "ammi-visnaga",
+        "vertex_2": "allergy"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "ammi-visnaga",
         "vertex_2": "constipation"
     },
     {
         "type": "herb_ailment",
         "vertex_1": "ammi-visnaga",
-        "vertex_2": "common-cold"
+        "vertex_2": "sore-throat"
     },
     {
         "type": "herb_ailment",
         "vertex_1": "ammi-visnaga",
-        "vertex_2": "allergy"
+        "vertex_2": "common-cold"
     },
     {
         "type": "herb_ailment",
@@ -322,17 +327,12 @@
     {
         "type": "herb_ailment",
         "vertex_1": "angelica-sinensis",
-        "vertex_2": "cough"
-    },
-    {
-        "type": "herb_ailment",
-        "vertex_1": "angelica-sinensis",
-        "vertex_2": "sinus-infection"
-    },
-    {
-        "type": "herb_ailment",
-        "vertex_1": "angelica-sinensis",
         "vertex_2": "sore-throat"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "angelica-sinensis",
+        "vertex_2": "cough"
     },
     {
         "type": "herb_ailment",
@@ -342,7 +342,7 @@
     {
         "type": "herb_ailment",
         "vertex_1": "angelica-sinensis",
-        "vertex_2": "anxiety"
+        "vertex_2": "sinus-infection"
     },
     {
         "type": "herb_ailment",
@@ -357,7 +357,17 @@
     {
         "type": "herb_ailment",
         "vertex_1": "angelica-sinensis",
+        "vertex_2": "anxiety"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "angelica-sinensis",
         "vertex_2": "high-blood-pressure"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "angelica-sinensis",
+        "vertex_2": "fibroid"
     },
     {
         "type": "herb_ailment",
@@ -401,12 +411,7 @@
     },
     {
         "type": "herb_ailment",
-        "vertex_1": "apium-graveolens",
-        "vertex_2": "high-blood-pressure"
-    },
-    {
-        "type": "herb_ailment",
-        "vertex_1": "apium-graveolens",
+        "vertex_1": "arctium-lappa",
         "vertex_2": "fibroid"
     },
     {
@@ -417,6 +422,16 @@
     {
         "type": "herb_ailment",
         "vertex_1": "arctium-lappa",
+        "vertex_2": "allergy"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "arctium-lappa",
+        "vertex_2": "headache"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "arctium-lappa",
         "vertex_2": "sore-throat"
     },
     {
@@ -427,32 +442,12 @@
     {
         "type": "herb_ailment",
         "vertex_1": "arctium-lappa",
-        "vertex_2": "allergy"
-    },
-    {
-        "type": "herb_ailment",
-        "vertex_1": "arctium-lappa",
         "vertex_2": "sinus-infection"
     },
     {
         "type": "herb_ailment",
         "vertex_1": "arctium-lappa",
         "vertex_2": "common-cold"
-    },
-    {
-        "type": "herb_ailment",
-        "vertex_1": "arctium-lappa",
-        "vertex_2": "headache"
-    },
-    {
-        "type": "herb_ailment",
-        "vertex_1": "arctium-lappa",
-        "vertex_2": "fibroid"
-    },
-    {
-        "type": "herb_ailment",
-        "vertex_1": "arctium-lappa",
-        "vertex_2": "anxiety"
     },
     {
         "type": "herb_ailment",
@@ -461,6 +456,11 @@
     },
     {
         "type": "herb_ailment",
+        "vertex_1": "arctium-lappa",
+        "vertex_2": "anxiety"
+    },
+    {
+        "type": "herb_ailment",
         "vertex_1": "artemisia-absinthium",
         "vertex_2": "common-cold"
     },
@@ -477,22 +477,22 @@
     {
         "type": "herb_ailment",
         "vertex_1": "artemisia-absinthium",
-        "vertex_2": "cough"
-    },
-    {
-        "type": "herb_ailment",
-        "vertex_1": "artemisia-absinthium",
-        "vertex_2": "allergy"
-    },
-    {
-        "type": "herb_ailment",
-        "vertex_1": "artemisia-absinthium",
         "vertex_2": "headache"
     },
     {
         "type": "herb_ailment",
         "vertex_1": "artemisia-absinthium",
+        "vertex_2": "cough"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "artemisia-absinthium",
         "vertex_2": "anxiety"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "artemisia-absinthium",
+        "vertex_2": "allergy"
     },
     {
         "type": "herb_ailment",
@@ -512,22 +512,22 @@
     {
         "type": "herb_ailment",
         "vertex_1": "artemisia-annua",
-        "vertex_2": "cough"
-    },
-    {
-        "type": "herb_ailment",
-        "vertex_1": "artemisia-annua",
-        "vertex_2": "allergy"
-    },
-    {
-        "type": "herb_ailment",
-        "vertex_1": "artemisia-annua",
         "vertex_2": "headache"
     },
     {
         "type": "herb_ailment",
         "vertex_1": "artemisia-annua",
+        "vertex_2": "cough"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "artemisia-annua",
         "vertex_2": "sore-throat"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "artemisia-annua",
+        "vertex_2": "allergy"
     },
     {
         "type": "herb_ailment",
@@ -538,11 +538,6 @@
         "type": "herb_ailment",
         "vertex_1": "artemisia-annua",
         "vertex_2": "constipation"
-    },
-    {
-        "type": "herb_ailment",
-        "vertex_1": "artemisia-annua",
-        "vertex_2": "high-blood-pressure"
     },
     {
         "type": "herb_ailment",
@@ -551,7 +546,7 @@
     },
     {
         "type": "herb_ailment",
-        "vertex_1": "astragalus-membranaceus",
+        "vertex_1": "artemisia-annua",
         "vertex_2": "high-blood-pressure"
     },
     {
@@ -572,17 +567,22 @@
     {
         "type": "herb_ailment",
         "vertex_1": "astragalus-membranaceus",
+        "vertex_2": "high-blood-pressure"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "astragalus-membranaceus",
         "vertex_2": "anxiety"
     },
     {
         "type": "herb_ailment",
         "vertex_1": "astragalus-membranaceus",
-        "vertex_2": "constipation"
+        "vertex_2": "sore-throat"
     },
     {
         "type": "herb_ailment",
         "vertex_1": "astragalus-membranaceus",
-        "vertex_2": "sore-throat"
+        "vertex_2": "constipation"
     },
     {
         "type": "herb_ailment",
@@ -607,12 +607,12 @@
     {
         "type": "herb_ailment",
         "vertex_1": "azadirachta-indica",
-        "vertex_2": "cough"
+        "vertex_2": "sore-throat"
     },
     {
         "type": "herb_ailment",
         "vertex_1": "azadirachta-indica",
-        "vertex_2": "sore-throat"
+        "vertex_2": "cough"
     },
     {
         "type": "herb_ailment",
@@ -637,11 +637,196 @@
     {
         "type": "herb_ailment",
         "vertex_1": "azadirachta-indica",
-        "vertex_2": "high-blood-pressure"
+        "vertex_2": "fibroid"
     },
     {
         "type": "herb_ailment",
         "vertex_1": "azadirachta-indica",
+        "vertex_2": "high-blood-pressure"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "barosma-betulina",
+        "vertex_2": "common-cold"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "barosma-betulina",
+        "vertex_2": "sinus-infection"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "barosma-betulina",
+        "vertex_2": "cough"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "barosma-betulina",
+        "vertex_2": "sore-throat"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "barosma-betulina",
+        "vertex_2": "constipation"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "barosma-betulina",
+        "vertex_2": "allergy"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "barosma-betulina",
+        "vertex_2": "headache"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "barosma-betulina",
+        "vertex_2": "anxiety"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "bupleurum-chinense",
+        "vertex_2": "common-cold"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "bupleurum-chinense",
+        "vertex_2": "sinus-infection"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "bupleurum-chinense",
+        "vertex_2": "cough"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "bupleurum-chinense",
+        "vertex_2": "anxiety"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "bupleurum-chinense",
+        "vertex_2": "sore-throat"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "bupleurum-chinense",
+        "vertex_2": "high-blood-pressure"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "bupleurum-chinense",
+        "vertex_2": "allergy"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "bupleurum-chinense",
+        "vertex_2": "headache"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "bupleurum-chinense",
+        "vertex_2": "constipation"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "calendula-officinalis",
+        "vertex_2": "constipation"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "calendula-officinalis",
+        "vertex_2": "common-cold"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "calendula-officinalis",
+        "vertex_2": "sore-throat"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "calendula-officinalis",
+        "vertex_2": "cough"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "calendula-officinalis",
+        "vertex_2": "allergy"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "calendula-officinalis",
+        "vertex_2": "sinus-infection"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "calendula-officinalis",
+        "vertex_2": "headache"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "calendula-officinalis",
+        "vertex_2": "anxiety"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "calendula-officinalis",
+        "vertex_2": "fibroid"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "calendula-officinalis",
+        "vertex_2": "high-blood-pressure"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "capsicum-annuum",
+        "vertex_2": "headache"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "capsicum-annuum",
+        "vertex_2": "cough"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "capsicum-annuum",
+        "vertex_2": "common-cold"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "capsicum-annuum",
+        "vertex_2": "sore-throat"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "capsicum-annuum",
+        "vertex_2": "allergy"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "capsicum-annuum",
+        "vertex_2": "constipation"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "capsicum-annuum",
+        "vertex_2": "sinus-infection"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "capsicum-annuum",
+        "vertex_2": "anxiety"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "capsicum-annuum",
+        "vertex_2": "high-blood-pressure"
+    },
+    {
+        "type": "herb_ailment",
+        "vertex_1": "capsicum-annuum",
         "vertex_2": "fibroid"
     }
 ]

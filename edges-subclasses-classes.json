@@ -16,6 +16,11 @@
     },
     {
         "edge_type": "herb_subclass_class",
+        "vertex_1": "liliidae",
+        "vertex_2": "liliopsida"
+    },
+    {
+        "edge_type": "herb_subclass_class",
         "vertex_1": "commelinidae",
         "vertex_2": "liliopsida"
     }

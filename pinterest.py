@@ -71,7 +71,7 @@ def pin_post(article_filepath):
     e = driver.find_element(By.XPATH, '//input[@id="WebsiteField"]')
     e.send_keys(url) 
     time.sleep(5)
-    e = driver.find_element(By.XPATH, '//button[@data-test-id="board-dropdown-select-button"]')
+    e = driver.find_element(By.XPATH, '//div[@data-test-id="board-dropdown-select-button"]')
     e.click()
     time.sleep(5)
     e = driver.find_element(By.XPATH, '//input[@id="pickerSearchField"]')
@@ -89,8 +89,19 @@ def pin_post(article_filepath):
 
 
 
-jsons_filenames = os.listdir(f'pinterest/pins')[:]
-for i in range(len(jsons_filenames)): 
+jsons_filenames = os.listdir(f'pinterest/pins')
+jsons_filenames = sorted(jsons_filenames)
+i = 0
+for json_filename in jsons_filenames:
+    json_filepath = f'pinterest/pins/{json_filename}'
+    print(f'{i}/{len(jsons_filenames)} >> {json_filepath}')
+    i += 1
+    pin_post(json_filepath)
+
+
+
+quit()
+for i in range(len(jsons_filenames)):
     found = False
     article_filename = ''
     for _json_filename in jsons_filenames:

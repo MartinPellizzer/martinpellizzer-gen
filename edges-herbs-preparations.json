@@ -1,827 +1,2594 @@
 [
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "achillea-millefolium",
-        "vertex_2": "tincture"
+        "vertex_2": "infusion",
+        "edge_strength": 98
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "achillea-millefolium",
-        "vertex_2": "infusion"
+        "vertex_2": "tincture",
+        "edge_strength": 89
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "achillea-millefolium",
-        "vertex_2": "salve"
+        "vertex_2": "salve",
+        "edge_strength": 76
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "achillea-millefolium",
-        "vertex_2": "extract"
+        "vertex_2": "decoction",
+        "edge_strength": 73
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "achillea-millefolium",
-        "vertex_2": "infused-oil"
+        "vertex_2": "infused-oil",
+        "edge_strength": 71
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "achillea-millefolium",
-        "vertex_2": "cream"
+        "vertex_2": "tea",
+        "edge_strength": 68
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "achillea-millefolium",
-        "vertex_2": "oil"
+        "vertex_2": "essential-oil",
+        "edge_strength": 65
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "achillea-millefolium",
-        "vertex_2": "balm"
+        "vertex_2": "extract",
+        "edge_strength": 56
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "achillea-millefolium",
-        "vertex_2": "glycerite"
+        "vertex_2": "capsule",
+        "edge_strength": 55
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "achillea-millefolium",
-        "vertex_2": "tea"
+        "vertex_2": "oil",
+        "edge_strength": 54
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "achillea-millefolium",
-        "vertex_2": "gum"
+        "vertex_2": "powder",
+        "edge_strength": 50
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
+        "vertex_1": "achillea-millefolium",
+        "vertex_2": "gum",
+        "edge_strength": 48
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "achillea-millefolium",
+        "vertex_2": "glycerite",
+        "edge_strength": 45
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "achillea-millefolium",
+        "vertex_2": "cream",
+        "edge_strength": 45
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "achillea-millefolium",
+        "vertex_2": "elixir",
+        "edge_strength": 45
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "achillea-millefolium",
+        "vertex_2": "balm",
+        "edge_strength": 44
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "achillea-millefolium",
+        "vertex_2": "gel",
+        "edge_strength": 40
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "achillea-millefolium",
+        "vertex_2": "lotion",
+        "edge_strength": 35
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "achillea-millefolium",
+        "vertex_2": "liniment",
+        "edge_strength": 33
+    },
+    {
+        "edge_type": "herb_preparation",
         "vertex_1": "acorus-calamus",
-        "vertex_2": "tincture"
+        "vertex_2": "tincture",
+        "edge_strength": 90
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "acorus-calamus",
-        "vertex_2": "extract"
+        "vertex_2": "essential-oil",
+        "edge_strength": 90
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "acorus-calamus",
-        "vertex_2": "oil"
+        "vertex_2": "infusion",
+        "edge_strength": 80
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "acorus-calamus",
-        "vertex_2": "elixir"
+        "vertex_2": "extract",
+        "edge_strength": 78
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "acorus-calamus",
-        "vertex_2": "infusion"
+        "vertex_2": "decoction",
+        "edge_strength": 76
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "acorus-calamus",
-        "vertex_2": "powder"
+        "vertex_2": "tea",
+        "edge_strength": 68
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "acorus-calamus",
-        "vertex_2": "cream"
+        "vertex_2": "infused-oil",
+        "edge_strength": 67
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "acorus-calamus",
-        "vertex_2": "capsule"
+        "vertex_2": "syrup",
+        "edge_strength": 62
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "acorus-calamus",
-        "vertex_2": "glycerite"
+        "vertex_2": "capsule",
+        "edge_strength": 60
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "acorus-calamus",
-        "vertex_2": "gum"
+        "vertex_2": "gel",
+        "edge_strength": 60
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "acorus-calamus",
-        "vertex_2": "salve"
+        "vertex_2": "oil",
+        "edge_strength": 57
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
+        "vertex_1": "acorus-calamus",
+        "vertex_2": "gum",
+        "edge_strength": 55
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "acorus-calamus",
+        "vertex_2": "glycerite",
+        "edge_strength": 50
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "acorus-calamus",
+        "vertex_2": "salve",
+        "edge_strength": 50
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "acorus-calamus",
+        "vertex_2": "paste",
+        "edge_strength": 50
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "acorus-calamus",
+        "vertex_2": "emulsion",
+        "edge_strength": 50
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "acorus-calamus",
+        "vertex_2": "powder",
+        "edge_strength": 44
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "acorus-calamus",
+        "vertex_2": "resin",
+        "edge_strength": 42
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "acorus-calamus",
+        "vertex_2": "elixir",
+        "edge_strength": 40
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "acorus-calamus",
+        "vertex_2": "cream",
+        "edge_strength": 38
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "acorus-calamus",
+        "vertex_2": "liniment",
+        "edge_strength": 35
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "acorus-calamus",
+        "vertex_2": "balm",
+        "edge_strength": 23
+    },
+    {
+        "edge_type": "herb_preparation",
         "vertex_1": "aesculus-hippocastanum",
-        "vertex_2": "extract"
+        "vertex_2": "extract",
+        "edge_strength": 92
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "aesculus-hippocastanum",
-        "vertex_2": "tincture"
+        "vertex_2": "tincture",
+        "edge_strength": 89
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "aesculus-hippocastanum",
-        "vertex_2": "cream"
+        "vertex_2": "infused-oil",
+        "edge_strength": 72
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "aesculus-hippocastanum",
-        "vertex_2": "salve"
+        "vertex_2": "glycerite",
+        "edge_strength": 65
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "aesculus-hippocastanum",
-        "vertex_2": "oil"
+        "vertex_2": "salve",
+        "edge_strength": 62
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "aesculus-hippocastanum",
-        "vertex_2": "infused-oil"
+        "vertex_2": "cream",
+        "edge_strength": 57
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "aesculus-hippocastanum",
-        "vertex_2": "liniment"
+        "vertex_2": "gum",
+        "edge_strength": 55
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "aesculus-hippocastanum",
-        "vertex_2": "balm"
+        "vertex_2": "lozenge",
+        "edge_strength": 50
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "aesculus-hippocastanum",
-        "vertex_2": "elixir"
+        "vertex_2": "capsule",
+        "edge_strength": 46
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "aesculus-hippocastanum",
-        "vertex_2": "gel"
+        "vertex_2": "oil",
+        "edge_strength": 46
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "aesculus-hippocastanum",
-        "vertex_2": "powder"
+        "vertex_2": "poultice",
+        "edge_strength": 45
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
+        "vertex_1": "aesculus-hippocastanum",
+        "vertex_2": "syrup",
+        "edge_strength": 45
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "aesculus-hippocastanum",
+        "vertex_2": "gel",
+        "edge_strength": 41
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "aesculus-hippocastanum",
+        "vertex_2": "balm",
+        "edge_strength": 40
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "aesculus-hippocastanum",
+        "vertex_2": "suppository",
+        "edge_strength": 40
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "aesculus-hippocastanum",
+        "vertex_2": "liniment",
+        "edge_strength": 37
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "aesculus-hippocastanum",
+        "vertex_2": "elixir",
+        "edge_strength": 37
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "aesculus-hippocastanum",
+        "vertex_2": "powder",
+        "edge_strength": 36
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "aesculus-hippocastanum",
+        "vertex_2": "pill",
+        "edge_strength": 30
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "aesculus-hippocastanum",
+        "vertex_2": "paste",
+        "edge_strength": 30
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "aesculus-hippocastanum",
+        "vertex_2": "pomade",
+        "edge_strength": 23
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "aesculus-hippocastanum",
+        "vertex_2": "emulsion",
+        "edge_strength": 23
+    },
+    {
+        "edge_type": "herb_preparation",
         "vertex_1": "allium-sativum",
-        "vertex_2": "extract"
+        "vertex_2": "extract",
+        "edge_strength": 86
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "allium-sativum",
-        "vertex_2": "tincture"
+        "vertex_2": "infused-oil",
+        "edge_strength": 85
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "allium-sativum",
-        "vertex_2": "cream"
+        "vertex_2": "poultice",
+        "edge_strength": 80
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "allium-sativum",
-        "vertex_2": "oil"
+        "vertex_2": "tea",
+        "edge_strength": 79
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "allium-sativum",
-        "vertex_2": "capsule"
+        "vertex_2": "tincture",
+        "edge_strength": 76
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "allium-sativum",
-        "vertex_2": "elixir"
+        "vertex_2": "infusion",
+        "edge_strength": 75
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "allium-sativum",
-        "vertex_2": "infusion"
+        "vertex_2": "oil",
+        "edge_strength": 71
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "allium-sativum",
-        "vertex_2": "tea"
+        "vertex_2": "capsule",
+        "edge_strength": 70
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "allium-sativum",
-        "vertex_2": "gum"
+        "vertex_2": "syrup",
+        "edge_strength": 68
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "allium-sativum",
-        "vertex_2": "infused-oil"
+        "vertex_2": "salve",
+        "edge_strength": 65
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "allium-sativum",
-        "vertex_2": "salve"
+        "vertex_2": "tablet",
+        "edge_strength": 65
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
+        "vertex_1": "allium-sativum",
+        "vertex_2": "suppository",
+        "edge_strength": 63
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "allium-sativum",
+        "vertex_2": "decoction",
+        "edge_strength": 62
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "allium-sativum",
+        "vertex_2": "paste",
+        "edge_strength": 60
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "allium-sativum",
+        "vertex_2": "gum",
+        "edge_strength": 60
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "allium-sativum",
+        "vertex_2": "cream",
+        "edge_strength": 60
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "allium-sativum",
+        "vertex_2": "gel",
+        "edge_strength": 57
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "allium-sativum",
+        "vertex_2": "balm",
+        "edge_strength": 55
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "allium-sativum",
+        "vertex_2": "ghee",
+        "edge_strength": 55
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "allium-sativum",
+        "vertex_2": "lozenge",
+        "edge_strength": 50
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "allium-sativum",
+        "vertex_2": "powder",
+        "edge_strength": 50
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "allium-sativum",
+        "vertex_2": "elixir",
+        "edge_strength": 45
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "allium-sativum",
+        "vertex_2": "glycerite",
+        "edge_strength": 45
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "allium-sativum",
+        "vertex_2": "pill",
+        "edge_strength": 35
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "allium-sativum",
+        "vertex_2": "liniment",
+        "edge_strength": 30
+    },
+    {
+        "edge_type": "herb_preparation",
         "vertex_1": "aloe-vera",
-        "vertex_2": "cream"
+        "vertex_2": "gel",
+        "edge_strength": 98
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "aloe-vera",
-        "vertex_2": "gel"
+        "vertex_2": "salve",
+        "edge_strength": 86
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "aloe-vera",
-        "vertex_2": "extract"
+        "vertex_2": "syrup",
+        "edge_strength": 80
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "aloe-vera",
-        "vertex_2": "salve"
+        "vertex_2": "cream",
+        "edge_strength": 78
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "aloe-vera",
-        "vertex_2": "oil"
+        "vertex_2": "infused-oil",
+        "edge_strength": 74
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "aloe-vera",
-        "vertex_2": "balm"
+        "vertex_2": "lotion",
+        "edge_strength": 65
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "aloe-vera",
-        "vertex_2": "infused-oil"
+        "vertex_2": "balm",
+        "edge_strength": 64
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "aloe-vera",
-        "vertex_2": "tincture"
+        "vertex_2": "tea",
+        "edge_strength": 60
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "aloe-vera",
-        "vertex_2": "powder"
+        "vertex_2": "oinment",
+        "edge_strength": 60
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "aloe-vera",
-        "vertex_2": "lotion"
+        "vertex_2": "oil",
+        "edge_strength": 59
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "aloe-vera",
-        "vertex_2": "elixir"
+        "vertex_2": "poultice",
+        "edge_strength": 51
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
+        "vertex_1": "aloe-vera",
+        "vertex_2": "paste",
+        "edge_strength": 50
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "aloe-vera",
+        "vertex_2": "pomade",
+        "edge_strength": 50
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "aloe-vera",
+        "vertex_2": "suppository",
+        "edge_strength": 49
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "aloe-vera",
+        "vertex_2": "extract",
+        "edge_strength": 46
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "aloe-vera",
+        "vertex_2": "powder",
+        "edge_strength": 44
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "aloe-vera",
+        "vertex_2": "ghee",
+        "edge_strength": 43
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "aloe-vera",
+        "vertex_2": "tincture",
+        "edge_strength": 40
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "aloe-vera",
+        "vertex_2": "gum",
+        "edge_strength": 40
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "aloe-vera",
+        "vertex_2": "liniment",
+        "edge_strength": 36
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "aloe-vera",
+        "vertex_2": "emulsion",
+        "edge_strength": 30
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "aloe-vera",
+        "vertex_2": "capsule",
+        "edge_strength": 20
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "aloe-vera",
+        "vertex_2": "elixir",
+        "edge_strength": 16
+    },
+    {
+        "edge_type": "herb_preparation",
         "vertex_1": "alpinia-officinarum",
-        "vertex_2": "extract"
+        "vertex_2": "infusion",
+        "edge_strength": 85
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "alpinia-officinarum",
-        "vertex_2": "tincture"
+        "vertex_2": "extract",
+        "edge_strength": 83
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "alpinia-officinarum",
-        "vertex_2": "infusion"
+        "vertex_2": "decoction",
+        "edge_strength": 80
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "alpinia-officinarum",
-        "vertex_2": "oil"
+        "vertex_2": "tincture",
+        "edge_strength": 77
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "alpinia-officinarum",
-        "vertex_2": "cream"
+        "vertex_2": "tea",
+        "edge_strength": 68
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "alpinia-officinarum",
-        "vertex_2": "elixir"
+        "vertex_2": "infused-oil",
+        "edge_strength": 60
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "alpinia-officinarum",
-        "vertex_2": "capsule"
+        "vertex_2": "oil",
+        "edge_strength": 60
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "alpinia-officinarum",
-        "vertex_2": "powder"
+        "vertex_2": "ghee",
+        "edge_strength": 60
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "alpinia-officinarum",
-        "vertex_2": "decoction"
+        "vertex_2": "essential-oil",
+        "edge_strength": 60
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "alpinia-officinarum",
-        "vertex_2": "gum"
+        "vertex_2": "powder",
+        "edge_strength": 51
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "alpinia-officinarum",
-        "vertex_2": "glycerite"
+        "vertex_2": "glycerite",
+        "edge_strength": 46
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
+        "vertex_1": "alpinia-officinarum",
+        "vertex_2": "syrup",
+        "edge_strength": 45
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "alpinia-officinarum",
+        "vertex_2": "gum",
+        "edge_strength": 44
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "alpinia-officinarum",
+        "vertex_2": "cream",
+        "edge_strength": 40
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "alpinia-officinarum",
+        "vertex_2": "paste",
+        "edge_strength": 40
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "alpinia-officinarum",
+        "vertex_2": "capsule",
+        "edge_strength": 37
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "alpinia-officinarum",
+        "vertex_2": "salve",
+        "edge_strength": 35
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "alpinia-officinarum",
+        "vertex_2": "tablet",
+        "edge_strength": 35
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "alpinia-officinarum",
+        "vertex_2": "liniment",
+        "edge_strength": 35
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "alpinia-officinarum",
+        "vertex_2": "gel",
+        "edge_strength": 33
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "alpinia-officinarum",
+        "vertex_2": "elixir",
+        "edge_strength": 32
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "alpinia-officinarum",
+        "vertex_2": "balm",
+        "edge_strength": 22
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "alpinia-officinarum",
+        "vertex_2": "pill",
+        "edge_strength": 20
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "alpinia-officinarum",
+        "vertex_2": "suppository",
+        "edge_strength": 20
+    },
+    {
+        "edge_type": "herb_preparation",
         "vertex_1": "ammi-visnaga",
-        "vertex_2": "extract"
+        "vertex_2": "tincture",
+        "edge_strength": 86
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "ammi-visnaga",
-        "vertex_2": "tincture"
+        "vertex_2": "infusion",
+        "edge_strength": 86
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "ammi-visnaga",
-        "vertex_2": "oil"
+        "vertex_2": "extract",
+        "edge_strength": 84
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "ammi-visnaga",
-        "vertex_2": "cream"
+        "vertex_2": "resin",
+        "edge_strength": 70
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "ammi-visnaga",
-        "vertex_2": "elixir"
+        "vertex_2": "infused-oil",
+        "edge_strength": 60
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "ammi-visnaga",
-        "vertex_2": "infusion"
+        "vertex_2": "tea",
+        "edge_strength": 57
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "ammi-visnaga",
-        "vertex_2": "capsule"
+        "vertex_2": "oil",
+        "edge_strength": 55
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "ammi-visnaga",
-        "vertex_2": "gum"
+        "vertex_2": "decoction",
+        "edge_strength": 55
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "ammi-visnaga",
-        "vertex_2": "powder"
+        "vertex_2": "glycerite",
+        "edge_strength": 50
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "ammi-visnaga",
-        "vertex_2": "salve"
+        "vertex_2": "salve",
+        "edge_strength": 47
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "ammi-visnaga",
-        "vertex_2": "glycerite"
+        "vertex_2": "powder",
+        "edge_strength": 42
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
+        "vertex_1": "ammi-visnaga",
+        "vertex_2": "cream",
+        "edge_strength": 42
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "ammi-visnaga",
+        "vertex_2": "tablet",
+        "edge_strength": 40
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "ammi-visnaga",
+        "vertex_2": "elixir",
+        "edge_strength": 38
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "ammi-visnaga",
+        "vertex_2": "gum",
+        "edge_strength": 38
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "ammi-visnaga",
+        "vertex_2": "capsule",
+        "edge_strength": 35
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "ammi-visnaga",
+        "vertex_2": "syrup",
+        "edge_strength": 35
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "ammi-visnaga",
+        "vertex_2": "gel",
+        "edge_strength": 30
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "ammi-visnaga",
+        "vertex_2": "bath",
+        "edge_strength": 30
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "ammi-visnaga",
+        "vertex_2": "balm",
+        "edge_strength": 27
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "ammi-visnaga",
+        "vertex_2": "poultice",
+        "edge_strength": 26
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "ammi-visnaga",
+        "vertex_2": "liniment",
+        "edge_strength": 24
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "ammi-visnaga",
+        "vertex_2": "concentrate",
+        "edge_strength": 20
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "ammi-visnaga",
+        "vertex_2": "paste",
+        "edge_strength": 15
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "ammi-visnaga",
+        "vertex_2": "suppository",
+        "edge_strength": 15
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "ammi-visnaga",
+        "vertex_2": "ghee",
+        "edge_strength": 10
+    },
+    {
+        "edge_type": "herb_preparation",
         "vertex_1": "angelica-sinensis",
-        "vertex_2": "extract"
+        "vertex_2": "infusion",
+        "edge_strength": 86
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "angelica-sinensis",
-        "vertex_2": "tincture"
+        "vertex_2": "decoction",
+        "edge_strength": 84
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "angelica-sinensis",
-        "vertex_2": "decoction"
+        "vertex_2": "extract",
+        "edge_strength": 81
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "angelica-sinensis",
-        "vertex_2": "capsule"
+        "vertex_2": "tincture",
+        "edge_strength": 80
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "angelica-sinensis",
-        "vertex_2": "infusion"
+        "vertex_2": "tea",
+        "edge_strength": 78
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "angelica-sinensis",
-        "vertex_2": "glycerite"
+        "vertex_2": "ghee",
+        "edge_strength": 60
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "angelica-sinensis",
-        "vertex_2": "powder"
+        "vertex_2": "capsule",
+        "edge_strength": 58
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "angelica-sinensis",
-        "vertex_2": "tea"
+        "vertex_2": "gel",
+        "edge_strength": 56
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "angelica-sinensis",
-        "vertex_2": "elixir"
+        "vertex_2": "infused-oil",
+        "edge_strength": 55
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "angelica-sinensis",
-        "vertex_2": "oil"
+        "vertex_2": "glycerite",
+        "edge_strength": 52
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "angelica-sinensis",
-        "vertex_2": "cream"
+        "vertex_2": "tablet",
+        "edge_strength": 50
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
+        "vertex_1": "angelica-sinensis",
+        "vertex_2": "oil",
+        "edge_strength": 49
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "angelica-sinensis",
+        "vertex_2": "powder",
+        "edge_strength": 48
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "angelica-sinensis",
+        "vertex_2": "cream",
+        "edge_strength": 48
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "angelica-sinensis",
+        "vertex_2": "syrup",
+        "edge_strength": 45
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "angelica-sinensis",
+        "vertex_2": "salve",
+        "edge_strength": 45
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "angelica-sinensis",
+        "vertex_2": "gum",
+        "edge_strength": 44
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "angelica-sinensis",
+        "vertex_2": "pill",
+        "edge_strength": 40
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "angelica-sinensis",
+        "vertex_2": "suppository",
+        "edge_strength": 40
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "angelica-sinensis",
+        "vertex_2": "elixir",
+        "edge_strength": 30
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "angelica-sinensis",
+        "vertex_2": "lozenge",
+        "edge_strength": 30
+    },
+    {
+        "edge_type": "herb_preparation",
         "vertex_1": "apium-graveolens",
-        "vertex_2": "tincture"
+        "vertex_2": "tincture",
+        "edge_strength": 84
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "apium-graveolens",
-        "vertex_2": "extract"
+        "vertex_2": "infused-oil",
+        "edge_strength": 81
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "apium-graveolens",
-        "vertex_2": "cream"
+        "vertex_2": "infusion",
+        "edge_strength": 80
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "apium-graveolens",
-        "vertex_2": "oil"
+        "vertex_2": "essential-oil",
+        "edge_strength": 76
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "apium-graveolens",
-        "vertex_2": "infusion"
+        "vertex_2": "extract",
+        "edge_strength": 72
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "apium-graveolens",
-        "vertex_2": "salve"
+        "vertex_2": "tea",
+        "edge_strength": 70
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "apium-graveolens",
-        "vertex_2": "elixir"
+        "vertex_2": "oil",
+        "edge_strength": 57
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "apium-graveolens",
-        "vertex_2": "glycerite"
+        "vertex_2": "salve",
+        "edge_strength": 56
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "apium-graveolens",
-        "vertex_2": "infused-oil"
+        "vertex_2": "decoction",
+        "edge_strength": 54
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "apium-graveolens",
-        "vertex_2": "tea"
+        "vertex_2": "glycerite",
+        "edge_strength": 46
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "apium-graveolens",
-        "vertex_2": "gum"
+        "vertex_2": "syrup",
+        "edge_strength": 45
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
+        "vertex_1": "apium-graveolens",
+        "vertex_2": "cream",
+        "edge_strength": 44
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "apium-graveolens",
+        "vertex_2": "capsule",
+        "edge_strength": 42
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "apium-graveolens",
+        "vertex_2": "elixir",
+        "edge_strength": 42
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "apium-graveolens",
+        "vertex_2": "gum",
+        "edge_strength": 40
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "apium-graveolens",
+        "vertex_2": "gel",
+        "edge_strength": 32
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "apium-graveolens",
+        "vertex_2": "powder",
+        "edge_strength": 31
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "apium-graveolens",
+        "vertex_2": "balm",
+        "edge_strength": 30
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "apium-graveolens",
+        "vertex_2": "liniment",
+        "edge_strength": 26
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "apium-graveolens",
+        "vertex_2": "pomade",
+        "edge_strength": 25
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "apium-graveolens",
+        "vertex_2": "poultice",
+        "edge_strength": 20
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "apium-graveolens",
+        "vertex_2": "ghee",
+        "edge_strength": 10
+    },
+    {
+        "edge_type": "herb_preparation",
         "vertex_1": "arctium-lappa",
-        "vertex_2": "tincture"
+        "vertex_2": "infusion",
+        "edge_strength": 88
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "arctium-lappa",
-        "vertex_2": "extract"
+        "vertex_2": "tincture",
+        "edge_strength": 86
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "arctium-lappa",
-        "vertex_2": "infusion"
+        "vertex_2": "decoction",
+        "edge_strength": 80
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "arctium-lappa",
-        "vertex_2": "decoction"
+        "vertex_2": "extract",
+        "edge_strength": 72
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "arctium-lappa",
-        "vertex_2": "salve"
+        "vertex_2": "infused-oil",
+        "edge_strength": 70
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "arctium-lappa",
-        "vertex_2": "powder"
+        "vertex_2": "suppository",
+        "edge_strength": 70
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "arctium-lappa",
-        "vertex_2": "capsule"
+        "vertex_2": "salve",
+        "edge_strength": 68
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "arctium-lappa",
-        "vertex_2": "oil"
+        "vertex_2": "gel",
+        "edge_strength": 60
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "arctium-lappa",
-        "vertex_2": "cream"
+        "vertex_2": "oil",
+        "edge_strength": 49
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "arctium-lappa",
-        "vertex_2": "infused-oil"
+        "vertex_2": "tea",
+        "edge_strength": 48
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "arctium-lappa",
-        "vertex_2": "gum"
+        "vertex_2": "glycerite",
+        "edge_strength": 46
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
+        "vertex_1": "arctium-lappa",
+        "vertex_2": "gum",
+        "edge_strength": 46
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "arctium-lappa",
+        "vertex_2": "capsule",
+        "edge_strength": 45
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "arctium-lappa",
+        "vertex_2": "powder",
+        "edge_strength": 44
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "arctium-lappa",
+        "vertex_2": "cream",
+        "edge_strength": 40
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "arctium-lappa",
+        "vertex_2": "paste",
+        "edge_strength": 40
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "arctium-lappa",
+        "vertex_2": "elixir",
+        "edge_strength": 36
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "arctium-lappa",
+        "vertex_2": "balm",
+        "edge_strength": 30
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "arctium-lappa",
+        "vertex_2": "lozenge",
+        "edge_strength": 20
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "arctium-lappa",
+        "vertex_2": "liniment",
+        "edge_strength": 20
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "arctium-lappa",
+        "vertex_2": "syrup",
+        "edge_strength": 20
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "arctium-lappa",
+        "vertex_2": "tablet",
+        "edge_strength": 10
+    },
+    {
+        "edge_type": "herb_preparation",
         "vertex_1": "artemisia-absinthium",
-        "vertex_2": "tincture"
+        "vertex_2": "tincture",
+        "edge_strength": 92
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "artemisia-absinthium",
-        "vertex_2": "extract"
+        "vertex_2": "infusion",
+        "edge_strength": 91
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "artemisia-absinthium",
-        "vertex_2": "infusion"
+        "vertex_2": "extract",
+        "edge_strength": 73
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "artemisia-absinthium",
-        "vertex_2": "salve"
+        "vertex_2": "salve",
+        "edge_strength": 67
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "artemisia-absinthium",
-        "vertex_2": "oil"
+        "vertex_2": "tea",
+        "edge_strength": 67
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "artemisia-absinthium",
-        "vertex_2": "cream"
+        "vertex_2": "oil",
+        "edge_strength": 63
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "artemisia-absinthium",
-        "vertex_2": "glycerite"
+        "vertex_2": "glycerite",
+        "edge_strength": 62
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "artemisia-absinthium",
-        "vertex_2": "elixir"
+        "vertex_2": "decoction",
+        "edge_strength": 60
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "artemisia-absinthium",
-        "vertex_2": "essential-oil"
+        "vertex_2": "infused-oil",
+        "edge_strength": 58
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "artemisia-absinthium",
-        "vertex_2": "gum"
+        "vertex_2": "essential-oil",
+        "edge_strength": 56
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "artemisia-absinthium",
-        "vertex_2": "balm"
+        "vertex_2": "gel",
+        "edge_strength": 55
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
+        "vertex_1": "artemisia-absinthium",
+        "vertex_2": "capsule",
+        "edge_strength": 50
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "artemisia-absinthium",
+        "vertex_2": "cream",
+        "edge_strength": 48
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "artemisia-absinthium",
+        "vertex_2": "gum",
+        "edge_strength": 45
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "artemisia-absinthium",
+        "vertex_2": "powder",
+        "edge_strength": 45
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "artemisia-absinthium",
+        "vertex_2": "elixir",
+        "edge_strength": 42
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "artemisia-absinthium",
+        "vertex_2": "balm",
+        "edge_strength": 40
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "artemisia-absinthium",
+        "vertex_2": "liniment",
+        "edge_strength": 40
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "artemisia-absinthium",
+        "vertex_2": "resin",
+        "edge_strength": 30
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "artemisia-absinthium",
+        "vertex_2": "pomade",
+        "edge_strength": 25
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "artemisia-absinthium",
+        "vertex_2": "suppository",
+        "edge_strength": 20
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "artemisia-absinthium",
+        "vertex_2": "lozenge",
+        "edge_strength": 20
+    },
+    {
+        "edge_type": "herb_preparation",
         "vertex_1": "artemisia-annua",
-        "vertex_2": "extract"
+        "vertex_2": "extract",
+        "edge_strength": 93
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "artemisia-annua",
-        "vertex_2": "capsule"
+        "vertex_2": "tincture",
+        "edge_strength": 83
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "artemisia-annua",
-        "vertex_2": "tincture"
+        "vertex_2": "infusion",
+        "edge_strength": 79
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "artemisia-annua",
-        "vertex_2": "oil"
+        "vertex_2": "infused-oil",
+        "edge_strength": 72
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "artemisia-annua",
-        "vertex_2": "elixir"
+        "vertex_2": "capsule",
+        "edge_strength": 72
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "artemisia-annua",
-        "vertex_2": "cream"
+        "vertex_2": "tea",
+        "edge_strength": 65
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "artemisia-annua",
-        "vertex_2": "infused-oil"
+        "vertex_2": "glycerite",
+        "edge_strength": 60
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "artemisia-annua",
-        "vertex_2": "glycerite"
+        "vertex_2": "salve",
+        "edge_strength": 60
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "artemisia-annua",
-        "vertex_2": "powder"
+        "vertex_2": "oil",
+        "edge_strength": 59
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "artemisia-annua",
-        "vertex_2": "tablet"
+        "vertex_2": "syrup",
+        "edge_strength": 50
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "artemisia-annua",
-        "vertex_2": "syrup"
+        "vertex_2": "balm",
+        "edge_strength": 50
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
+        "vertex_1": "artemisia-annua",
+        "vertex_2": "emulsion",
+        "edge_strength": 50
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "artemisia-annua",
+        "vertex_2": "pill",
+        "edge_strength": 50
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "artemisia-annua",
+        "vertex_2": "elixir",
+        "edge_strength": 49
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "artemisia-annua",
+        "vertex_2": "tablet",
+        "edge_strength": 49
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "artemisia-annua",
+        "vertex_2": "gel",
+        "edge_strength": 47
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "artemisia-annua",
+        "vertex_2": "cream",
+        "edge_strength": 43
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "artemisia-annua",
+        "vertex_2": "powder",
+        "edge_strength": 42
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "artemisia-annua",
+        "vertex_2": "gum",
+        "edge_strength": 41
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "artemisia-annua",
+        "vertex_2": "lozenge",
+        "edge_strength": 40
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "artemisia-annua",
+        "vertex_2": "suppository",
+        "edge_strength": 35
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "artemisia-annua",
+        "vertex_2": "liniment",
+        "edge_strength": 26
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "artemisia-annua",
+        "vertex_2": "ghee",
+        "edge_strength": 20
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "artemisia-annua",
+        "vertex_2": "paste",
+        "edge_strength": 20
+    },
+    {
+        "edge_type": "herb_preparation",
         "vertex_1": "astragalus-membranaceus",
-        "vertex_2": "extract"
+        "vertex_2": "extract",
+        "edge_strength": 90
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "astragalus-membranaceus",
-        "vertex_2": "capsule"
+        "vertex_2": "tincture",
+        "edge_strength": 84
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "astragalus-membranaceus",
-        "vertex_2": "tincture"
+        "vertex_2": "capsule",
+        "edge_strength": 79
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "astragalus-membranaceus",
-        "vertex_2": "powder"
+        "vertex_2": "tea",
+        "edge_strength": 77
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "astragalus-membranaceus",
-        "vertex_2": "tea"
+        "vertex_2": "infusion",
+        "edge_strength": 74
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "astragalus-membranaceus",
-        "vertex_2": "glycerite"
+        "vertex_2": "decoction",
+        "edge_strength": 72
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "astragalus-membranaceus",
-        "vertex_2": "infusion"
+        "vertex_2": "gel",
+        "edge_strength": 60
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "astragalus-membranaceus",
-        "vertex_2": "tablet"
+        "vertex_2": "tablet",
+        "edge_strength": 59
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "astragalus-membranaceus",
-        "vertex_2": "elixir"
+        "vertex_2": "powder",
+        "edge_strength": 54
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "astragalus-membranaceus",
-        "vertex_2": "cream"
+        "vertex_2": "gum",
+        "edge_strength": 50
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "astragalus-membranaceus",
-        "vertex_2": "decoction"
+        "vertex_2": "salve",
+        "edge_strength": 50
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
+        "vertex_1": "astragalus-membranaceus",
+        "vertex_2": "elixir",
+        "edge_strength": 49
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "astragalus-membranaceus",
+        "vertex_2": "glycerite",
+        "edge_strength": 46
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "astragalus-membranaceus",
+        "vertex_2": "pill",
+        "edge_strength": 45
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "astragalus-membranaceus",
+        "vertex_2": "syrup",
+        "edge_strength": 44
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "astragalus-membranaceus",
+        "vertex_2": "infused-oil",
+        "edge_strength": 40
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "astragalus-membranaceus",
+        "vertex_2": "cream",
+        "edge_strength": 40
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "astragalus-membranaceus",
+        "vertex_2": "oil",
+        "edge_strength": 32
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "astragalus-membranaceus",
+        "vertex_2": "suppository",
+        "edge_strength": 30
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "astragalus-membranaceus",
+        "vertex_2": "ghee",
+        "edge_strength": 23
+    },
+    {
+        "edge_type": "herb_preparation",
         "vertex_1": "atropa-belladonna",
-        "vertex_2": "extract"
+        "vertex_2": "tincture",
+        "edge_strength": 94
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "atropa-belladonna",
-        "vertex_2": "tincture"
+        "vertex_2": "infusion",
+        "edge_strength": 83
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "atropa-belladonna",
-        "vertex_2": "elixir"
+        "vertex_2": "extract",
+        "edge_strength": 81
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "atropa-belladonna",
-        "vertex_2": "capsule"
+        "vertex_2": "infused-oil",
+        "edge_strength": 76
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "atropa-belladonna",
-        "vertex_2": "oil"
+        "vertex_2": "gel",
+        "edge_strength": 70
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "atropa-belladonna",
-        "vertex_2": "cream"
+        "vertex_2": "glycerite",
+        "edge_strength": 68
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "atropa-belladonna",
-        "vertex_2": "powder"
+        "vertex_2": "elixir",
+        "edge_strength": 63
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "atropa-belladonna",
-        "vertex_2": "gum"
+        "vertex_2": "poultice",
+        "edge_strength": 60
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "atropa-belladonna",
-        "vertex_2": "glycerite"
+        "vertex_2": "tea",
+        "edge_strength": 60
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "atropa-belladonna",
-        "vertex_2": "infused-oil"
+        "vertex_2": "suppository",
+        "edge_strength": 54
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
         "vertex_1": "atropa-belladonna",
-        "vertex_2": "salve"
+        "vertex_2": "oil",
+        "edge_strength": 51
     },
     {
-        "type": "herb_preparation",
-        "vertex_1": "azadirachta-indica",
-        "vertex_2": "extract"
+        "edge_type": "herb_preparation",
+        "vertex_1": "atropa-belladonna",
+        "vertex_2": "salve",
+        "edge_strength": 45
     },
     {
-        "type": "herb_preparation",
-        "vertex_1": "azadirachta-indica",
-        "vertex_2": "oil"
+        "edge_type": "herb_preparation",
+        "vertex_1": "atropa-belladonna",
+        "vertex_2": "cream",
+        "edge_strength": 44
     },
     {
-        "type": "herb_preparation",
-        "vertex_1": "azadirachta-indica",
-        "vertex_2": "capsule"
+        "edge_type": "herb_preparation",
+        "vertex_1": "atropa-belladonna",
+        "vertex_2": "gum",
+        "edge_strength": 44
     },
     {
-        "type": "herb_preparation",
-        "vertex_1": "azadirachta-indica",
-        "vertex_2": "cream"
+        "edge_type": "herb_preparation",
+        "vertex_1": "atropa-belladonna",
+        "vertex_2": "capsule",
+        "edge_strength": 41
     },
     {
-        "type": "herb_preparation",
-        "vertex_1": "azadirachta-indica",
-        "vertex_2": "tincture"
+        "edge_type": "herb_preparation",
+        "vertex_1": "atropa-belladonna",
+        "vertex_2": "syrup",
+        "edge_strength": 40
     },
     {
-        "type": "herb_preparation",
-        "vertex_1": "azadirachta-indica",
-        "vertex_2": "powder"
+        "edge_type": "herb_preparation",
+        "vertex_1": "atropa-belladonna",
+        "vertex_2": "powder",
+        "edge_strength": 37
     },
     {
-        "type": "herb_preparation",
-        "vertex_1": "azadirachta-indica",
-        "vertex_2": "infused-oil"
+        "edge_type": "herb_preparation",
+        "vertex_1": "atropa-belladonna",
+        "vertex_2": "resin",
+        "edge_strength": 36
     },
     {
-        "type": "herb_preparation",
-        "vertex_1": "azadirachta-indica",
-        "vertex_2": "elixir"
+        "edge_type": "herb_preparation",
+        "vertex_1": "atropa-belladonna",
+        "vertex_2": "balm",
+        "edge_strength": 30
     },
     {
-        "type": "herb_preparation",
-        "vertex_1": "azadirachta-indica",
-        "vertex_2": "gum"
+        "edge_type": "herb_preparation",
+        "vertex_1": "atropa-belladonna",
+        "vertex_2": "emulsion",
+        "edge_strength": 23
     },
     {
-        "type": "herb_preparation",
-        "vertex_1": "azadirachta-indica",
-        "vertex_2": "balm"
+        "edge_type": "herb_preparation",
+        "vertex_1": "atropa-belladonna",
+        "vertex_2": "pill",
+        "edge_strength": 23
     },
     {
-        "type": "herb_preparation",
+        "edge_type": "herb_preparation",
+        "vertex_1": "atropa-belladonna",
+        "vertex_2": "decoction",
+        "edge_strength": 20
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "atropa-belladonna",
+        "vertex_2": "liniment",
+        "edge_strength": 20
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "atropa-belladonna",
+        "vertex_2": "lozenge",
+        "edge_strength": 20
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "atropa-belladonna",
+        "vertex_2": "bath",
+        "edge_strength": 20
+    },
+    {
+        "edge_type": "herb_preparation",
         "vertex_1": "azadirachta-indica",
-        "vertex_2": "salve"
+        "vertex_2": "extract",
+        "edge_strength": 96
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "infusion",
+        "edge_strength": 90
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "decoction",
+        "edge_strength": 90
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "oil",
+        "edge_strength": 81
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "infused-oil",
+        "edge_strength": 70
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "tea",
+        "edge_strength": 70
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "capsule",
+        "edge_strength": 69
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "tincture",
+        "edge_strength": 66
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "cream",
+        "edge_strength": 60
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "gum",
+        "edge_strength": 57
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "salve",
+        "edge_strength": 57
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "powder",
+        "edge_strength": 56
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "syrup",
+        "edge_strength": 55
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "gel",
+        "edge_strength": 52
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "essential-oil",
+        "edge_strength": 50
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "balm",
+        "edge_strength": 43
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "glycerite",
+        "edge_strength": 42
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "ghee",
+        "edge_strength": 42
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "elixir",
+        "edge_strength": 40
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "liniment",
+        "edge_strength": 40
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "lotion",
+        "edge_strength": 30
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "pomade",
+        "edge_strength": 30
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "paste",
+        "edge_strength": 20
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "resin",
+        "edge_strength": 15
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "azadirachta-indica",
+        "vertex_2": "emulsion",
+        "edge_strength": 10
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "barosma-betulina",
+        "vertex_2": "tincture",
+        "edge_strength": 82
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "barosma-betulina",
+        "vertex_2": "infusion",
+        "edge_strength": 81
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "barosma-betulina",
+        "vertex_2": "infused-oil",
+        "edge_strength": 68
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "barosma-betulina",
+        "vertex_2": "decoction",
+        "edge_strength": 65
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "barosma-betulina",
+        "vertex_2": "extract",
+        "edge_strength": 63
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "barosma-betulina",
+        "vertex_2": "essential-oil",
+        "edge_strength": 62
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "barosma-betulina",
+        "vertex_2": "tea",
+        "edge_strength": 61
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "barosma-betulina",
+        "vertex_2": "salve",
+        "edge_strength": 56
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "barosma-betulina",
+        "vertex_2": "oil",
+        "edge_strength": 49
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "barosma-betulina",
+        "vertex_2": "cream",
+        "edge_strength": 49
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "barosma-betulina",
+        "vertex_2": "powder",
+        "edge_strength": 46
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "barosma-betulina",
+        "vertex_2": "gum",
+        "edge_strength": 44
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "barosma-betulina",
+        "vertex_2": "balm",
+        "edge_strength": 42
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "barosma-betulina",
+        "vertex_2": "gel",
+        "edge_strength": 40
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "barosma-betulina",
+        "vertex_2": "elixir",
+        "edge_strength": 36
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "barosma-betulina",
+        "vertex_2": "resin",
+        "edge_strength": 33
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "barosma-betulina",
+        "vertex_2": "capsule",
+        "edge_strength": 30
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "barosma-betulina",
+        "vertex_2": "liniment",
+        "edge_strength": 30
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "barosma-betulina",
+        "vertex_2": "paste",
+        "edge_strength": 30
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "barosma-betulina",
+        "vertex_2": "emulsion",
+        "edge_strength": 30
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "barosma-betulina",
+        "vertex_2": "glycerite",
+        "edge_strength": 28
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "barosma-betulina",
+        "vertex_2": "syrup",
+        "edge_strength": 13
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "barosma-betulina",
+        "vertex_2": "ghee",
+        "edge_strength": 10
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "bupleurum-chinense",
+        "vertex_2": "extract",
+        "edge_strength": 89
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "bupleurum-chinense",
+        "vertex_2": "decoction",
+        "edge_strength": 80
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "bupleurum-chinense",
+        "vertex_2": "tincture",
+        "edge_strength": 76
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "bupleurum-chinense",
+        "vertex_2": "infusion",
+        "edge_strength": 75
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "bupleurum-chinense",
+        "vertex_2": "salve",
+        "edge_strength": 65
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "bupleurum-chinense",
+        "vertex_2": "tea",
+        "edge_strength": 59
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "bupleurum-chinense",
+        "vertex_2": "capsule",
+        "edge_strength": 57
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "bupleurum-chinense",
+        "vertex_2": "infused-oil",
+        "edge_strength": 53
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "bupleurum-chinense",
+        "vertex_2": "glycerite",
+        "edge_strength": 51
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "bupleurum-chinense",
+        "vertex_2": "tablet",
+        "edge_strength": 50
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "bupleurum-chinense",
+        "vertex_2": "ghee",
+        "edge_strength": 50
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "bupleurum-chinense",
+        "vertex_2": "gum",
+        "edge_strength": 47
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "bupleurum-chinense",
+        "vertex_2": "cream",
+        "edge_strength": 45
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "bupleurum-chinense",
+        "vertex_2": "gel",
+        "edge_strength": 45
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "bupleurum-chinense",
+        "vertex_2": "powder",
+        "edge_strength": 42
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "bupleurum-chinense",
+        "vertex_2": "oil",
+        "edge_strength": 41
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "bupleurum-chinense",
+        "vertex_2": "syrup",
+        "edge_strength": 40
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "bupleurum-chinense",
+        "vertex_2": "elixir",
+        "edge_strength": 37
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "bupleurum-chinense",
+        "vertex_2": "poultice",
+        "edge_strength": 30
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "bupleurum-chinense",
+        "vertex_2": "suppository",
+        "edge_strength": 25
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "bupleurum-chinense",
+        "vertex_2": "liniment",
+        "edge_strength": 10
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "bupleurum-chinense",
+        "vertex_2": "emulsion",
+        "edge_strength": 10
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "bupleurum-chinense",
+        "vertex_2": "paste",
+        "edge_strength": 10
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "calendula-officinalis",
+        "vertex_2": "salve",
+        "edge_strength": 95
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "calendula-officinalis",
+        "vertex_2": "infused-oil",
+        "edge_strength": 93
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "calendula-officinalis",
+        "vertex_2": "cream",
+        "edge_strength": 68
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "calendula-officinalis",
+        "vertex_2": "glycerite",
+        "edge_strength": 63
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "calendula-officinalis",
+        "vertex_2": "gel",
+        "edge_strength": 60
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "calendula-officinalis",
+        "vertex_2": "lozenge",
+        "edge_strength": 60
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "calendula-officinalis",
+        "vertex_2": "balm",
+        "edge_strength": 57
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "calendula-officinalis",
+        "vertex_2": "tincture",
+        "edge_strength": 56
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "calendula-officinalis",
+        "vertex_2": "ghee",
+        "edge_strength": 55
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "calendula-officinalis",
+        "vertex_2": "liniment",
+        "edge_strength": 52
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "calendula-officinalis",
+        "vertex_2": "infusion",
+        "edge_strength": 47
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "calendula-officinalis",
+        "vertex_2": "lotion",
+        "edge_strength": 45
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "calendula-officinalis",
+        "vertex_2": "suppository",
+        "edge_strength": 45
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "calendula-officinalis",
+        "vertex_2": "pomade",
+        "edge_strength": 43
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "calendula-officinalis",
+        "vertex_2": "poultice",
+        "edge_strength": 42
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "calendula-officinalis",
+        "vertex_2": "emulsion",
+        "edge_strength": 42
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "calendula-officinalis",
+        "vertex_2": "extract",
+        "edge_strength": 38
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "calendula-officinalis",
+        "vertex_2": "oil",
+        "edge_strength": 34
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "calendula-officinalis",
+        "vertex_2": "decoction",
+        "edge_strength": 30
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "calendula-officinalis",
+        "vertex_2": "gum",
+        "edge_strength": 20
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "calendula-officinalis",
+        "vertex_2": "paste",
+        "edge_strength": 10
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "calendula-officinalis",
+        "vertex_2": "elixir",
+        "edge_strength": 10
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "capsicum-annuum",
+        "vertex_2": "capsule",
+        "edge_strength": 88
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "capsicum-annuum",
+        "vertex_2": "extract",
+        "edge_strength": 82
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "capsicum-annuum",
+        "vertex_2": "infused-oil",
+        "edge_strength": 81
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "capsicum-annuum",
+        "vertex_2": "salve",
+        "edge_strength": 74
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "capsicum-annuum",
+        "vertex_2": "cream",
+        "edge_strength": 65
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "capsicum-annuum",
+        "vertex_2": "tincture",
+        "edge_strength": 64
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "capsicum-annuum",
+        "vertex_2": "oil",
+        "edge_strength": 64
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "capsicum-annuum",
+        "vertex_2": "powder",
+        "edge_strength": 64
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "capsicum-annuum",
+        "vertex_2": "infusion",
+        "edge_strength": 60
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "capsicum-annuum",
+        "vertex_2": "tea",
+        "edge_strength": 60
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "capsicum-annuum",
+        "vertex_2": "gel",
+        "edge_strength": 54
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "capsicum-annuum",
+        "vertex_2": "poultice",
+        "edge_strength": 53
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "capsicum-annuum",
+        "vertex_2": "liniment",
+        "edge_strength": 53
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "capsicum-annuum",
+        "vertex_2": "balm",
+        "edge_strength": 51
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "capsicum-annuum",
+        "vertex_2": "syrup",
+        "edge_strength": 50
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "capsicum-annuum",
+        "vertex_2": "paste",
+        "edge_strength": 50
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "capsicum-annuum",
+        "vertex_2": "pill",
+        "edge_strength": 50
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "capsicum-annuum",
+        "vertex_2": "elixir",
+        "edge_strength": 47
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "capsicum-annuum",
+        "vertex_2": "glycerite",
+        "edge_strength": 44
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "capsicum-annuum",
+        "vertex_2": "gum",
+        "edge_strength": 40
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "capsicum-annuum",
+        "vertex_2": "decoction",
+        "edge_strength": 30
+    },
+    {
+        "edge_type": "herb_preparation",
+        "vertex_1": "capsicum-annuum",
+        "vertex_2": "essential-oil",
+        "edge_strength": 30
     }
 ]

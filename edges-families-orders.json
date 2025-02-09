@@ -16,12 +16,12 @@
     },
     {
         "edge_type": "herb_family_order",
-        "vertex_1": "liliaceae",
+        "vertex_1": "alliaceae",
         "vertex_2": "asparagales"
     },
     {
         "edge_type": "herb_family_order",
-        "vertex_1": "xanthorrhoeaceae",
+        "vertex_1": "asphodelaceae",
         "vertex_2": "asparagales"
     },
     {
@@ -47,6 +47,11 @@
     {
         "edge_type": "herb_family_order",
         "vertex_1": "meliaceae",
+        "vertex_2": "sapindales"
+    },
+    {
+        "edge_type": "herb_family_order",
+        "vertex_1": "rutaceae",
         "vertex_2": "sapindales"
     }
 ]
