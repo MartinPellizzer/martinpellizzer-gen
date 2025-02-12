@@ -1119,7 +1119,6 @@ def pin_gen_herbs_benefits(article_filepath, article_i, herb_slug):
     templates = ['1_img_b', '1_img_t', '']
     image_style = random.choice(styles)
     template = random.choice(templates)
-    print(template)
     images = []
     width = 0
     height = 0
@@ -1158,9 +1157,9 @@ for filename in os.listdir('pinterest/pins'):
 for filename in os.listdir('pinterest/images'):
     os.remove(f'pinterest/images/{filename}')
     
-i = 0
 # PINS EQUIPMENTS
 if 1:
+    i = 0
     for article_filepath in equipments_filepaths:
         print(f'{i}/{len(articles_filepaths)} >> {article_filepath}')
         equipment_slug = article_filepath.split('/')[-2].replace('.json', '')

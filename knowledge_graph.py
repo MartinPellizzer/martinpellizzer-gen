@@ -17,6 +17,16 @@ edges_families_orders = json_read('edges-families-orders.json')
 edges_orders_subclasses = json_read('edges-orders-subclasses.json')
 edges_subclasses_classes = json_read('edges-subclasses-classes.json')
 edges_classes_divisions = json_read('edges-classes-divisions.json')
+
+vertices_plants_filepath = f'/home/ubuntu/vault/herbalism/vertices-plants.json'
+vertices_plants = json_read(vertices_plants_filepath)
+with open('herbs.csv') as f: 
+    plants_slugs_filtered = [
+        line.lower().strip().replace(' ', '-').replace('.', '') 
+        for line in f.read().split('\n')
+        if line.strip() != ''
+]
+
 # edges = []
 # json_write('edges-ai.json', edges)
 
@@ -28,6 +38,7 @@ json_write('edges-subclasses-classes.json', [])
 json_write('edges-classes-divisions.json', [])
 '''
 
+'''
 # add new herbs - from csv to json
 with open('herbs.csv') as f: 
     herbs_rows = [row for row in f.read().split('\n') if row.strip() != '']
@@ -47,10 +58,57 @@ for herb_row in herbs_rows:
         j = json.dumps(vertices_herbs, indent=4)
         with open('vertices-herbs.json', 'w') as f:
             print(j, file=f)
+'''
 
 ####################################################################################
 # gen vertex
 ####################################################################################
+def plants_names_common():
+    for vertex_plant in vertices_plants:
+        plant_slug = vertex_plant['plant_slug']
+        if plant_slug not in plants_slugs_filtered: continue
+        if 'plant_names_common' not in vertex_plant: vertex_plant['plant_names_common'] = []
+        # vertex_plant['plant_names_common'] = []
+        if vertex_plant['plant_names_common'] == []:
+            plant_name_scientific = vertex_plant['plant_name_scientific']
+            outputs = []
+            for _ in range(1):
+                prompt = f'''
+                    Write a list of the most popular common names of the plant with scientific name: {plant_name_scientific}.
+                    Also give a confidence score from 1 to 10 for each list item, indicating how much you are sure about your answer.
+                    Use as few words as possible.
+                    Reply with the following JSON format:
+                    [
+                        {{"name": "write name 1 here", "confidence_score": 10}},
+                        {{"name": "write name 2 here", "confidence_score": 5}},
+                        {{"name": "write name 3 here", "confidence_score": 7}}
+                    ]
+                    Reply only with the JSON.
+                '''
+                reply = llm_reply(prompt)
+                try: json_reply = json.loads(reply)
+                except: json_reply = {}
+                if json_reply != {}:
+                    for obj_reply in json_reply:
+                        try: name = obj_reply['name'].lower().strip()
+                        except: continue
+                        try: confidence_score = obj_reply['confidence_score']
+                        except: continue
+                        outputs.append({
+                            'name': name,
+                            'confidence_score': confidence_score,
+                        })
+                    outputs = sorted(outputs, key=lambda x: x['confidence_score'], reverse=True)
+                    print(outputs)
+            vertex_plant['plant_names_common'] = outputs
+            j = json.dumps(vertices_plants, indent=4)
+            with open(vertices_plants_filepath, 'w') as f:
+                print(j, file=f)
+
+plants_names_common()
+
+quit()
+
 for vertex_herb in vertices_herbs:
     # common names
     if 'herb_names_common' not in vertex_herb: vertex_herb['herb_names_common'] = []
@@ -92,6 +150,7 @@ for vertex_herb in vertices_herbs:
         with open('vertices-herbs.json', 'w') as f:
             print(j, file=f)
 
+quit()
 for vertex_herb in vertices_herbs:
     # family
     key = 'herb_family'

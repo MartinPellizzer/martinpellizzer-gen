@@ -33,6 +33,14 @@ edges_orders_subclasses = json_read('edges-orders-subclasses.json')
 edges_subclasses_classes = json_read('edges-subclasses-classes.json')
 edges_classes_divisions = json_read('edges-classes-divisions.json')
 
+vertices_plants = json_read(f'{vault}/herbalism/vertices-plants.json')
+with open('herbs.csv') as f: 
+    plants_slugs_filtered = [
+        line.lower().strip().replace(' ', '-').replace('.', '') 
+        for line in f.read().split('\n')
+        if line.strip() != ''
+]
+
 def img_resize(img, w=768, h=768):
     start_size = img.size
     end_size = (w, h)
@@ -64,14 +72,34 @@ def affiliate_disclaimer_gen():
     '''
     return html
 
-def amazon_buy_button(url):
+def amazon_buy_button(url, img_filepath=''):
+    try:
+        with open(img_filepath) as f: 
+            html_img = f.read()
+    except: 
+        html_img = ''
     affiliate_disclaimer_html = affiliate_disclaimer_gen()
-    html = f'''
-        <div class="bg-lightgray px-24 py-32">
-            <a class="button-amazon mb-16" href="{url}" target="_blank">Buy On Amazon</a>
-            {affiliate_disclaimer_html}
-        </div>
-    '''
+    if html_img == '':
+        html = f'''
+            <div class="bg-lightgray px-24 py-32">
+                <a class="button-amazon mb-16" href="{url}" target="_blank">Buy On Amazon</a>
+                {affiliate_disclaimer_html}
+            </div>
+        '''
+    else:
+        html = f'''
+            <div class="bg-lightgray px-24 pb-48">
+                <div class="flex gap-48 items-center">
+                    <div>
+                    {html_img}
+                    </div>
+                    <div>
+                    <a class="button-amazon mb-16" href="{url}" target="_blank">Buy On Amazon</a>
+                    {affiliate_disclaimer_html}
+                    </div>
+                </div>
+            </div>
+        '''
     return html
 
 
@@ -182,6 +210,28 @@ def html_menu_gen():
     return html
 html_menu = html_menu_gen()
 
+
+###############################################
+# ;data
+###############################################
+def get_vertices_plants_validated():
+    # verity herbs in "wcpo"
+    vertices_plants_filtered_tmp = [vertex for vertex in vertices_plants if vertex['plant_slug'] in plants_slugs_filtered] 
+    vertices_plants_filtered_tmp = sorted(vertices_plants_filtered_tmp, key=lambda x: x['plant_slug'], reverse=False)
+    # remove duplicates
+    vertices_plants_filtered = []
+    for vertex_plant in vertices_plants_filtered_tmp:
+        plant_slug = vertex_plant['plant_slug']
+        found = False
+        for _vertex_plant in vertices_plants_filtered:
+            _plant_slug = _vertex_plant['plant_slug']
+            if plant_slug == _plant_slug:
+                found = True
+                break
+        if not found:
+            vertices_plants_filtered.append(vertex_plant)
+    return vertices_plants_filtered
+    
 def p_home():
     title = f'herbalism'
     html_head = html_head_gen(title)
@@ -244,59 +294,62 @@ def ai_paragraph_gen(filepath, data, obj, key, prompt, regen=False, print_prompt
             obj[key] = reply
             json_write(filepath, data)
 
-def p_herbs():
+# ;jump
+def p_herbs(regen=False):
+    vertices_plants_filtered = get_vertices_plants_validated()
     json_article_filepath = f'database/pages/herbs.json'
     json_article = json_read(json_article_filepath, create=True)
-    if 'herbs' not in json_article: json_article['herbs'] = []
-    # json_article['herbs'] = []
-    for herb in vertices_herbs:
-        herb_slug = herb['herb_slug']
-        herb_name_scientific = herb['herb_name_scientific']
-        herb_names_common = [item['name'] for item in herb['herb_names_common']]
-        herb_name_common = herb_names_common[0]
+    if 'plants' not in json_article: json_article['plants'] = []
+    if regen: json_article['plants'] = []
+    # json_article['plants'] = []
+    for vertex_plant in vertices_plants_filtered:
+        plant_slug = vertex_plant['plant_slug']
+        plant_name_scientific = vertex_plant['plant_name_scientific']
+        plant_names_common = [item['name'] for item in vertex_plant['plant_names_common']]
+        plant_name_common = plant_names_common[0]
         # add if doesn't exist
         found = False
-        for _obj in json_article['herbs']:
-            if herb_slug == _obj['herb_slug']:
+        for _obj in json_article['plants']:
+            if plant_slug == _obj['plant_slug']:
                 found = True
                 break
         if not found:
-            json_article['herbs'].append({
-                'herb_slug': herb_slug,
-                'herb_name_scientific': herb_name_scientific,
-                'herb_name_common': herb_name_common,
+            json_article['plants'].append({
+                'plant_slug': plant_slug,
+                'plant_name_scientific': plant_name_scientific,
+                'plant_name_common': plant_name_common,
             })
             json_write(json_article_filepath, json_article)
         # update
-        herb_obj = {}
-        for _herb_obj in json_article['herbs']:
-            if herb_slug == _herb_obj['herb_slug']:
-                herb_obj = _herb_obj
+        plant_obj = {}
+        for _plant_obj in json_article['plants']:
+            if plant_slug == _plant_obj['plant_slug']:
+                plant_obj = _plant_obj
                 break
         ai_paragraph_gen(
-            key = 'herb_desc', 
+            key = 'plant_desc', 
             filepath = json_article_filepath, 
             data = json_article, 
-            obj = herb_obj, 
+            obj = plant_obj, 
             prompt = f'''
-                Write a short 3-sentence paragraph about {herb_name_scientific}.
-                Start the reply with the following words: {herb_name_scientific}, also known as {herb_name_common}, .
+                Write a short 3-sentence paragraph about the following medicinal herb: {plant_name_scientific}.
+                Start the reply with the following words: {plant_name_scientific}, also known as {plant_name_common}, .
             ''',
             regen = False,
         )
 
     html_article = ''
-    herbs_num = len(vertices_herbs)
-    html_article += f'''<h1>{herbs_num} Best Medicinal Herbs For Apothecaries</h1>'''
-    for i, herb in enumerate(json_article['herbs']):
-        herb_slug = herb['herb_slug']
-        herb_name_scientific = herb['herb_name_scientific']
-        herb_name_common = herb['herb_name_common']
-        herb_desc = herb['herb_desc']
-        html_article += f'<h2>{i+1}. {herb_name_scientific.capitalize()} ({herb_name_common})</h2>\n'
-        html_article += f'''<img src="/images/herbs/{herb_slug}.jpg" alt="{herb_name_scientific}">\n'''
-        html_article += f'''{text_format_1N1_html(herb_desc)}\n'''
-        html_article += f'<p><a href="/herbs/{herb_slug}.html">{herb_name_scientific}</a></p>\n'
+    plants_num = len(vertices_plants_filtered)
+    html_article += f'''<h1>{plants_num} Best Medicinal Herbs For Herbalists</h1>'''
+    for i, plant in enumerate(json_article['plants']):
+        plant_slug = plant['plant_slug']
+        plant_name_scientific = plant['plant_name_scientific']
+        plant_name_common = plant['plant_name_common']
+        plant_desc = plant['plant_desc']
+        html_article += f'<h2>{i+1}. {plant_name_scientific.capitalize()} ({plant_name_common})</h2>\n'
+        html_article += f'''<img src="/images/herbs/{plant_slug}.jpg" alt="{plant_name_scientific}">\n'''
+        html_article += f'''{text_format_1N1_html(plant_desc)}\n'''
+        html_article += f'<p><a href="/herbs/{plant_slug}.html">{plant_name_scientific}</a></p>\n'
     title = 'herbs'
     html_head = html_head_gen(title)
     html_breadcrumbs = breadcrumbs_gen(f'herbs.html')
@@ -492,6 +545,11 @@ def a_herb(herb):
 
     # amazon
     # html
+    # TODO?
+    html_section_what = f'''
+        <section>
+        </section>
+    '''
     html_article = ''
     html_article += f'<h1>{herb_name_scientific.capitalize()} ({herb_name_common})</h1>'
     html_article += f'''<img src="/images/herbs/{herb_slug}.jpg" alt="{herb_name_scientific}">\n'''
@@ -1884,6 +1942,7 @@ def a_equipment_best(equipment):
     html_article += f'{text_format_1N1_html(json_article["intro"])}\n'
     if 'products' not in json_article: json_article['products'] = []
     for i, obj in enumerate(json_article['products'][:products_num]):
+        asin = obj['product_id']
         title = obj['title_ai']
         desc = obj['desc']
         pros = obj['pros']
@@ -1899,15 +1958,23 @@ def a_equipment_best(equipment):
         html_article += f'</ul>\n'
         html_article += f'<p class="font-bold text-black">Warnings:</p>\n'
         html_article += f'{text_format_1N1_html(warn)}\n'
-        amazon_button_html = amazon_buy_button(product_aff_link)
+        product_img_filepath = f'{vault}/amazon/images/{equipment_amazon}/{asin}.txt'
+        amazon_button_html = amazon_buy_button(product_aff_link, product_img_filepath)
         html_article += amazon_button_html
     html_head = html_head_gen(title)
     html_breadcrumbs = breadcrumbs_gen(f'equipments/{equipment_slug}/best.html')
     html_article_layout = html_article_layout_gen(html_article)
+    amazon_css_filepath = f'{vault}/amazon/amazon.css'
     html = f'''
         <!DOCTYPE html>
         <html lang="en">
-        {html_head}
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="/style.css">
+            <link rel="stylesheet" href="/amazon.css">
+            <title>{title}</title>
+        </head>
         <body>
             {html_header}
             {html_breadcrumbs}
@@ -2042,10 +2109,11 @@ def a_ailment(ailment):
 p_home()
 
 # herbs
-if 1:
+if 0:
+    vertices_plants_filtered = get_vertices_plants_validated()
     regen = False
     regen_return = False
-    if 1:
+    if 0:
         for herb in vertices_herbs:
             a_herb_benefits(herb, regen=regen, regen_return=regen_return)
             a_herb_properties(herb, regen=regen)
@@ -2053,23 +2121,24 @@ if 1:
             a_herb_parts(herb, regen=regen)
             a_herb_preparations(herb, regen=regen)
             a_herb_side_effects(herb, regen=regen)
-    if 1:
-        for herb in vertices_herbs:
-            a_herb(herb)
-    if 1:
+    if 0:
         for herb in vertices_herbs:
             a_herb_uses(herb)
-    p_herbs()
+    if 0:
+        for herb in vertices_plants_filtered:
+            a_herb(herb)
+    if 0:
+        p_herbs(regen=False)
 
 # preparations
-if 1:
+if 0:
     for preparation in vertices_preparations:
         a_preparation_herbs(preparation)
         # a_preparation(preparation)
     # p_preparations()
 
 # equipments
-if 0:
+if 1:
     lst = [
         {'slug': 'jar', 'amazon': 'jars',},
         {'slug': 'bottle', 'amazon': 'bottles',},
@@ -2079,6 +2148,7 @@ if 0:
         {'slug': 'pestle', 'amazon': 'pestles',},
         {'slug': 'measuring-cup', 'amazon': 'measuring-cups',},
         {'slug': 'lid-grip', 'amazon': 'lid-grips',},
+        {'slug': 'stirring-device', 'amazon': 'stirring-devices',},
     ]
     p_equipments(lst)
     for equipment in lst:
@@ -2092,4 +2162,5 @@ if 0:
         a_ailment(vertex_ailment)
 
 shutil.copy('style.css', f'{website_folderpath}/style.css')
+shutil.copy(f'{vault}/amazon/amazon.css', f'{website_folderpath}/amazon.css')
 
