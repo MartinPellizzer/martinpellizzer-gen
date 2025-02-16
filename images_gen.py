@@ -15,17 +15,13 @@ vertices_preparations = json_read('vertices-preparations.json')
 edges_herbs_preparations = json_read('edges-herbs-preparations.json')
 
 checkpoint_filepath = f'{vault}/stable-diffusion/checkpoints/xl/juggernautXL_juggXIByRundiffusion.safetensors'
-pipe = None
-def pipe_init():
-    global pipe
-    if pipe is None:
-        pipe = StableDiffusionXLPipeline.from_single_file(
-            checkpoint_filepath, 
-            torch_dtype=torch.float16, 
-            use_safetensors=True, 
-            variant="fp16"
-        ).to('cuda')
-        pipe.scheduler = DPMSolverMultistepScheduler.from_config(pipe.scheduler.config)
+pipe = StableDiffusionXLPipeline.from_single_file(
+    checkpoint_filepath, 
+    torch_dtype=torch.float16, 
+    use_safetensors=True, 
+    variant="fp16"
+).to('cuda')
+pipe.scheduler = DPMSolverMultistepScheduler.from_config(pipe.scheduler.config)
 
 ###################################################
 # ;UTILS
@@ -123,4 +119,57 @@ for edge_herb_preparation in edges_herbs_preparations:
         image = pipe(prompt=prompt, width=1024, height=1024, num_inference_steps=30, guidance_scale=7.0).images[0]
         image = img_resize(image, w=768, h=768)
         image.save(images_to_validate_filepath)
+
+##################################################################################
+# ;equipments
+##################################################################################
+prompt_style = f'''
+    vintage,
+'''
+
+def p_equipments_intro():
+    output_filepath = f'{website_folderpath}/images/equipments/herbalists-equipments.jpg'
+    if not os.path.exists(output_filepath):
+    # if True:
+        prompt = f'''
+            close-up of jar,
+            on a wooden table,
+            with herbs,
+            indoor, 
+        '''
+        prompt += prompt_style
+        negative_prompt = f'''
+            text, watermark 
+        '''
+        print(prompt)
+        image = pipe(prompt=prompt, negative_prompt=negative_prompt, width=1024, height=1024, num_inference_steps=30, guidance_scale=7.0).images[0]
+        image = img_resize(image, w=768, h=768)
+        image.save(output_filepath)
+
+def a_equipments_intro():
+    for equipment_slug in os.listdir(f'{vault}/amazon/json'):
+        equipment_name = equipment_slug.lower().strip().replace('-', ' ')
+        if equipment_name[-1] == 's': equipment_name = equipment_name[:-1]
+        out_filepath = f'{website_folderpath}/images/equipments/{equipment_slug}.jpg'
+        ast_filepath = f'assets/images/equipments/{equipment_slug}.jpg'
+        tmp_filepath = f'assets/images/equipments-tmp/{equipment_slug}.jpg'
+        if not os.path.exists(ast_filepath):
+        # if True:
+            prompt = f'''
+                close-up of {equipment_name},
+                on a wooden table,
+                with herbs,
+                indoor, 
+            '''
+            prompt += prompt_style
+            negative_prompt = f'''
+                text, watermark 
+            '''
+            print(prompt)
+            image = pipe(prompt=prompt, negative_prompt=negative_prompt, width=1024, height=1024, num_inference_steps=30, guidance_scale=7.0).images[0]
+            image = img_resize(image, w=768, h=768)
+            image.save(tmp_filepath)
+
+p_equipments_intro()
+a_equipments_intro()
 

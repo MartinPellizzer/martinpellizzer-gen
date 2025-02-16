@@ -100,18 +100,3 @@ for json_filename in jsons_filenames:
 
 
 
-quit()
-for i in range(len(jsons_filenames)):
-    found = False
-    article_filename = ''
-    for _json_filename in jsons_filenames:
-        json_n = int(_json_filename.split('.')[0])
-        if json_n == i:
-            found = True
-            article_filename = _json_filename
-            break
-    if found and article_filename != '':
-        article_filepath = f'pinterest/pins/{article_filename}'
-        print(f'{i}/{len(jsons_filenames)} >> {article_filepath}')
-        pin_post(article_filepath)
-
