@@ -1,0 +1,499 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 1.8rem;
+    line-height: 2.7rem;
+    font-family: serif;
+}
+
+.container-xl {
+    max-width: 128.0rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2.4rem;
+    padding-right: 2.4rem;
+}
+
+.container-md {
+    max-width: 76.8rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2.4rem;
+    padding-right: 2.4rem;
+}
+
+h1 {
+    color: #101010;
+    font-size: 6.4rem;
+    line-height: 1;
+    margin-bottom: 1.6rem;
+    margin-top: 4.8rem;
+}
+
+h2 {
+    color: #101010;
+    font-size: 3.2rem;
+    line-height: 4.0rem;
+    margin-bottom: 1.6rem;
+    margin-top: 4.8rem;
+}
+
+h3 {
+    color: #101010;
+    font-size: 2.4rem;
+    line-height: 3.2rem;
+    margin-bottom: 1.6rem;
+    margin-top: 4.8rem;
+}
+
+p {
+    color: #303030;
+    margin-bottom: 1.6rem;
+}
+
+ul {
+    margin-left: 3.2rem;
+    margin-bottom: 0.8rem;
+}
+
+li {
+    color: #303030;
+    font-size: 1.8rem;
+    line-height: 2.7rem;
+    padding-bottom: 0.8rem;
+}
+
+img {
+    width: 100%;
+    margin-bottom: 1.6rem;
+}
+
+.bg-lightgray {
+    background-color: #f6f6f6;
+}
+
+
+.font-bold {
+    font-weight: bold;
+}
+
+.text-14 {
+    font-size: 1.4rem;
+    line-height: 2.0rem;
+}
+
+.flex {
+    display: flex;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.gap-16 {
+    gap: 1.6rem;
+}
+
+.gap-32 {
+    gap: 3.2rem;
+}
+
+.gap-48 {
+    gap: 4.8rem;
+}
+
+.px-24 {
+    padding-left: 2.4rem;
+    padding-right: 2.4rem;
+}
+
+.py-24 {
+    padding-top: 2.4rem;
+    padding-bottom: 2.4rem;
+}
+
+.py-32 {
+    padding-top: 3.2rem;
+    padding-bottom: 3.2rem;
+}
+
+.mt-0 {
+    margin-top: 0;
+}
+
+.mt-16 {
+    margin-top: 1.6rem;
+}
+
+.mb-0 {
+    margin-bottom: 0;
+}
+
+.mb-8 {
+    margin-bottom: 0.8rem;
+}
+
+.mb-16 {
+    margin-bottom: 1.6rem;
+}
+
+.mb-24 {
+    margin-bottom: 2.4rem;
+}
+
+.mb-48 {
+    margin-bottom: 4.8rem;
+}
+
+.pb-48 {
+    padding-bottom: 4.8rem;
+}
+
+.no-underline {
+    text-decoration-line: none;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: #ffffff;
+    padding-top: 2.4rem;
+    padding-bottom: 2.4rem;
+    border-bottom: 1px solid #cdcdcd;
+}
+
+header nav {
+    display: flex;
+    gap: 16px;
+}
+
+header a {
+    text-decoration: none;
+    color: #404040;
+}
+
+footer {
+    padding-top: 2.4rem;
+    padding-bottom: 2.4rem;
+    border-top: 1px solid #cdcdcd;
+    margin-top: 4.8rem;
+}
+
+.button-amazon {
+    display: inline-block;
+    text-decoration: none;
+    color: #000000;
+    background-color: #ff9900;
+    border-radius: 9999px;
+    padding-top: 1.2rem;
+    padding-bottom: 0.8rem;
+    padding-left: 2.4rem;
+    padding-right: 2.4rem;
+}
+
+table { 
+    border-collapse: collapse;
+    border: 1px solid #101010;
+    margin-bottom: 1.6rem;
+}
+
+th { 
+    border: 1px solid #101010;
+    padding: 0.8rem 1.6rem;
+}
+
+td { 
+    border: 1px solid #101010;
+    padding: 0.8rem 1.6rem;
+}
+
+@media screen and (min-width: 768px) {
+    .mob-flex {
+        display: flex;
+    }
+}
+
+/**********************************************
+SIDEBAR TOC
+**********************************************/
+.sidebar-toc-header {
+    display: flex;
+    gap: 8px;
+}
+
+.sidebar-toc-header svg {
+    height: 24px;
+}
+
+.sidebar-toc p {
+    color: #171717;
+    margin-bottom: 0;
+}
+
+.sidebar-toc ul {
+    margin-top: 16px;
+    margin-left: 10px;
+    padding-left: 16px;
+    border-left: 1px solid #d4d4d4;
+}
+
+.sidebar-toc ul li {
+    list-style: none;
+}
+
+.sidebar-toc ul li a {
+    text-decoration: none;
+    color: #737373;
+}
+
+.sidebar-toc ul li a:hover {
+    color: #c2410c;
+}
+
+/**********************************************
+BREADCRUMBS
+**********************************************/
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.breadcrumbs svg {
+    height: 24px;
+}
+
+.breadcrumbs a {
+    text-decoration: none;
+    color: #171717;
+}
+
+.breadcrumbs span {
+    color: #171717;
+}
+
+.breadcrumbs a:hover {
+    color: #c2410c;
+}
+
+
+
+
+
+
+
+/***************************************************************
+    AMAZON
+***************************************************************/
+
+.paapi5-pa-ad-unit {
+    border: 1px solid #eee;
+    margin:2px;
+    position: relative;
+    overflow: hidden;
+    padding: 22px 20px;
+    line-height: 1.1em;
+}
+
+.paapi5-pa-ad-unit * {
+    box-sizing: content-box;
+    box-shadow: none;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    outline: 0;
+    padding: 0;
+}
+
+.paapi5-pa-ad-unit.pull-left {
+    float: left;
+}
+
+.paapi5-pa-ad-unit.pull-right {
+    float: right;
+}
+
+.paapi5-pa-ad-unit a {
+    box-shadow: none !important;
+}
+
+.paapi5-pa-ad-unit a:hover {
+    color: #c45500;
+}
+
+.paapi5-pa-product-container {
+    width: 180px;
+    height: 210px;
+}
+/* fixed width and height of product image to 150px */
+.paapi5-pa-product-image {
+    display: table;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.paapi5-pa-product-image-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.paapi5-pa-product-image-link {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.paapi5-pa-product-image-source {
+    max-width: 150px;
+    max-height: 150px;
+    vertical-align: bottom;
+}
+
+.paapi5-pa-percent-off {
+    display: block;
+    width: 32px;
+    height: 25px;
+    padding-top: 8px;
+    position: absolute;
+    top: -16px;
+    right: -16px;
+    color: #ffffff;
+    font-size: 12px;
+    text-align: center;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+    background-color: #a50200;
+    background-image: -webkit-linear-gradient(top, #cb0400, #a50200);
+    background-image: linear-gradient(to bottom, #cb0400, #a50200);
+}
+
+.paapi5-pa-ad-unit.hide-percent-off-badge .paapi5-pa-percent-off {
+    display: none;
+}
+
+.paapi5-pa-product-details {
+    display: inline-block;
+    max-width: 100%;
+    margin-top: 11px;
+    text-align: center;
+    width: 100%;
+}
+
+.paapi5-pa-ad-unit .paapi5-pa-product-title a {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 13px;
+    color: #0066c0;
+    text-decoration: none;
+    margin-bottom: 3px;
+}
+
+.paapi5-pa-ad-unit .paapi5-pa-product-title a:hover {
+    text-decoration: underline;
+    color: #c45500;
+}
+
+.paapi5-pa-ad-unit.no-truncate .paapi5-pa-product-title a {
+    text-overflow: initial;
+    white-space: initial;
+}
+
+.paapi5-pa-product-offer-price {
+    font-size: 13px;
+    color: #111111;
+}
+
+.paapi5-pa-product-offer-price-value {
+    color: #AB1700;
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-right: 3px;
+}
+
+.paapi5-pa-product-list-price {
+    font-size: 13px;
+    color: #565656;
+}
+
+.paapi5-pa-product-list-price-value {
+    text-decoration: line-through;
+    font-size: 0.99em;
+}
+
+.paapi5-pa-product-prime-icon .icon-prime-all {
+    background: url("https://images-na.ssl-images-amazon.com/images/G/01/AUIClients/AmazonUIBaseCSS-sprite_2x_weblab_AUI_100106_T1-4e9f4ae74b1b576e5f55de370aae7aedaedf390d._V2_.png") no-repeat;
+    display: inline-block;
+    margin-top: -1px;
+    vertical-align: middle;
+    background-position: -192px -911px;
+    background-size: 560px 938px;
+    width: 52px;
+    height: 15px;
+}
+
+.paapi5-pa-product-offer-price,
+.paapi5-pa-product-list-price,
+.paapi5-pa-product-prime-icon {
+    display: inline-block;
+    margin-right: 3px;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .paapi5-pa-ad-unit .paapi5-pa-product-prime-icon .icon-prime-all {
+        background: url("https://images-na.ssl-images-amazon.com/images/G/01/AUIClients/AmazonUIBaseCSS-sprite_2x_weblab_AUI_100106_T1-4e9f4ae74b1b576e5f55de370aae7aedaedf390d._V2_.png") no-repeat;
+        display: inline-block;
+        margin-top: -1px;
+        vertical-align: middle;
+        background-position: -192px -911px;
+        background-size: 560px 938px;
+        width: 52px;
+        height: 15px;
+    }
+}
+
+/* css for mobile devices when device width is less than 441px*/
+@media  screen and (max-width: 440px) {
+    .paapi5-pa-ad-unit {
+        float: none;
+        width: 100%;
+    }
+
+    .paapi5-pa-product-container {
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .paapi5-pa-product-details {
+        text-align: center;
+        margin-top: 11px;
+    }
+}

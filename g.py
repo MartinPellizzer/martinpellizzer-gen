@@ -1,0 +1,2 @@
+WEBSITE_FOLDERPATH = 'website'
+STYLESHEET_FILEPATH = '/style.css'
