@@ -41,12 +41,12 @@ def gen_art_plant_benefits_html(html_article_filepath, json_article_filepath):
         {components.html_head(page_title)}
         <body>
             {components.html_header()}
-            <main style="margin-top: 48px;" class="container-xl mob-flex gap-48">
+            <main style="margin-top: 24px;" class="container-xl mob-flex gap-48">
                 <article style="flex: 2;">
                     {html_breadcrumbs}
                     {html_article}
                 </article>
-                <aside style="flex: 1; position: sticky; top: 124px; z-index: 999; align-self: flex-start; overflow-y: auto; height: 100vh;">
+                <aside style="flex: 1; position: sticky; top: 100px; z-index: 999; align-self: flex-start; overflow-y: auto; height: 100vh;">
                     {html_toc_sidebar}
                 </aside>
             </main>

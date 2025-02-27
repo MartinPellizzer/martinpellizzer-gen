@@ -25,6 +25,7 @@ model = model_8b
 
 checkpoint_filepath = f'{vault}/stable-diffusion/checkpoints/juggernautXL_juggXIByRundiffusion.safetensors'
 
+'''
 vertices = json_read('vertices.json')
 vertices_herbs = json_read('vertices-herbs.json')
 vertices_preparations = json_read('vertices-preparations.json')
@@ -47,7 +48,27 @@ edges_plants_preparations = json_read(edges_plants_preparations_filepath)
 
 edges_plants_ailments_filepath = f'/home/ubuntu/vault/herbalism/edges-plants-ailments.json'
 edges_plants_ailments = json_read(edges_plants_ailments_filepath)
+'''
 
+vertices = []
+vertices_herbs = []
+vertices_preparations = []
+vertices_ailments = []
+edges = []
+edges_ai = []
+edges_families_orders_filepath = []
+edges_families_orders = []
+edges_orders_subclasses_filepath = []
+edges_orders_subclasses = []
+
+edges_subclasses_classes_filepath = f'/home/ubuntu/vault/herbalism/edges-subclasses-classes.json'
+edges_subclasses_classes = json_read(edges_subclasses_classes_filepath)
+edges_classes_divisions_filepath = f'/home/ubuntu/vault/herbalism/edges-classes-divisions.json'
+edges_classes_divisions = json_read(edges_classes_divisions_filepath)
+edges_plants_preparations_filepath = f'/home/ubuntu/vault/herbalism/edges-plants-preparations.json'
+edges_plants_preparations = json_read(edges_plants_preparations_filepath)
+edges_plants_ailments_filepath = f'/home/ubuntu/vault/herbalism/edges-plants-ailments.json'
+edges_plants_ailments = json_read(edges_plants_ailments_filepath)
 vertices_plants = json_read(f'{vault}/herbalism/vertices-plants.json')
 with open('herbs.csv') as f: 
     plants_slugs_filtered = [

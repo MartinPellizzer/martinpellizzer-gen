@@ -9,7 +9,7 @@ def html_head(title, stylesheet='/style.css'):
     '''
     return html
 
-def html_header():
+def html_header_0000():
     html = f'''
         <header>
             <div class="container-xl flex justify-between">
@@ -19,6 +19,28 @@ def html_header():
                     <a href="/preparations.html">Preparations</a>
                     <a href="/equipments.html">Equipments</a>
                     <a href="/ailments.html">Ailments</a>
+                </nav>
+            </div>
+        </header>
+    '''
+    return html
+
+def html_header():
+    html = f'''
+        <header>
+            <div class="header container-xl">
+                <div class="header-logo">
+                    <a class="" href="/">
+                        Martin Pellizzer
+                        <!-- <img height="64" src="/images-static/terrawhisper-logo.png" alt="logo of terrawhisper"> -->
+                    </a>
+                </div>
+                <nav class="navigation">
+                    <input type="checkbox" class="toggle-menu">
+                    <div class="hamburger"></div>
+                    <ul class="menu">
+                        <li><a href="/herbs.html">Herbs</a></li>
+                    </ul>
                 </nav>
             </div>
         </header>
