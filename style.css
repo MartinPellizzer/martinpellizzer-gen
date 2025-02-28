@@ -399,6 +399,34 @@ td {
 }
 
 /**********************************************
+STUDY CARD
+**********************************************/
+.study {
+    background-color: #f4f4f4;
+    padding: 24px;
+}
+
+.study p {
+    color: #404040;
+    margin-bottom: 0;
+}
+
+.study-header {
+    display: flex; 
+    gap: 8px; 
+    margin-bottom: 12px;
+}
+
+.study-header svg {
+    height: 24px;
+}
+
+.study-header p {
+    color: #171717;
+    font-weight: bold;
+}
+
+/**********************************************
 SIDEBAR TOC
 **********************************************/
 .sidebar-toc-header {
