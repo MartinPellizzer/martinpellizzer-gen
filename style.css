@@ -427,6 +427,32 @@ STUDY CARD
 }
 
 /**********************************************
+TOC
+**********************************************/
+.toc {
+}
+
+.toc p {
+    color: #404040;
+    margin-bottom: 0;
+}
+
+.toc-header {
+    display: flex; 
+    gap: 8px; 
+    margin-bottom: 12px;
+}
+
+.toc-header svg {
+    height: 24px;
+}
+
+.toc-header p {
+    color: #171717;
+    font-weight: bold;
+}
+
+/**********************************************
 SIDEBAR TOC
 **********************************************/
 .sidebar-toc-header {
@@ -493,6 +519,27 @@ BREADCRUMBS
 
 .breadcrumbs a:hover {
     color: #c2410c;
+}
+
+@media screen and (max-width: 576px) {
+    .breadcrumbs a {
+        font-size: 12px;
+    }
+    .breadcrumbs span {
+        font-size: 12px;
+    }
+}
+
+
+
+/**********************************************
+ARTICLE
+**********************************************/
+@media screen and (max-width: 576px) {
+    .article h1 {
+        font-size: 48px;
+        margin-top: 16px;
+    }
 }
 
 

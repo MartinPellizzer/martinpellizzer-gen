@@ -112,3 +112,65 @@ def gen_study_snippet(plant_name_scientific):
     if replies == []:
         replies.append('N/A')
     return replies[0]
+
+def gen_plant_study_intro(plant_name_scientific):
+    n_results = 100
+    query = f'{plant_name_scientific.capitalize()}'
+    documents, metadatas = retrieve_docs(query, n_results=n_results)
+    # use llm to filter the chroma documents and give back the first 10 studies that fit the query
+    n_filtered = 5
+    documents_filtered = []
+    metadatas_filtered = []
+    for i in range(n_results):
+        if len(documents_filtered) >= n_filtered: break
+        document = documents[i]
+        metadata = metadatas[i]
+        prompt = f'''
+            Does the DOCUMENT below mention {plant_name_scientific} for medicinal purposes?
+            Reply only with "YES" or "NO".
+            DOCUMENT: {document}
+        '''
+        reply = llm_reply(prompt)
+        if 'yes' in reply.lower():
+            documents_filtered.append(document)
+            metadatas_filtered.append(metadata)
+    # gen llm replies
+    replies = []
+    for i in range(len(documents_filtered)):
+        for _ in range(3):
+            document = documents_filtered[i]
+            metadata = metadatas_filtered[i]
+            question = f'''
+                Write 1 sentence about the medicinal purposes of {plant_name_scientific.capitalize()} using the content in the scientific STUDY below.
+            '''
+            prompt = f'''
+                {question}
+                STUDY: {document}
+                If you cannot answer for whatever reason, reply only with: 'I can't answer'.
+                If you can answer, start with the following words: According to {metadata['journal_title']}, {plant_name_scientific.capitalize()} .
+            '''
+            reply = llm_reply(prompt)
+            if reply.strip().startswith('I can\'t'): 
+                continue
+            elif reply.strip().startswith('I couldn\'t'): 
+                continue
+            elif reply.strip().startswith('cannot'): 
+                continue
+            validator_reply = llm_validate(question, document, reply)
+            try: validator_obj = json.loads(validator_reply)
+            except: continue
+            score = validator_obj['SCORE']
+            if score == 'PASS':
+                print('pass')
+                replies.append(reply)
+                break
+            elif score == 'FAIL':
+                print('fail score')
+                continue
+            else: 
+                print('bad something')
+                continue
+    if replies == []:
+        replies.append('N/A')
+    return replies[0]
+

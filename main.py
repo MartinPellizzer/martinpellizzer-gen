@@ -10,7 +10,10 @@ from PIL import Image, ImageFont, ImageDraw
 from oliark_llm import llm_reply
 from oliark_io import json_read, json_write
 
-from a_plant import gen_art_plant, gen_art_plant_benefits
+from art_plant_benefit import gen_art_plant_benefits
+from art_plant import gen_art_plant
+
+from art_ailments import gen_art_ailments
 
 import g
 import components
@@ -339,7 +342,7 @@ def p_plants(regen=False):
         plant_desc = plant['plant_desc']
         html_article += f'<h2>{i+1}. {plant_name_scientific.capitalize()} ({plant_name_common})</h2>\n'
         html_article += f'''<img src="/images/herbs/{plant_slug}.jpg" alt="{plant_name_scientific}">\n'''
-        html_article += f'''{util.text_format_1N1_html(plant_desc)}\n'''
+        html_article += f'{utils.text_format_sentences_html(plant_desc)}\n'
         html_article += f'<p><a href="/herbs/{plant_slug}.html">{plant_name_scientific}</a></p>\n'
     title = 'herbs'
     html_head = components.html_head(title)
@@ -393,123 +396,9 @@ def a_plant(vertex_plant):
         ''',
         regen = False,
     )
-    ailments_slugs = [edge['vertex_2'] for edge in edges_plants_ailments if edge['vertex_1'] == plant_slug]
-    ailments_slugs_prompt = ', '.join(ailments_slugs)[:5]
-    ai_paragraph_gen(
-        key = 'uses', 
-        filepath = json_article_filepath, 
-        data = json_article, 
-        obj = json_article, 
-        prompt = f'''
-            Write a short 5-sentence paragraph about the ailments that the plant {plant_name_scientific} heals.
-            In specific, tell that this plant heals the following ailments: {ailments_slugs_prompt}.
-            Write one sentence for ailment.
-            Start the reply with the following words: {plant_name_scientific.capitalize()} is used .
-        ''',
-        regen = False,
-    )
-    names = [item['name'] for item in vertex_plant['plant_benefits']]
-    names_prompt = ', '.join(names[:5])
-    ai_paragraph_gen(
-        key = 'benefits', 
-        filepath = json_article_filepath, 
-        data = json_article, 
-        obj = json_article, 
-        prompt = f'''
-            Write a short 5-sentence paragraph about the benefits of the plant {plant_name_scientific}.
-            In specific, tell that the benefits of this plant are: {names_prompt}.
-            Write one sentence for each benefit.
-            Start the reply with the following words: {plant_name_scientific.capitalize()} can .
-        ''',
-        regen = False,
-        print_prompt = True,
-    )
-    ## ;properties
-    names = [item['name'] for item in vertex_plant['plant_properties']]
-    names_prompt = ', '.join(names[:5])
-    ai_paragraph_gen(
-        key = 'properties', 
-        filepath = json_article_filepath, 
-        data = json_article, 
-        obj = json_article, 
-        prompt = f'''
-            Write a short 5-sentence paragraph about the therapeutic properties of the plant {plant_name_scientific}.
-            In specific, tell that the properties of this plant are: {names_prompt}.
-            Write one sentence for each active property.
-            Start the reply with the following words: {plant_name_scientific.capitalize()} has many therapeutic properties, such as .
-        ''',
-        regen = False,
-        print_prompt = True,
-    )
-    ## ;constituents
-    names = [item['name'] for item in vertex_plant['plant_constituents']]
-    names_prompt = ', '.join(names[:5])
-    ai_paragraph_gen(
-        key = 'constituents', 
-        filepath = json_article_filepath, 
-        data = json_article, 
-        obj = json_article, 
-        prompt = f'''
-            Write a short 5-sentence paragraph about the medicinal active constituents of the plant {plant_name_scientific}.
-            In specific, tell that the active constituents of this plant are: {names_prompt}.
-            Write one sentence for each active constituent.
-            Start the reply with the following words: {plant_name_scientific.capitalize()} contains .
-        ''',
-        regen = False,
-        print_prompt = True,
-    )
-    ## ;parts
-    names = [item['name'] for item in vertex_plant['plant_parts']]
-    names_prompt = ', '.join(names[:5])
-    ai_paragraph_gen(
-        key = 'parts', 
-        filepath = json_article_filepath, 
-        data = json_article, 
-        obj = json_article, 
-        prompt = f'''
-            Write a short 5-sentence paragraph about the medicinal parts of the plant {plant_name_scientific}.
-            In specific, tell that the parts of this plant are: {names_prompt}.
-            Write one sentence for each active part.
-            Start the reply with the following words: {plant_name_scientific.capitalize()} has several medicinal parts, such as .
-        ''',
-        regen = False,
-        print_prompt = True,
-    )
-    ## ;preparations
-    # names = [item['name'] for item in plant['plant_preparations']]
-    names = [edge['vertex_2'] for edge in edges_plants_preparations if edge['vertex_1'] == plant_slug]
-    names_prompt = ', '.join(names[:5])
-    ai_paragraph_gen(
-        key = 'preparations', 
-        filepath = json_article_filepath, 
-        data = json_article, 
-        obj = json_article, 
-        prompt = f'''
-            Write a short 5-sentence paragraph about the herbal preparations of the plant {plant_name_scientific} for medicinal purposes.
-            In specific, tell that the parts of this plant are: {names_prompt}.
-            Write one sentence for each active part.
-            Start the reply with the following words: {plant_name_scientific.capitalize()} has several herbal preparations, such as .
-        ''',
-        regen = False,
-        print_prompt = True,
-    )
-    ## ;side_effects
-    names = [item['name'] for item in vertex_plant['plant_side_effects']]
-    names_prompt = ', '.join(names[:5])
-    ai_paragraph_gen(
-        key = 'side_effects', 
-        filepath = json_article_filepath, 
-        data = json_article, 
-        obj = json_article, 
-        prompt = f'''
-            Write a short 5-sentence paragraph about the most common negative health side effects of the plant {plant_name_scientific}.
-            In specific, tell that the side effects of this plant are: {names_prompt}.
-            Write one sentence for each side effect.
-            Start the reply with the following words: {plant_name_scientific.capitalize()} can .
-        ''',
-        regen = False,
-        print_prompt = True,
-    )
+    # ailments_slugs = [edge['vertex_2'] for edge in edges_plants_ailments if edge['vertex_1'] == plant_slug]
+    # ailments_slugs_prompt = ', '.join(ailments_slugs)[:5]
+
     ########################################################
     # ;html
     ########################################################
@@ -2519,7 +2408,7 @@ def a_ailment(ailment):
 p_home()
 
 # herbs
-if 1:
+if 0:
     vertices_plants_filtered = get_vertices_plants_validated()
     print(vertices_plants_filtered)
     regen = False
@@ -2536,11 +2425,11 @@ if 1:
             a_plant_parts(vertex_plant, regen=regen)
             a_plant_preparations(vertex_plant, regen=regen)
             a_plant_side_effects(vertex_plant, regen=regen)
-    if 0:
+    if 1:
         for vertex_plant in vertices_plants_filtered:
-            # a_plant(vertex_plant)
+            # a_plant(vertex_plant) # NOTE: not working anymore, use only for code reference
             gen_art_plant(vertex_plant)
-    if 0:
+    if 1:
         p_plants(regen=False)
 
 # preparations
@@ -2559,10 +2448,13 @@ if 0:
     p_equipments(equipments_slugs)
 
 # ailments
-if 0:
-    p_ailments()
-    for vertex_ailment in vertices_ailments:
-        a_ailment(vertex_ailment)
+if 1:
+    if 1:
+        # p_ailments()
+        gen_art_ailments()
+    if 0:
+        for vertex_ailment in vertices_ailments:
+            a_ailment(vertex_ailment)
 
 shutil.copy('style.css', f'{g.WEBSITE_FOLDERPATH}/style.css')
 

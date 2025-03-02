@@ -10,10 +10,6 @@ from oliark_io import json_read, json_write
 vault = f'/home/ubuntu/vault'
 website_folderpath = 'website'
 
-vertices_herbs = json_read('vertices-herbs.json')
-vertices_preparations = json_read('vertices-preparations.json')
-edges_herbs_preparations = json_read('edges-herbs-preparations.json')
-
 checkpoint_filepath = f'{vault}/stable-diffusion/checkpoints/xl/juggernautXL_juggXIByRundiffusion.safetensors'
 pipe = StableDiffusionXLPipeline.from_single_file(
     checkpoint_filepath, 
@@ -118,32 +114,33 @@ def gen_plants():
 ##############################################
 
 # herbs teas
-for edge_herb_preparation in edges_herbs_preparations:
-    herb_slug = edge_herb_preparation['vertex_1']
-    preparation_slug = edge_herb_preparation['vertex_2']
+if 0:
+    for edge_herb_preparation in edges_herbs_preparations:
+        herb_slug = edge_herb_preparation['vertex_1']
+        preparation_slug = edge_herb_preparation['vertex_2']
 
-    herb_name_scientific = [vertex['herb_name_scientific'] for vertex in vertices_herbs if vertex['herb_slug'] == herb_slug][0]
-    preparation_name = [vertex['preparation_name'] for vertex in vertices_preparations if vertex['preparation_slug'] == preparation_slug][0]
+        herb_name_scientific = [vertex['herb_name_scientific'] for vertex in vertices_herbs if vertex['herb_slug'] == herb_slug][0]
+        preparation_name = [vertex['preparation_name'] for vertex in vertices_preparations if vertex['preparation_slug'] == preparation_slug][0]
 
-    if preparation_slug != 'tea': continue
+        if preparation_slug != 'tea': continue
 
-    images_to_validate_filepath = f'images/herbs-preparations/{herb_slug}-{preparation_slug}.jpg'
-    images_validated_filepath = f'{website_folderpath}/images/herbs-preparations/{herb_slug}-{preparation_slug}.jpg'
-    if not os.path.exists(images_validated_filepath):
-        prompt = f'''
-            a close-up cup of {herb_name_scientific} {preparation_slug},
-            on a wooden table,
-            surrounded by medicinal herbs,
-            indoor,
-            natural light,
-            depth of field, bokeh,
-            high resolution,
-            cinematic
-        '''
-        print(prompt)
-        image = pipe(prompt=prompt, width=1024, height=1024, num_inference_steps=30, guidance_scale=7.0).images[0]
-        image = img_resize(image, w=768, h=768)
-        image.save(images_to_validate_filepath)
+        images_to_validate_filepath = f'images/herbs-preparations/{herb_slug}-{preparation_slug}.jpg'
+        images_validated_filepath = f'{website_folderpath}/images/herbs-preparations/{herb_slug}-{preparation_slug}.jpg'
+        if not os.path.exists(images_validated_filepath):
+            prompt = f'''
+                a close-up cup of {herb_name_scientific} {preparation_slug},
+                on a wooden table,
+                surrounded by medicinal herbs,
+                indoor,
+                natural light,
+                depth of field, bokeh,
+                high resolution,
+                cinematic
+            '''
+            print(prompt)
+            image = pipe(prompt=prompt, width=1024, height=1024, num_inference_steps=30, guidance_scale=7.0).images[0]
+            image = img_resize(image, w=768, h=768)
+            image.save(images_to_validate_filepath)
 
 ##################################################################################
 # ;equipments

@@ -5,19 +5,6 @@ import numpy
 from oliark_llm import llm_reply
 from oliark_io import json_read, json_write
 
-vertices_herbs = json_read('vertices-herbs.json')
-vertices_taxonomy = json_read('vertices-taxonomy.json')
-vertices_preparations = json_read('vertices-preparations.json')
-vertices_ailments = json_read('vertices-ailments.json')
-
-edges = json_read('edges-ai.json')
-'''
-edges_families_orders = json_read('edges-families-orders.json')
-edges_orders_subclasses = json_read('edges-orders-subclasses.json')
-edges_subclasses_classes = json_read('edges-subclasses-classes.json')
-edges_classes_divisions = json_read('edges-classes-divisions.json')
-'''
-
 vertices_plants_filepath = f'/home/ubuntu/vault/herbalism/vertices-plants.json'
 vertices_plants = json_read(vertices_plants_filepath)
 with open('herbs.csv') as f: 
@@ -88,357 +75,6 @@ for vertex_plant in vertices_plants:
         j = json.dumps(vertices_plants, indent=4)
         with open(vertices_plants_filepath, 'w') as f:
             print(j, file=f)
-
-'''
-for vertex_plant in vertices_plants:
-    plant_slug = vertex_plant['plant_slug']
-    family_slug = vertex_plant['plant_family']
-    if plant_slug not in plants_slugs_filtered: continue
-    print(plant_slug, family_slug)
-    plant_order = [edge['vertex_2'] for edge in edges_families_orders if edge['vertex_1'] == family_slug][0]
-    print(plant_order)
-    print()
-'''
-
-
-if 0:
-    for vertex_herb in vertices_herbs:
-        # family
-        key = 'herb_family'
-        if key not in vertex_herb: vertex_herb[key] = ''
-        # vertex_herb[key] = ''
-        if vertex_herb[key] == '':
-            herb_name_scientific = vertex_herb['herb_name_scientific']
-            outputs = []
-            for _ in range(1):
-                prompt = f'''
-                    Write a the name of the taxonomical family of the plant with scientific name: {herb_name_scientific}.
-                    Examples of taxonomical families are: asteraceae, araceae, etc...
-                    Also give a confidence score from 1 to 10 for the answer, indicating how much you are sure about your answer.
-                    If you don't know the answer, reply with the name "unknown".
-                    Use as few words as possible.
-                    Reply with the following JSON format:
-                    {{"name": "write only the name here", "confidence_score": 8}}
-                    Reply only with the JSON.
-                '''
-                reply = llm_reply(prompt)
-                try: json_reply = json.loads(reply)
-                except: json_reply = {}
-                if json_reply != {}:
-                    try: name = json_reply['name'].lower().strip()
-                    except: continue
-                    try: confidence_score = json_reply['confidence_score']
-                    except: continue
-                    vertex_herb[key] = {
-                        'name': name,
-                        'confidence_score': confidence_score,
-                    }
-                    j = json.dumps(vertices_herbs, indent=4)
-                    with open('vertices-herbs.json', 'w') as f:
-                        print(j, file=f)
-
-    quit()
-    ####################################################################################
-    # gen taxonomy (vertices + edges)
-    ####################################################################################
-    # family vertices
-    for vertex_herb in vertices_herbs:
-        herbs_families = [vertex for vertex in vertices_taxonomy if vertex['vertex_type'] == 'herb_family']
-        herbs_slugs = [vertex['family_slug'] for vertex in herbs_families]
-        herb_family = vertex_herb['herb_family']
-        if herb_family not in herbs_slugs:
-            vertices_taxonomy.append({
-                'vertex_type': 'herb_family',
-                'family_slug': herb_family,
-            })
-            j = json.dumps(vertices_taxonomy, indent=4)
-            with open('vertices-taxonomy.json', 'w') as f:
-                print(j, file=f)
-
-    for vertex_herb in vertices_herbs:
-        # linnaean system -> order
-        herb_name_scientific = vertex_herb['herb_name_scientific']
-        herb_species = herb_name_scientific
-        herb_genus = herb_name_scientific.split(' ')[0]
-        herb_family = vertex_herb['herb_family']['name']
-        try: 
-            herb_order = [edge['vertex_2'] for edge in edges_families_orders if edge['edge_type'] == 'herb_family_order' and edge['vertex_1'] == herb_family][0]
-            continue
-        except: pass
-        outputs = []
-        for _ in range(1):
-            prompt = f'''
-                Write the Linnaean system of classification for the plant: {herb_name_scientific}.
-                The Linnaean system is classified by: Kingdom, Division, Class, Subclass, Order, Family, Genus, Species.
-                I will give you the Species, Genus, Family of this plant and you have to fill the rest. 
-                Use as few words as possible.
-                Reply with the following JSON format:
-                [
-                    {{"Kingdom": "write the kingdom name here"}},
-                    {{"Division": "write the division name here"}},
-                    {{"Class": "write the class name here"}},
-                    {{"Subclass": "write the subclass name here"}},
-                    {{"Order": "write the order name here"}},
-                    {{"Family": "{herb_family}"}},
-                    {{"Genus": "{herb_genus}"}},
-                    {{"Species": "{herb_species}"}}
-                ]
-                Reply only with the JSON.
-            '''
-            reply = llm_reply(prompt)
-            try: json_reply = json.loads(reply)
-            except: json_reply = {}
-            if json_reply != {}:
-                try: herb_kingdom = json_reply[0]['Kingdom'].strip().lower()
-                except: continue
-                try: herb_division = json_reply[1]['Division'].strip().lower()
-                except: continue
-                try: herb_class = json_reply[2]['Class'].strip().lower()
-                except: continue
-                try: herb_subclass = json_reply[3]['Subclass'].strip().lower()
-                except: continue
-                try: herb_order = json_reply[4]['Order'].strip().lower()
-                except: continue
-                try: herb_family = json_reply[5]['Family'].strip().lower()
-                except: continue
-                print('***************************************')
-                edge_new = {
-                    'edge_type': 'herb_family_order',
-                    'vertex_1': herb_family,
-                    'vertex_2': herb_order,
-                }
-                edges_families_orders.append(edge_new)
-                j = json.dumps(edges_families_orders, indent=4)
-                with open('edges-families-orders.json', 'w') as f:
-                    print(j, file=f)
-                vertices_taxonomy_orders_slugs = [vertex['order_slug'] for vertex in vertices_taxonomy if vertex['vertex_type'] == 'herb_order']
-                if herb_order not in vertices_taxonomy_orders_slugs:
-                    vertex_new = {
-                        'vertex_type': 'herb_order',
-                        'order_slug': herb_order,
-                    }
-                    vertices_taxonomy.append(vertex_new)
-                    j = json.dumps(vertices_taxonomy, indent=4)
-                    with open('vertices-taxonomy.json', 'w') as f:
-                        print(j, file=f)
-
-    for vertex_herb in vertices_herbs:
-        # linnaean system -> subclass
-        herb_name_scientific = vertex_herb['herb_name_scientific']
-        herb_species = herb_name_scientific
-        herb_genus = herb_name_scientific.split(' ')[0]
-        herb_family = vertex_herb['herb_family']['name']
-        try:
-            herb_order = [edge['vertex_2'] for edge in edges_families_orders if edge['edge_type'] == 'herb_family_order' and edge['vertex_1'] == herb_family][0]
-        except: continue
-        try: 
-            herb_subclass = [edge['vertex_2'] for edge in edges_orders_subclasses if edge['edge_type'] == 'herb_order_subclass' and edge['vertex_1'] == herb_order][0]
-            continue
-        except: pass
-        outputs = []
-        for _ in range(1):
-            prompt = f'''
-                Write the Linnaean system of classification for the plant: {herb_name_scientific}.
-                The Linnaean system is classified by: Kingdom, Division, Class, Subclass, Order, Family, Genus, Species.
-                I will give you the Species, Genus, Family, Order of this plant and you have to fill the rest. 
-                Use as few words as possible.
-                Reply with the following JSON format:
-                [
-                    {{"Kingdom": "write the kingdom name here"}},
-                    {{"Division": "write the division name here"}},
-                    {{"Class": "write the class name here"}},
-                    {{"Subclass": "write the subclass name here"}},
-                    {{"Order": "{herb_order}"}},
-                    {{"Family": "{herb_family}"}},
-                    {{"Genus": "{herb_genus}"}},
-                    {{"Species": "{herb_species}"}}
-                ]
-                Reply only with the JSON.
-            '''
-            reply = llm_reply(prompt)
-            try: json_reply = json.loads(reply)
-            except: json_reply = {}
-            if json_reply != {}:
-                try: herb_kingdom = json_reply[0]['Kingdom'].strip().lower()
-                except: continue
-                try: herb_division = json_reply[1]['Division'].strip().lower()
-                except: continue
-                try: herb_class = json_reply[2]['Class'].strip().lower()
-                except: continue
-                try: herb_subclass = json_reply[3]['Subclass'].strip().lower()
-                except: continue
-                try: herb_order = json_reply[4]['Order'].strip().lower()
-                except: continue
-                try: herb_family = json_reply[5]['Family'].strip().lower()
-                except: continue
-                edge_new = {
-                    'edge_type': 'herb_order_subclass',
-                    'vertex_1': herb_order,
-                    'vertex_2': herb_subclass,
-                }
-                edges_orders_subclasses.append(edge_new)
-                j = json.dumps(edges_orders_subclasses, indent=4)
-                with open('edges-orders-subclasses.json', 'w') as f:
-                    print(j, file=f)
-                vertices_slugs = [v['subclass_slug'] for v in vertices_taxonomy if v['vertex_type'] == 'herb_subclass']
-                if herb_subclass not in vertices_slugs:
-                    vertex_new = {
-                        'vertex_type': 'herb_subclass',
-                        'subclass_slug': herb_subclass,
-                    }
-                    vertices_taxonomy.append(vertex_new)
-                    j = json.dumps(vertices_taxonomy, indent=4)
-                    with open('vertices-taxonomy.json', 'w') as f:
-                        print(j, file=f)
-
-    for vertex_herb in vertices_herbs:
-        # linnaean system -> class
-        herb_name_scientific = vertex_herb['herb_name_scientific']
-        herb_species = herb_name_scientific
-        herb_genus = herb_name_scientific.split(' ')[0]
-        herb_family = vertex_herb['herb_family']['name']
-        try:
-            herb_order = [edge['vertex_2'] for edge in edges_families_orders if edge['edge_type'] == 'herb_family_order' and edge['vertex_1'] == herb_family][0]
-        except: continue
-        try: 
-            herb_subclass = [edge['vertex_2'] for edge in edges_orders_subclasses if edge['edge_type'] == 'herb_order_subclass' and edge['vertex_1'] == herb_order][0]
-        except: continue
-        try: 
-            herb_class = [edge['vertex_2'] for edge in edges_subclasses_classes if edge['edge_type'] == 'herb_subclass_class' and edge['vertex_1'] == herb_subclass][0]
-            continue
-        except: pass
-        outputs = []
-        for _ in range(1):
-            prompt = f'''
-                Write the Linnaean system of classification for the plant: {herb_name_scientific}.
-                The Linnaean system is classified by: Kingdom, Division, Class, Subclass, Order, Family, Genus, Species.
-                I will give you the Species, Genus, Family, Order, Subclass of this plant and you have to fill the rest. 
-                Use as few words as possible.
-                Reply with the following JSON format:
-                [
-                    {{"Kingdom": "write the kingdom name here"}},
-                    {{"Division": "write the division name here"}},
-                    {{"Class": "write the division name here"}},
-                    {{"Subclass": "{herb_subclass}"}},
-                    {{"Order": "{herb_order}"}},
-                    {{"Family": "{herb_family}"}},
-                    {{"Genus": "{herb_genus}"}},
-                    {{"Species": "{herb_species}"}}
-                ]
-                Reply only with the JSON.
-            '''
-            reply = llm_reply(prompt)
-            try: json_reply = json.loads(reply)
-            except: json_reply = {}
-            if json_reply != {}:
-                try: herb_kingdom = json_reply[0]['Kingdom'].strip().lower()
-                except: continue
-                try: herb_division = json_reply[1]['Division'].strip().lower()
-                except: continue
-                try: herb_class = json_reply[2]['Class'].strip().lower()
-                except: continue
-                try: herb_subclass = json_reply[3]['Subclass'].strip().lower()
-                except: continue
-                try: herb_order = json_reply[4]['Order'].strip().lower()
-                except: continue
-                try: herb_family = json_reply[5]['Family'].strip().lower()
-                except: continue
-                if 1:
-                    edge_new = {
-                        'edge_type': 'herb_subclass_class',
-                        'vertex_1': herb_subclass,
-                        'vertex_2': herb_class,
-                    }
-                    edges_subclasses_classes.append(edge_new)
-                    j = json.dumps(edges_subclasses_classes, indent=4)
-                    with open('edges-subclasses-classes.json', 'w') as f:
-                        print(j, file=f)
-                    vertices_slugs = [v['class_slug'] for v in vertices_taxonomy if v['vertex_type'] == 'herb_class']
-                    if herb_class not in vertices_slugs:
-                        vertex_new = {
-                            'vertex_type': 'herb_class',
-                            'class_slug': herb_class,
-                        }
-                        vertices_taxonomy.append(vertex_new)
-                        j = json.dumps(vertices_taxonomy, indent=4)
-                        with open('vertices-taxonomy.json', 'w') as f:
-                            print(j, file=f)
-
-    for vertex_herb in vertices_herbs:
-        # linnaean system -> division
-        herb_name_scientific = vertex_herb['herb_name_scientific']
-        herb_species = herb_name_scientific
-        herb_genus = herb_name_scientific.split(' ')[0]
-        herb_family = vertex_herb['herb_family']['name']
-        try:
-            herb_order = [edge['vertex_2'] for edge in edges_families_orders if edge['edge_type'] == 'herb_family_order' and edge['vertex_1'] == herb_family][0]
-        except: continue
-        try: 
-            herb_subclass = [edge['vertex_2'] for edge in edges_orders_subclasses if edge['edge_type'] == 'herb_order_subclass' and edge['vertex_1'] == herb_order][0]
-        except: continue
-        try: 
-            herb_class = [edge['vertex_2'] for edge in edges_subclasses_classes if edge['edge_type'] == 'herb_subclass_class' and edge['vertex_1'] == herb_subclass][0]
-        except: continue
-        try: 
-            herb_division = [edge['vertex_2'] for edge in edges_classes_divisions if edge['edge_type'] == 'herb_class_division' and edge['vertex_1'] == herb_class][0]
-            continue
-        except: pass
-        outputs = []
-        for _ in range(1):
-            prompt = f'''
-                Write the Linnaean system of classification for the plant: {herb_name_scientific}.
-                The Linnaean system is classified by: Kingdom, Division, Class, Subclass, Order, Family, Genus, Species.
-                I will give you the Species, Genus, Family, Order, Subclass, Class of this plant and you have to fill the rest. 
-                Use as few words as possible.
-                Reply with the following JSON format:
-                [
-                    {{"Kingdom": "write the kingdom name here"}},
-                    {{"Division": "write the division name here"}},
-                    {{"Class": "{herb_class}"}},
-                    {{"Subclass": "{herb_subclass}"}},
-                    {{"Order": "{herb_order}"}},
-                    {{"Family": "{herb_family}"}},
-                    {{"Genus": "{herb_genus}"}},
-                    {{"Species": "{herb_species}"}}
-                ]
-                Reply only with the JSON.
-            '''
-            reply = llm_reply(prompt)
-            try: json_reply = json.loads(reply)
-            except: json_reply = {}
-            if json_reply != {}:
-                try: herb_kingdom = json_reply[0]['Kingdom'].strip().lower()
-                except: continue
-                try: herb_division = json_reply[1]['Division'].strip().lower()
-                except: continue
-                try: herb_class = json_reply[2]['Class'].strip().lower()
-                except: continue
-                try: herb_subclass = json_reply[3]['Subclass'].strip().lower()
-                except: continue
-                try: herb_order = json_reply[4]['Order'].strip().lower()
-                except: continue
-                try: herb_family = json_reply[5]['Family'].strip().lower()
-                except: continue
-                if 1:
-                    edge_new = {
-                        'edge_type': 'herb_class_division',
-                        'vertex_1': herb_class,
-                        'vertex_2': herb_division,
-                    }
-                    edges_classes_divisions.append(edge_new)
-                    j = json.dumps(edges_classes_divisions, indent=4)
-                    with open('edges-classes-divisions.json', 'w') as f:
-                        print(j, file=f)
-                    vertices_slugs = [v['division_slug'] for v in vertices_taxonomy if v['vertex_type'] == 'division_class']
-                    if herb_division not in vertices_slugs:
-                        vertex_new = {
-                            'vertex_type': 'herb_division',
-                            'division_slug': herb_division,
-                        }
-                        vertices_taxonomy.append(vertex_new)
-                        j = json.dumps(vertices_taxonomy, indent=4)
-                        with open('vertices-taxonomy.json', 'w') as f:
-                            print(j, file=f)
 
 def gen_vertex_plant_attr_list_json(vertex, key, prompt, regen=False):
     if key not in vertex_plant: vertex_plant[key] = []
@@ -592,15 +228,13 @@ for vertex_plant in vertices_plants:
     )
 
 # gen edges -> herb_preparation
-if 1:
+if 0:
     for vertex_plant in vertices_plants:
         plant_slug = vertex_plant['plant_slug']
         if plant_slug not in plants_slugs_filtered: continue
-
         plant_slug = vertex_plant['plant_slug']
         plants_slugs = [edge['vertex_1'] for edge in edges_plants_preparations]
         if plant_slug in plants_slugs: continue
-
         plant_name_scientific = vertex_plant['plant_name_scientific']
         preparations_names = [vertex['preparation_name'] for vertex in vertices_preparations]
         preparations_names_prompt = ', '.join(preparations_names)
@@ -672,15 +306,13 @@ if 1:
                     print(j, file=f)
 
 # gen edges herb_ailment (from ailment)
-if 1:
+if 0:
     for vertex_plant in vertices_plants:
         plant_slug = vertex_plant['plant_slug']
         if plant_slug not in plants_slugs_filtered: continue
-
         plant_slug = vertex_plant['plant_slug']
         plants_slugs = [edge['vertex_1'] for edge in edges_plants_ailments]
         if plant_slug in plants_slugs: continue
-
         plant_name_scientific = vertex_plant['plant_name_scientific']
         ailments_names = [ailment['ailment_name'] for ailment in vertices_ailments]
         ailments_names_prompt = ', '.join(ailments_names)
