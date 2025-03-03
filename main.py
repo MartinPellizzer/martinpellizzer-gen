@@ -14,6 +14,8 @@ from art_plant_benefit import gen_art_plant_benefits
 from art_plant import gen_art_plant
 
 from art_ailments import gen_art_ailments
+from art_ailment import gen_art_ailment
+from art_ailment_tea import gen_art_ailment_tea
 
 import g
 import components
@@ -2408,7 +2410,7 @@ def a_ailment(ailment):
 p_home()
 
 # herbs
-if 0:
+if 1:
     vertices_plants_filtered = get_vertices_plants_validated()
     print(vertices_plants_filtered)
     regen = False
@@ -2449,12 +2451,17 @@ if 0:
 
 # ailments
 if 1:
+    with open('ailments.csv') as f: 
+        ailments_names = [line.lower().strip() for line in f.read().split('\n') if line.strip() != '']
     if 1:
         # p_ailments()
         gen_art_ailments()
-    if 0:
-        for vertex_ailment in vertices_ailments:
-            a_ailment(vertex_ailment)
+    if 1:
+        for ailment_name in ailments_names:
+            gen_art_ailment(ailment_name)
+    if 1:
+        for ailment_name in ailments_names:
+            gen_art_ailment_tea(ailment_name)
 
 shutil.copy('style.css', f'{g.WEBSITE_FOLDERPATH}/style.css')
 

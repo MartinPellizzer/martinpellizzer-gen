@@ -34,17 +34,13 @@ def gen_intro(json_article_filepath):
         print_prompt = True,
     )
 
-def sluggify(text):
-    slug = text.strip().lower().replace(' ', '-')
-    return slug
-
 def gen_list_init(json_article_filepath, regen=False):
     json_article = json_read(json_article_filepath)
     key = 'ailments'
     if key not in json_article: json_article[key] = []
     if regen: json_article[key] = []
     ailments_names = get_ailments_names()
-    ailments_slugs = [sluggify(ailment_name) for ailment_name in ailments_names]
+    ailments_slugs = [utils.sluggify(ailment_name) for ailment_name in ailments_names]
     json_article_ailments_names = [obj['ailment_name'] for obj in json_article['ailments']]
     for ailment_name in ailments_names:
         if ailment_name not in json_article_ailments_names:
@@ -77,7 +73,7 @@ def gen_list_desc(json_article_filepath, regen=False):
 
 def gen_art_ailments_json(json_article_filepath):
     json_article = json_read(json_article_filepath, create=True)
-    json_article['article_url'] = f'ailments.html'
+    json_article['url'] = f'ailments.html'
     json_article['title'] = f'ailments'
     json_write(json_article_filepath, json_article)
 
@@ -93,10 +89,12 @@ def gen_art_ailments_html(html_article_filepath, json_article_filepath):
     # html_article += f'<img src="/images/herbs/{plant_slug}.jpg" alt="{plant_name_scientific}">\n'
     html_article += f'{utils.text_format_sentences_html(json_article["intro"])}\n'
     for i, ailment in enumerate(json_article['ailments']):
-        ailment_name = ailment['ailment_name'].capitalize()
+        ailment_name = ailment['ailment_name']
         ailment_desc = ailment['ailment_desc']
-        html_article += f'<h2>{i+1}. {ailment_name}</h2>\n'
+        ailment_slug = utils.sluggify(ailment_name)
+        html_article += f'<h2>{i+1}. {ailment_name.capitalize()}</h2>\n'
         html_article += f'{utils.text_format_sentences_html(ailment_desc)}\n'
+        html_article += f'<p>Check the <a href="/ailments/{ailment_slug}.html">best herbal remedies for {ailment_name}</a>.</p>\n'
     html_article, json_toc = components.toc(html_article)
     html_intro_toc = components.toc_json_to_html_article(json_toc)
     html_article = html_article.replace('[html_intro_toc]', html_intro_toc)

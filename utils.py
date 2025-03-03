@@ -1,4 +1,15 @@
+import json
+
 from nltk import tokenize
+
+def json_write(filepath, data):
+    j = json.dumps(data, indent=4)
+    with open(filepath, 'w') as f:
+        print(j, file=f)
+
+def sluggify(text):
+    slug = text.strip().lower().replace(' ', '-')
+    return slug
 
 def text_format_sentences_html(text):
     text_formatted = ''

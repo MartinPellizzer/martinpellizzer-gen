@@ -5,6 +5,8 @@ import numpy
 from oliark_llm import llm_reply
 from oliark_io import json_read, json_write
 
+import utils
+
 vertices_plants_filepath = f'/home/ubuntu/vault/herbalism/vertices-plants.json'
 vertices_plants = json_read(vertices_plants_filepath)
 with open('herbs.csv') as f: 
@@ -32,8 +34,115 @@ edges_plants_ailments = json_read(edges_plants_ailments_filepath)
 # edges = []
 # json_write('edges-ai.json', edges)
 
+vertices_ailments_filepath = f'/home/ubuntu/vault/herbalism/vertices-ailments.json'
+vertices_ailments = json_read(vertices_ailments_filepath)
+
 ####################################################################################
-# gen vertex
+# ailments
+####################################################################################
+def attr_list_gen(vertices_filepath, vertices, vertex, key, prompt, regen=False):
+    if key not in vertex: vertex[key] = []
+    if regen == True: vertex[key] = []
+    if vertex[key] == []:
+        outputs = []
+        for _ in range(1):
+            reply = llm_reply(prompt)
+            try: json_reply = json.loads(reply)
+            except: json_reply = {}
+            if json_reply != {}:
+                for item in json_reply:
+                    try: name = item['name'].strip().lower()
+                    except: continue
+                    try: confidence_score = item['confidence_score']
+                    except: continue
+                    if name.endswith('.'): name = name[:-1]
+                    outputs.append({
+                        'name': name,
+                        'confidence_score': confidence_score,
+                    })
+        outputs = sorted(outputs, key=lambda x: x['confidence_score'], reverse=True)
+        for output in outputs:
+            print(output)
+        vertex[key] = outputs
+        utils.json_write(vertices_filepath, vertices)
+
+def ailments_add():
+    with open('ailments.csv') as f: 
+        ailments_names = [line for line in f.read().split('\n') if line.strip() != '']
+    for ailment_name in ailments_names:
+        ailment_slug = utils.sluggify(ailment_name)
+        vertices_ailments_slugs = [vertex['ailment_slug'] for vertex in vertices_ailments]
+        if ailment_slug not in vertices_ailments_slugs:
+            vertices_ailments.append({
+                'ailment_slug': ailment_slug,
+                'ailment_name': ailment_name,
+            })
+            utils.json_write(vertices_ailments_filepath, vertices_ailments)
+
+def ailment_teas_gen():
+    vertices_plants_names_scientific = [vertex['plant_name_scientific'] for vertex in vertices_plants]
+    for vertex_ailment in vertices_ailments:
+        ailment_slug = vertex_ailment['ailment_slug']
+        ailment_name = vertex_ailment['ailment_name']
+        key = 'ailment_teas'
+        if key not in vertex_ailment: vertex_ailment[key] = []
+        # vertex_ailment[key] = []
+        if vertex_ailment[key] == []:
+            outputs = []
+            for _ in range(10):
+                n_items = random.randint(10, 20)
+                prompt = f'''
+                    Write a list of the {n_items} best herbal teas names to treat the {ailment_name} ailment.
+                    Also, write a confidence score from 1 to 10 for each list item, indicating how much sure you are about that answer.
+                    Always reply only with the scientific names of the plants used in the herbal teas. Never reply with common names.
+                    Write as few words as possible.
+                    Reply in JSON using the format below:
+                    [
+                        {{"name": "write name 1 here", "confidence_score": 10}},
+                        {{"name": "write name 2 here", "confidence_score": 5}},
+                        {{"name": "write name 3 here", "confidence_score": 7}}
+                    ]
+                    Reply only with the JSON.
+                '''
+                reply = llm_reply(prompt)
+                try: json_reply = json.loads(reply)
+                except: json_reply = {}
+                if json_reply != {}:
+                    for item in json_reply:
+                        try: name = item['name'].strip().lower()
+                        except: continue
+                        try: confidence_score = item['confidence_score']
+                        except: continue
+                        for vertex_plant in vertices_plants:
+                            plant_slug = vertex_plant['plant_slug']
+                            plant_name_scientific = vertex_plant['plant_name_scientific']
+                            if name == plant_name_scientific:
+                                found = False
+                                for output in outputs:
+                                    if plant_slug == output['plant_slug']: 
+                                        found = True
+                                        output['confidence_score'] += confidence_score
+                                        break
+                                if not found:
+                                    outputs.append({
+                                        'plant_slug': plant_slug,
+                                        'plant_name_scientific': plant_name_scientific,
+                                        'confidence_score': confidence_score,
+                                    })
+                                break
+            outputs = sorted(outputs, key=lambda x: x['confidence_score'], reverse=True)
+            for output in outputs:
+                print(output)
+            vertex_ailment[key] = outputs[:20]
+            utils.json_write(vertices_ailments_filepath, vertices_ailments)
+
+ailments_add()
+ailment_teas_gen()
+
+quit()
+
+####################################################################################
+# plants
 ####################################################################################
 for vertex_plant in vertices_plants:
     plant_slug = vertex_plant['plant_slug']
