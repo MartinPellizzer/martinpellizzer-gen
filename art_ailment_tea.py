@@ -103,12 +103,14 @@ def gen_art_ailment_tea_html(html_article_filepath, json_article_filepath):
     article_title = f'{main_lst_num} best herbal teas for {ailment_name}'.title()
     html_article = ''
     html_article += f'<h1>{article_title}</h1>\n'
+    html_article += f'<img src="/images/ailments-teas/{ailment_slug}-teas.jpg" alt="{ailment_name} teas">\n'
     html_article += f'{utils.text_format_sentences_html(json_article["intro"])}\n'
     for i, tea in enumerate(json_article['teas'][:main_lst_num]):
         plant_name_scientific = tea['plant_name_scientific']
         plant_slug = utils.sluggify(plant_name_scientific)
         plant_desc = tea['plant_desc']
         html_article += f'<h2>{i+1}. {plant_name_scientific.capitalize()} tea</h2>\n'
+        html_article += f'<img src="/images/teas/{plant_slug}-tea.jpg" alt="{plant_name_scientific} tea">\n'
         html_article += f'{utils.text_format_sentences_html(plant_desc)}\n'
     # toc
     html_article, json_toc = components.toc(html_article)

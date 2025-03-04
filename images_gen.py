@@ -1,4 +1,5 @@
 import os
+import random
 
 import torch
 from diffusers import DiffusionPipeline, StableDiffusionXLPipeline
@@ -6,6 +7,8 @@ from diffusers import DPMSolverMultistepScheduler
 from PIL import Image, ImageFont, ImageDraw, ImageColor, ImageOps
 
 from oliark_io import json_read, json_write
+
+import utils
 
 vault = f'/home/ubuntu/vault'
 website_folderpath = 'website'
@@ -26,6 +29,9 @@ with open('herbs.csv') as f:
         for line in f.read().split('\n')
         if line.strip() != ''
 ]
+
+vertices_ailments_filepath = f'/home/ubuntu/vault/herbalism/vertices-ailments.json'
+vertices_ailments = json_read(vertices_ailments_filepath)
 
 ###################################################
 # ;UTILS
@@ -112,6 +118,104 @@ def gen_plants():
 ##############################################
 # ;preparations
 ##############################################
+def ailments_teas_intro():
+    for vertex_ailment in vertices_ailments:
+        ailment_slug = vertex_ailment['ailment_slug']
+        ailment_name = vertex_ailment['ailment_name']
+        images_to_validate_filepath = f'images/to-validate/{ailment_slug}-teas.jpg'
+        images_validated_filepath = f'{website_folderpath}/images/ailments-teas/{ailment_slug}-teas.jpg'
+        if not os.path.exists(images_validated_filepath):
+            plants_names_scientific = []
+            for tea in vertex_ailment['ailment_teas']:
+                plant_name_scientific = tea['plant_name_scientific']
+                if plant_name_scientific not in plants_names_scientific:
+                    plants_names_scientific.append(plant_name_scientific)
+            random.shuffle(plants_names_scientific)
+            img_0000_filepath = 'images/tmp/tmp-0000.jpg'
+            prompt = f'''
+                a close-up cup of {plants_names_scientific[0]} tea,
+                on a wooden table,
+                surrounded by medicinal herbs,
+                indoor,
+                natural light,
+                depth of field, bokeh,
+                high resolution,
+                cinematic
+            '''
+            image = pipe(prompt=prompt, width=1216, height=832, num_inference_steps=30, guidance_scale=7.0).images[0]
+            image = img_resize(image, w=768, h=512)
+            image.save(img_0000_filepath)
+            text_color = '#ffffff'
+            background_color = '#000000'
+            img_w = 768
+            img_h = 768
+            img = Image.new(mode="RGB", size=(img_w, img_h), color=background_color)
+            draw = ImageDraw.Draw(img)
+            img_0000 = Image.open(img_0000_filepath)
+            img.paste(img_0000, (0, 0))
+            font_sizes = [96, 88, 80, 72, 64, 56, 48, 40,32]
+            text_1 = f'best herbal teas for'.upper()
+            text_1_size = 0
+            text_2 = f'{ailment_name}'.upper()
+            text_2_size = 0
+            font_family, font_weight = 'Lato', 'Bold'
+            font_path = f"{vault}/fonts/{font_family}/{font_family}-{font_weight}.ttf"
+            for font_size in font_sizes:
+                font = ImageFont.truetype(font_path, font_size)
+                _, _, text_w, text_h = font.getbbox(text_1)
+                if text_w + 32*2 < img_w:
+                    text_1_size = font_size
+                    break
+            for font_size in font_sizes:
+                font = ImageFont.truetype(font_path, font_size)
+                _, _, text_w, text_h = font.getbbox(text_2)
+                if text_w + 32*2 < img_w:
+                    text_2_size = font_size
+                    break
+            text_1_y = 0
+            text_2_y = text_1_y + text_1_size
+            text_total_h = text_2_y + text_2_size
+            text_offset_y = 512 + (768-512)//2 - text_total_h//2
+            font = ImageFont.truetype(font_path, text_1_size)
+            _, _, text_w, text_h = font.getbbox(text_1)
+            draw.text((img_w//2 - text_w//2, text_1_y + text_offset_y), text_1, text_color, font=font)
+            font = ImageFont.truetype(font_path, text_2_size)
+            _, _, text_w, text_h = font.getbbox(text_2)
+            draw.text((img_w//2 - text_w//2, text_2_y + text_offset_y), text_2, text_color, font=font)
+            img.save(
+                images_to_validate_filepath,
+                format='JPEG',
+                subsampling=0,
+                quality=70,
+            )
+
+def teas_gen():
+    plants_names_scientific = []
+    for vertex_ailment in vertices_ailments:
+        for tea in vertex_ailment['ailment_teas']:
+            plant_name_scientific = tea['plant_name_scientific']
+            if plant_name_scientific not in plants_names_scientific:
+                plants_names_scientific.append(plant_name_scientific)
+
+    for plant_name_scientific in plants_names_scientific:
+        plant_slug = utils.sluggify(plant_name_scientific)
+        images_to_validate_filepath = f'images/to-validate/{plant_slug}-tea.jpg'
+        images_validated_filepath = f'{website_folderpath}/images/teas/{plant_slug}-tea.jpg'
+        if not os.path.exists(images_validated_filepath):
+            prompt = f'''
+                a close-up cup of {plant_name_scientific} tea,
+                on a wooden table,
+                surrounded by medicinal herbs,
+                indoor,
+                natural light,
+                depth of field, bokeh,
+                high resolution,
+                cinematic
+            '''
+            print(prompt)
+            image = pipe(prompt=prompt, width=1024, height=1024, num_inference_steps=30, guidance_scale=7.0).images[0]
+            image = img_resize(image, w=768, h=768)
+            image.save(images_to_validate_filepath)
 
 # herbs teas
 if 0:
@@ -145,10 +249,6 @@ if 0:
 ##################################################################################
 # ;equipments
 ##################################################################################
-prompt_style = f'''
-    vintage,
-'''
-
 def p_equipments_intro():
     output_filepath = f'{website_folderpath}/images/equipments/herbalists-equipments.jpg'
     if not os.path.exists(output_filepath):
@@ -195,4 +295,12 @@ def a_equipments_intro():
 # p_equipments_intro()
 # a_equipments_intro()
 
-gen_plants()
+prompt_style = f'''
+    vintage,
+'''
+
+# gen_plants()
+
+teas_gen()
+
+ailments_teas_intro()
