@@ -85,7 +85,7 @@ def gen_art_ailment_tea_json(ailment_name, json_article_filepath):
     json_article = json_read(json_article_filepath, create=True)
     json_article['ailment_slug'] = ailment_slug
     json_article['ailment_name'] = ailment_name
-    json_article['url'] = f'ailments/{ailment_slug}/tea.html'
+    json_article['url'] = f'ailments/{ailment_slug}/tea'
     json_article['title'] = f'best herbal teas for {ailment_name}'
     if 'main_lst_num' not in json_article: json_article['main_lst_num'] = random.choice([7, 9, 11, 13])
     json_write(json_article_filepath, json_article)

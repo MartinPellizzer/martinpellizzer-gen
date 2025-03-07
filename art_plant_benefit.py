@@ -20,8 +20,8 @@ def gen_art_plant_benefits_json(vertex_plant, json_article_filepath):
     json_article['plant_slug'] = plant_slug
     json_article['plant_name_scientific'] = plant_name_scientific
     json_article['plant_names_common'] = plant_names_common
-    json_article['url'] = f'herbs/{plant_slug}/benefit.html'
-    json_article['title'] = f'{plant_name_scientific} benefits'
+    json_article['url'] = f'herbs/{plant_slug}/benefit'
+    json_article['title'] = f'best benefits of {plant_name_scientific}'
     if 'main_lst_num' not in json_article: json_article['main_lst_num'] = random.choice([7, 9, 11, 13])
     json_write(json_article_filepath, json_article)
     # intro

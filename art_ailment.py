@@ -133,10 +133,10 @@ def gen_art_ailment_html(html_article_filepath, json_article_filepath):
     json_article = json_read(json_article_filepath)
     ailment_slug = json_article['ailment_slug']
     ailment_name = json_article['ailment_name']
-    page_title = json_article['article_title']
+    page_title = json_article['title']
     html_article = ''
     html_article += f'<h1>{page_title.title()}</h1>\n'
-    # html_article += f'<img src="/images/herbs/{plant_slug}.jpg" alt="{plant_name_scientific}">\n'
+    html_article += f'<img src="/images/ailments/{ailment_slug}.jpg" alt="{ailment_name}">\n'
     html_article += f'{utils.text_format_sentences_html(json_article["intro"])}\n'
     html_article += f'<h2>What is {ailment_name}?</h2>\n'
     html_article += f'{utils.text_format_sentences_html(json_article["what"])}\n'

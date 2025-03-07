@@ -67,7 +67,7 @@ def gen_list_desc(json_article_filepath, regen=False):
                 If you can't answer, reply with only "I can't reply".
                 Start with the following words: {ailment_name.capitalize()} is .
             ''',
-            regen = False,
+            regen = regen,
             print_prompt = True,
         )
 

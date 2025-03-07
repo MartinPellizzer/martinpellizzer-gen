@@ -214,15 +214,16 @@ def p_home():
     '''
     # ;herbs
     html_cards = ''
-    for vertex_herb in vertices_herbs[:4]:
-        herb_slug = vertex_herb['herb_slug']
-        herb_scientific_name = vertex_herb['herb_name_scientific']
-        herb_img_filepath = f'/images/herbs/{vertex_herb["herb_slug"]}.jpg'
+    vertices_plants_filtered = get_vertices_plants_validated()
+    for vertex_plant in vertices_plants_filtered[:4]:
+        plant_slug = vertex_plant['plant_slug']
+        plant_scientific_name = vertex_plant['plant_name_scientific']
+        plant_img_filepath = f'/images/herbs/{vertex_plant["plant_slug"]}.jpg'
         html_card = f'''
-            <a href="/herbs/{herb_slug}.html">
+            <a style="text-decoration: none;" href="/herbs/{plant_slug}.html">
                 <div>
-                    <img class="mb-8" src="{herb_img_filepath}">
-                    <h3 class="mt-0">{herb_scientific_name.capitalize()}</h3>
+                    <img class="mb-8" src="{plant_img_filepath}">
+                    <h3 class="mt-0" style="font-size: 20px;">{plant_scientific_name.capitalize()}</h3>
                 </div>
             </a>
         '''
@@ -232,6 +233,33 @@ def p_home():
             <div class="flex justify-between items-center mb-16">
                 <h2 class="mt-0 mb-0">Herbs</h2>
                 <p class="mb-0"><a href="/herbs.html">All Herbs ></a></p>
+            </div>
+            <div class="grid-4 gap-48">
+                {html_cards}
+            </div>
+        </section>
+    '''
+    # ;ailments
+    with open('ailments.csv') as f: 
+        ailments_names = [line.lower().strip() for line in f.read().split('\n') if line.strip() != '']
+    html_cards = ''
+    for ailment_name in ailments_names[:4]:
+        ailment_slug = utils.sluggify(ailment_name)
+        ailment_img_filepath = f'/images/ailments/{ailment_slug}.jpg'
+        html_card = f'''
+            <a style="text-decoration: none;" href="/ailments/{ailment_slug}.html">
+                <div>
+                    <img class="mb-8" src="{ailment_img_filepath}">
+                    <h3 class="mt-0" style="font-size: 20px;">{ailment_name.capitalize()}</h3>
+                </div>
+            </a>
+        '''
+        html_cards += html_card
+    html_section_ailments = f'''
+        <section class="container-xl">
+            <div class="flex justify-between items-center mb-16">
+                <h2 class="mt-0 mb-0">Ailments</h2>
+                <p class="mb-0"><a href="/ailments.html">All Ailments ></a></p>
             </div>
             <div class="grid-4 gap-48">
                 {html_cards}
@@ -270,14 +298,15 @@ def p_home():
             {components.html_header()}
             {html_section_hero}
             {html_section_herbs}
-            {html_section_equipments}
+            {html_section_ailments}
             {components.html_footer()}
         </body>
         </html>
     '''
+            # {html_section_equipments}
     with open(f'{g.WEBSITE_FOLDERPATH}/index.html', 'w') as f:
         f.write(html)
-    
+
 def ai_paragraph_gen(filepath, data, obj, key, prompt, regen=False, print_prompt=False):
     if key not in obj: obj[key] = ''
     if regen: obj[key] = ''
@@ -2421,7 +2450,6 @@ if 1:
     if 0:
         for vertex_plant in vertices_plants_filtered:
             a_plant_uses(vertex_plant, regen=regen, regen_return=regen_return)
-            # a_plant_benefits(vertex_plant, regen=regen, regen_return=regen_return)
             a_plant_properties(vertex_plant, regen=regen)
             a_plant_constituents(vertex_plant, regen=regen)
             a_plant_parts(vertex_plant, regen=regen)
@@ -2429,7 +2457,6 @@ if 1:
             a_plant_side_effects(vertex_plant, regen=regen)
     if 1:
         for vertex_plant in vertices_plants_filtered:
-            # a_plant(vertex_plant) # NOTE: not working anymore, use only for code reference
             gen_art_plant(vertex_plant)
     if 1:
         p_plants(regen=False)

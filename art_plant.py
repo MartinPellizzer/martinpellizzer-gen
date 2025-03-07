@@ -231,7 +231,7 @@ def gen_art_plant_html(html_article_filepath, json_article_filepath):
     html_intro_toc = components.toc_json_to_html_article(json_toc)
     html_article = html_article.replace('[html_intro_toc]', html_intro_toc)
     html_toc_sidebar = components.toc_json_to_html_sidebar(json_toc)
-    html_breadcrumbs = components.breadcrumbs(f'herbs/{plant_slug}/benefit.html')
+    html_breadcrumbs = components.breadcrumbs(f'herbs/{plant_slug}.html')
     html = f'''
         <!DOCTYPE html>
         <html lang="en">
