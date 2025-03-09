@@ -10,8 +10,9 @@ from PIL import Image, ImageFont, ImageDraw
 from oliark_llm import llm_reply
 from oliark_io import json_read, json_write
 
-from art_plant_benefit import gen_art_plant_benefits
+from art_plants import gen_art_plants
 from art_plant import gen_art_plant
+from art_plant_benefit import gen_art_plant_benefits
 
 from art_ailments import gen_art_ailments
 from art_ailment import gen_art_ailment
@@ -2459,7 +2460,8 @@ if 1:
         for vertex_plant in vertices_plants_filtered:
             gen_art_plant(vertex_plant)
     if 1:
-        p_plants(regen=False)
+        gen_art_plants()
+        # p_plants(regen=False)
 
 # preparations
 if 0:
