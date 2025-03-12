@@ -88,6 +88,8 @@ def gen_art_ailments_html(html_article_filepath, json_article_filepath):
     html_article += f'<h1>Ailments</h1>\n'
     # html_article += f'<img src="/images/herbs/{plant_slug}.jpg" alt="{plant_name_scientific}">\n'
     html_article += f'{utils.text_format_sentences_html(json_article["intro"])}\n'
+    html_article += f'<p style="margin-top: 16px; margin-bottom: 32px;">This page lists the most common ailments to treat with medicinal herbs.</p>\n'
+    html_article += f'[html_intro_toc]\n'
     for i, ailment in enumerate(json_article['ailments']):
         ailment_name = ailment['ailment_name']
         ailment_desc = ailment['ailment_desc']

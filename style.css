@@ -9,7 +9,6 @@ html {
 }
 
 body {
-    font-size: 1.8rem;
     font-size: 1.6rem;
     line-height: 2.7rem;
     line-height: 2.4rem;
@@ -68,8 +67,8 @@ ul {
 
 li {
     color: #303030;
-    font-size: 1.8rem;
-    line-height: 2.7rem;
+    font-size: 1.6rem;
+    line-height: 2.4rem;
     padding-bottom: 0.8rem;
 }
 
@@ -535,6 +534,11 @@ BREADCRUMBS
 /**********************************************
 ARTICLE
 **********************************************/
+.article h1 {
+    font-size: 56px;
+    margin-top: 16px;
+}
+
 @media screen and (max-width: 576px) {
     .article h1 {
         font-size: 48px;

@@ -322,79 +322,6 @@ def ai_paragraph_gen(filepath, data, obj, key, prompt, regen=False, print_prompt
             obj[key] = reply
             json_write(filepath, data)
 
-def p_plants(regen=False):
-    vertices_plants_filtered = get_vertices_plants_validated()
-    json_article_filepath = f'database/pages/herbs.json'
-    json_article = json_read(json_article_filepath, create=True)
-    if 'plants' not in json_article: json_article['plants'] = []
-    if regen: json_article['plants'] = []
-    # json_article['plants'] = []
-    for vertex_plant in vertices_plants_filtered:
-        plant_slug = vertex_plant['plant_slug']
-        plant_name_scientific = vertex_plant['plant_name_scientific']
-        plant_names_common = [item['name'] for item in vertex_plant['plant_names_common']]
-        plant_name_common = plant_names_common[0]
-        # add if doesn't exist
-        found = False
-        for _obj in json_article['plants']:
-            if plant_slug == _obj['plant_slug']:
-                found = True
-                break
-        if not found:
-            json_article['plants'].append({
-                'plant_slug': plant_slug,
-                'plant_name_scientific': plant_name_scientific,
-                'plant_name_common': plant_name_common,
-            })
-            json_write(json_article_filepath, json_article)
-        # update
-        plant_obj = {}
-        for _plant_obj in json_article['plants']:
-            if plant_slug == _plant_obj['plant_slug']:
-                plant_obj = _plant_obj
-                break
-        ai_paragraph_gen(
-            key = 'plant_desc', 
-            filepath = json_article_filepath, 
-            data = json_article, 
-            obj = plant_obj, 
-            prompt = f'''
-                Write a short 3-sentence paragraph about the following medicinal herb: {plant_name_scientific}.
-                Start the reply with the following words: {plant_name_scientific}, also known as {plant_name_common}, .
-            ''',
-            regen = False,
-        )
-    html_article = ''
-    plants_num = len(vertices_plants_filtered)
-    html_article += f'''<h1>{plants_num} Best Medicinal Herbs For Herbalists</h1>'''
-    for i, plant in enumerate(json_article['plants']):
-        plant_slug = plant['plant_slug']
-        plant_name_scientific = plant['plant_name_scientific']
-        plant_name_common = plant['plant_name_common']
-        plant_desc = plant['plant_desc']
-        html_article += f'<h2>{i+1}. {plant_name_scientific.capitalize()} ({plant_name_common})</h2>\n'
-        html_article += f'''<img src="/images/herbs/{plant_slug}.jpg" alt="{plant_name_scientific}">\n'''
-        html_article += f'{utils.text_format_sentences_html(plant_desc)}\n'
-        html_article += f'<p><a href="/herbs/{plant_slug}.html">{plant_name_scientific}</a></p>\n'
-    title = 'herbs'
-    html_head = components.html_head(title)
-    html_breadcrumbs = components.breadcrumbs(f'herbs.html')
-    html_article_layout = html_article_layout_gen(html_article)
-    html = f'''
-        <!DOCTYPE html>
-        <html lang="en">
-        {html_head}
-        <body>
-            {components.html_header()}
-            {html_breadcrumbs}
-            {html_article_layout}
-            {components.html_footer()}
-        </body>
-        </html>
-    '''
-    with open(f'{g.WEBSITE_FOLDERPATH}/herbs.html', 'w') as f:
-        f.write(html)
-
 def a_plant(vertex_plant):
     plant_slug = vertex_plant['plant_slug']
     plant_name_scientific = vertex_plant['plant_name_scientific']
@@ -2442,7 +2369,6 @@ p_home()
 # herbs
 if 1:
     vertices_plants_filtered = get_vertices_plants_validated()
-    print(vertices_plants_filtered)
     regen = False
     regen_return = False
     if 1:
@@ -2461,7 +2387,6 @@ if 1:
             gen_art_plant(vertex_plant)
     if 1:
         gen_art_plants()
-        # p_plants(regen=False)
 
 # preparations
 if 0:
@@ -2479,7 +2404,7 @@ if 0:
     p_equipments(equipments_slugs)
 
 # ailments
-if 1:
+if 0:
     with open('ailments.csv') as f: 
         ailments_names = [line.lower().strip() for line in f.read().split('\n') if line.strip() != '']
     if 1:

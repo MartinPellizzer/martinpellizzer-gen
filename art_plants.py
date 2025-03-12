@@ -38,7 +38,7 @@ def get_vertices_plants_validated():
             vertices_plants_filtered.append(vertex_plant)
     return vertices_plants_filtered
     
-def gen_intro(json_article_filepath):
+def gen_intro(json_article_filepath, regen):
     json_article = json_read(json_article_filepath)
     llm.ai_paragraph_gen(
         key = 'intro',
@@ -101,7 +101,7 @@ def gen_art_plants_json(json_article_filepath):
     json_article['title'] = f'medicinal herbs'
     json_write(json_article_filepath, json_article)
 
-    gen_intro(json_article_filepath)
+    gen_intro(json_article_filepath, regen=False)
     gen_list_init(json_article_filepath, regen=False)
     gen_list_desc(json_article_filepath, regen=False)
 
@@ -112,6 +112,8 @@ def gen_art_plants_html(html_article_filepath, json_article_filepath):
     html_article += f'<h1>Medicinal Herbs</h1>\n'
     # html_article += f'<img src="/images/herbs/{plant_slug}.jpg" alt="{plant_name_scientific}">\n'
     html_article += f'{utils.text_format_sentences_html(json_article["intro"])}\n'
+    html_article += f'<p style="margin-top: 16px; margin-bottom: 32px;">This page lists the best medicinal herbs used in herbalism.</p>\n'
+    html_article += f'[html_intro_toc]\n'
     for i, plant in enumerate(json_article['plants']):
         plant_name_scientific = plant['plant_name_scientific']
         plant_desc = plant['plant_desc']
@@ -119,7 +121,18 @@ def gen_art_plants_html(html_article_filepath, json_article_filepath):
         html_article += f'<h2>{i+1}. {plant_name_scientific.capitalize()}</h2>\n'
         html_article += f'<img src="/images/herbs/{plant_slug}.jpg" alt="{plant_name_scientific}">\n'
         html_article += f'{utils.text_format_sentences_html(plant_desc)}\n'
-        html_article += f'<p>Check <a href="/herbs/{plant_slug}.html">{plant_name_scientific} medicinal info</a>.</p>\n'
+        # plant benefits list
+        html_article += f'<p style="font-weight: bold;">Example Benefits:</p>\n'
+        json_article_plant_benefits_filepath = f'database/pages/herbs/{plant_slug}/benefit.json'
+        json_article_plant_benefits = json_read(json_article_plant_benefits_filepath)
+        benefits_names = [benefit['benefit_name'] for benefit in json_article_plant_benefits['plant_benefits']]
+        html_article += f'<ul>\n'
+        rnd_benefit_num = random.randint(3, 5)
+        for benefit_name in benefits_names[:rnd_benefit_num]:
+            html_article += f'<li>{benefit_name.capitalize()}</li>\n'
+        html_article += f'</ul>\n'
+        # link
+        html_article += f'<p>Check <a href="/herbs/{plant_slug}.html">{plant_name_scientific.title()} Complete Medicinal Profile</a>.</p>\n'
     html_article, json_toc = components.toc(html_article)
     html_intro_toc = components.toc_json_to_html_article(json_toc)
     html_article = html_article.replace('[html_intro_toc]', html_intro_toc)

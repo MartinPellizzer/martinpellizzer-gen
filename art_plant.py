@@ -41,11 +41,11 @@ def gen_intro_study(vertex_plant, json_article_filepath):
             json_article[key] = reply
             json_write(json_article_filepath, json_article)
 
-def gen_benefits(vertex_plant, json_article_filepath):
+def gen_benefits_desc(vertex_plant, json_article_filepath):
     plant_name_scientific = vertex_plant['plant_name_scientific']
     json_article = json_read(json_article_filepath)
     llm.ai_paragraph_gen(
-        key = 'benefits',
+        key = 'benefits_desc',
         filepath = json_article_filepath, 
         data = json_article, 
         obj = json_article, 
@@ -63,11 +63,35 @@ def gen_benefits(vertex_plant, json_article_filepath):
         print_prompt = True,
     )
 
-def gen_actions(vertex_plant, json_article_filepath):
+def gen_benefits_list(vertex_plant, json_article_filepath):
+    plant_name_scientific = vertex_plant['plant_name_scientific']
+    json_article = json_read(json_article_filepath)
+    llm.gen_json_list(
+        key = 'benefits_list',
+        filepath = json_article_filepath, 
+        data = json_article, 
+        obj = json_article, 
+        prompt = f'''
+            Write a list of 7 benefits names and descriptions of the {plant_name_scientific} plant.
+            Reply in JSON using the following format:
+            [
+                {{"name": "write name of benefit 1 here", "description": "write description of benefit 1 here"}},
+                {{"name": "write name of benefit 2 here", "description": "write description of benefit 2 here"}},
+                {{"name": "write name of benefit 3 here", "description": "write description of benefit 3 here"}}
+            ]
+            Always start the reply with character "[" and end it with character "]".
+            If you can answer, reply with only the JSON.
+            If you can't answer, reply with only "I can't reply".
+        ''',
+        regen = False,
+        print_prompt = True,
+    )
+
+def gen_actions_desc(vertex_plant, json_article_filepath):
     plant_name_scientific = vertex_plant['plant_name_scientific']
     json_article = json_read(json_article_filepath)
     llm.ai_paragraph_gen(
-        key = 'actions',
+        key = 'actions_desc',
         filepath = json_article_filepath, 
         data = json_article, 
         obj = json_article, 
@@ -85,11 +109,36 @@ def gen_actions(vertex_plant, json_article_filepath):
         print_prompt = True,
     )
 
-def gen_constituents(vertex_plant, json_article_filepath):
+def gen_actions_list(vertex_plant, json_article_filepath):
+    plant_name_scientific = vertex_plant['plant_name_scientific']
+    json_article = json_read(json_article_filepath)
+    llm.gen_json_list(
+        key = 'actions_list',
+        filepath = json_article_filepath, 
+        data = json_article, 
+        obj = json_article, 
+        prompt = f'''
+            Write a list of 7 therapeutic actions names and descriptions of the {plant_name_scientific} plant.
+            Examples of actions are: antiseptic, nervine, etc.
+            Reply in JSON using the following format:
+            [
+                {{"name": "write name of action 1 here", "description": "write description of action 1 here"}},
+                {{"name": "write name of action 2 here", "description": "write description of action 2 here"}},
+                {{"name": "write name of action 3 here", "description": "write description of action 3 here"}}
+            ]
+            Always start the reply with character "[" and end it with character "]".
+            If you can answer, reply with only the JSON.
+            If you can't answer, reply with only "I can't reply".
+        ''',
+        regen = False,
+        print_prompt = True,
+    )
+
+def gen_constituents_desc(vertex_plant, json_article_filepath):
     plant_name_scientific = vertex_plant['plant_name_scientific']
     json_article = json_read(json_article_filepath)
     llm.ai_paragraph_gen(
-        key = 'constituents',
+        key = 'constituents_desc',
         filepath = json_article_filepath, 
         data = json_article, 
         obj = json_article, 
@@ -106,11 +155,36 @@ def gen_constituents(vertex_plant, json_article_filepath):
         print_prompt = True,
     )
 
-def gen_parts(vertex_plant, json_article_filepath):
+def gen_constituents_list(vertex_plant, json_article_filepath):
+    plant_name_scientific = vertex_plant['plant_name_scientific']
+    json_article = json_read(json_article_filepath)
+    llm.gen_json_list(
+        key = 'constituents_list',
+        filepath = json_article_filepath, 
+        data = json_article, 
+        obj = json_article, 
+        prompt = f'''
+            Write a list of 7 biochemical costituents names and descriptions of the {plant_name_scientific} plant.
+            Examples of constituents are: tannins, flavonoids, etc.
+            Reply in JSON using the following format:
+            [
+                {{"name": "write name of constituent 1 here", "description": "write description of constituent 1 here"}},
+                {{"name": "write name of constituent 2 here", "description": "write description of constituent 2 here"}},
+                {{"name": "write name of constituent 3 here", "description": "write description of constituent 3 here"}}
+            ]
+            Always start the reply with character "[" and end it with character "]".
+            If you can answer, reply with only the JSON.
+            If you can't answer, reply with only "I can't reply".
+        ''',
+        regen = False,
+        print_prompt = True,
+    )
+
+def gen_parts_desc(vertex_plant, json_article_filepath):
     plant_name_scientific = vertex_plant['plant_name_scientific']
     json_article = json_read(json_article_filepath)
     llm.ai_paragraph_gen(
-        key = 'parts',
+        key = 'parts_desc',
         filepath = json_article_filepath, 
         data = json_article, 
         obj = json_article, 
@@ -126,11 +200,36 @@ def gen_parts(vertex_plant, json_article_filepath):
         print_prompt = True,
     )
 
-def gen_preparations(vertex_plant, json_article_filepath):
+def gen_parts_list(vertex_plant, json_article_filepath):
+    plant_name_scientific = vertex_plant['plant_name_scientific']
+    json_article = json_read(json_article_filepath)
+    llm.gen_json_list(
+        key = 'parts_list',
+        filepath = json_article_filepath, 
+        data = json_article, 
+        obj = json_article, 
+        prompt = f'''
+            Write a list of 7 medicinal parts names and descriptions of the {plant_name_scientific} plant.
+            Examples of parts are: leaves, flowers, roots, etc.
+            Reply in JSON using the following format:
+            [
+                {{"name": "write name of part 1 here", "description": "write description of part 1 here"}},
+                {{"name": "write name of part 2 here", "description": "write description of part 2 here"}},
+                {{"name": "write name of part 3 here", "description": "write description of part 3 here"}}
+            ]
+            Always start the reply with character "[" and end it with character "]".
+            If you can answer, reply with only the JSON.
+            If you can't answer, reply with only "I can't reply".
+        ''',
+        regen = False,
+        print_prompt = True,
+    )
+
+def gen_preparations_desc(vertex_plant, json_article_filepath):
     plant_name_scientific = vertex_plant['plant_name_scientific']
     json_article = json_read(json_article_filepath)
     llm.ai_paragraph_gen(
-        key = 'preparations',
+        key = 'preparations_desc',
         filepath = json_article_filepath, 
         data = json_article, 
         obj = json_article, 
@@ -146,11 +245,36 @@ def gen_preparations(vertex_plant, json_article_filepath):
         print_prompt = True,
     )
 
-def gen_side_effects(vertex_plant, json_article_filepath):
+def gen_preparations_list(vertex_plant, json_article_filepath):
+    plant_name_scientific = vertex_plant['plant_name_scientific']
+    json_article = json_read(json_article_filepath)
+    llm.gen_json_list(
+        key = 'preparations_list',
+        filepath = json_article_filepath, 
+        data = json_article, 
+        obj = json_article, 
+        prompt = f'''
+            Write a list of 7 herbal preparations names and descriptions of the {plant_name_scientific} plant.
+            Examples of parts are: infusions, tinctures, etc.
+            Reply in JSON using the following format:
+            [
+                {{"name": "write name of preparation 1 here", "description": "write description of preparation 1 here"}},
+                {{"name": "write name of preparation 2 here", "description": "write description of preparation 2 here"}},
+                {{"name": "write name of preparation 3 here", "description": "write description of preparation 3 here"}}
+            ]
+            Always start the reply with character "[" and end it with character "]".
+            If you can answer, reply with only the JSON.
+            If you can't answer, reply with only "I can't reply".
+        ''',
+        regen = False,
+        print_prompt = True,
+    )
+
+def gen_side_effects_desc(vertex_plant, json_article_filepath):
     plant_name_scientific = vertex_plant['plant_name_scientific']
     json_article = json_read(json_article_filepath)
     llm.ai_paragraph_gen(
-        key = 'side_effects',
+        key = 'side_effects_desc',
         filepath = json_article_filepath, 
         data = json_article, 
         obj = json_article, 
@@ -163,6 +287,30 @@ def gen_side_effects(vertex_plant, json_article_filepath):
             Make a lot of examples of side effects of this plant.
             If you can't answer, reply with only "I can't reply".
             Start with the following words: {plant_name_scientific.capitalize()} side effects are .
+        ''',
+        regen = False,
+        print_prompt = True,
+    )
+
+def gen_side_effects_list(vertex_plant, json_article_filepath):
+    plant_name_scientific = vertex_plant['plant_name_scientific']
+    json_article = json_read(json_article_filepath)
+    llm.gen_json_list(
+        key = 'side_effects_list',
+        filepath = json_article_filepath, 
+        data = json_article, 
+        obj = json_article, 
+        prompt = f'''
+            Write a list of 7 side effects names and descriptions of the {plant_name_scientific} plant.
+            Reply in JSON using the following format:
+            [
+                {{"name": "write name of side effect 1 here", "description": "write description of side effect 1 here"}},
+                {{"name": "write name of side effect 2 here", "description": "write description of side effect 2 here"}},
+                {{"name": "write name of side effect 3 here", "description": "write description of side effect 3 here"}}
+            ]
+            Always start the reply with character "[" and end it with character "]".
+            If you can answer, reply with only the JSON.
+            If you can't answer, reply with only "I can't reply".
         ''',
         regen = False,
         print_prompt = True,
@@ -182,20 +330,26 @@ def gen_art_plant_json(vertex_plant, json_article_filepath):
 
     gen_intro(vertex_plant, json_article_filepath)
     gen_intro_study(vertex_plant, json_article_filepath)
-    gen_benefits(vertex_plant, json_article_filepath)
-    gen_actions(vertex_plant, json_article_filepath)
-    gen_constituents(vertex_plant, json_article_filepath)
-    gen_parts(vertex_plant, json_article_filepath)
-    gen_preparations(vertex_plant, json_article_filepath)
-    gen_side_effects(vertex_plant, json_article_filepath)
+    gen_benefits_desc(vertex_plant, json_article_filepath)
+    gen_benefits_list(vertex_plant, json_article_filepath)
+    gen_actions_desc(vertex_plant, json_article_filepath)
+    gen_actions_list(vertex_plant, json_article_filepath)
+    gen_constituents_desc(vertex_plant, json_article_filepath)
+    gen_constituents_list(vertex_plant, json_article_filepath)
+    gen_parts_desc(vertex_plant, json_article_filepath)
+    gen_parts_list(vertex_plant, json_article_filepath)
+    gen_preparations_desc(vertex_plant, json_article_filepath)
+    gen_preparations_list(vertex_plant, json_article_filepath)
+    gen_side_effects_desc(vertex_plant, json_article_filepath)
+    gen_side_effects_list(vertex_plant, json_article_filepath)
 
 def gen_art_plant_html(html_article_filepath, json_article_filepath):
     json_article = json_read(json_article_filepath)
     plant_slug = json_article['plant_slug']
     plant_name_scientific = json_article['plant_name_scientific'].capitalize()
-    page_title = plant_name_scientific
+    page_title = f'{plant_name_scientific.title()} Complete Medicinal Profile'
     html_article = ''
-    html_article += f'<h1>{plant_name_scientific.capitalize()}</h1>\n'
+    html_article += f'<h1>{plant_name_scientific.title()}: Complete Medicinal Profile</h1>\n'
     html_article += f'<img src="/images/herbs/{plant_slug}.jpg" alt="{plant_name_scientific}">\n'
     html_article += f'{utils.text_format_sentences_html(json_article["intro"])}\n'
     if json_article['intro_study'] != '' and json_article['intro_study'] != 'N/A':
@@ -212,21 +366,74 @@ def gen_art_plant_html(html_article_filepath, json_article_filepath):
                 </p>
             </div>
         '''
-    html_article += f'<p style="margin-top: 16px; margin-bottom: 32px;">This page analize the most important medicinal aspects of of {plant_name_scientific.capitalize()}.</p>\n'
+    html_article += f'<p style="margin-top: 16px; margin-bottom: 32px;">This page analize the most important medicinal aspects of {plant_name_scientific.capitalize()}.</p>\n'
     html_article += f'[html_intro_toc]\n'
     html_article += f'<h2>Uses and Benefits</h2>\n'
-    html_article += f'{utils.text_format_sentences_html(json_article["benefits"])}\n'
+    html_article += f'{utils.text_format_sentences_html(json_article["benefits_desc"])}\n'
+    html_article += f'<p>The health benefits of {plant_name_scientific.capitalize()} are listed below.</p>\n'
+    if 'benefits_list' in json_article:
+        html_article += f'<ul>\n'
+        for benefit_list in json_article['benefits_list']:
+            benefit_name = benefit_list['name']
+            benefit_desc = benefit_list['desc']
+            html_article += f'<li><span style="font-weight: bold;">{benefit_name.capitalize()}</span>: {benefit_desc.capitalize()}</li>\n'
+        html_article += f'</ul>\n'
     html_article += f'<p>Here are the <a href="/herbs/{plant_slug}/benefit.html">best health benefits of {plant_name_scientific}</a>.</p>\n'
-    html_article += f'<h2>Properties and Actions</h2>\n'
-    html_article += f'{utils.text_format_sentences_html(json_article["actions"])}\n'
+
+    html_article += f'<h2>Actions</h2>\n'
+    html_article += f'{utils.text_format_sentences_html(json_article["actions_desc"])}\n'
+    html_article += f'<p>The therapeutic actions of {plant_name_scientific.capitalize()} are listed below.</p>\n'
+    if 'actions_list' in json_article:
+        html_article += f'<ul>\n'
+        for action_list in json_article['actions_list']:
+            action_name = action_list['name']
+            action_desc = action_list['desc']
+            html_article += f'<li><span style="font-weight: bold;">{action_name.capitalize()}</span>: {action_desc.capitalize()}</li>\n'
+        html_article += f'</ul>\n'
+
     html_article += f'<h2>Constituents</h2>\n'
-    html_article += f'{utils.text_format_sentences_html(json_article["constituents"])}\n'
+    html_article += f'{utils.text_format_sentences_html(json_article["constituents_desc"])}\n'
+    html_article += f'<p>The bioactive constituents of {plant_name_scientific.capitalize()} are listed below.</p>\n'
+    if 'constituents_list' in json_article:
+        html_article += f'<ul>\n'
+        for constituent_list in json_article['constituents_list']:
+            constituent_name = constituent_list['name']
+            constituent_desc = constituent_list['desc']
+            html_article += f'<li><span style="font-weight: bold;">{constituent_name.capitalize()}</span>: {constituent_desc.capitalize()}</li>\n'
+        html_article += f'</ul>\n'
     html_article += f'<h2>Parts</h2>\n'
-    html_article += f'{utils.text_format_sentences_html(json_article["parts"])}\n'
+    html_article += f'{utils.text_format_sentences_html(json_article["parts_desc"])}\n'
+    html_article += f'<p>The medicinal parts of {plant_name_scientific.capitalize()} are listed below.</p>\n'
+    if 'parts_list' in json_article:
+        html_article += f'<ul>\n'
+        for part_list in json_article['parts_list']:
+            part_name = part_list['name']
+            part_desc = part_list['desc']
+            html_article += f'<li><span style="font-weight: bold;">{part_name.capitalize()}</span>: {part_desc.capitalize()}</li>\n'
+        html_article += f'</ul>\n'
+
     html_article += f'<h2>Preparations</h2>\n'
-    html_article += f'{utils.text_format_sentences_html(json_article["preparations"])}\n'
+    html_article += f'{utils.text_format_sentences_html(json_article["preparations_desc"])}\n'
+    html_article += f'<p>The herbal preparations of {plant_name_scientific.capitalize()} are listed below.</p>\n'
+    if 'preparations_list' in json_article:
+        html_article += f'<ul>\n'
+        for preparation_list in json_article['preparations_list']:
+            preparation_name = preparation_list['name']
+            preparation_desc = preparation_list['desc']
+            html_article += f'<li><span style="font-weight: bold;">{preparation_name.capitalize()}</span>: {preparation_desc.capitalize()}</li>\n'
+        html_article += f'</ul>\n'
+
     html_article += f'<h2>Side Effects</h2>\n'
-    html_article += f'{utils.text_format_sentences_html(json_article["side_effects"])}\n'
+    html_article += f'{utils.text_format_sentences_html(json_article["side_effects_desc"])}\n'
+    html_article += f'<p>The possible side effects of {plant_name_scientific.capitalize()} are listed below.</p>\n'
+    if 'side_effects_list' in json_article:
+        html_article += f'<ul>\n'
+        for side_effect_list in json_article['side_effects_list']:
+            side_effect_name = side_effect_list['name']
+            side_effect_desc = side_effect_list['desc']
+            html_article += f'<li><span style="font-weight: bold;">{side_effect_name.capitalize()}</span>: {side_effect_desc.capitalize()}</li>\n'
+        html_article += f'</ul>\n'
+
     html_article, json_toc = components.toc(html_article)
     html_intro_toc = components.toc_json_to_html_article(json_toc)
     html_article = html_article.replace('[html_intro_toc]', html_intro_toc)
@@ -265,3 +472,4 @@ def gen_art_plant(vertex_plant):
 
     gen_art_plant_json(vertex_plant, json_article_filepath)
     gen_art_plant_html(html_article_filepath, json_article_filepath)
+

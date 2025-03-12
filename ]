@@ -1,0 +1,308 @@
+import os
+
+from oliark_io import json_read, json_write
+
+import g
+import llm
+import utils
+import studies
+import components
+
+def gen_intro(vertex_plant, json_article_filepath):
+    plant_name_scientific = vertex_plant['plant_name_scientific']
+    json_article = json_read(json_article_filepath)
+    llm.ai_paragraph_gen(
+        key = 'intro',
+        filepath = json_article_filepath, 
+        data = json_article, 
+        obj = json_article, 
+        prompt = f'''
+            Write a short 4-sentence paragraph about the {plant_name_scientific} plant.
+            Include a definition of what this plant is.
+            Include the medicinal properties.
+            Include the health benefits.
+            Include the herbal preparations.
+            If you can't answer, reply with only "I can't reply".
+            Start with the following words: {plant_name_scientific.capitalize()} .
+        ''',
+        regen = False,
+        print_prompt = True,
+    )
+
+def gen_intro_study(vertex_plant, json_article_filepath):
+    plant_name_scientific = vertex_plant['plant_name_scientific']
+    json_article = json_read(json_article_filepath)
+    key = 'intro_study'
+    if key not in json_article: json_article[key] = ''
+    # json_article[key] = ''
+    if json_article[key] == '':
+        reply = studies.gen_plant_study_intro(plant_name_scientific.capitalize())
+        if reply.strip() != '':
+            json_article[key] = reply
+            json_write(json_article_filepath, json_article)
+
+def gen_benefits_desc(vertex_plant, json_article_filepath):
+    plant_name_scientific = vertex_plant['plant_name_scientific']
+    json_article = json_read(json_article_filepath)
+    llm.ai_paragraph_gen(
+        key = 'benefits_desc',
+        filepath = json_article_filepath, 
+        data = json_article, 
+        obj = json_article, 
+        prompt = f'''
+            Write a short 4-sentence paragraph about the benefits of the {plant_name_scientific} plant.
+            Include the medicinal uses.
+            Include the health benefits.
+            Don't include the bioactive constituents.
+            Don't include the therapeutic properties.
+            Make a lot of examples of health benefits.
+            If you can't answer, reply with only "I can't reply".
+            Start with the following words: {plant_name_scientific.capitalize()} is used to .
+        ''',
+        regen = False,
+        print_prompt = True,
+    )
+
+def gen_benefits_list(vertex_plant, json_article_filepath):
+    plant_name_scientific = vertex_plant['plant_name_scientific']
+    json_article = json_read(json_article_filepath)
+    llm.ai_list_gen(
+        key = 'benefits_list',
+        filepath = json_article_filepath, 
+        data = json_article, 
+        obj = json_article, 
+        prompt = f'''
+            Write a numbered list of 3-5 benefits of the {plant_name_scientific} plant.
+            Use the following format for each list item: benefit_name: 
+            Include the medicinal uses.
+            Include the health benefits.
+            Don't include the bioactive constituents.
+            Don't include the therapeutic properties.
+            Make a lot of examples of health benefits.
+            If you can't answer, reply with only "I can't reply".
+            Start with the following words: {plant_name_scientific.capitalize()} is used to .
+        ''',
+        regen = False,
+        print_prompt = True,
+    )
+    for i, plant in enumerate(json_article['plants']):
+        plant_name_scientific = plant['plant_name_scientific']
+        plant_desc = plant['plant_desc']
+        plant_slug = utils.sluggify(plant_name_scientific)
+        html_article += f'<h2>{i+1}. {plant_name_scientific.capitalize()}</h2>\n'
+        html_article += f'<img src="/images/herbs/{plant_slug}.jpg" alt="{plant_name_scientific}">\n'
+        html_article += f'{utils.text_format_sentences_html(plant_desc)}\n'
+        # plant benefits list
+        html_article += f'<p style="font-weight: bold;">Example Benefits:</p>\n'
+        json_article_plant_benefits_filepath = f'database/pages/herbs/{plant_slug}/benefit.json'
+        json_article_plant_benefits = json_read(json_article_plant_benefits_filepath)
+        benefits_names = [benefit['benefit_name'] for benefit in json_article_plant_benefits['plant_benefits']]
+        html_article += f'<ul>\n'
+        rnd_benefit_num = random.randint(3, 5)
+        for benefit_name in benefits_names[:rnd_benefit_num]:
+            html_article += f'<li>{benefit_name.capitalize()}</li>\n'
+
+def gen_actions(vertex_plant, json_article_filepath):
+    plant_name_scientific = vertex_plant['plant_name_scientific']
+    json_article = json_read(json_article_filepath)
+    llm.ai_paragraph_gen(
+        key = 'actions',
+        filepath = json_article_filepath, 
+        data = json_article, 
+        obj = json_article, 
+        prompt = f'''
+            Write a short 4-sentence paragraph about the therapeutic actions of the {plant_name_scientific} plant.
+            Include the therapeutic actions (ex. anti-inflammatory, nervine, etc...).
+            Include the body systems most affected by these actions (ex. digestive system, cardiovascular system, etc...).
+            Don't include the uses.
+            Don't include the ailments.
+            Make a lot of examples of therapeutic actions of this plant.
+            If you can't answer, reply with only "I can't reply".
+            Start with the following words: {plant_name_scientific.capitalize()} has .
+        ''',
+        regen = False,
+        print_prompt = True,
+    )
+
+def gen_constituents(vertex_plant, json_article_filepath):
+    plant_name_scientific = vertex_plant['plant_name_scientific']
+    json_article = json_read(json_article_filepath)
+    llm.ai_paragraph_gen(
+        key = 'constituents',
+        filepath = json_article_filepath, 
+        data = json_article, 
+        obj = json_article, 
+        prompt = f'''
+            Write a short 4-sentence paragraph about the bioactive constituents of the {plant_name_scientific} plant for health purposes.
+            Include the bioactive constituents (ex. flavonoids, tannins, etc...).
+            Include the healing properties each of these constituents has.
+            Don't include the ailments.
+            Make a lot of examples of bioactive constituents of this plant.
+            If you can't answer, reply with only "I can't reply".
+            Start with the following words: {plant_name_scientific.capitalize()} has .
+        ''',
+        regen = False,
+        print_prompt = True,
+    )
+
+def gen_parts(vertex_plant, json_article_filepath):
+    plant_name_scientific = vertex_plant['plant_name_scientific']
+    json_article = json_read(json_article_filepath)
+    llm.ai_paragraph_gen(
+        key = 'parts',
+        filepath = json_article_filepath, 
+        data = json_article, 
+        obj = json_article, 
+        prompt = f'''
+            Write a short 4-sentence paragraph about the most commonly used parts of the {plant_name_scientific} plant for health purposes.
+            Include the parts names (ex. roots, leaves, flowers, etc...).
+            Include the uses of those parts.
+            Make a lot of examples of uses of these parts.
+            If you can't answer, reply with only "I can't reply".
+            Start with the following words: The most commoly used parts of {plant_name_scientific.capitalize()} are .
+        ''',
+        regen = False,
+        print_prompt = True,
+    )
+
+def gen_preparations(vertex_plant, json_article_filepath):
+    plant_name_scientific = vertex_plant['plant_name_scientific']
+    json_article = json_read(json_article_filepath)
+    llm.ai_paragraph_gen(
+        key = 'preparations',
+        filepath = json_article_filepath, 
+        data = json_article, 
+        obj = json_article, 
+        prompt = f'''
+            Write a short 4-sentence paragraph about the most commonly used herbal preparations of the {plant_name_scientific} plant for health purposes.
+            Include the preparations names (ex. infusions, tinctures, etc...).
+            Include the uses of those preparations.
+            Make a lot of examples of uses of these preparations.
+            If you can't answer, reply with only "I can't reply".
+            Start with the following words: {plant_name_scientific.capitalize()} most common herbal preparations are .
+        ''',
+        regen = False,
+        print_prompt = True,
+    )
+
+def gen_side_effects(vertex_plant, json_article_filepath):
+    plant_name_scientific = vertex_plant['plant_name_scientific']
+    json_article = json_read(json_article_filepath)
+    llm.ai_paragraph_gen(
+        key = 'side_effects',
+        filepath = json_article_filepath, 
+        data = json_article, 
+        obj = json_article, 
+        prompt = f'''
+            Write a short 4-sentence paragraph about the side effects of the {plant_name_scientific} plant.
+            Include the side effects.
+            Include who is most likely to experience these side effects.
+            Include precautions.
+            Don't include suggestions to consult a health care provider or a doctor.
+            Make a lot of examples of side effects of this plant.
+            If you can't answer, reply with only "I can't reply".
+            Start with the following words: {plant_name_scientific.capitalize()} side effects are .
+        ''',
+        regen = False,
+        print_prompt = True,
+    )
+
+def gen_art_plant_json(vertex_plant, json_article_filepath):
+    plant_slug = vertex_plant['plant_slug']
+    plant_name_scientific = vertex_plant['plant_name_scientific']
+    plant_names_common = vertex_plant['plant_names_common']
+    json_article = json_read(json_article_filepath, create=True)
+    json_article['plant_slug'] = plant_slug
+    json_article['plant_name_scientific'] = plant_name_scientific
+    json_article['plant_names_common'] = plant_names_common
+    json_article['plant_url'] = f'herbs/{plant_slug}.html'
+    json_article['title'] = f'{plant_name_scientific}'
+    json_write(json_article_filepath, json_article)
+
+    gen_intro(vertex_plant, json_article_filepath)
+    gen_intro_study(vertex_plant, json_article_filepath)
+    gen_benefits_desc(vertex_plant, json_article_filepath)
+    gen_benefits_list(vertex_plant, json_article_filepath)
+    gen_actions(vertex_plant, json_article_filepath)
+    gen_constituents(vertex_plant, json_article_filepath)
+    gen_parts(vertex_plant, json_article_filepath)
+    gen_preparations(vertex_plant, json_article_filepath)
+    gen_side_effects(vertex_plant, json_article_filepath)
+
+def gen_art_plant_html(html_article_filepath, json_article_filepath):
+    json_article = json_read(json_article_filepath)
+    plant_slug = json_article['plant_slug']
+    plant_name_scientific = json_article['plant_name_scientific'].capitalize()
+    page_title = f'{plant_name_scientific.title()} Complete Medicinal Profile'
+    html_article = ''
+    html_article += f'<h1>{plant_name_scientific.title()}: Complete Medicinal Profile</h1>\n'
+    html_article += f'<img src="/images/herbs/{plant_slug}.jpg" alt="{plant_name_scientific}">\n'
+    html_article += f'{utils.text_format_sentences_html(json_article["intro"])}\n'
+    if json_article['intro_study'] != '' and json_article['intro_study'] != 'N/A':
+        html_article += f'''
+            <div class="study">
+                <div class="study-header">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
+                    </svg>
+                    <p>Study of the Day</p>
+                </div>
+                <p>
+                    {json_article['intro_study']}
+                </p>
+            </div>
+        '''
+    html_article += f'<p style="margin-top: 16px; margin-bottom: 32px;">This page analize the most important medicinal aspects of {plant_name_scientific.capitalize()}.</p>\n'
+    html_article += f'[html_intro_toc]\n'
+    html_article += f'<h2>Uses and Benefits</h2>\n'
+    html_article += f'{utils.text_format_sentences_html(json_article["benefits"])}\n'
+    html_article += f'<p>Here are the <a href="/herbs/{plant_slug}/benefit.html">best health benefits of {plant_name_scientific}</a>.</p>\n'
+    html_article += f'<h2>Properties and Actions</h2>\n'
+    html_article += f'{utils.text_format_sentences_html(json_article["actions"])}\n'
+    html_article += f'<h2>Constituents</h2>\n'
+    html_article += f'{utils.text_format_sentences_html(json_article["constituents"])}\n'
+    html_article += f'<h2>Parts</h2>\n'
+    html_article += f'{utils.text_format_sentences_html(json_article["parts"])}\n'
+    html_article += f'<h2>Preparations</h2>\n'
+    html_article += f'{utils.text_format_sentences_html(json_article["preparations"])}\n'
+    html_article += f'<h2>Side Effects</h2>\n'
+    html_article += f'{utils.text_format_sentences_html(json_article["side_effects"])}\n'
+    html_article, json_toc = components.toc(html_article)
+    html_intro_toc = components.toc_json_to_html_article(json_toc)
+    html_article = html_article.replace('[html_intro_toc]', html_intro_toc)
+    html_toc_sidebar = components.toc_json_to_html_sidebar(json_toc)
+    html_breadcrumbs = components.breadcrumbs(f'herbs/{plant_slug}.html')
+    html = f'''
+        <!DOCTYPE html>
+        <html lang="en">
+        {components.html_head(page_title)}
+        <body>
+            {components.html_header()}
+            <main style="margin-top: 24px;" class="container-xl mob-flex gap-48">
+                <article style="flex: 2;" class="article">
+                    {html_breadcrumbs}
+                    {html_article}
+                </article>
+                <aside style="flex: 1; position: sticky; top: 100px; z-index: 999; align-self: flex-start; overflow-y: auto; height: 100vh;">
+                    {html_toc_sidebar}
+                </aside>
+            </main>
+            {components.html_footer()}
+        </body>
+        </html>
+    '''
+    html_article_folderpath = '/'.join(html_article_filepath.split('/')[:-1])
+    if not os.path.exists(html_article_folderpath): 
+        os.mkdir(html_article_folderpath)
+    with open(html_article_filepath, 'w') as f: 
+        f.write(html)
+
+def gen_art_plant(vertex_plant):
+    plant_slug = vertex_plant['plant_slug']
+    html_article_folderpath = f'{g.WEBSITE_FOLDERPATH}/herbs'
+    html_article_filepath = f'{html_article_folderpath}/{plant_slug}.html'
+    json_article_filepath = f'database/pages/herbs/{plant_slug}.json'
+
+    gen_art_plant_json(vertex_plant, json_article_filepath)
+    gen_art_plant_html(html_article_filepath, json_article_filepath)
+
