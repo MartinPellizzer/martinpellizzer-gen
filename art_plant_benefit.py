@@ -36,6 +36,7 @@ def gen_intro(vertex_plant, json_article_filepath):
 
 def gen_intro_study(vertex_plant, json_article_filepath):
     json_article = json_read(json_article_filepath)
+    plant_name_scientific = vertex_plant['plant_name_scientific']
     key = 'intro_study'
     if key not in json_article: json_article[key] = ''
     # json_article[key] = ''
@@ -84,7 +85,6 @@ def gen_list_update(vertex_plant, json_article_filepath):
 def gen_benefit_preparations(vertex_plant, json_article_filepath):
     plant_name_scientific = vertex_plant['plant_name_scientific']
     json_article = json_read(json_article_filepath)
-    print(json_article)
     for obj in json_article['plant_benefits']:
         benefit_name = obj['benefit_name']
         llm.gen_json_list_base(
@@ -100,7 +100,7 @@ def gen_benefit_preparations(vertex_plant, json_article_filepath):
                     {{"name": "write name of preparation 2 here"}},
                     {{"name": "write name of preparation 3 here"}}
                 ]
-                Always start the reply with character "[" and end it with character "]".
+                Always end the reply with the character "]".
                 Reply in as few words as possible.
                 Include the scientific name of the plant at the start of the preparation.
                 If you can answer, reply with only the JSON.
@@ -109,6 +109,35 @@ def gen_benefit_preparations(vertex_plant, json_article_filepath):
             regen = False,
             print_prompt = True,
         )
+
+def gen_benefit_constituents_table(vertex_plant, json_article_filepath):
+    plant_name_scientific = vertex_plant['plant_name_scientific']
+    json_article = json_read(json_article_filepath)
+    for obj in json_article['plant_benefits']:
+        benefit_name = obj['benefit_name']
+        llm.gen_json_list_name_and_list(
+            key = 'benefit_constituents',
+            filepath = json_article_filepath, 
+            data = json_article, 
+            obj = obj, 
+            prompt = f'''
+                Write a list of 3-5 medicinal consitutents names of the {plant_name_scientific} plant that best give the following benefit: {benefit_name}.
+                Also, for each of these constituents write a list of 3-5 ailments related to the above mentioned benefit that it helps cure.
+                Reply in JSON using the following format:
+                [
+                    {{"name": "write name of preparation 1 here", "list": ["ailment 1", "ailment 2", "ailment 3"]}},
+                    {{"name": "write name of preparation 2 here", "list": ["ailment 1", "ailment 2", "ailment 3"]}},
+                    {{"name": "write name of preparation 3 here", "list": ["ailment 1", "ailment 2", "ailment 3"]}}
+                ]
+                Always end the reply with the character "]".
+                Reply in as few words as possible.
+                If you can answer, reply with only the JSON.
+                If you can't answer, reply with only "I can't reply".
+            ''',
+            regen=False, 
+            print_prompt=False,
+        )
+
 
 def gen_art_plant_benefits_json(vertex_plant, json_article_filepath):
     plant_slug = vertex_plant['plant_slug']
@@ -128,6 +157,7 @@ def gen_art_plant_benefits_json(vertex_plant, json_article_filepath):
     gen_list_init(vertex_plant, json_article_filepath)
     gen_list_update(vertex_plant, json_article_filepath)
     gen_benefit_preparations(vertex_plant, json_article_filepath)
+    gen_benefit_constituents_table(vertex_plant, json_article_filepath)
 
 def gen_art_plant_benefits_html(html_article_filepath, json_article_filepath):
     json_article = json_read(json_article_filepath)
@@ -173,6 +203,23 @@ def gen_art_plant_benefits_html(html_article_filepath, json_article_filepath):
             preparation_name = preparation_name.lower().replace(plant_name_scientific.lower(), '').strip()
             html_article += f'<li>{preparation_name.capitalize()}</li>\n'
         html_article += f'</ul>\n'
+        # plant preparations table 
+        plant_constituents = plant_benefit['benefit_constituents']
+        html_article += f'<p>The following table displays the major constituents of {plant_name_scientific.capitalize()} and examples of ailments they help cure that are related to {benefit_name}.</p>\n'
+        html_article += f'<table style="width: 100%;">\n'
+        html_article += f'<tr>\n'
+        html_article += f'<th>Constituents</th>\n'
+        html_article += f'<th>Ailments</th>\n'
+        html_article += f'</tr>\n'
+        for constituent in plant_constituents:
+            constituent_name = constituent['name'].capitalize()
+            constituent_list = constituent['list']
+            constituent_list_prompt = ', '.join(constituent['list']).capitalize()
+            html_article += f'<tr>\n'
+            html_article += f'<td>{constituent_name}</td>\n'
+            html_article += f'<td>{constituent_list_prompt}</td>\n'
+            html_article += f'</tr>\n'
+        html_article += f'</table>\n'
     # toc
     html_article, json_toc = components.toc(html_article)
     html_intro_toc = components.toc_json_to_html_article(json_toc)

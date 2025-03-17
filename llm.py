@@ -62,3 +62,26 @@ def gen_json_list_base(filepath, data, obj, key, prompt, regen=False, print_prom
                 obj[key] = outputs
                 json_write(filepath, data)
 
+def gen_json_list_name_and_list(filepath, data, obj, key, prompt, regen=False, print_prompt=False):
+        if key not in obj: obj[key] = ''
+        if regen: obj[key] = ''
+        if obj[key] == '':
+            if print_prompt: print(prompt)
+            reply = llm_reply(prompt)
+            try: json_reply = json.loads(reply)
+            except: json_reply = {}
+            if json_reply != {}:
+                outputs = []
+                for item in json_reply:
+                    try: name = item['name'].strip().lower()
+                    except: continue
+                    try: lst = [e.strip().lower() for e in item['list']]
+                    except: continue
+                    if name.endswith('.'): name = name[:-1]
+                    outputs.append({
+                        'name': name,
+                        'list': lst,
+                    })
+                if outputs != []:
+                    obj[key] = outputs
+                    json_write(filepath, data)

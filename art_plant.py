@@ -79,7 +79,7 @@ def gen_benefits_list(vertex_plant, json_article_filepath):
                 {{"name": "write name of benefit 2 here", "description": "write description of benefit 2 here"}},
                 {{"name": "write name of benefit 3 here", "description": "write description of benefit 3 here"}}
             ]
-            Always start the reply with character "[" and end it with character "]".
+            Always end the reply with the character "]".
             If you can answer, reply with only the JSON.
             If you can't answer, reply with only "I can't reply".
         ''',
@@ -126,7 +126,7 @@ def gen_actions_list(vertex_plant, json_article_filepath):
                 {{"name": "write name of action 2 here", "description": "write description of action 2 here"}},
                 {{"name": "write name of action 3 here", "description": "write description of action 3 here"}}
             ]
-            Always start the reply with character "[" and end it with character "]".
+            Always end the reply with the character "]".
             If you can answer, reply with only the JSON.
             If you can't answer, reply with only "I can't reply".
         ''',
@@ -172,7 +172,7 @@ def gen_constituents_list(vertex_plant, json_article_filepath):
                 {{"name": "write name of constituent 2 here", "description": "write description of constituent 2 here"}},
                 {{"name": "write name of constituent 3 here", "description": "write description of constituent 3 here"}}
             ]
-            Always start the reply with character "[" and end it with character "]".
+            Always end the reply with character "]".
             If you can answer, reply with only the JSON.
             If you can't answer, reply with only "I can't reply".
         ''',
@@ -217,12 +217,40 @@ def gen_parts_list(vertex_plant, json_article_filepath):
                 {{"name": "write name of part 2 here", "description": "write description of part 2 here"}},
                 {{"name": "write name of part 3 here", "description": "write description of part 3 here"}}
             ]
-            Always start the reply with character "[" and end it with character "]".
+            Always end the reply with character "]".
             If you can answer, reply with only the JSON.
             If you can't answer, reply with only "I can't reply".
         ''',
         regen = False,
         print_prompt = True,
+    )
+
+def gen_plant_parts_table(json_article_filepath, regen=False):
+    json_article = json_read(json_article_filepath)
+    plant_name_scientific = json_article['plant_name_scientific']
+    llm.gen_json_list_name_and_list(
+        key = 'plant_parts',
+        filepath = json_article_filepath, 
+        data = json_article, 
+        obj = json_article, 
+        prompt = f'''
+            Write a list of 3-5 medicinal parts names of the {plant_name_scientific} plant.
+            Examples of parts are: leaves, flowers, etc.
+            Also, for each of these parts write a list of 3-5 ailments it helps cure.
+            Reply in JSON using the following format:
+            [
+                {{"name": "write name of part 1 here", "list": ["ailment 1", "ailment 2", "ailment 3"]}},
+                {{"name": "write name of part 2 here", "list": ["ailment 1", "ailment 2", "ailment 3"]}},
+                {{"name": "write name of part 3 here", "list": ["ailment 1", "ailment 2", "ailment 3"]}}
+            ]
+            Always end the reply with the character "]".
+            Reply in as few words as possible.
+            Don't include the name of the plant in the part.
+            If you can answer, reply with only the JSON.
+            If you can't answer, reply with only "I can't reply".
+        ''',
+        regen=regen, 
+        print_prompt=False,
     )
 
 def gen_preparations_desc(vertex_plant, json_article_filepath):
@@ -262,7 +290,7 @@ def gen_preparations_list(vertex_plant, json_article_filepath):
                 {{"name": "write name of preparation 2 here", "description": "write description of preparation 2 here"}},
                 {{"name": "write name of preparation 3 here", "description": "write description of preparation 3 here"}}
             ]
-            Always start the reply with character "[" and end it with character "]".
+            Always end the reply with character "]".
             If you can answer, reply with only the JSON.
             If you can't answer, reply with only "I can't reply".
         ''',
@@ -308,7 +336,7 @@ def gen_side_effects_list(vertex_plant, json_article_filepath):
                 {{"name": "write name of side effect 2 here", "description": "write description of side effect 2 here"}},
                 {{"name": "write name of side effect 3 here", "description": "write description of side effect 3 here"}}
             ]
-            Always start the reply with character "[" and end it with character "]".
+            Always end the reply with character "]".
             If you can answer, reply with only the JSON.
             If you can't answer, reply with only "I can't reply".
         ''',
@@ -338,6 +366,9 @@ def gen_art_plant_json(vertex_plant, json_article_filepath):
     gen_constituents_list(vertex_plant, json_article_filepath)
     gen_parts_desc(vertex_plant, json_article_filepath)
     gen_parts_list(vertex_plant, json_article_filepath)
+
+    gen_plant_parts_table(json_article_filepath, regen=False)
+
     gen_preparations_desc(vertex_plant, json_article_filepath)
     gen_preparations_list(vertex_plant, json_article_filepath)
     gen_side_effects_desc(vertex_plant, json_article_filepath)
@@ -401,8 +432,10 @@ def gen_art_plant_html(html_article_filepath, json_article_filepath):
             constituent_desc = constituent_list['desc']
             html_article += f'<li><span style="font-weight: bold;">{constituent_name.capitalize()}</span>: {constituent_desc.capitalize()}</li>\n'
         html_article += f'</ul>\n'
+
     html_article += f'<h2>Parts</h2>\n'
     html_article += f'{utils.text_format_sentences_html(json_article["parts_desc"])}\n'
+    '''
     html_article += f'<p>The medicinal parts of {plant_name_scientific.capitalize()} are listed below.</p>\n'
     if 'parts_list' in json_article:
         html_article += f'<ul>\n'
@@ -411,6 +444,25 @@ def gen_art_plant_html(html_article_filepath, json_article_filepath):
             part_desc = part_list['desc']
             html_article += f'<li><span style="font-weight: bold;">{part_name.capitalize()}</span>: {part_desc.capitalize()}</li>\n'
         html_article += f'</ul>\n'
+    '''
+    # plant parts table 
+    html_article += f'<p>The following table displays the most used parts of of {plant_name_scientific.capitalize()} and examples of ailments they help cure.</p>\n'
+    if 'plant_parts' in json_article:
+        plant_parts = json_article['plant_parts']
+        html_article += f'<table style="width: 100%;">\n'
+        html_article += f'<tr>\n'
+        html_article += f'<th>Parts</th>\n'
+        html_article += f'<th>Ailments</th>\n'
+        html_article += f'</tr>\n'
+        for part in plant_parts:
+            part_name = part['name'].capitalize()
+            part_list = part['list']
+            part_list_prompt = ', '.join(part['list']).capitalize()
+            html_article += f'<tr>\n'
+            html_article += f'<td>{part_name}</td>\n'
+            html_article += f'<td>{part_list_prompt}</td>\n'
+            html_article += f'</tr>\n'
+        html_article += f'</table>\n'
 
     html_article += f'<h2>Preparations</h2>\n'
     html_article += f'{utils.text_format_sentences_html(json_article["preparations_desc"])}\n'

@@ -1,4 +1,5 @@
 import os
+import json
 import random
 
 from oliark_io import json_read, json_write
@@ -51,9 +52,9 @@ def gen_intro(json_article_filepath, regen):
             Include why medicinal herbs are a great natural remedies.
             Include examples of popular medicinal herbs.
             If you can't answer, reply with only "I can't reply".
-            Start with the following words: Ailments are .
+            Start with the following words: Medicinal herbs are .
         ''',
-        regen = False,
+        regen = regen,
         print_prompt = True,
     )
 
@@ -95,6 +96,34 @@ def gen_list_desc(json_article_filepath, regen=False):
             print_prompt = True,
         )
 
+def gen_plant_preparations_table(json_article_filepath, regen=False):
+    json_article = json_read(json_article_filepath)
+    for obj in json_article['plants']:
+        plant_name_scientific = obj['plant_name_scientific']
+        llm.gen_json_list_name_and_list(
+            key = 'plant_preparations',
+            filepath = json_article_filepath, 
+            data = json_article, 
+            obj = obj, 
+            prompt = f'''
+                Write a list of 3-5 medicinal herbal preparations names of the {plant_name_scientific} plant.
+                Also, for each of these preparations write a list of 3-5 ailments it helps cure.
+                Reply in JSON using the following format:
+                [
+                    {{"name": "write name of preparation 1 here", "list": ["ailment 1", "ailment 2", "ailment 3"]}},
+                    {{"name": "write name of preparation 2 here", "list": ["ailment 1", "ailment 2", "ailment 3"]}},
+                    {{"name": "write name of preparation 3 here", "list": ["ailment 1", "ailment 2", "ailment 3"]}}
+                ]
+                Always end the reply with the character "]".
+                Reply in as few words as possible.
+                Don't include the name of the plant in the preparations.
+                If you can answer, reply with only the JSON.
+                If you can't answer, reply with only "I can't reply".
+            ''',
+            regen=regen, 
+            print_prompt=False,
+        )
+
 def gen_art_plants_json(json_article_filepath):
     json_article = json_read(json_article_filepath, create=True)
     json_article['url'] = f'herbs'
@@ -104,6 +133,7 @@ def gen_art_plants_json(json_article_filepath):
     gen_intro(json_article_filepath, regen=False)
     gen_list_init(json_article_filepath, regen=False)
     gen_list_desc(json_article_filepath, regen=False)
+    gen_plant_preparations_table(json_article_filepath, regen=False)
 
 def gen_art_plants_html(html_article_filepath, json_article_filepath):
     json_article = json_read(json_article_filepath)
@@ -131,6 +161,23 @@ def gen_art_plants_html(html_article_filepath, json_article_filepath):
         for benefit_name in benefits_names[:rnd_benefit_num]:
             html_article += f'<li>{benefit_name.capitalize()}</li>\n'
         html_article += f'</ul>\n'
+        # plant preparations table 
+        plant_preparations = plant['plant_preparations']
+        html_article += f'<p>The following table displays the major preparations of {plant_name_scientific.capitalize()} and examples of ailments they help cure.</p>\n'
+        html_article += f'<table style="width: 100%;">\n'
+        html_article += f'<tr>\n'
+        html_article += f'<th>Preparation</th>\n'
+        html_article += f'<th>Ailments</th>\n'
+        html_article += f'</tr>\n'
+        for preparation in plant_preparations:
+            preparation_name = preparation['name'].capitalize()
+            preparation_list = preparation['list']
+            preparation_list_prompt = ', '.join(preparation['list']).capitalize()
+            html_article += f'<tr>\n'
+            html_article += f'<td>{preparation_name}</td>\n'
+            html_article += f'<td>{preparation_list_prompt}</td>\n'
+            html_article += f'</tr>\n'
+        html_article += f'</table>\n'
         # link
         html_article += f'<p>Check <a href="/herbs/{plant_slug}.html">{plant_name_scientific.title()} Complete Medicinal Profile</a>.</p>\n'
     html_article, json_toc = components.toc(html_article)
@@ -161,8 +208,7 @@ def gen_art_plants_html(html_article_filepath, json_article_filepath):
         f.write(html)
 
 def gen_art_plants():
-    html_article_folderpath = f'{g.WEBSITE_FOLDERPATH}'
-    html_article_filepath = f'{html_article_folderpath}/herbs.html'
+    html_article_filepath = f'{g.WEBSITE_FOLDERPATH}/herbs.html'
     json_article_filepath = f'database/pages/herbs.json'
 
     gen_art_plants_json(json_article_filepath)

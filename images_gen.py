@@ -8,12 +8,10 @@ from PIL import Image, ImageFont, ImageDraw, ImageColor, ImageOps
 
 from oliark_io import json_read, json_write
 
+import g
 import utils
 
-vault = f'/home/ubuntu/vault'
-website_folderpath = 'website'
-
-checkpoint_filepath = f'{vault}/stable-diffusion/checkpoints/xl/juggernautXL_juggXIByRundiffusion.safetensors'
+checkpoint_filepath = f'{g.VAULT}/stable-diffusion/checkpoints/xl/juggernautXL_juggXIByRundiffusion.safetensors'
 pipe = StableDiffusionXLPipeline.from_single_file(
     checkpoint_filepath, 
     torch_dtype=torch.float16, 
@@ -22,7 +20,7 @@ pipe = StableDiffusionXLPipeline.from_single_file(
 ).to('cuda')
 pipe.scheduler = DPMSolverMultistepScheduler.from_config(pipe.scheduler.config)
 
-vertices_plants = json_read(f'{vault}/herbalism/vertices-plants.json')
+vertices_plants = json_read(f'{g.VAULT}/herbalism/vertices-plants.json')
 with open('herbs.csv') as f: 
     plants_slugs_filtered = [
         line.lower().strip().replace(' ', '-').replace('.', '') 
@@ -30,7 +28,7 @@ with open('herbs.csv') as f:
         if line.strip() != ''
 ]
 
-vertices_ailments_filepath = f'/home/ubuntu/vault/herbalism/vertices-ailments.json'
+vertices_ailments_filepath = f'{g.VAULT}/herbalism/vertices-ailments.json'
 vertices_ailments = json_read(vertices_ailments_filepath)
 
 ###################################################
@@ -86,7 +84,7 @@ def gen_plants():
         plant_name_scientific = vertex_plant['plant_name_scientific']
         # default
         images_to_validate_filepath = f'images/to-validate/{plant_slug}.jpg'
-        images_validated_filepath = f'{website_folderpath}/images/herbs/{plant_slug}.jpg'
+        images_validated_filepath = f'{g.WEBSITE_FOLDERPATH}/images/herbs/{plant_slug}.jpg'
         if not os.path.exists(images_validated_filepath):
             prompt = f'''
                 {plant_name_scientific} plant,
@@ -101,7 +99,7 @@ def gen_plants():
             image.save(images_to_validate_filepath)
         # botanical illustration
         images_to_validate_filepath = f'images/to-validate/{plant_slug}-illustation.jpg'
-        images_validated_filepath = f'{website_folderpath}/images/herbs/{plant_slug}-illustation.jpg'
+        images_validated_filepath = f'{g.WEBSITE_FOLDERPATH}/images/herbs/{plant_slug}-illustation.jpg'
         if not os.path.exists(images_validated_filepath):
             prompt = f'''
                 {plant_name_scientific} plant,
@@ -123,7 +121,7 @@ def ailments_teas_intro():
         ailment_slug = vertex_ailment['ailment_slug']
         ailment_name = vertex_ailment['ailment_name']
         images_to_validate_filepath = f'images/to-validate/{ailment_slug}-teas.jpg'
-        images_validated_filepath = f'{website_folderpath}/images/ailments-teas/{ailment_slug}-teas.jpg'
+        images_validated_filepath = f'{g.WEBSITE_FOLDERPATH}/images/ailments-teas/{ailment_slug}-teas.jpg'
         if not os.path.exists(images_validated_filepath):
             plants_names_scientific = []
             for tea in vertex_ailment['ailment_teas']:
@@ -159,7 +157,7 @@ def ailments_teas_intro():
             text_2 = f'{ailment_name}'.upper()
             text_2_size = 0
             font_family, font_weight = 'Lato', 'Bold'
-            font_path = f"{vault}/fonts/{font_family}/{font_family}-{font_weight}.ttf"
+            font_path = f"{g.VAULT}/fonts/{font_family}/{font_family}-{font_weight}.ttf"
             for font_size in font_sizes:
                 font = ImageFont.truetype(font_path, font_size)
                 _, _, text_w, text_h = font.getbbox(text_1)
@@ -199,7 +197,7 @@ def teas_gen():
     for plant_name_scientific in plants_names_scientific:
         plant_slug = utils.sluggify(plant_name_scientific)
         images_to_validate_filepath = f'images/to-validate/{plant_slug}-tea.jpg'
-        images_validated_filepath = f'{website_folderpath}/images/teas/{plant_slug}-tea.jpg'
+        images_validated_filepath = f'{g.WEBSITE_FOLDERPATH}/images/teas/{plant_slug}-tea.jpg'
         if not os.path.exists(images_validated_filepath):
             prompt = f'''
                 a close-up cup of {plant_name_scientific} tea,
@@ -225,7 +223,7 @@ if 0:
         preparation_name = [vertex['preparation_name'] for vertex in vertices_preparations if vertex['preparation_slug'] == preparation_slug][0]
         if preparation_slug != 'tea': continue
         images_to_validate_filepath = f'images/herbs-preparations/{herb_slug}-{preparation_slug}.jpg'
-        images_validated_filepath = f'{website_folderpath}/images/herbs-preparations/{herb_slug}-{preparation_slug}.jpg'
+        images_validated_filepath = f'{g.WEBSITE_FOLDERPATH}/images/herbs-preparations/{herb_slug}-{preparation_slug}.jpg'
         if not os.path.exists(images_validated_filepath):
             prompt = f'''
                 a close-up cup of {herb_name_scientific} {preparation_slug},
@@ -259,7 +257,7 @@ def gen_ailments_intros():
         text_1 = f'{ailment_name}'.upper()
         text_1_size = 0
         font_family, font_weight = 'Lato', 'Bold'
-        font_path = f"{vault}/fonts/{font_family}/{font_family}-{font_weight}.ttf"
+        font_path = f"{g.VAULT}/fonts/{font_family}/{font_family}-{font_weight}.ttf"
         for font_size in font_sizes:
             font = ImageFont.truetype(font_path, font_size)
             _, _, text_w, text_h = font.getbbox(text_1)
@@ -269,14 +267,14 @@ def gen_ailments_intros():
         font = ImageFont.truetype(font_path, text_1_size)
         _, _, text_w, text_h = font.getbbox(text_1)
         draw.text((img_w//2 - text_w//2, img_h//2 - text_h//2), text_1, text_color, font=font)
-        img.save(f'{website_folderpath}/images/ailments/{ailment_slug}.jpg')
+        img.save(f'{g.WEBSITE_FOLDERPATH}/images/ailments/{ailment_slug}.jpg')
         
 
 ##################################################################################
 # ;equipments
 ##################################################################################
 def p_equipments_intro():
-    output_filepath = f'{website_folderpath}/images/equipments/herbalists-equipments.jpg'
+    output_filepath = f'{g.WEBSITE_FOLDERPATH}/images/equipments/herbalists-equipments.jpg'
     if not os.path.exists(output_filepath):
     # if True:
         prompt = f'''
@@ -295,10 +293,10 @@ def p_equipments_intro():
         image.save(output_filepath)
 
 def a_equipments_intro():
-    for equipment_slug in os.listdir(f'{vault}/amazon/json'):
+    for equipment_slug in os.listdir(f'{g.VAULT}/amazon/json'):
         equipment_name = equipment_slug.lower().strip().replace('-', ' ')
         if equipment_name[-1] == 's': equipment_name = equipment_name[:-1]
-        out_filepath = f'{website_folderpath}/images/equipments/{equipment_slug}.jpg'
+        out_filepath = f'{g.WEBSITE_FOLDERPATH}/images/equipments/{equipment_slug}.jpg'
         ast_filepath = f'assets/images/equipments/{equipment_slug}.jpg'
         tmp_filepath = f'assets/images/equipments-tmp/{equipment_slug}.jpg'
         if not os.path.exists(ast_filepath):
@@ -328,5 +326,5 @@ prompt_style = f'''
 gen_plants()
 # teas_gen()
 # ailments_teas_intro()
-gen_ailments_intros()
+# gen_ailments_intros()
 

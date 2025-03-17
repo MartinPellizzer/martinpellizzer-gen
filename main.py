@@ -23,7 +23,6 @@ import components
 import utils
 
 vault = f'/home/ubuntu/vault'
-g.WEBSITE_FOLDERPATH = 'website'
 
 model_8b = f'/home/ubuntu/vault-tmp/llms/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf'
 model_validator_filepath = f'llms/Llama-3-Partonus-Lynx-8B-Instruct-Q4_K_M.gguf'
