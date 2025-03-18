@@ -16,6 +16,13 @@ with open('herbs.csv') as f:
         if line.strip() != ''
 ]
 
+with open('herbs-450.csv') as f: 
+    plants450_slugs_filtered = [
+        line.lower().strip().replace(' ', '-').replace('.', '') 
+        for line in f.read().split('\n')
+        if line.strip() != ''
+]
+
 edges_families_orders_filepath = f'/home/ubuntu/vault/herbalism/edges-families-orders.json'
 edges_families_orders = json_read(edges_families_orders_filepath)
 edges_orders_subclasses_filepath = f'/home/ubuntu/vault/herbalism/edges-orders-subclasses.json'
@@ -142,48 +149,49 @@ ailment_teas_gen()
 ####################################################################################
 # plants
 ####################################################################################
-for vertex_plant in vertices_plants:
-    plant_slug = vertex_plant['plant_slug']
-    if plant_slug not in plants_slugs_filtered: continue
-    if 'plant_names_common' not in vertex_plant: vertex_plant['plant_names_common'] = []
-    # vertex_plant['plant_names_common'] = []
-    if vertex_plant['plant_names_common'] == []:
-        plant_name_scientific = vertex_plant['plant_name_scientific']
-        outputs = []
-        for _ in range(1):
-            prompt = f'''
-                Write a list of the most popular common names of the plant with scientific name: {plant_name_scientific}.
-                Also give a confidence score from 1 to 10 for each list item, indicating how much you are sure about your answer.
-                Use as few words as possible.
-                Reply with the following JSON format:
-                [
-                    {{"name": "write name 1 here", "confidence_score": 10}},
-                    {{"name": "write name 2 here", "confidence_score": 5}},
-                    {{"name": "write name 3 here", "confidence_score": 7}}
-                ]
-                Reply only with the JSON.
-            '''
-            reply = llm_reply(prompt)
-            try: json_reply = json.loads(reply)
-            except: json_reply = {}
-            if json_reply != {}:
-                for obj_reply in json_reply:
-                    try: name = obj_reply['name'].lower().strip()
-                    except: continue
-                    try: confidence_score = obj_reply['confidence_score']
-                    except: continue
-                    outputs.append({
-                        'name': name,
-                        'confidence_score': confidence_score,
-                    })
-                outputs = sorted(outputs, key=lambda x: x['confidence_score'], reverse=True)
-                print(outputs)
-        vertex_plant['plant_names_common'] = outputs
-        j = json.dumps(vertices_plants, indent=4)
-        with open(vertices_plants_filepath, 'w') as f:
-            print(j, file=f)
+def plants_names_common(plants_slugs):
+    for vertex_plant in vertices_plants:
+        plant_slug = vertex_plant['plant_slug']
+        if plant_slug not in plants_slugs: continue
+        if 'plant_names_common' not in vertex_plant: vertex_plant['plant_names_common'] = []
+        # vertex_plant['plant_names_common'] = []
+        if vertex_plant['plant_names_common'] == []:
+            plant_name_scientific = vertex_plant['plant_name_scientific']
+            outputs = []
+            for _ in range(1):
+                prompt = f'''
+                    Write a list of the most popular common names of the plant with scientific name: {plant_name_scientific}.
+                    Also give a confidence score from 1 to 10 for each list item, indicating how much you are sure about your answer.
+                    Use as few words as possible.
+                    Reply with the following JSON format:
+                    [
+                        {{"name": "write name 1 here", "confidence_score": 10}},
+                        {{"name": "write name 2 here", "confidence_score": 5}},
+                        {{"name": "write name 3 here", "confidence_score": 7}}
+                    ]
+                    Reply only with the JSON.
+                '''
+                reply = llm_reply(prompt)
+                try: json_reply = json.loads(reply)
+                except: json_reply = {}
+                if json_reply != {}:
+                    for obj_reply in json_reply:
+                        try: name = obj_reply['name'].lower().strip()
+                        except: continue
+                        try: confidence_score = obj_reply['confidence_score']
+                        except: continue
+                        outputs.append({
+                            'name': name,
+                            'confidence_score': confidence_score,
+                        })
+                    outputs = sorted(outputs, key=lambda x: x['confidence_score'], reverse=True)
+                    print(outputs)
+            vertex_plant['plant_names_common'] = outputs
+            j = json.dumps(vertices_plants, indent=4)
+            with open(vertices_plants_filepath, 'w') as f:
+                print(j, file=f)
 
-def gen_vertex_plant_attr_list_json(vertex, key, prompt, regen=False):
+def gen_vertex_plant_attr_list_json(vertex_plant, key, prompt, regen=False):
     if key not in vertex_plant: vertex_plant[key] = []
     # vertex_plant[key] = []
     if regen == True: vertex_plant[key] = []
@@ -219,120 +227,125 @@ def gen_vertex_plant_attr_list_json(vertex, key, prompt, regen=False):
 ##################################################################################
 # attributes
 ##################################################################################
-for vertex_plant in vertices_plants:
-    plant_slug = vertex_plant['plant_slug']
-    if plant_slug not in plants_slugs_filtered: continue
-    plant_name_scientific = vertex_plant['plant_name_scientific']
-    gen_vertex_plant_attr_list_json(
-        vertex = vertex_plant,
-        key = 'plant_benefits', 
-        prompt = f'''
-            Write a list of the 20 most important health benefits names of the plant {plant_name_scientific}.
-            Also, write a confidence score from 1 to 10 for each list item, indicating how much sure you are about that answer.
-            Start each benefit with a third-person singular action verb.
-            Write as few words as possible.
-            Reply in JSON using the format below:
-            [
-                {{"name": "write name 1 here", "confidence_score": 10}},
-                {{"name": "write name 2 here", "confidence_score": 5}},
-                {{"name": "write name 3 here", "confidence_score": 7}}
-            ]
-            Reply only with the JSON.
-        ''',
-        regen = False,
-    )
+def plants_benefits(plants_slugs):
+    for vertex_plant in vertices_plants:
+        plant_slug = vertex_plant['plant_slug']
+        if plant_slug not in plants_slugs: continue
+        plant_name_scientific = vertex_plant['plant_name_scientific']
+        gen_vertex_plant_attr_list_json(
+            vertex_plant = vertex_plant,
+            key = 'plant_benefits', 
+            prompt = f'''
+                Write a list of the 20 most important health benefits names of the plant {plant_name_scientific}.
+                Also, write a confidence score from 1 to 10 for each list item, indicating how much sure you are about that answer.
+                Start each benefit with a third-person singular action verb.
+                Write as few words as possible.
+                Reply in JSON using the format below:
+                [
+                    {{"name": "write name 1 here", "confidence_score": 10}},
+                    {{"name": "write name 2 here", "confidence_score": 5}},
+                    {{"name": "write name 3 here", "confidence_score": 7}}
+                ]
+                Reply only with the JSON.
+            ''',
+            regen = False,
+        )
 
-for vertex_plant in vertices_plants:
-    plant_slug = vertex_plant['plant_slug']
-    if plant_slug not in plants_slugs_filtered: continue
-    plant_name_scientific = vertex_plant['plant_name_scientific']
-    gen_vertex_plant_attr_list_json(
-        vertex = vertex_plant,
-        key = 'plant_properties', 
-        prompt = f'''
-            Write a list of the 20 best therapeutic properties names of the plant {plant_name_scientific}.
-            Examples of therapeutic properties are: antiseptic, antispasmodic, etc.
-            Also, write a confidence score from 1 to 10 for each list item, indicating how much sure you are about that answer.
-            Write as few words as possible.
-            Reply in JSON using the format below:
-            [
-                {{"name": "write name 1 here", "confidence_score": 10}},
-                {{"name": "write name 2 here", "confidence_score": 5}},
-                {{"name": "write name 3 here", "confidence_score": 7}}
-            ]
-            Reply only with the JSON.
-        ''',
-        regen = False,
-    )
+def plants_properties(plants_slugs):
+    for vertex_plant in vertices_plants:
+        plant_slug = vertex_plant['plant_slug']
+        if plant_slug not in plants_slugs: continue
+        plant_name_scientific = vertex_plant['plant_name_scientific']
+        gen_vertex_plant_attr_list_json(
+            vertex_plant = vertex_plant,
+            key = 'plant_properties', 
+            prompt = f'''
+                Write a list of the 20 best therapeutic properties names of the plant {plant_name_scientific}.
+                Examples of therapeutic properties are: antiseptic, antispasmodic, etc.
+                Also, write a confidence score from 1 to 10 for each list item, indicating how much sure you are about that answer.
+                Write as few words as possible.
+                Reply in JSON using the format below:
+                [
+                    {{"name": "write name 1 here", "confidence_score": 10}},
+                    {{"name": "write name 2 here", "confidence_score": 5}},
+                    {{"name": "write name 3 here", "confidence_score": 7}}
+                ]
+                Reply only with the JSON.
+            ''',
+            regen = False,
+        )
 
-for vertex_plant in vertices_plants:
-    plant_slug = vertex_plant['plant_slug']
-    if plant_slug not in plants_slugs_filtered: continue
-    plant_name_scientific = vertex_plant['plant_name_scientific']
-    gen_vertex_plant_attr_list_json(
-        vertex = vertex_plant,
-        key = 'plant_constituents', 
-        prompt = f'''
-            Write a list of the 20 most important medicinal constituents names of the plant {plant_name_scientific}.
-            Examples of medicinal constituents are: tannins, flavonoids, etc.
-            Also, write a confidence score from 1 to 10 for each list item, indicating how much sure you are about that answer.
-            Write as few words as possible.
-            Reply in JSON using the format below:
-            [
-                {{"name": "write name 1 here", "confidence_score": 10}},
-                {{"name": "write name 2 here", "confidence_score": 5}},
-                {{"name": "write name 3 here", "confidence_score": 7}}
-            ]
-            Reply only with the JSON.
-        ''',
-        regen = False,
-    )
+def plants_constituents(plants_slugs):
+    for vertex_plant in vertices_plants:
+        plant_slug = vertex_plant['plant_slug']
+        if plant_slug not in plants_slugs: continue
+        plant_name_scientific = vertex_plant['plant_name_scientific']
+        gen_vertex_plant_attr_list_json(
+            vertex_plant = vertex_plant,
+            key = 'plant_constituents', 
+            prompt = f'''
+                Write a list of the 20 most important medicinal constituents names of the plant {plant_name_scientific}.
+                Examples of medicinal constituents are: tannins, flavonoids, etc.
+                Also, write a confidence score from 1 to 10 for each list item, indicating how much sure you are about that answer.
+                Write as few words as possible.
+                Reply in JSON using the format below:
+                [
+                    {{"name": "write name 1 here", "confidence_score": 10}},
+                    {{"name": "write name 2 here", "confidence_score": 5}},
+                    {{"name": "write name 3 here", "confidence_score": 7}}
+                ]
+                Reply only with the JSON.
+            ''',
+            regen = False,
+        )
 
-for vertex_plant in vertices_plants:
-    plant_slug = vertex_plant['plant_slug']
-    if plant_slug not in plants_slugs_filtered: continue
-    plant_name_scientific = vertex_plant['plant_name_scientific']
-    gen_vertex_plant_attr_list_json(
-        vertex = vertex_plant,
-        key = 'plant_parts', 
-        prompt = f'''
-            Write a list of the 20 most important parts names of the plant {plant_name_scientific} used for medicinal purposes.
-            Examples of parts are: leaf, root, etc.
-            Also, write a confidence score from 1 to 10 for each list item, indicating how much sure you are about that answer.
-            Write as few words as possible.
-            Reply in JSON using the format below:
-            [
-                {{"name": "write name 1 here", "confidence_score": 10}},
-                {{"name": "write name 2 here", "confidence_score": 5}},
-                {{"name": "write name 3 here", "confidence_score": 7}}
-            ]
-            Reply only with the JSON.
-        ''',
-        regen = False,
-    )
+def plants_parts(plants_slugs):
+    for vertex_plant in vertices_plants:
+        plant_slug = vertex_plant['plant_slug']
+        if plant_slug not in plants_slugs: continue
+        plant_name_scientific = vertex_plant['plant_name_scientific']
+        gen_vertex_plant_attr_list_json(
+            vertex_plant = vertex_plant,
+            key = 'plant_parts', 
+            prompt = f'''
+                Write a list of the 20 most important parts names of the plant {plant_name_scientific} used for medicinal purposes.
+                Examples of parts are: leaf, root, etc.
+                Also, write a confidence score from 1 to 10 for each list item, indicating how much sure you are about that answer.
+                Write as few words as possible.
+                Reply in JSON using the format below:
+                [
+                    {{"name": "write name 1 here", "confidence_score": 10}},
+                    {{"name": "write name 2 here", "confidence_score": 5}},
+                    {{"name": "write name 3 here", "confidence_score": 7}}
+                ]
+                Reply only with the JSON.
+            ''',
+            regen = False,
+        )
 
-for vertex_plant in vertices_plants:
-    plant_slug = vertex_plant['plant_slug']
-    if plant_slug not in plants_slugs_filtered: continue
-    plant_name_scientific = vertex_plant['plant_name_scientific']
-    gen_vertex_plant_attr_list_json(
-        vertex = vertex_plant,
-        key = 'plant_side_effects', 
-        prompt = f'''
-            Write a list of the 20 most common negative health side effects names of the plant {plant_name_scientific}.
-            Start each side effect with a third-person singular action verb.
-            Also, write a confidence score from 1 to 10 for each list item, indicating how much sure you are about that answer.
-            Write as few words as possible.
-            Reply in JSON using the format below:
-            [
-                {{"name": "write name 1 here", "confidence_score": 10}},
-                {{"name": "write name 2 here", "confidence_score": 5}},
-                {{"name": "write name 3 here", "confidence_score": 7}}
-            ]
-            Reply only with the JSON.
-        ''',
-        regen = False,
-    )
+def plants_side_effects(plants_slugs):
+    for vertex_plant in vertices_plants:
+        plant_slug = vertex_plant['plant_slug']
+        if plant_slug not in plants_slugs: continue
+        plant_name_scientific = vertex_plant['plant_name_scientific']
+        gen_vertex_plant_attr_list_json(
+            vertex_plant = vertex_plant,
+            key = 'plant_side_effects', 
+            prompt = f'''
+                Write a list of the 20 most common negative health side effects names of the plant {plant_name_scientific}.
+                Start each side effect with a third-person singular action verb.
+                Also, write a confidence score from 1 to 10 for each list item, indicating how much sure you are about that answer.
+                Write as few words as possible.
+                Reply in JSON using the format below:
+                [
+                    {{"name": "write name 1 here", "confidence_score": 10}},
+                    {{"name": "write name 2 here", "confidence_score": 5}},
+                    {{"name": "write name 3 here", "confidence_score": 7}}
+                ]
+                Reply only with the JSON.
+            ''',
+            regen = False,
+        )
 
 # gen edges -> herb_preparation
 if 0:
@@ -478,4 +491,21 @@ if 0:
                 with open(edges_plants_ailments_filepath, 'w') as f:
                     print(j, file=f)
 
-quit()
+####################################################################################
+# plants450
+####################################################################################
+
+plants_names_common(plants_slugs_filtered)
+plants_benefits(plants_slugs_filtered)
+plants_properties(plants_slugs_filtered)
+plants_constituents(plants_slugs_filtered)
+plants_parts(plants_slugs_filtered)
+plants_side_effects(plants_slugs_filtered)
+
+plants_names_common(plants450_slugs_filtered)
+plants_benefits(plants450_slugs_filtered)
+plants_properties(plants450_slugs_filtered)
+plants_constituents(plants450_slugs_filtered)
+plants_parts(plants450_slugs_filtered)
+plants_side_effects(plants450_slugs_filtered)
+

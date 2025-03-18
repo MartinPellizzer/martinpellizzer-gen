@@ -82,6 +82,13 @@ with open('herbs.csv') as f:
         if line.strip() != ''
 ]
 
+with open('herbs-450.csv') as f: 
+    plants450_slugs_filtered = [
+        line.lower().strip().replace(' ', '-').replace('.', '') 
+        for line in f.read().split('\n')
+        if line.strip() != ''
+]
+
 equipments_slugs = os.listdir(f'{vault}/amazon/equipments/json')
 
 ##################################################################
@@ -186,9 +193,9 @@ html_menu = html_menu_gen()
 ###############################################
 # ;data
 ###############################################
-def get_vertices_plants_validated():
+def get_vertices_plants_validated(plants_slugs=plants_slugs_filtered):
     # verity herbs in "wcpo"
-    vertices_plants_filtered_tmp = [vertex for vertex in vertices_plants if vertex['plant_slug'] in plants_slugs_filtered] 
+    vertices_plants_filtered_tmp = [vertex for vertex in vertices_plants if vertex['plant_slug'] in plants_slugs] 
     vertices_plants_filtered_tmp = sorted(vertices_plants_filtered_tmp, key=lambda x: x['plant_slug'], reverse=False)
     # remove duplicates
     vertices_plants_filtered = []
@@ -2367,11 +2374,14 @@ p_home()
 
 # herbs
 if 1:
-    vertices_plants_filtered = get_vertices_plants_validated()
+    vertices_plants_filtered = get_vertices_plants_validated(plants_slugs_filtered)
+    vertices450_plants_filtered = get_vertices_plants_validated(plants450_slugs_filtered)
     regen = False
     regen_return = False
     if 1:
         for vertex_plant in vertices_plants_filtered:
+            gen_art_plant_benefits(vertex_plant)
+        for vertex_plant in vertices450_plants_filtered:
             gen_art_plant_benefits(vertex_plant)
     if 0:
         for vertex_plant in vertices_plants_filtered:
@@ -2383,6 +2393,8 @@ if 1:
             a_plant_side_effects(vertex_plant, regen=regen)
     if 1:
         for vertex_plant in vertices_plants_filtered:
+            gen_art_plant(vertex_plant)
+        for vertex_plant in vertices450_plants_filtered:
             gen_art_plant(vertex_plant)
     if 1:
         gen_art_plants()

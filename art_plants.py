@@ -21,9 +21,16 @@ with open('herbs.csv') as f:
         if line.strip() != ''
 ]
 
-def get_vertices_plants_validated():
+with open('herbs-450.csv') as f: 
+    plants450_slugs_filtered = [
+        line.lower().strip().replace(' ', '-').replace('.', '') 
+        for line in f.read().split('\n')
+        if line.strip() != ''
+]
+
+def get_vertices_plants_validated(plants_slugs):
     # verity herbs in "wcpo"
-    vertices_plants_filtered_tmp = [vertex for vertex in vertices_plants if vertex['plant_slug'] in plants_slugs_filtered] 
+    vertices_plants_filtered_tmp = [vertex for vertex in vertices_plants if vertex['plant_slug'] in plants_slugs] 
     vertices_plants_filtered_tmp = sorted(vertices_plants_filtered_tmp, key=lambda x: x['plant_slug'], reverse=False)
     # remove duplicates
     vertices_plants_filtered = []
@@ -63,7 +70,11 @@ def gen_list_init(json_article_filepath, regen=False):
     key = 'plants'
     if key not in json_article: json_article[key] = []
     if regen: json_article[key] = []
-    vertices_plants_filtered = get_vertices_plants_validated()
+    vertices_plants_filtered = []
+    for vertex in get_vertices_plants_validated(plants_slugs_filtered):
+        vertices_plants_filtered.append(vertex)
+    for vertex in get_vertices_plants_validated(plants450_slugs_filtered):
+        vertices_plants_filtered.append(vertex)
     plants_names_scientific = [vertex['plant_name_scientific'] for vertex in vertices_plants_filtered]
     plants_slugs = [utils.sluggify(plant_name_scientific) for plant_name_scientific in plants_names_scientific]
     json_article_plants_names = [obj['plant_name_scientific'] for obj in json_article['plants']]

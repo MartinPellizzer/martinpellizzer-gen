@@ -28,6 +28,13 @@ with open('herbs.csv') as f:
         if line.strip() != ''
 ]
 
+with open('herbs-450.csv') as f: 
+    plants450_slugs_filtered = [
+        line.lower().strip().replace(' ', '-').replace('.', '') 
+        for line in f.read().split('\n')
+        if line.strip() != ''
+]
+
 vertices_ailments_filepath = f'{g.VAULT}/herbalism/vertices-ailments.json'
 vertices_ailments = json_read(vertices_ailments_filepath)
 
@@ -55,9 +62,9 @@ def img_resize(img, w=768, h=768):
     img = img.crop(area)
     return img
 
-def get_vertices_plants_validated():
+def get_vertices_plants_validated(plants_slugs):
     # verity herbs in "wcpo"
-    vertices_plants_filtered_tmp = [vertex for vertex in vertices_plants if vertex['plant_slug'] in plants_slugs_filtered] 
+    vertices_plants_filtered_tmp = [vertex for vertex in vertices_plants if vertex['plant_slug'] in plants_slugs] 
     vertices_plants_filtered_tmp = sorted(vertices_plants_filtered_tmp, key=lambda x: x['plant_slug'], reverse=False)
     # remove duplicates
     vertices_plants_filtered = []
@@ -77,8 +84,8 @@ def get_vertices_plants_validated():
 # ;plants
 ##############################################
 
-def gen_plants():
-    vertices_plants_filtered = get_vertices_plants_validated()
+def gen_plants(plants_slugs):
+    vertices_plants_filtered = get_vertices_plants_validated(plants_slugs)
     for vertex_plant in vertices_plants_filtered:
         plant_slug = vertex_plant['plant_slug']
         plant_name_scientific = vertex_plant['plant_name_scientific']
@@ -323,7 +330,8 @@ prompt_style = f'''
     vintage,
 '''
 
-gen_plants()
+gen_plants(plants_slugs_filtered)
+gen_plants(plants450_slugs_filtered)
 # teas_gen()
 # ailments_teas_intro()
 # gen_ailments_intros()

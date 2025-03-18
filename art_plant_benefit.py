@@ -15,6 +15,7 @@ import components
 def gen_intro(vertex_plant, json_article_filepath):
     json_article = json_read(json_article_filepath)
     plant_name_scientific = vertex_plant['plant_name_scientific']
+    print(vertex_plant)
     benefits_names = [benefit['name'] for benefit in vertex_plant['plant_benefits']]
     benefits_names_prompt = ', '.join(benefits_names[:3])
     llm.ai_paragraph_gen(
