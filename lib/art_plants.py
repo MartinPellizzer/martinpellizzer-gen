@@ -1,15 +1,13 @@
 import os
 from string import ascii_lowercase
 
-from oliark_llm import llm_reply
-
 from lib import g
 from lib import io
 from lib import llm
 from lib import data
 from lib import utils
 
-model_filepath = '/home/ubuntu/vault-tmp/llms/Qwen3-8B-Q4_K_M.gguf'
+model_filepath = f'{g.vault_tmp_folderpath}/llm/Qwen3-8B-Q4_K_M.gguf'
 
 for item in os.listdir('.'):
     if os.path.isdir(item):
@@ -98,6 +96,170 @@ def ai_llm_taxonomy(json_article_filepath, regen=False, clear=False):
         model_filepath = model_filepath,
     )
 
+def ai_llm_morphology(json_article_filepath, regen=False, clear=False):
+    json_article = io.json_read(json_article_filepath)
+    plant_name_scientific = json_article['plant_name_scientific']
+    reply_start = f'{plant_name_scientific.capitalize()} has '
+    llm.paragraph_ai(
+        key = 'morphology_desc_llm',
+        filepath = json_article_filepath, 
+        data = json_article, 
+        obj = json_article, 
+        prompt = f'''
+            Write a short 5-sentence paragraph about the morphological characteristics of the following plant: {plant_name_scientific}.
+            Include the following characteristics if this plant has them:
+            - leaves (shape, arrangement, size, color)
+            - stem and bark (texture, color, growth pattern)
+            - flowers (structure, color, blooming period, pollination method)
+            - fruit and seeds (type, dispersal methods)
+            - roots
+            If you can't answer, reply with only "I can't reply".
+            Start with the following words: {reply_start} .
+            /no_think
+        ''',
+        reply_start = reply_start,
+        regen = regen,
+        clear = clear,
+        print_prompt = True,
+        model_filepath = model_filepath,
+    )
+
+def ai_llm_habitat(json_article_filepath, regen=False, clear=False):
+    json_article = io.json_read(json_article_filepath)
+    plant_name_scientific = json_article['plant_name_scientific']
+    reply_start = f'{plant_name_scientific.capitalize()} is '
+    llm.paragraph_ai(
+        key = 'habitat_desc_llm',
+        filepath = json_article_filepath, 
+        data = json_article, 
+        obj = json_article, 
+        prompt = f'''
+            Write a short 5-sentence paragraph about the natural habitat and distribution of the following plant: {plant_name_scientific}.
+            Include the following:
+            - native range
+            - current distribution
+            - environment
+            - altitude
+            - conservation status
+            If you can't answer, reply with only "I can't reply".
+            Start with the following words: {reply_start} .
+            /no_think
+        ''',
+        reply_start = reply_start,
+        regen = regen,
+        clear = clear,
+        print_prompt = True,
+        model_filepath = model_filepath,
+    )
+
+def ai_llm_cultivation(json_article_filepath, regen=False, clear=False):
+    json_article = io.json_read(json_article_filepath)
+    plant_name_scientific = json_article['plant_name_scientific']
+    reply_start = f'{plant_name_scientific.capitalize()} is '
+    llm.paragraph_ai(
+        key = 'cultivation_desc_llm',
+        filepath = json_article_filepath, 
+        data = json_article, 
+        obj = json_article, 
+        prompt = f'''
+            Write a short 5-sentence paragraph about the growth and cultivation of the following plant: {plant_name_scientific}.
+            Include the following:
+            - propagation methods
+            - growth cycle
+            - soil and watering
+            - fertilization and pruning
+            - pests and diseases
+            - companion planting
+            If you can't answer, reply with only "I can't reply".
+            Start with the following words: {reply_start} .
+            /no_think
+        ''',
+        reply_start = reply_start,
+        regen = regen,
+        clear = clear,
+        print_prompt = True,
+        model_filepath = model_filepath,
+    )
+
+def ai_llm_ecology(json_article_filepath, regen=False, clear=False):
+    json_article = io.json_read(json_article_filepath)
+    plant_name_scientific = json_article['plant_name_scientific']
+    reply_start = f'{plant_name_scientific.capitalize()} is '
+    llm.paragraph_ai(
+        key = 'ecology_desc_llm',
+        filepath = json_article_filepath, 
+        data = json_article, 
+        obj = json_article, 
+        prompt = f'''
+            Write a short 5-sentence paragraph about the ecological role of the following plant: {plant_name_scientific}.
+            Include the following:
+            - what provides (e.g. food, shelter, ecological benefits, etc.)
+            - who attracts (e.g. pollinators, wildlife, etc.)
+            - what act as (companion plant, erosion control, nitrogen fixer, etc.)
+            If you can't answer, reply with only "I can't reply".
+            Start with the following words: {reply_start} .
+            /no_think
+        ''',
+        reply_start = reply_start,
+        regen = regen,
+        clear = clear,
+        print_prompt = True,
+        model_filepath = model_filepath,
+    )
+
+def ai_llm_uses(json_article_filepath, regen=False, clear=False):
+    json_article = io.json_read(json_article_filepath)
+    plant_name_scientific = json_article['plant_name_scientific']
+    reply_start = f'{plant_name_scientific.capitalize()} is '
+    llm.paragraph_ai(
+        key = 'uses_desc_llm',
+        filepath = json_article_filepath, 
+        data = json_article, 
+        obj = json_article, 
+        prompt = f'''
+            Write a short 5-sentence paragraph about the uses and applications role of the following plant: {plant_name_scientific}.
+            By uses and applications I mean things like:
+            - culinary
+            - medicinal
+            - industrial and economic
+            - cultural and symbolic
+            If you can't answer, reply with only "I can't reply".
+            Start with the following words: {reply_start} .
+            /no_think
+        ''',
+        reply_start = reply_start,
+        regen = regen,
+        clear = clear,
+        print_prompt = True,
+        model_filepath = model_filepath,
+    )
+
+def ai_llm_varieties(json_article_filepath, regen=False, clear=False):
+    json_article = io.json_read(json_article_filepath)
+    plant_name_scientific = json_article['plant_name_scientific']
+    reply_start = f'{plant_name_scientific.capitalize()} has '
+    llm.paragraph_ai(
+        key = 'varieties_desc_llm',
+        filepath = json_article_filepath, 
+        data = json_article, 
+        obj = json_article, 
+        prompt = f'''
+            Write a short 5-sentence paragraph about the varieties, cultivars and hybrids of the following plant: {plant_name_scientific}.
+            Include the following:
+            - popular cultivars
+            - hybrids
+            - horticultural importance
+            If you can't answer, reply with only "I can't reply".
+            Start with the following words: {reply_start} .
+            /no_think
+        ''',
+        reply_start = reply_start,
+        regen = regen,
+        clear = clear,
+        print_prompt = True,
+        model_filepath = model_filepath,
+    )
+
 def ai_llm_distribution_native(json_article_filepath, regen=False, clear=False):
     json_article = io.json_read(json_article_filepath)
     plant_name_scientific = json_article['plant_name_scientific']
@@ -166,48 +328,81 @@ def json_gen(plants_folderpath, plant_slug, plant_name_scientific):
     ###
     ai_intro(json_article_filepath, regen=False, clear=False)
     ai_llm_taxonomy(json_article_filepath, regen=False, clear=False)
-    ai_llm_distribution_native(json_article_filepath, regen=False, clear=False)
-    ai_llm_distribution_introduced(json_article_filepath, regen=False, clear=False)
+    ai_llm_morphology(json_article_filepath, regen=False, clear=False)
+    ai_llm_habitat(json_article_filepath, regen=False, clear=False)
+    ai_llm_cultivation(json_article_filepath, regen=False, clear=False)
+    ai_llm_ecology(json_article_filepath, regen=False, clear=False)
+    ai_llm_uses(json_article_filepath, regen=False, clear=False)
+    ai_llm_varieties(json_article_filepath, regen=False, clear=False)
+    # ai_llm_distribution_native(json_article_filepath, regen=False, clear=False)
+    # ai_llm_distribution_introduced(json_article_filepath, regen=False, clear=False)
+
+def html_gen(plants_folderpath, plant_slug):
+    json_article_filepath = f'{plants_folderpath}/{plant_slug}.json'
+    json_article = io.json_read(json_article_filepath, create=True)
+    html_article = ''
+    html_article += f'<h1>{json_article["page_title"]}</h1>\n'
+    html_article += f'{utils.text_format_1N1_html(json_article["intro"])}\n'
+    if 'taxonomy_art_desc' in json_article:
+        html_article += f'<h2>Taxonomy</h2>\n'
+        html_article += f'{utils.text_format_1N1_html(json_article["taxonomy_art_desc"])}\n'
+    if 'morphology_desc_llm' in json_article:
+        html_article += f'<h2>Morphology</h2>\n'
+        html_article += f'{utils.text_format_1N1_html(json_article["morphology_desc_llm"])}\n'
+    '''
+    if 'distribution_native_art_desc' in json_article:
+        html_article += f'<h2>Native Distribution</h2>\n'
+        html_article += f'{utils.text_format_1N1_html(json_article["distribution_native_art_desc"])}\n'
+    if 'distribution_introduced_art_desc' in json_article:
+        html_article += f'<h2>Introduced Distribution</h2>\n'
+        html_article += f'{utils.text_format_1N1_html(json_article["distribution_introduced_art_desc"])}\n'
+    '''
+    if 'habitat_desc_llm' in json_article:
+        html_article += f'<h2>Natural Habitat and Distribution</h2>\n'
+        html_article += f'{utils.text_format_1N1_html(json_article["habitat_desc_llm"])}\n'
+    if 'cultivation_desc_llm' in json_article:
+        html_article += f'<h2>Growth and Cultivation</h2>\n'
+        html_article += f'{utils.text_format_1N1_html(json_article["cultivation_desc_llm"])}\n'
+    if 'ecology_desc_llm' in json_article:
+        html_article += f'<h2>Ecological Role</h2>\n'
+        html_article += f'{utils.text_format_1N1_html(json_article["ecology_desc_llm"])}\n'
+    if 'uses_desc_llm' in json_article:
+        html_article += f'<h2>Uses and Applications</h2>\n'
+        html_article += f'{utils.text_format_1N1_html(json_article["uses_desc_llm"])}\n'
+    if 'varieties_desc_llm' in json_article:
+        html_article += f'<h2>Varieties, Cultivars and Hybrids</h2>\n'
+        html_article += f'{utils.text_format_1N1_html(json_article["varieties_desc_llm"])}\n'
+    ai_llm_varieties(json_article_filepath, regen=False, clear=False)
+    html = f'''
+        <!DOCTYPE html>
+        <html lang="en">
+        <body>
+            <main>
+                {html_article}
+            </main>
+        </body>
+        </html>
+    '''
+    with open(f'{g.website_folderpath}/{plants_folderpath}/{plant_slug}.html', 'w') as f:
+        f.write(html)
 
 def gen():
+    # plants = io.csv_to_dict(f'{g.terrawhisper_database_folderpath}/csv/wcvp/wcvp_names.csv', '|')
     plants = data.plants_wcvp_get()
     plants = plants[:g.plant_n]
-    for plant_i, plant_name_scientific in enumerate(plants):
+    for plant_i, plant in enumerate(plants):
+        plant_name_scientific = f'''{plant['taxon_name']}'''.strip().lower()
+        print(f'#################################################')
         print(f'{plant_i}/{len(plants)} - {plant_name_scientific}')
-        if len(plant_name_scientific.split()) < 2: continue
+        print(f'#################################################')
+        ###
         first_char = plant_name_scientific.lower().strip()[0]
         if first_char.isalpha():
+            if len(plant_name_scientific.split()) < 2: continue
             plants_folderpath = f'plants-{first_char}'
             plant_slug = utils.sluggify(plant_name_scientific)
             ###
             json_article_filepath = f'{plants_folderpath}/{plant_slug}.json'
             json_gen(plants_folderpath, plant_slug, plant_name_scientific)
-            #######################################################################
-            # html
-            #######################################################################
-            json_article = io.json_read(json_article_filepath, create=True)
-            html_article = ''
-            html_article += f'<h1>{json_article["page_title"]}</h1>\n'
-            html_article += f'{utils.text_format_1N1_html(json_article["intro"])}\n'
-            if 'taxonomy_art_desc' in json_article:
-                html_article += f'<h2>Taxonomy</h2>\n'
-                html_article += f'{utils.text_format_1N1_html(json_article["taxonomy_art_desc"])}\n'
-            if 'distribution_native_art_desc' in json_article:
-                html_article += f'<h2>Native Distribution</h2>\n'
-                html_article += f'{utils.text_format_1N1_html(json_article["distribution_native_art_desc"])}\n'
-            if 'distribution_introduced_art_desc' in json_article:
-                html_article += f'<h2>Introduced Distribution</h2>\n'
-                html_article += f'{utils.text_format_1N1_html(json_article["distribution_introduced_art_desc"])}\n'
-            html = f'''
-                <!DOCTYPE html>
-                <html lang="en">
-                <body>
-                    <main>
-                        {html_article}
-                    </main>
-                </body>
-                </html>
-            '''
-            with open(f'{g.WEBSITE_FOLDERPATH}/{plants_folderpath}/{plant_slug}.html', 'w') as f:
-                f.write(html)
+            html_gen(plants_folderpath, plant_slug)
 

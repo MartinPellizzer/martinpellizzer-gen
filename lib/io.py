@@ -62,6 +62,15 @@ def json_read(filepath, create=False):
 #######################
 # ;csv
 #######################
+def csv_read(filepath, delimiter='\\'):
+    rows = []
+    with open(filepath, newline='') as f:
+        reader = csv.reader(f, delimiter=delimiter)
+        for row in reader:
+            if row != []:
+                rows.append(row)
+    return rows
+
 def csv_read_rows(path, delimiter='\\'):
     rows = []
     with open(path, encoding='utf-8', errors='ignore') as f:
@@ -70,6 +79,7 @@ def csv_read_rows(path, delimiter='\\'):
                 rows.append(line)
     return rows
 
+'''
 def csv_to_dict(path, delimiter='\\', debug=False):
     rows = csv_read_rows(path, delimiter)
     if debug:
@@ -101,3 +111,17 @@ def csv_to_dict(path, delimiter='\\', debug=False):
                 print(row)
         objects.append(obj)
     return objects
+'''
+
+def csv_to_dict(filepath, delimiter='\\'):
+    rows = csv_read(filepath, delimiter=delimiter)
+    row_header = rows[0]
+    rows_body = rows[1:]
+    obj_list = []
+    for row in rows_body:
+        obj = {}
+        for element_i, e in enumerate(row):
+            obj[row_header[element_i]] = e.strip()
+        obj_list.append(obj)
+    return obj_list
+
