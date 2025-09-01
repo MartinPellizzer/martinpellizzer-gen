@@ -22,6 +22,13 @@ def folder_create_from_filepath(filepath):
         if not os.path.exists(chunk_curr):
             os.makedirs(chunk_curr)
 
+def folders_recursive_gen(folderpath):
+    folderpath_cur = ''
+    for chunk in folderpath.split('/'):
+        folderpath_cur += f'{chunk}/'
+        try: os.mkdir(f'{folderpath_cur}')
+        except: pass
+
 #######################
 # ;file
 #######################

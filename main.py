@@ -5,10 +5,21 @@ from lib import g
 from lib import media
 from lib import sections
 
+shutil.copy2(f'style.css', f'{g.website_folderpath}/style.css')
+
 # from lib import art_plants
 
 # art_plants.gen()
 
+if 0:
+    from hub import hub_flowers
+    hub_flowers.gen()
+
+if 1:
+    from hub import hub_art
+    hub_art.gen()
+
+quit()
 if 1:
     data = [
         {
@@ -122,7 +133,6 @@ if 1:
     for item in data:
         art_plants_types_flowers_var_aesthetic.gen(item)
 
-shutil.copy2(f'style.css', f'{g.website_folderpath}/style.css')
 
 quit()
 

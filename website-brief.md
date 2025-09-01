@@ -1,3 +1,57 @@
+================================================================================
+## plants
+    ### types
+        ### flower
+        ### tree
+    ### house
+        #### garden
+    ### ideas
+    ### food
+        #### recipes
+        #### fruit
+    ### art
+        #### crafts
+            ###### pumpkin
+                ####### carving
+                    ######## ideas
+                        ######### easy
+                        ######### unique
+                        ######### cool
+                        ######### cute
+                        ######### simple
+                    ######## cute
+                    ######## easy
+                    ######## cat
+                    ######## funny
+                    ######## desings
+                    ######## scary
+                ####### painting (painted)
+                    ######## ideas
+                        ######### cute
+                        ######### easy
+                ####### decorating
+                    ######## ideas
+                    ######## contest
+                ####### ideas
+                ####### desings
+                ####### hello kitty
+                ####### mini
+                    ######## painting
+                        ######### ideas
+                ####### crochet
+        #### paintings
+        #### aesthetic
+        #### decor
+    ### seasonal
+    ### nature
+
+pumpkin
+    carving
+        ideas
+    painting
+        ideas
+    
+
 ................................................................................
 # martinpellizzer
     ## plants
