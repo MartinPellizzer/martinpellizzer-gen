@@ -16,6 +16,10 @@ if 0:
     hub_flowers.gen()
 
 if 1:
+    from hub import hub_house
+    hub_house.gen()
+
+if 0:
     from hub import hub_art
     hub_art.gen()
 

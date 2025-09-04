@@ -62,8 +62,23 @@ def keywords_get(folderpath, seed='', target_keyword='', keywords_num=1000, keyw
     print(len(keywords_no_dup))
     return keywords_no_dup
     
-martinpellizzer_folderpath = f'{g.vault_folderpath}/martinpellizzer/database/keywords/pinterest-pinclicks/plants'
-terrawhisper_folderpath = f'{g.vault_folderpath}/terrawhisper/database/keywords/pinterest-pinclicks/skin-care'
-keywords = keywords_get(martinpellizzer_folderpath, seed='', target_keyword='pumpkin', keywords_num=1000, keywords_volume_min=0)
-# word_cluster(keywords)
+project = 'martinpellizzer'
+project = 'terrawhisper'
+base_foldername = f'herbal-medicine'
+base_foldername = f''
+target_keyword = 'house'
+target_keyword = 'flower'
+keywords_num = 1000
+keywords_volume_min = 10000
+keywords_volume_min = 0
+keywords_volume_min = 1000000
+keywords_volume_min = 100000
+word_cluster_flag = 1
+
+base_folderpath = f'{g.vault_folderpath}/{project}/database/keywords/pinterest-pinclicks/{base_foldername}'
+print(base_folderpath)
+keywords = keywords_get(base_folderpath, seed='', target_keyword=target_keyword, keywords_num=keywords_num, keywords_volume_min=keywords_volume_min)
+if word_cluster_flag == True:
+    word_cluster(keywords)
 quit()
+
