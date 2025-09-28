@@ -6,6 +6,7 @@ from lib import g
 from lib import io
 from lib import llm
 from lib import media
+from lib import article
 from lib import sections
 
 def has_year(text):
@@ -151,6 +152,7 @@ def art_gen_json(article_slug, keyword_main, keyword_main_pretty, image_prompt='
     json_article['entity_slug_plural'] = f'''pumpkins'''
     json_article['keyword_main'] = keyword_main
     json_article['keyword_main_pretty'] = keyword_main_pretty
+    json_article['keyword_main_title'] = keyword_main_title
     json_article['keyword_main_slug'] = keyword_main.lower().strip().replace(' ', '-')
     json_article['links'] = links
     json_article['image_prompt'] = image_prompt
@@ -171,6 +173,7 @@ def art_gen_json_prompts(article_slug, keyword_main, keyword_main_pretty, images
     json_article['main_list_num'] = f'10'
     json_article['keyword_main'] = keyword_main
     json_article['keyword_main_pretty'] = keyword_main_pretty
+    json_article['keyword_main_title'] = keyword_main_title
     json_article['keyword_main_slug'] = keyword_main.lower().strip().replace(' ', '-')
     json_article['links'] = links
     json_article['images_prompts'] = images_prompts
@@ -232,55 +235,100 @@ def art_gen_html(article_slug):
     '''
     with open(f'{g.website_folderpath}/{article_slug}.html', 'w') as f: f.write(html)
 
-def art_crafts_pumpkin_carving_ideas_cat_gen():
-    print(f'ART: crafts pumpkin carving ideas cat')
+def article_crafts_pumpkin_carving_ideas_cat_gen():
     article_slug = f'''plants/art/crafts/pumpkin/carving/ideas/cat'''
-    image_prompt = f'''cat pumpkin carving, bokeh, depth of field, high resolution,'''
-    keyword_main = f'''pumpkin carving ideas cat'''
-    keyword_main_pretty = f'''cat pumpkin carving ideas'''
-    art_gen_images(article_slug, keyword_main, image_prompt, images_num=10, dispel=False)
-    art_gen_json(article_slug, keyword_main, keyword_main_pretty, image_prompt=image_prompt, regen=False, dispel=False)
-    art_gen_html(article_slug)
+    print(f'ARTICLE: {article_slug}')
+    article_obj = {
+        'article_slug': article_slug,
+        'keyword_main': 'pumpkin carving ideas cat',
+        'keyword_main_slug': 'pumpkin-carving-ideas-cat',
+        'keyword_main_pretty': 'cat pumpkin carving ideas',
+        'keyword_main_title': 'cat pumpkin carving ideas',
+        'pin_board_name': 'plant art',
+        'main_list_num': '10',
+        'article_type': 'listicle',
+        'images_prompts': ['cat pumpkin carving, bokeh, depth of field, high resolution'],
+        'links': [],
+    }
+    article.images_gen(article_obj, regen=False, dispel=False)
+    article.json_gen(article_obj, regen=False, dispel=False)
+    article.html_gen(article_slug)
 
-def art_crafts_pumpkin_carving_ideas_cute_gen():
-    print(f'ART: crafts pumpkin carving ideas cute')
+def article_crafts_pumpkin_carving_ideas_cute_gen():
     article_slug = f'''plants/art/crafts/pumpkin/carving/ideas/cute'''
-    image_prompt = f'''cute pumpkin carving, bokeh, depth of field, high resolution,'''
-    keyword_main = f'''pumpkin carving ideas cute'''
-    keyword_main_pretty = f'''cute pumpkin carving ideas'''
-    art_gen_images(article_slug, keyword_main, image_prompt, images_num=10, dispel=False)
-    art_gen_json(article_slug, keyword_main, keyword_main_pretty, image_prompt=image_prompt, regen=False, dispel=False)
-    art_gen_html(article_slug)
+    print(f'ARTICLE: {article_slug}')
+    article_obj = {
+        'article_slug': article_slug,
+        'keyword_main': 'pumpkin carving ideas cute',
+        'keyword_main_slug': 'pumpkin-carving-ideas-cute',
+        'keyword_main_pretty': 'cute pumpkin carving ideas',
+        'keyword_main_title': 'cute pumpkin carving ideas',
+        'pin_board_name': 'plant art',
+        'main_list_num': '10',
+        'article_type': 'listicle',
+        'images_prompts': ['cute pumpkin carving, bokeh, depth of field, high resolution'],
+        'links': [],
+    }
+    article.images_gen(article_obj, regen=False, dispel=False)
+    article.json_gen(article_obj, regen=False, dispel=False)
+    article.html_gen(article_slug)
 
-def art_crafts_pumpkin_carving_ideas_cool_gen():
-    print(f'ART: crafts pumpkin carving ideas cool')
+def article_crafts_pumpkin_carving_ideas_cool_gen():
     article_slug = f'''plants/art/crafts/pumpkin/carving/ideas/cool'''
-    image_prompt = f'''cool pumpkin carving, bokeh, depth of field, high resolution,'''
-    keyword_main = f'''pumpkin carving ideas cool'''
-    keyword_main_pretty = f'''cool pumpkin carving ideas'''
-    art_gen_images(article_slug, keyword_main, image_prompt, images_num=10, dispel=False)
-    art_gen_json(article_slug, keyword_main, keyword_main_pretty, image_prompt=image_prompt, regen=False, dispel=False)
-    art_gen_html(article_slug)
+    print(f'ARTICLE: {article_slug}')
+    article_obj = {
+        'article_slug': article_slug,
+        'keyword_main': 'pumpkin carving ideas cool',
+        'keyword_main_slug': 'pumpkin-carving-ideas-cool',
+        'keyword_main_pretty': 'cool pumpkin carving ideas',
+        'keyword_main_title': 'cool pumpkin carving ideas',
+        'pin_board_name': 'plant art',
+        'main_list_num': '10',
+        'article_type': 'listicle',
+        'images_prompts': ['cool pumpkin carving, bokeh, depth of field, high resolution'],
+        'links': [],
+    }
+    article.images_gen(article_obj, regen=False, dispel=False)
+    article.json_gen(article_obj, regen=False, dispel=False)
+    article.html_gen(article_slug)
 
-def art_crafts_pumpkin_carving_ideas_unique_gen():
-    print(f'ART: crafts pumpkin carving ideas easy')
+def article_crafts_pumpkin_carving_ideas_unique_gen():
     article_slug = f'''plants/art/crafts/pumpkin/carving/ideas/unique'''
-    image_prompt = f'''unique pumpkin carving, bokeh, depth of field, high resolution,'''
-    keyword_main = f'''pumpkin carving ideas unique'''
-    keyword_main_pretty = f'''unique pumpkin carving ideas'''
-    art_gen_images(article_slug, keyword_main, image_prompt, images_num=10, dispel=False)
-    art_gen_json(article_slug, keyword_main, keyword_main_pretty, image_prompt=image_prompt, regen=False, dispel=False)
-    art_gen_html(article_slug)
+    print(f'ARTICLE: {article_slug}')
+    article_obj = {
+        'article_slug': article_slug,
+        'keyword_main': 'pumpkin carving ideas unique',
+        'keyword_main_slug': 'pumpkin-carving-ideas-unique',
+        'keyword_main_pretty': 'unique pumpkin carving ideas',
+        'keyword_main_title': 'unique pumpkin carving ideas',
+        'pin_board_name': 'plant art',
+        'main_list_num': '10',
+        'article_type': 'listicle',
+        'images_prompts': ['unique pumpkin carving, bokeh, depth of field, high resolution'],
+        'links': [],
+    }
+    article.images_gen(article_obj, regen=False, dispel=False)
+    article.json_gen(article_obj, regen=False, dispel=False)
+    article.html_gen(article_slug)
 
-def art_crafts_pumpkin_carving_ideas_easy_gen():
-    print(f'ART: crafts pumpkin carving ideas easy')
+def article_crafts_pumpkin_carving_ideas_easy_gen():
     article_slug = f'''plants/art/crafts/pumpkin/carving/ideas/easy'''
-    image_prompt = f'''easy pumpkin carving, bokeh, depth of field, high resolution,'''
-    keyword_main = f'''pumpkin carving ideas easy'''
-    keyword_main_pretty = f'''easy pumpkin carving ideas'''
-    art_gen_images(article_slug, keyword_main, image_prompt, images_num=10, dispel=False)
-    art_gen_json(article_slug, keyword_main, keyword_main_pretty, image_prompt=image_prompt, regen=False, dispel=False)
-    art_gen_html(article_slug)
+    print(f'ARTICLE: {article_slug}')
+    article_obj = {
+        'article_slug': article_slug,
+        'keyword_main': 'pumpkin carving ideas easy',
+        'keyword_main_slug': 'pumpkin-carving-ideas-easy',
+        'keyword_main_pretty': 'easy pumpkin carving ideas',
+        'keyword_main_title': 'easy pumpkin carving ideas',
+        'pin_board_name': 'plant art',
+        'main_list_num': '10',
+        'article_type': 'listicle',
+        'images_prompts': ['easy pumpkin carving, bokeh, depth of field, high resolution'],
+        'links': [],
+    }
+    article.images_gen(article_obj, regen=False, dispel=False)
+    article.json_gen(article_obj, regen=False, dispel=False)
+    article.html_gen(article_slug)
 
 def art_crafts_pumpkin_carving_ideas_gen_images(article_slug, dispel=False):
     json_article_filepath = f'''{g.database_folderpath}/json/{article_slug}.json'''
@@ -611,7 +659,7 @@ def art_gen_json_branch(article_slug, keywords_links):
         art_gen_list_alt(article_slug, regen=False, dispel=False)
         '''
 
-def art_crafts_pumpkin_carving_ideas_gen():
+def article_crafts_pumpkin_carving_ideas_gen_old():
     print(f'ART: crafts pumpkin carving ideas')
     article_slug = f'''plants/art/crafts/pumpkin/carving/ideas'''
     image_prompt = f'''pumpkin carving, bokeh, depth of field, high resolution,'''
@@ -634,90 +682,148 @@ def art_crafts_pumpkin_carving_ideas_gen():
     art_crafts_pumpkin_carving_ideas_cute_gen()
     art_crafts_pumpkin_carving_ideas_cat_gen()
 
+def article_crafts_pumpkin_carving_ideas_gen():
+    article_slug = f'''plants/art/crafts/pumpkin/carving/ideas'''
+    print(f'ARTICLE: {article_slug}')
+    article_obj = {
+        'article_slug': article_slug,
+        'keyword_main': 'pumpkin carving ideas',
+        'keyword_main_slug': 'pumpkin-carving-ideas',
+        'keyword_main_pretty': 'pumpkin carving ideas',
+        'keyword_main_title': 'pumpkin carving ideas',
+        'pin_board_name': 'plant art',
+        'main_list_num': '10',
+        'article_type': 'listicle',
+        'images_prompts': ['pumpkin carving, bokeh, depth of field, high resolution'],
+        'links': [
+            {'keyword': f'easy pumpkin carving ideas', 'href': f'/{article_slug}/easy.html'}, 
+            {'keyword': f'unique pumpkin carving ideas', 'href': f'/{article_slug}/unique.html'}, 
+            {'keyword': f'cool pumpkin carving ideas', 'href': f'/{article_slug}/cool.html'}, 
+            {'keyword': f'cute pumpkin carving ideas', 'href': f'/{article_slug}/cute.html'}, 
+            {'keyword': f'cat pumpkin carving ideas', 'href': f'/{article_slug}/cat.html'}, 
+        ],
+    }
+    article.images_gen(article_obj, regen=False, dispel=False)
+    article.json_gen(article_obj, regen=False, dispel=False)
+    article.html_gen(article_slug)
+    ###
+    article_crafts_pumpkin_carving_ideas_easy_gen()
+    article_crafts_pumpkin_carving_ideas_unique_gen()
+    article_crafts_pumpkin_carving_ideas_cool_gen()
+    article_crafts_pumpkin_carving_ideas_cute_gen()
+    article_crafts_pumpkin_carving_ideas_cat_gen()
+
 def art_crafts_pumpkin_carving_json_gen():
     print(f'ART: crafts pumpkin carving [json]')
 
 def art_crafts_pumpkin_carving_html_gen():
     print(f'ART: crafts pumpkin carving [html]')
 
-def art_crafts_pumpkin_carving_gen():
-    print(f'ART: crafts pumpkin carving')
-    art_crafts_pumpkin_carving_json_gen()
-    art_crafts_pumpkin_carving_html_gen()
-    art_crafts_pumpkin_carving_ideas_gen()
+def article_crafts_pumpkin_carving_gen():
+    article_slug = f'''plants/art/crafts/pumpkin/carving'''
+    print(f'ARTICLE: {article_slug}')
+    # art_crafts_pumpkin_carving_json_gen()
+    # art_crafts_pumpkin_carving_html_gen()
+    article_crafts_pumpkin_carving_ideas_gen()
 
-def art_crafts_pumpkin_painting_ideas_easy_gen():
-    print(f'ART: crafts pumpkin painting ideas easy')
+def article_crafts_pumpkin_painting_ideas_easy_gen():
     article_slug = f'''plants/art/crafts/pumpkin/painting/ideas/easy'''
-    keyword_main = f'''pumpkin painting ideas easy'''
-    keyword_main_pretty = f'''easy pumpkin painting ideas'''
-    images_prompts = [
-        f'''pumpkin painted with a smiley face simple eyes and a big grin, on a nature background, soft light, bokeh, depth of field, high resolution,''',
-        f'''pumpkin painted with emoji, on a nature background, soft light, bokeh, depth of field, high resolution,''',
-        f'''pumpkin painted with polka dots dab different colors all over, on a nature background, soft light, bokeh, depth of field, high resolution,''',
-        f'''pumpkin painted with rainbow paint stripes in order, on a nature background, soft light, bokeh, depth of field, high resolution,''',
-        f'''pumpkin painted with cat face, on a nature background, soft light, bokeh, depth of field, high resolution,''',
-        f'''pumpkin painted with candy corn in yellow orange and white bands, on a nature background, soft light, bokeh, depth of field, high resolution,''',
-        f'''pumpkin painted with white spider web lines on black pumpkin, on a nature background, soft light, bokeh, depth of field, high resolution,''',
-        f'''pumpkin painted with autumn leaves in red orange and gold, on a nature background, soft light, bokeh, depth of field, high resolution,''',
-        f'''pumpkin painted with snowman with two white-painted pumpkins and buttons and scarf, on a nature background, soft light, bokeh, depth of field, high resolution,''',
-        f'''pumpkin painted with ombre fade one color into another, on a nature background, soft light, bokeh, depth of field, high resolution,''',
-        f'''pumpkin painted with splatter paint drip or flick bright colors across a dark base, on a nature background, soft light, bokeh, depth of field, high resolution,''',
-    ]
-    art_gen_images_prompts(article_slug, keyword_main, images_prompts=images_prompts, images_num=10, regen=False, dispel=False)
-    art_gen_json_prompts(article_slug, keyword_main, keyword_main_pretty, images_prompts=images_prompts, links=[], regen=False, dispel=False)
-    art_gen_html(article_slug)
+    print(f'ARTICLE: {article_slug}')
+    article_obj = {
+        'article_slug': article_slug,
+        'keyword_main': 'pumpkin painting ideas easy',
+        'keyword_main_slug': 'pumpkin-painting-ideas-easy',
+        'keyword_main_pretty': 'easy pumpkin painting ideas',
+        'keyword_main_title': 'easy pumpkin painting ideas',
+        'pin_board_name': 'plant art',
+        'main_list_num': '10',
+        'article_type': 'listicle',
+        'images_prompts': [
+            f'''pumpkin painted with a smiley face simple eyes and a big grin, on a nature background, soft light, bokeh, depth of field, high resolution,''',
+            f'''pumpkin painted with emoji, on a nature background, soft light, bokeh, depth of field, high resolution,''',
+            f'''pumpkin painted with polka dots dab different colors all over, on a nature background, soft light, bokeh, depth of field, high resolution,''',
+            f'''pumpkin painted with rainbow paint stripes in order, on a nature background, soft light, bokeh, depth of field, high resolution,''',
+            f'''pumpkin painted with cat face, on a nature background, soft light, bokeh, depth of field, high resolution,''',
+            f'''pumpkin painted with candy corn in yellow orange and white bands, on a nature background, soft light, bokeh, depth of field, high resolution,''',
+            f'''pumpkin painted with white spider web lines on black pumpkin, on a nature background, soft light, bokeh, depth of field, high resolution,''',
+            f'''pumpkin painted with autumn leaves in red orange and gold, on a nature background, soft light, bokeh, depth of field, high resolution,''',
+            f'''pumpkin painted with snowman with two white-painted pumpkins and buttons and scarf, on a nature background, soft light, bokeh, depth of field, high resolution,''',
+            f'''pumpkin painted with ombre fade one color into another, on a nature background, soft light, bokeh, depth of field, high resolution,''',
+            f'''pumpkin painted with splatter paint drip or flick bright colors across a dark base, on a nature background, soft light, bokeh, depth of field, high resolution,''',
+        ],
+        'links': [],
+    }
+    article.images_gen(article_obj, regen=False, dispel=False)
+    article.json_gen(article_obj, regen=False, dispel=False)
+    article.html_gen(article_slug)
 
-def art_crafts_pumpkin_painting_ideas_cute_gen():
-    print(f'ART: crafts pumpkin painting ideas cute')
+def article_crafts_pumpkin_painting_ideas_cute_gen():
     article_slug = f'''plants/art/crafts/pumpkin/painting/ideas/cute'''
-    keyword_main = f'''pumpkin painting ideas cute'''
-    keyword_main_pretty = f'''cute pumpkin painting ideas'''
-    images_prompts = [
-        f'''pumpkin painted with kitten face with big eyes whiskers and ears, on a nature background, soft light, bokeh, depth of field, high resolution,''',
-        f'''pumpkin painted with owl face with round eyes feathers with painted details and a little beak, on a nature background, soft light, bokeh, depth of field, high resolution,''',
-        f'''pumpkin painted with bumblebee yellow with black stripes and pipe-cleaner antennae, on a nature background, soft light, bokeh, depth of field, high resolution,''',
-        f'''pumpkin painted with puppy face, on a nature background, soft light, bokeh, depth of field, high resolution,''',
-        f'''pumpkin painted with pastel rainbow paint soft pastel stripes, on a nature background, soft light, bokeh, depth of field, high resolution,''',
-        f'''pumpkin painted with galaxy blend purples blues and whites with little stars, on a nature background, soft light, bokeh, depth of field, high resolution,''',
-        f'''pumpkin painted with polka dot colorful dots all over a white base, on a nature background, soft light, bokeh, depth of field, high resolution,''',
-        f'''pumpkin painted with floral hand-painted daisies sunflowers or roses, on a nature background, soft light, bokeh, depth of field, high resolution,''',
-        f'''pumpkin painted with unicorn pastel colors glitter and a golden horn, on a nature background, soft light, bokeh, depth of field, high resolution,''',
-        f'''pumpkin painted with scarecrow face and a straw hat and painted-on stitched smile, on a nature background, soft light, bokeh, depth of field, high resolution,''',
-        f'''pumpkin painted with candy corn striped orange yellow and white, on a nature background, soft light, bokeh, depth of field, high resolution,''',
-    ]
-    art_gen_images_prompts(article_slug, keyword_main, images_prompts=images_prompts, images_num=10, regen=False, dispel=False)
-    art_gen_json_prompts(article_slug, keyword_main, keyword_main_pretty, images_prompts=images_prompts, links=[], regen=False, dispel=False)
-    art_gen_html(article_slug)
+    print(f'ARTICLE: {article_slug}')
+    article_obj = {
+        'article_slug': article_slug,
+        'keyword_main': 'pumpkin painting ideas cute',
+        'keyword_main_slug': 'pumpkin-painting-ideas-cute',
+        'keyword_main_pretty': 'cute pumpkin painting ideas',
+        'keyword_main_title': 'cute pumpkin painting ideas',
+        'pin_board_name': 'plant art',
+        'main_list_num': '10',
+        'article_type': 'listicle',
+        'images_prompts': [
+            f'''pumpkin painted with kitten face with big eyes whiskers and ears, on a nature background, soft light, bokeh, depth of field, high resolution,''',
+            f'''pumpkin painted with owl face with round eyes feathers with painted details and a little beak, on a nature background, soft light, bokeh, depth of field, high resolution,''',
+            f'''pumpkin painted with bumblebee yellow with black stripes and pipe-cleaner antennae, on a nature background, soft light, bokeh, depth of field, high resolution,''',
+            f'''pumpkin painted with puppy face, on a nature background, soft light, bokeh, depth of field, high resolution,''',
+            f'''pumpkin painted with pastel rainbow paint soft pastel stripes, on a nature background, soft light, bokeh, depth of field, high resolution,''',
+            f'''pumpkin painted with galaxy blend purples blues and whites with little stars, on a nature background, soft light, bokeh, depth of field, high resolution,''',
+            f'''pumpkin painted with polka dot colorful dots all over a white base, on a nature background, soft light, bokeh, depth of field, high resolution,''',
+            f'''pumpkin painted with floral hand-painted daisies sunflowers or roses, on a nature background, soft light, bokeh, depth of field, high resolution,''',
+            f'''pumpkin painted with unicorn pastel colors glitter and a golden horn, on a nature background, soft light, bokeh, depth of field, high resolution,''',
+            f'''pumpkin painted with scarecrow face and a straw hat and painted-on stitched smile, on a nature background, soft light, bokeh, depth of field, high resolution,''',
+            f'''pumpkin painted with candy corn striped orange yellow and white, on a nature background, soft light, bokeh, depth of field, high resolution,''',
+        ],
+        'links': [],
+    }
+    article.images_gen(article_obj, regen=False, dispel=False)
+    article.json_gen(article_obj, regen=False, dispel=False)
+    article.html_gen(article_slug)
 
-def art_crafts_pumpkin_painting_ideas_gen():
-    print(f'ART: crafts pumpkin painting ideas')
+def article_crafts_pumpkin_painting_ideas_gen():
     article_slug = f'''plants/art/crafts/pumpkin/painting/ideas'''
-    keyword_main = f'''pumpkin painting ideas'''
-    keyword_main_pretty = f'''pumpkin painting ideas'''
-    images_prompts = [
-        f'''pumpkin with black painting and swirling purples and blues and silvers and white speckled stars, on a nature background, soft light, bokeh, depth of field, high resolution,''',
-        f'''pumpkin painted with an animal face like a cat, on a nature background, soft light, bokeh, depth of field, high resolution,''',
-        f'''pumpkin painted with pastel base color and frosting paint on top and sparkles paint, on a nature background, soft light, bokeh, depth of field, high resolution,''',
-        f'''pumpkin painted like a smiley emoji, on a nature background, soft light, bokeh, depth of field, high resolution,''',
-        f'''pumpkin painted with white spider webs on a black color, on a nature background, soft light, bokeh, depth of field, high resolution,''',
-        f'''pumpkin painted with a sunset gradient color with a dark spooky silhouette, on a nature background, soft light, bokeh, depth of field, high resolution,''',
-        f'''pumpkin painted with blend of fall colors like burgundy and orange and gold, on a nature background, soft light, bokeh, depth of field, high resolution,''',
-        f'''pumpkin painted with hand-paint vines or sunflowers or roses, on a nature background, soft light, bokeh, depth of field, high resolution,''',
-        f'''pumpkin painted with cozy checkered flannel style paint, on a nature background, soft light, bokeh, depth of field, high resolution,''',
-        f'''pumpkin painted with gold paint or silver paint or commer sheen paint for a a chic look, on a nature background, soft light, bokeh, depth of field, high resolution,''',
-        f'''pumpkin painted minimalist line art simple black designs on a white color, on a nature background, soft light, bokeh, depth of field, high resolution,''',
-    ]
-    links = [
-        {'keyword': f'easy pumpkin painting ideas', 'href': f'/{article_slug}/easy.html'}, 
-        {'keyword': f'cute pumpkin painting ideas', 'href': f'/{article_slug}/cute.html'}, 
-    ]
-    art_gen_images_prompts(article_slug, keyword_main, images_prompts, images_num=10, regen=False, dispel=False)
-    art_gen_json_prompts(article_slug, keyword_main, keyword_main_pretty, images_prompts=images_prompts, links=links, regen=False, dispel=False)
-    art_gen_html(article_slug)
+    print(f'ARTICLE: {article_slug}')
+    article_obj = {
+        'article_slug': article_slug,
+        'keyword_main': 'pumpkin painting ideas',
+        'keyword_main_slug': 'pumpkin-painting-ideas',
+        'keyword_main_pretty': 'pumpkin painting ideas',
+        'keyword_main_title': 'pumpkin painting ideas',
+        'pin_board_name': 'plant art',
+        'main_list_num': '10',
+        'article_type': 'listicle',
+        'images_prompts': [
+            f'''pumpkin with black painting and swirling purples and blues and silvers and white speckled stars, on a nature background, soft light, bokeh, depth of field, high resolution,''',
+            f'''pumpkin painted with an animal face like a cat, on a nature background, soft light, bokeh, depth of field, high resolution,''',
+            f'''pumpkin painted with pastel base color and frosting paint on top and sparkles paint, on a nature background, soft light, bokeh, depth of field, high resolution,''',
+            f'''pumpkin painted like a smiley emoji, on a nature background, soft light, bokeh, depth of field, high resolution,''',
+            f'''pumpkin painted with white spider webs on a black color, on a nature background, soft light, bokeh, depth of field, high resolution,''',
+            f'''pumpkin painted with a sunset gradient color with a dark spooky silhouette, on a nature background, soft light, bokeh, depth of field, high resolution,''',
+            f'''pumpkin painted with blend of fall colors like burgundy and orange and gold, on a nature background, soft light, bokeh, depth of field, high resolution,''',
+            f'''pumpkin painted with hand-paint vines or sunflowers or roses, on a nature background, soft light, bokeh, depth of field, high resolution,''',
+            f'''pumpkin painted with cozy checkered flannel style paint, on a nature background, soft light, bokeh, depth of field, high resolution,''',
+            f'''pumpkin painted with gold paint or silver paint or commer sheen paint for a a chic look, on a nature background, soft light, bokeh, depth of field, high resolution,''',
+            f'''pumpkin painted minimalist line art simple black designs on a white color, on a nature background, soft light, bokeh, depth of field, high resolution,''',
+        ],
+        'links': [
+            {'keyword': f'easy pumpkin painting ideas', 'href': f'/{article_slug}/easy.html'}, 
+            {'keyword': f'cute pumpkin painting ideas', 'href': f'/{article_slug}/cute.html'}, 
+        ],
+    }
+    article.images_gen(article_obj, regen=False, dispel=False)
+    article.json_gen(article_obj, regen=False, dispel=False)
+    article.html_gen(article_slug)
     ###
-    art_crafts_pumpkin_painting_ideas_easy_gen()
-    art_crafts_pumpkin_painting_ideas_cute_gen()
+    article_crafts_pumpkin_painting_ideas_easy_gen()
+    article_crafts_pumpkin_painting_ideas_cute_gen()
 
 def art_crafts_pumpkin_painting_json_gen():
     print(f'ART: crafts pumpkin painting [json]')
@@ -725,11 +831,11 @@ def art_crafts_pumpkin_painting_json_gen():
 def art_crafts_pumpkin_painting_html_gen():
     print(f'ART: crafts pumpkin painting [html]')
 
-def art_crafts_pumpkin_painting_gen():
-    print(f'ART: crafts pumpkin painting')
-    art_crafts_pumpkin_painting_json_gen()
-    art_crafts_pumpkin_painting_html_gen()
-    art_crafts_pumpkin_painting_ideas_gen()
+def article_crafts_pumpkin_painting_gen():
+    print(f'ARTICLE: crafts pumpkin painting')
+    # art_crafts_pumpkin_painting_json_gen()
+    # art_crafts_pumpkin_painting_html_gen()
+    article_crafts_pumpkin_painting_ideas_gen()
 
 def art_crafts_pumpkin_json_gen():
     print(f'ART: crafts pumpkin [json]')
@@ -737,25 +843,27 @@ def art_crafts_pumpkin_json_gen():
 def art_crafts_pumpkin_html_gen():
     print(f'ART: crafts pumpkin [html]')
 
-def art_crafts_pumpkin_gen():
-    print(f'ART: crafts pumpkin')
-    art_crafts_pumpkin_json_gen()
-    art_crafts_pumpkin_html_gen()
-    art_crafts_pumpkin_carving_gen()
-    art_crafts_pumpkin_painting_gen()
+def article_crafts_pumpkin_gen():
+    print(f'ARTICLE: crafts pumpkin')
+    # art_crafts_pumpkin_json_gen()
+    # art_crafts_pumpkin_html_gen()
+    article_crafts_pumpkin_carving_gen()
+    article_crafts_pumpkin_painting_gen()
 
-def art_crafts_json_gen():
+def article_crafts_json_gen():
     print(f'ART: crafts [json]')
 
-def art_crafts_html_gen():
+def article_crafts_html_gen():
     print(f'ART: crafts [html]')
 
-def art_crafts_gen():
-    print(f'ART: crafts')
-    art_crafts_json_gen()
-    art_crafts_html_gen()
-    art_crafts_pumpkin_gen()
+def article_crafts_gen():
+    article_slug = f'''plants/art'''
+    print(f'ARTICLE: crafts')
+    # article_crafts_json_gen()
+    # article_crafts_html_gen()
+    article_crafts_pumpkin_gen()
+    article_background_pumpkin_gen()
 
 def gen():
-    print(f'ART: art')
-    art_crafts_gen()
+    print(f'HUB: art')
+

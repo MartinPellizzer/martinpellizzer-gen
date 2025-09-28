@@ -4,7 +4,9 @@ from lib import g
 from lib import io
 from lib import llm
 from lib import polish
+from lib import article
 from lib import sections
+
 
 flowers = [
     {
@@ -297,26 +299,69 @@ def art_flowers_flower_html_gen(item):
     html_filepath = f'''{g.website_folderpath}/{article_slug}.html'''
     with open(html_filepath, 'w') as f: f.write(html)
 
-def art_flowers_flower_gen(item):
+def art_flowers_flower_gen_old(item):
     print(f'ART: flowers flower')
     folders_recursive_gen(f'plants/types/flowers')
     art_flowers_flower_json_gen(item)
     art_flowers_flower_html_gen(item)
     # quit()
 
-def art_flowers_json_gen():
-    print(f'ART: flowers [json]')
 
-def art_flowers_html_gen():
-    print(f'ART: flowers [html]')
 
-def art_flowers_gen():
-    print(f'ART: flowers')
-    art_flowers_json_gen()
-    art_flowers_html_gen()
-    for item in flowers:
-        art_flowers_flower_gen(item)
+
+
+def article_plants_types_flowers_wallpaper_gen():
+    article_slug = f'''plants/types/flowers/wallpaper'''
+    print(f'ARTICLE: {article_slug}')
+    article_obj = {
+        'article_slug': article_slug,
+        'keyword_main': 'flower wallpaper',
+        'keyword_main_slug': 'flower-wallpaper',
+        'keyword_main_pretty': 'flower wallpapers',
+        'keyword_main_title': 'flower wallpaper images',
+        'pin_board_name': 'plants',
+        'main_list_num': '10',
+        'article_type': 'listicle',
+        'images_prompts': ['flower wallpaper, bokeh, depth of field, high resolution'],
+        'links': [],
+    }
+    article.images_gen(article_obj, regen=False, dispel=False)
+    article.json_gen(article_obj, regen=False, dispel=False)
+    article.html_gen(article_slug)
+
+def article_plants_types_flowers_aesthetic_gen():
+    article_slug = f'''plants/types/flowers/aesthetic'''
+    print(f'ARTICLE: {article_slug}')
+    article_obj = {
+        'article_slug': article_slug,
+        'keyword_main': 'flowers aesthetic',
+        'keyword_main_slug': 'flowers-aesthetic',
+        'keyword_main_pretty': 'flowers aesthetics',
+        'keyword_main_title': 'flowers aesthetic photos',
+        'pin_board_name': 'plants',
+        'main_list_num': '10',
+        'article_type': 'listicle',
+        'images_prompts': ['flowers in nature, bokeh, depth of field, high resolution'],
+        'links': [],
+    }
+    article.images_gen(article_obj, regen=False, dispel=False)
+    article.json_gen(article_obj, regen=False, dispel=False)
+    article.html_gen(article_slug)
+
+def article_plants_types_flowers_gen():
+    article_slug = f'''plants/types/flowers'''
+    print(f'ARTICLE: {article_slug}')
+    article_plants_types_flowers_aesthetic_gen()
+    article_plants_types_flowers_wallpaper_gen()
+
+def article_plants_types_gen():
+    article_slug = f'''plants/types'''
+    print(f'ARTICLE: {article_slug}')
+    # for item in flowers:
+        # art_flowers_flower_gen(item)
+    article_plants_types_flowers_gen()
 
 def gen():
-    art_flowers_gen()
+    print(f'HUB: types')
+    article_plants_types_gen()
 

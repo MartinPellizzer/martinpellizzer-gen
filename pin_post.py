@@ -3,6 +3,7 @@ import re
 import csv
 import time
 import random
+import pickle
 from datetime import datetime
 from bs4 import BeautifulSoup
 
@@ -41,17 +42,41 @@ driver.maximize_window()
 
 driver.get("https://www.pinterest.com/login/")
 time.sleep(10)
-e = driver.find_element(By.XPATH, '//input[@type="email"]')
-e.send_keys(username) 
-time.sleep(10)
-e = driver.find_element(By.XPATH, '//input[@id="password"]')
-e.send_keys(password) 
-time.sleep(10)
-e = driver.find_element(By.XPATH, '//div[text()="Log in"]')
-e.click()
-time.sleep(30)
-    
+
+COOKIE_FILEPATH = 'cookies.plk'
+if os.path.exists(COOKIE_FILEPATH):
+    print(COOKIE_FILEPATH)
+    with open(COOKIE_FILEPATH, 'rb') as f:
+        cookies = pickle.load(f)
+        for cookie in cookies:
+            print(cookie)
+            if 'sameSite' in cookie:
+                del cookie['sameSite']
+            try: 
+                driver.add_cookie(cookie)
+                print(f"**********************************************************")
+                print(f"Adding cookie: {cookie.get('name')}")
+                print(f"**********************************************************")
+            except Exception as e:
+                print(f"Skipping cookie: {cookie.get('name')} - {e}")
+    driver.refresh()
+else:
+    e = driver.find_element(By.XPATH, '//input[@type="email"]')
+    e.send_keys(username) 
+    time.sleep(10)
+    e = driver.find_element(By.XPATH, '//input[@id="password"]')
+    e.send_keys(password) 
+    time.sleep(10)
+    e = driver.find_element(By.XPATH, '//div[text()="Log in"]')
+    e.click()
+    time.sleep(60)
+
+    cookies = driver.get_cookies()
+    with open(COOKIE_FILEPATH, 'wb') as f:
+        pickle.dump(cookies, f)
+
 def pin_post(article_filepath):
+    global failed_pins_num
     data = io.json_read(article_filepath)
     title = data['title'].title()
     url = data["url"]
@@ -64,9 +89,17 @@ def pin_post(article_filepath):
     print('URL: ' + url)
     print('IMG_FILEPATH: ' + img_filepath)
     print('DESCRIPTION: ' + description)
-    driver.get("https://www.pinterest.com/pin-creation-tool/")
+    try:
+        driver.get("https://www.pinterest.com/pin-creation-tool/")
+    except:
+        failed_pins_num += 1
+        return
     time.sleep(10)
-    e = driver.find_element(By.XPATH, '//input[@id="storyboard-upload-input"]')
+    try:
+        e = driver.find_element(By.XPATH, '//input[@id="storyboard-upload-input"]')
+    except:
+        failed_pins_num += 1
+        return
     img_filepath_formatted = img_filepath
     e.send_keys(f'{img_filepath_formatted}') 
     time.sleep(10)
@@ -83,9 +116,13 @@ def pin_post(article_filepath):
     time.sleep(5)
     e = driver.find_element(By.XPATH, '//div[@data-test-id="board-dropdown-select-button"]')
     e.click()
-    time.sleep(5)
-    e = driver.find_element(By.XPATH, '//input[@id="pickerSearchField"]')
-    e.send_keys(board_name) 
+    time.sleep(30)
+    try:
+        e = driver.find_element(By.XPATH, '//input[@id="pickerSearchField"]')
+        e.send_keys(board_name) 
+    except:
+        failed_pins_num += 1
+        return
     time.sleep(5)
     e = driver.find_element(By.XPATH, f'//div[@data-test-id="board-row-{board_name}"]')
     e.click()
@@ -94,6 +131,7 @@ def pin_post(article_filepath):
     e.click()
     time.sleep(60)
 
+failed_pins_num = 0
 jsons_filenames = os.listdir(f'{g.pinterest_tmp_image_folderpath}/pins')
 for i in range(len(jsons_filenames)): 
     # if i < 3: continue
@@ -113,3 +151,4 @@ for i in range(len(jsons_filenames)):
         random_time_to_wait = random.randint(-60, 60)
         time_to_wait = WAIT_SECONDS + random_time_to_wait
         time.sleep(time_to_wait)
+print(f'FAILED PINS NUM: {failed_pins_num}')

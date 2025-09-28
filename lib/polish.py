@@ -1,5 +1,9 @@
 def sanitize(text):
     text = text.replace('-', '-')
+    text = text.replace('—', ', ')
+    text = text.replace('’', "'")
+    text = text.replace('é', "e")
+    
     return text
 
 def format_1N1(text_raw):

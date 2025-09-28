@@ -11,19 +11,45 @@ shutil.copy2(f'style.css', f'{g.website_folderpath}/style.css')
 
 # art_plants.gen()
 
-if 0:
-    from hub import hub_flowers
-    hub_flowers.gen()
+if 1:
+    from hub import hub_types
+    hub_types.gen()
 
 if 1:
     from hub import hub_house
     hub_house.gen()
 
-if 0:
+if 1:
     from hub import hub_art
     hub_art.gen()
 
+########################################
+# CSV............................[CSV]
+########################################
+if 1:
+    from hub import hub_csv
+    hub_csv.gen()
+
+html = f'''
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <link rel="stylesheet" href="/style.css">
+    </head>
+    <body>
+        {sections.header()}
+        <main>
+            <div class="article container-md">
+            </div>
+        </main>
+        {sections.footer()}
+    </body>
+    </html>
+'''
+with open(f'{g.website_folderpath}/index.html', 'w') as f: f.write(html)
+
 quit()
+
 if 1:
     data = [
         {
