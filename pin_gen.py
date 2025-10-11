@@ -1,5 +1,6 @@
 import os
 import random
+from datetime import datetime
 
 from PIL import Image, ImageFont, ImageDraw, ImageColor, ImageOps
 
@@ -290,7 +291,7 @@ if 1:
         os.remove(f'{g.pinterest_tmp_image_folderpath}/images/{filename}')
     pass
 
-pins_num_max = 25
+pins_num_max = 32
 pins_delta_perc = 20
 pins_delta_perc_random = random.randint(0, pins_delta_perc)
 pins_delta_perc_random_sign = random.randint(0, 1)
@@ -305,6 +306,14 @@ item_i = 0
 
         # f'''plants/art/crafts/pumpkin/carving/ideas/cat''',
 articles_slugs = [
+    [
+        f'''plants/types/flowers/aesthetic''',
+        f'''plants/types/flowers/wallpaper''',
+    ],
+    [
+        f'''plants/types/flowers/peonies/bouquet''',
+        f'''plants/types/flowers/roses/picture''',
+    ],
     [
         f'''plants/art/crafts/pumpkin/carving/ideas''',
         f'''plants/art/crafts/pumpkin/carving/ideas/easy''',
@@ -323,13 +332,6 @@ articles_slugs = [
         f'''plants/art/backgrounds/red/aesthetic''',
     ],
     [
-        f'''plants/art/aesthetic/sunset''',
-        f'''plants/art/aesthetic/moon''',
-        f'''plants/art/aesthetic/sky''',
-        f'''plants/art/aesthetic/spring''',
-        f'''plants/art/aesthetic/ocean''',
-    ],
-    [
         f'''plants/art/wallpapers/red/velvet''',
         f'''plants/art/wallpapers/blue/dark''',
         f'''plants/art/wallpapers/black-white''',
@@ -339,42 +341,62 @@ articles_slugs = [
         f'''plants/art/wallpapers/lotus''',
     ],
     [
+        f'''plants/art/wallpapers/autumn''',
+    ],
+    [
+        f'''plants/art/wallpapers/whatsapp/aesthetic''',
+    ],
+    [
+        f'''plants/art/wallpapers/red/dark''',
+    ],
+    [
         f'''plants/art/aesthetic/academia/dark''',
         f'''plants/art/aesthetic/cafe''',
+        f'''plants/art/aesthetic/picnic''',
         f'''plants/art/aesthetic/school''',
         f'''plants/art/aesthetic/japan''',
-        f'''plants/art/aesthetic/picnic''',
+        f'''plants/art/aesthetic/italy''',
     ],
     [
         f'''plants/art/aesthetic/blue/wallpaper''',
         f'''plants/art/aesthetic/pink/light''',
-        f'''plants/art/aesthetic/green/sage''',
         f'''plants/art/aesthetic/pink/pastel''',
+        f'''plants/art/aesthetic/green/sage''',
     ],
     [
+        f'''plants/art/aesthetic/sunset''',
+        f'''plants/art/aesthetic/moon''',
+        f'''plants/art/aesthetic/sky''',
+        f'''plants/art/aesthetic/ocean''',
+        f'''plants/art/aesthetic/spring''',
         f'''plants/art/aesthetic/witch''',
     ],
     [
-        f'''plants/art/aesthetic/italy''',
+        f'''plants/art/aesthetic/cooking''',
     ],
     [
         f'''plants/art/design/home/interior''',
+        f'''plants/art/design/card/invitation''',
     ],
     [
-        f'''plants/art/design/card/invitation''',
+        f'''plants/art/design/bedroom/interior''',
+        f'''plants/art/decor/office/idea''',
+    ],
+    [
+        f'''plants/art/decor/room/diy/idea''',
     ],
     [
         f'''plants/house/garden/design''',
         f'''plants/house/garden/ideas''',
     ],
     [
+        f'''plants/house/backyard/landscaping/idea''',
+    ],
+    [
         f'''plants/house/indoor/door/design''',
         f'''plants/house/indoor/living-room/minimalist''',
         f'''plants/house/indoor/dining-room/decor''',
-    ],
-    [
-        f'''plants/types/flowers/aesthetic''',
-        f'''plants/types/flowers/wallpaper''',
+        f'''plants/house/indoor/kitchen/modern/design''',
     ],
     [
         f'''plants/food/desserts/strawberry/shortcake/aesthetic''',
@@ -383,10 +405,8 @@ articles_slugs = [
     [
         f'''plants/food/fruits/aesthetic''',
         f'''plants/food/fruits/mango/aesthetic''',
-        f'''plants/food/drinks/coffee/aesthetic''',
-    ],
-    [
         f'''plants/food/fruits/salad/aesthetic''',
+        f'''plants/food/drinks/coffee/aesthetic''',
     ],
     [
         f'''plants/habitats/forest/aesthetic''',
@@ -395,19 +415,23 @@ articles_slugs = [
     ],
     [
         f'''plants/event/party/aesthetic''',
+        f'''plants/event/birthday/cake/idea''',
     ],
     [
-        f'''plants/event/birthday/cake/idea''',
+        f'''plants/event/wedding/decorations''',
+    ],
+    [
+        f'''plants/event/anniversary/cake/design''',
     ],
 ]
 
 if 0:
     articles_slugs = [
         [
-            f'''plants/art/aesthetic/italy''',
+            f'''plants/art/wallpapers/whatsapp/aesthetic''',
         ],
         [
-            f'''plants/food/fruits/salad/aesthetic''',
+            f'''plants/art/wallpapers/red/dark''',
         ],
     ]
 
@@ -472,3 +496,5 @@ for item in flowers_data:
     pin_gen(item, item_i)
     item_i += 1
     # quit()
+
+print(datetime.now())

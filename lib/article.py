@@ -308,30 +308,33 @@ def json_category_sections_gen(article_slug, regen=False, dispel=False):
         return
     if regen: 
         json_article[key] = []
-    if json_article[key] == []:
-        output_list = []
-        folderpath = f'''{g.database_folderpath}/json/{article_slug}'''
-        for filename in os.listdir(folderpath):
-            filepath = f'''{folderpath}/{filename}'''
-            filename_base = filename.split('.')[0]
-            if not os.path.isfile(filepath): continue
-            json_subarticle = io.json_read(filepath)
-            json_subarticle_title = json_subarticle['article_title']
-            json_subarticle_intro = json_subarticle['intro']
-            html_subarticle_filename = filename.replace('.json', '.html')
-            image_filepath = f'''/images/{article_slug}/{filename_base}/{json_subarticle['keyword_main_slug']}.jpg'''
-            output_list.append(
-                {
-                    'title': json_subarticle['keyword_main_pretty'],
-                    'desc': json_subarticle_intro,
-                    'href': f'/{article_slug}/{html_subarticle_filename}',
-                    'anchor': json_subarticle_title,
-                    'image_src': image_filepath,
-                    'image_alt': f'''{json_subarticle['keyword_main']}''',
-                }
-            )
-        json_article[key] = output_list
-        io.json_write(json_article_filepath, json_article)
+    json_subarticles_slugs_old = [item['subarticle_slug'] for item in json_article[key]]
+    output_list = []
+    folderpath = f'''{g.database_folderpath}/json/{article_slug}'''
+    for filename in os.listdir(folderpath):
+        filepath = f'''{folderpath}/{filename}'''
+        filename_base = filename.split('.')[0]
+        if not os.path.isfile(filepath): continue
+        json_subarticle = io.json_read(filepath)
+        json_subarticle_slug = json_subarticle['article_slug']
+        if json_subarticle_slug in json_subarticles_slugs_old: continue
+        json_subarticle_title = json_subarticle['article_title']
+        json_subarticle_intro = json_subarticle['intro']
+        html_subarticle_filename = filename.replace('.json', '.html')
+        image_filepath = f'''/images/{article_slug}/{filename_base}/{json_subarticle['keyword_main_slug']}.jpg'''
+        output_list.append(
+            {
+                'subarticle_slug': json_subarticle['keyword_main_pretty'],
+                'title': json_subarticle['keyword_main_pretty'],
+                'desc': json_subarticle_intro,
+                'href': f'/{article_slug}/{html_subarticle_filename}',
+                'anchor': json_subarticle_title,
+                'image_src': image_filepath,
+                'image_alt': f'''{json_subarticle['keyword_main']}''',
+            }
+        )
+    json_article[key] = output_list
+    io.json_write(json_article_filepath, json_article)
 
 def json_gen(article_obj, regen=False, dispel=False):
     article_slug = article_obj["article_slug"]
@@ -358,57 +361,7 @@ def json_gen(article_obj, regen=False, dispel=False):
     elif json_article['article_type'] == 'category':
         json_category_title_gen(article_slug, regen=regen, dispel=dispel)
         json_intro_gen(article_slug, regen=regen, dispel=dispel)
-        json_category_sections_gen(article_slug, regen=True, dispel=dispel)
-
-def html_gen_old(article_slug, article_obj=None):
-    print(f'ARTICLE: {article_slug} [html]')
-    html_folderpath = f'{g.website_folderpath}/{article_slug}'
-    io.folders_recursive_gen(html_folderpath)
-    json_article_filepath = f'''{g.database_folderpath}/json/{article_slug}.json'''
-    json_article = io.json_read(json_article_filepath)
-    html_article = ''
-    html_article += f'<h1>{polish.sanitize(json_article["article_title"].title())}</h1>\n'
-    src = f'''/images/{json_article['article_slug']}/{json_article['keyword_main_slug']}.jpg'''
-    alt = f'''{json_article['keyword_main']}.jpg'''
-    html_article += f'''<img src="{src}" alt="{alt}">\n'''
-    html_article += f'<p>{polish.sanitize(json_article["intro"])}</p>\n'
-    html_article += f'<h2>{polish.sanitize(json_article["keyword_main_pretty"].title())}</h2>\n'
-    main_list = json_article['main_list']
-    html_article += f'''<div class="listicle">\n'''
-    for i, item in enumerate(main_list):
-        image_filename = f'''{item['image_filename']}'''
-        image_desc = f'''{i+1}. {polish.sanitize(item['image_desc'])}'''
-        src = f'/images/{article_slug}/{image_filename}'
-        alt = f'''{item['image_alt']}'''
-        html_article += f'''<p>{polish.sanitize(image_desc)}</p>\n'''
-        html_article += f'''<img src="{src}" alt="{alt}">\n'''
-    if json_article['links'] != []:
-        html_article += f'<h2>Additional Resources</h2>\n'
-        html_article += f'''<ul>\n'''
-        for link in json_article['links']:
-            html_article += f'''<li><a href="{link['href']}">{link['keyword'].title()}</a></li>\n'''
-        html_article += f'''</ul>\n'''
-        
-    html_article += f'''</div>\n'''
-    html = f'''
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <link rel="stylesheet" href="/style.css">
-        </head>
-        <body>
-            {sections.header()}
-            <main>
-                {sections.breadcrumbs(article_slug)}
-                <div class="article container-md">
-                    {html_article}
-                </div>
-            </main>
-            {sections.footer()}
-        </body>
-        </html>
-    '''
-    with open(f'{g.website_folderpath}/{article_slug}.html', 'w') as f: f.write(html)
+        json_category_sections_gen(article_slug, regen=regen, dispel=dispel)
 
 def html_category_gen(article_obj):
     article_slug = article_obj['article_slug']

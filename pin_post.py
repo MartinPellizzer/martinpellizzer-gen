@@ -59,7 +59,9 @@ if os.path.exists(COOKIE_FILEPATH):
                 print(f"**********************************************************")
             except Exception as e:
                 print(f"Skipping cookie: {cookie.get('name')} - {e}")
-    driver.refresh()
+    # driver.refresh()
+    driver.get("https://www.pinterest.com")
+    time.sleep(10)
 else:
     e = driver.find_element(By.XPATH, '//input[@type="email"]')
     e.send_keys(username) 
@@ -70,7 +72,6 @@ else:
     e = driver.find_element(By.XPATH, '//div[text()="Log in"]')
     e.click()
     time.sleep(60)
-
     cookies = driver.get_cookies()
     with open(COOKIE_FILEPATH, 'wb') as f:
         pickle.dump(cookies, f)

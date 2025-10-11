@@ -12,14 +12,6 @@ shutil.copy2(f'style.css', f'{g.website_folderpath}/style.css')
 # art_plants.gen()
 
 if 1:
-    from hub import hub_types
-    hub_types.gen()
-
-if 1:
-    from hub import hub_house
-    hub_house.gen()
-
-if 1:
     from hub import hub_art
     hub_art.gen()
 
