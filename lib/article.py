@@ -95,9 +95,9 @@ def images_category_gen(article_obj, regen=False, dispel=False):
 
 def images_gen(article_obj, regen=False, dispel=False):
     if article_obj['article_type'] == 'category':
-        images_category_gen(article_obj, regen=False, dispel=False)
+        images_category_gen(article_obj, regen=regen, dispel=dispel)
     elif article_obj['article_type'] == 'listicle':
-        images_listicle_gen(article_obj, regen=False, dispel=False)
+        images_listicle_gen(article_obj, regen=regen, dispel=dispel)
 
 def json_title_gen(article_slug, regen=False, dispel=False):
     json_article_filepath = f'''{g.database_folderpath}/json/{article_slug}.json'''
@@ -308,7 +308,9 @@ def json_category_sections_gen(article_slug, regen=False, dispel=False):
         return
     if regen: 
         json_article[key] = []
-    json_subarticles_slugs_old = [item['subarticle_slug'] for item in json_article[key]]
+    json_subarticles_slugs_old = []
+    for item in json_article[key]:
+        json_subarticles_slugs_old = item['subarticle_slug'] 
     output_list = []
     folderpath = f'''{g.database_folderpath}/json/{article_slug}'''
     for filename in os.listdir(folderpath):
@@ -359,7 +361,9 @@ def json_gen(article_obj, regen=False, dispel=False):
         json_list_desc_gen(article_slug, regen=regen, dispel=dispel)
         json_list_alt_gen(article_slug, regen=regen, dispel=dispel)
     elif json_article['article_type'] == 'category':
-        json_category_title_gen(article_slug, regen=regen, dispel=dispel)
+        json_article['article_title'] = (article_obj['keyword_main_pretty'] + ' for plant lovers').title()
+        io.json_write(json_article_filepath, json_article)
+        # json_category_title_gen(article_slug, regen=regen, dispel=dispel)
         json_intro_gen(article_slug, regen=regen, dispel=dispel)
         json_category_sections_gen(article_slug, regen=regen, dispel=dispel)
 

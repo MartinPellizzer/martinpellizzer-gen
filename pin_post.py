@@ -76,6 +76,11 @@ else:
     with open(COOKIE_FILEPATH, 'wb') as f:
         pickle.dump(cookies, f)
 
+
+
+
+
+
 def pin_post(article_filepath):
     global failed_pins_num
     data = io.json_read(article_filepath)
