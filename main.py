@@ -7,6 +7,11 @@ from lib import sections
 
 shutil.copy2(f'style.css', f'{g.website_folderpath}/style.css')
 
+if 1:
+    from hub import art_hub
+    art_hub.main()
+quit()
+
 ########################################
 # CSV............................[CSV]
 ########################################

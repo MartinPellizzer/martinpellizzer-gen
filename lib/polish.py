@@ -1,3 +1,8 @@
+def sluggify(text):
+    text = text.strip().lower().replace(' ', '-').replace('.', '')
+    text = text.replace('×', 'x')
+    return text
+    
 def sanitize(text):
     text = text.replace('-', '-')
     text = text.replace('—', ', ')

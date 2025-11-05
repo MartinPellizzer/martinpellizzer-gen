@@ -10,7 +10,7 @@ from lib import llm
 from lib import data
 from lib import media
 
-pins_num_max = 34
+pins_num_max = 38
 pins_delta_perc = 20
 pins_delta_perc_random = random.randint(0, pins_delta_perc)
 pins_delta_perc_random_sign = random.randint(0, 1)
@@ -52,12 +52,17 @@ def text_to_lines(text, font, max_w):
 def pin_gen(article_slug):
     json_article_filepath = f'''{g.database_folderpath}/json/{article_slug}.json'''
     json_article = io.json_read(json_article_filepath, create=True)
-    article_slug = json_article['article_slug']
+    try: article_slug = json_article['article_slug']
+    except: article_slug = json_article['article_url_slug']
     article_title = json_article['article_title']
-    keyword_main = json_article['keyword_main']
-    keyword_main_pretty = json_article['keyword_main_pretty']
-    keyword_main_slug = json_article['keyword_main_slug']
+    try: keyword_main = json_article['keyword_main']
+    except: keyword_main = json_article['article_keyword']
+    try: keyword_main_slug = json_article['keyword_main_slug']
+    except: keyword_main_slug = json_article['article_keyword_slug']
+    try: keyword_main_pretty = json_article['keyword_main_pretty']
+    except: keyword_main_pretty = json_article['article_keyword'] + 's'
     main_list_num = json_article['main_list_num']
+    '''
     article_desc = article_title
     article_desc = article_desc.lower()
     article_desc = article_desc.replace(f'{main_list_num}', '')
@@ -65,6 +70,7 @@ def pin_gen(article_slug):
     for word in keyword_main_pretty.lower().split('\n'):
         article_desc = article_desc.replace(f'{word.lower()}', '')
     article_desc = ' '.join([word for word in article_desc.split() if word != ''])
+    '''
     article_desc = 'for plant lovers'
     ###
     images_tmp_filepaths = []
@@ -178,6 +184,20 @@ for item in data:
         articles_slugs.append([article_slug])
 random.shuffle(articles_slugs)
 
+########################################
+### aesthetic
+########################################
+from data import art_data
+# articles_slugs = []
+
+art_aesthetic_articles_slugs = [item['article_url_slug'] for item in art_data.art_aesthetic_data]
+
+for item in art_aesthetic_articles_slugs:
+    articles_slugs.append([item])
+    pass
+
+random.shuffle(articles_slugs)
+
 item_i = 0
 for cluster_slugs in articles_slugs:
     if item_i >= pins_num: break
@@ -186,11 +206,15 @@ for cluster_slugs in articles_slugs:
     ### try pumpkin pin
     json_article_filepath = f'''{g.database_folderpath}/json/{article_slug}.json'''
     json_article = io.json_read(json_article_filepath)
-    article_slug = json_article['article_slug']
+    try: article_slug = json_article['article_slug']
+    except: article_slug = json_article['article_url_slug']
     article_title = json_article['article_title']
-    keyword_main = json_article['keyword_main']
-    keyword_main_slug = json_article['keyword_main_slug']
-    pin_board_name = json_article['pin_board_name'].title()
+    try: keyword_main = json_article['keyword_main']
+    except: keyword_main = json_article['article_keyword']
+    try: keyword_main_slug = json_article['keyword_main_slug']
+    except: keyword_main_slug = json_article['article_keyword_slug']
+    try: pin_board_name = json_article['pin_board_name'].title()
+    except: pin_board_name = 'Plant Art'
     ### gen tmp images
     pin_tmp_image_gen(json_article, keyword_main_slug)
     ### gen pin image
