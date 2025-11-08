@@ -116,4 +116,13 @@ art_aesthetic_data = [
     {'article_url_slug': 'plants/art/aesthetic/lavender', 'article_keyword': 'lavender aesthetic', 'regen': 0},
     {'article_url_slug': 'plants/art/aesthetic/camera', 'article_keyword': 'camera aesthetic', 'regen': 0},
     {'article_url_slug': 'plants/art/aesthetic/pizza', 'article_keyword': 'pizza aesthetic', 'regen': 0},
+    {'article_url_slug': 'plants/art/aesthetic/navy-blue', 'article_keyword': 'navy blue aesthetic', 'regen': 0},
+    {'article_url_slug': 'plants/art/aesthetic/gold', 'article_keyword': 'gold aesthetic', 'regen': 0},
+    {'article_url_slug': 'plants/art/aesthetic/dark-nature', 'article_keyword': 'dark nature aesthetic', 'regen': 0},
+    {'article_url_slug': 'plants/art/aesthetic/sushi', 'article_keyword': 'sushi aesthetic', 'regen': 0},
+    {'article_url_slug': 'plants/art/aesthetic/soft', 'article_keyword': 'soft aesthetic', 'regen': 0},
+    {'article_url_slug': 'plants/art/aesthetic/strawberry', 'article_keyword': 'strawberry aesthetic', 'regen': 0},
+    {'article_url_slug': 'plants/art/aesthetic/star', 'article_keyword': 'stars aesthetic', 'regen': 0},
+    {'article_url_slug': 'plants/art/aesthetic/japanese', 'article_keyword': 'japanese aesthetic', 'regen': 0},
+    {'article_url_slug': 'plants/art/aesthetic/butterfly', 'article_keyword': 'butterfly aesthetic', 'regen': 0},
 ]
