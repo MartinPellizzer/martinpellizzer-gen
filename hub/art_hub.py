@@ -408,9 +408,7 @@ def main():
     html = f'''
         <!DOCTYPE html>
         <html lang="en">
-        <head>
-            <link rel="stylesheet" href="/style.css">
-        </head>
+        {components.html_head(meta_title, meta_description)}
         <body>
             {sections.header()}
             <main>
