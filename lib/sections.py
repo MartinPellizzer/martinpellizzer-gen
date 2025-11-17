@@ -4,7 +4,7 @@ def header():
             <div class="container-xl" style="display: flex; justify-content: space-between;">
                 <a href="/">Martin Pellizzer</a>
                 <ul>
-                    <a href="/plants.html">Plants</a>
+                    <a href="/plants/">Plants</a>
                 </ul>
             </div>
         </header>

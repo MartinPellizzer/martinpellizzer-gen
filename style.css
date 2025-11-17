@@ -120,6 +120,19 @@ footer {
     margin-top: 6.4rem;
 }
 
+.grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+}
+
+@media (max-width: 768px) {
+    .grid-4 {
+        grid-template-columns: 1fr;
+    }
+}
+
 /*********************************************/
 /* breadcrumbs.........................[brd] */
 /*********************************************/

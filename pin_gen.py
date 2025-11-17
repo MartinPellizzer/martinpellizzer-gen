@@ -10,7 +10,7 @@ from lib import llm
 from lib import data
 from lib import media
 
-pins_num_max = 39
+pins_num_max = 40
 pins_delta_perc = 20
 pins_delta_perc_random = random.randint(0, pins_delta_perc)
 pins_delta_perc_random_sign = random.randint(0, 1)

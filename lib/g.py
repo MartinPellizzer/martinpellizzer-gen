@@ -20,3 +20,5 @@ terrawhisper_database_folderpath = f'{vault_folderpath}/terrawhisper/database'
 PIN_BOARD_NAME_ART = 'plant art'
 PIN_BOARD_NAME_FOOD = 'plant food'
 PIN_BOARD_NAME_HOUSE = 'house plants'
+
+WEB_PLANTS_URL = f'https://martinpellizzer.com'
