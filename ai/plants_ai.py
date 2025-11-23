@@ -14,7 +14,7 @@ from lib import polish
 from lib import components
 from lib import sections
 
-plants_num = 10000
+plants_num = 20000
 
 wcvp_data = io.csv_to_dict(f'{g.WCVP_FOLDERPATH}/wcvp_names.csv', '|')
 wcvp_data = wcvp_data[:plants_num]
@@ -30,29 +30,17 @@ def sitemaps_gen():
             plant_family = plant['plant_family']
             plant_slug = polish.sluggify(plant_name_scientific)
             web_urls.append(f'''{g.WEB_PLANTS_URL}/plants-{cluster['plants_letter_first']}/{plant_slug}/''')
-    for web_url in web_urls[:]:
-        print(web_url)
-    print()
-    quit()
-    sitemaps_folderpath = f'{g.WEBSITE_FOLDERPATH}/sitemaps'
-    try: os.makedirs(sitemaps_folderpath)
-    except: pass
-    herbs_folderpath = f'{g.SSOT_FOLDERPATH}/herbs/herbs-wcvp/medicinal'
-    filenames = []
-    for filename in os.listdir(f'{herbs_folderpath}'):
-        filename_base = filename.split('.')[0]
-        filenames.append(f'{g.WEB_HERBS_URL}/{filename_base}.html')
     ### chunks
     chunks = []
     chunk = []
     chunk_len = 0
-    for filename in filenames:
-        if chunk_len >= 30000:
+    for web_url in web_urls:
+        if chunk_len >= 40000:
             chunks.append(chunk)
-            chunk = [filename]
+            chunk = [web_url]
             chunk_len = 0
         else:
-            chunk.append(filename)
+            chunk.append(web_url)
             chunk_len += 1
     if chunk_len != 0:
         chunks.append(chunk)
@@ -61,14 +49,14 @@ def sitemaps_gen():
         sitemap = ''
         sitemap += '<?xml version="1.0" encoding="UTF-8"?>\n'
         sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-        for filepath in chunk:
+        for web_url in web_urls[:]:
             sitemap += f'''
                 <url>
-                <loc>{filepath}</loc>
+                <loc>{web_url}</loc>
                 </url>
             '''.strip() + '\n'
         sitemap += '</urlset>\n'
-        io.file_write(f'{sitemaps_folderpath}/sitemap-herbs-wcvs-medicinal-{chunk_i}.xml', sitemap.strip())
+        io.file_write(f'{g.WEBSITE_FOLDERPATH}/sitemaps/sitemap-herbs-wcvs-medicinal-{chunk_i}.xml', sitemap.strip())
 
 def answer_score_extract(json_data):
     _objs = []
@@ -202,7 +190,7 @@ def cluster_gen(cluster):
             json_plant_filepath = f'''{json_plant_folderpath}/{plant_slug}.json'''
             json_plant_data = io.json_read(json_plant_filepath)
             plant_name_common = json_plant_data['plants_names_common'][0]['answer'].capitalize()
-            plant_origin = json_plant_data['plant_origin'][0]['answer'].capitalize()
+            plant_origin = json_plant_data['plant_origin_continents'][0]['answer'].capitalize()
             html_article += f'''
                 <li itemscope itemtype="https://schema.org/ListItem">
                     <meta itemprop="position" content="{plant_i+1}">
@@ -431,11 +419,80 @@ def plant_origin_gen(json_filepath, regen=False, clear=False):
         json_data[key] = outputs
         io.json_write(json_filepath, json_data)
 
+def plant_origin_continents_gen(json_filepath, regen=False, clear=False):
+    json_data = io.json_read(json_filepath)
+    plant_name_scientific = json_data['plant_name_scientific']
+    key = 'plant_origin_continents'
+    if key not in json_data: json_data[key] = ''
+    if regen: json_data[key] = ''
+    if clear: 
+        json_data[key] = ''
+        io.json_write(json_filepath, json_data)
+        return
+    if json_data[key] == '' or json_data[key] == []:
+        outputs = []
+        for i in range(10):
+            print(f'{i} - {plant_name_scientific}')
+            prompt = f'''
+                Tell me the continents of origin of the the following plant with scientific name: {plant_name_scientific}.
+                In specific, write a confidence score from 1 to 10, indicating how sure you are about your answer.
+                The possible continents are 7: Africa, Antarctica, Asia, Europe, North America, South America, Australia.
+                Reply using the following JSON format:
+                [
+                    {{"answer": "write origin continent name 1 here", "score": "write score 1 here"}},
+                    {{"answer": "write origin continent name 2 here", "score": "write score 2 here"}},
+                    {{"answer": "write origin continent name 3 here", "score": "write score 3 here"}}
+                ]
+                Reply only with the JSON.
+            '''
+            prompt += f'/no_think'
+            reply = llm.reply(prompt)
+            if '</think>' in reply:
+                reply = reply.split('</think>')[1].strip()
+            reply_data = {}
+            try: reply_data = json.loads(reply)
+            except: pass 
+            if reply_data != {}:
+                _objs = answer_score_extract(reply_data)
+                for _obj in _objs:
+                    answer = _obj['answer'].lower()
+                    score = _obj['score']
+                    found = False
+                    for output in outputs:
+                        if answer in output['answer']: 
+                            output['mentions'] += 1
+                            output['confidence_score'] += int(score)
+                            found = True
+                            break
+                    if not found:
+                        outputs.append({
+                            'answer': answer, 
+                            'mentions': 1, 
+                            'confidence_score': int(score), 
+                        })
+        outputs = total_score_calc(outputs)
+        json_data[key] = outputs
+        io.json_write(json_filepath, json_data)
+
 def plants_json_gen():
+    ### json articles init
+    for cluster_i, cluster in enumerate(clusters):
+        print(f'>>> {cluster_i}/{len(clusters)} - {cluster}')
+        cluster_folderpath = f'''{g.DATABASE_FOLDERPATH}/json/plants-{cluster['plants_letter_first']}'''
+        if not os.path.exists(cluster_folderpath): os.makedirs(cluster_folderpath)
+        plants = cluster['plants']
+        for plant_i, plant in enumerate(plants):
+            plant_name_scientific = plant['plant_name_scientific']
+            plant_slug = polish.sluggify(plant_name_scientific)
+            json_plant_filepath = f'''{cluster_folderpath}/{plant_slug}/index.json'''
+            json_plant = io.json_read(json_plant_filepath, create=True)
+            json_plant['plant_name_scientific'] = plant_name_scientific
+            json_plant['plant_slug'] = plant_slug
+            io.json_write(json_plant_filepath, json_plant)
+    ### json ssot init
     json_folderpath = f'{g.DATABASE_FOLDERPATH}/ssot/plants'
     try: os.mkdir(json_folderpath)
     except: pass
-    ###
     for wcvp_item_i, wcvp_item in enumerate(wcvp_data):
         print(f'>>> {wcvp_item_i}/{len(wcvp_data)} - {wcvp_item}')
         plant_name_scientific = wcvp_item['taxon_name']
@@ -450,7 +507,8 @@ def plants_json_gen():
         io.json_write(json_filepath, json_data)
         ###
         plant_names_common_gen(json_filepath, regen=False, clear=False)
-        plant_origin_gen(json_filepath, regen=False, clear=False)
+        # plant_origin_gen(json_filepath, regen=False, clear=False)
+        plant_origin_continents_gen(json_filepath, regen=False, clear=False)
 
 def plants_html_gen():
     ########################################
@@ -502,29 +560,16 @@ def plants_html_gen():
     print(html_filepath)
     with open(html_filepath, 'w') as f: f.write(html)
 
-def main():
-    sitemaps_gen()
-    quit()
+def hub_plants_letter_plant_gen():
+    ### 1. init json (articles) from wcvp
+    ### 2. generate ssot from wcvp
     plants_json_gen()
-    # quit()
     plants_html_gen()
+
+def hub_plants_gen():
     ########################################
     # HUB -> /plants
     ########################################
-    ### json plants-[letter] pages
-    for cluster_i, cluster in enumerate(clusters):
-        print(f'>>> {cluster_i}/{len(clusters)} - {cluster}')
-        cluster_folderpath = f'''{g.DATABASE_FOLDERPATH}/json/plants-{cluster['plants_letter_first']}'''
-        if not os.path.exists(cluster_folderpath): os.makedirs(cluster_folderpath)
-        plants = cluster['plants']
-        for plant_i, plant in enumerate(plants):
-            plant_name_scientific = plant['plant_name_scientific']
-            plant_slug = polish.sluggify(plant_name_scientific)
-            json_plant_filepath = f'''{cluster_folderpath}/{plant_slug}/index.json'''
-            json_plant = io.json_read(json_plant_filepath, create=True)
-            json_plant['plant_name_scientific'] = plant_name_scientific
-            json_plant['plant_slug'] = plant_slug
-            io.json_write(json_plant_filepath, json_plant)
     ### json page
     for cluster_i, cluster in enumerate(clusters):
         print(f'>>> {cluster_i}/{len(clusters)} - {cluster}')
@@ -555,7 +600,7 @@ def main():
             json_article['plant_name_scientific'] = plant_name_scientific
             json_article['plant_slug'] = plant_slug
             json_article['article_title'] = plant_name_scientific
-            io.json_write(json_plant_filepath, json_plant)
+            io.json_write(json_article_filepath, json_article)
             ########################################
             # json
             ########################################
@@ -610,4 +655,11 @@ def main():
             html_filepath = f'{g.WEBSITE_FOLDERPATH}/{article_url_slug}/index.html'
             print(html_filepath)
             with open(html_filepath, 'w') as f: f.write(html)
+
+def main():
+    hub_plants_letter_plant_gen()
+
+    hub_plants_gen()
+
+    sitemaps_gen()
 
