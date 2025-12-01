@@ -125,4 +125,11 @@ art_aesthetic_data = [
     {'article_url_slug': 'plants/art/aesthetic/star', 'article_keyword': 'stars aesthetic', 'regen': 0},
     {'article_url_slug': 'plants/art/aesthetic/japanese', 'article_keyword': 'japanese aesthetic', 'regen': 0},
     {'article_url_slug': 'plants/art/aesthetic/butterfly', 'article_keyword': 'butterfly aesthetic', 'regen': 0},
+    {'article_url_slug': 'plants/art/aesthetic/black-cat', 'article_keyword': 'black cat aesthetic', 'regen': 0},
+    {'article_url_slug': 'plants/art/aesthetic/cloud', 'article_keyword': 'cloud aesthetic', 'regen': 0},
+    {'article_url_slug': 'plants/art/aesthetic/gray', 'article_keyword': 'gray aesthetic', 'regen': 0},
+    {'article_url_slug': 'plants/art/aesthetic/airport', 'article_keyword': 'airport aesthetic', 'regen': 0},
+    {'article_url_slug': 'plants/art/aesthetic/tennis', 'article_keyword': 'tennis aesthetic', 'regen': 0},
+    {'article_url_slug': 'plants/art/aesthetic/note', 'article_keyword': 'note aesthetic', 'regen': 0},
+    {'article_url_slug': 'plants/art/aesthetic/angel', 'article_keyword': 'angel aesthetic', 'regen': 0},
 ]

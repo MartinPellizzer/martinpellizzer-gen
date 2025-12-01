@@ -405,6 +405,8 @@ def main():
                 html_article += f'''<li><a href="{link['href']}">{link['keyword'].title()}</a></li>\n'''
             html_article += f'''</ul>\n'''
         html_article += f'''</div>\n'''
+    meta_title = f'aestetic of plants'
+    meta_description = f''
     html = f'''
         <!DOCTYPE html>
         <html lang="en">
